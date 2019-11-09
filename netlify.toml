@@ -3,6 +3,7 @@
     command = "npm run build && npm run build:fonts && npm run build:views"
 [build.environment]
     NODE_ENV = "production"
+    STATS_PREFIX = "/stats"
 
 # proxy api requests
 [[redirects]]
@@ -12,7 +13,7 @@
 
 # proxy statistics
 [[redirects]]
-    from = "/*.json"
+    from = "/stats/*"
     to = "https://smartbirds.org/:splat"
     status = 200
 

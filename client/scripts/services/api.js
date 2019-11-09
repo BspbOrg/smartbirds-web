@@ -83,7 +83,7 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     api.stats[form + '_stats'] = function () {
       return $http({
         method: 'GET',
-        url: '/' + form + '_stats.json'
+        url: (process.env.STATS_PREFIX || '') + '/' + form + '_stats.json'
       }).then(function (response) {
         return response.data
       })
