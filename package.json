@@ -34,7 +34,8 @@
     "build": "npm run build:css && npm run build:js",
     "postinstall": "bower install --allow-root",
     "budo": "budo ./client/scripts/app.js --serve js/scripts.js  -d public/ --live --pushstate",
-    "build:fonts": "rm -rf public/fonts/font-awesome; npx copyfiles -u 3 bower_components/font-awesome/fonts/* public/fonts/font-awesome; rm -rf public/fonts/glyphicons; npx copyfiles -u 3 bower_components/bootstrap/fonts/* public/fonts/glyphicons"
+    "build:fonts": "rm -rf public/fonts/font-awesome; copyfiles -u 3 bower_components/font-awesome/fonts/* public/fonts/font-awesome; rm -rf public/fonts/glyphicons; copyfiles -u 3 bower_components/bootstrap/fonts/* public/fonts/glyphicons",
+    "build:views": "rm -rf public/views; copyfiles -u 2 client/views/* public/views"
   },
   "dependencies": {
     "blueimp-md5": "^2.12.0",
