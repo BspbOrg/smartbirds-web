@@ -1,0 +1,23 @@
+[build]
+    publish = "public/"
+    command = "npm run build"
+[build.environment]
+    NODE_ENV = "production"
+
+# proxy api requests
+[[redirects]]
+    from = "/api/*"
+    to = "https://smartbirds.org/api/:splat"
+    status = 200
+
+# proxy statistics
+[[redirects]]
+    from = "/*.json"
+    to = "https://smartbirds.org/:splat"
+    status = 200
+
+# SPA routing
+[[redirects]]
+    from = "*"
+    to = "/index.html"
+    status = 200
