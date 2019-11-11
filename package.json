@@ -32,7 +32,9 @@
     "build:css:watch": "watch 'npm run build:css' client/styles",
     "build": "npm run build:css && npm run build:js",
     "postinstall": "bower install --allow-root",
-    "budo": "budo ./client/scripts/app.js --serve js/scripts.js  -d public/ --live --pushstate"
+    "budo": "budo ./client/scripts/app.js --serve js/scripts.js  -d public/ --live --pushstate",
+    "build:fonts": "rm -rf public/fonts/font-awesome; cp -r bower_components/font-awesome/fonts public/fonts/font-awesome; rm -rf public/fonts/glyphicons; cp -r bower_components/bootstrap/fonts public/fonts/glyphicons",
+    "build:views": "rm -rf public/views; cp -r client/views public/views"
   },
   "dependencies": {
     "blueimp-md5": "^2.12.0",
