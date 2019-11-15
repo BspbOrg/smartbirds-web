@@ -67,8 +67,7 @@
         <div class="panel-footer">
           <div class="form-actions">
             <div class="btn-group pull-right btn-group-lg" >
-            <a language-switcher class="language" ng-click="$ctrl.changeLanguage('en')">EN</a>
-            <a language-switcher class="language" ng-click="$ctrl.changeLanguage('bg')">BG</a>
+            <a class="language" navbar-language-switcher></a>
             </div>
             <button type="submit"
                     ng-disabled="form.$invalid || sessionController.loading || !sessionController.tos_accepted || !user.gdprConsent"
