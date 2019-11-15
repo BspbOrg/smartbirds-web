@@ -47,7 +47,7 @@ require('../app').directive('locationSelector', /* @ngInject */function () {
 
       field.getModels = function (q) {
         return Location.query({ q: q }).$promise.then(function (models) {
-          return limitTo(orderBy(filter(models, q), ['name.bg', 'area.bg']), 25)
+          return limitTo(orderBy(filter(models, q), ['name.local', 'area.local']), 25)
         })
       }
 

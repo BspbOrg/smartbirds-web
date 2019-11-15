@@ -4,7 +4,7 @@
 
 var angular = require('angular')
 
-require('../app').factory('Location', /* @ngInject */function ($resource, $translate, ENDPOINT_URL) {
+require('../app').factory('Location', /* @ngInject */function ($resource, ENDPOINT_URL, localization) {
   var Location = $resource(ENDPOINT_URL + '/locations/:id', {
     id: '@id'
   })
@@ -12,19 +12,19 @@ require('../app').factory('Location', /* @ngInject */function ($resource, $trans
   // instance methods
   angular.extend(Location.prototype, {
     getArea: function (locale) {
-      locale = locale || $translate.$language || 'en'
+      locale = localization.normalizeNomenclatureLocale(locale)
       return (this.area || {})[locale]
     },
     getName: function (locale) {
-      locale = locale || $translate.$language || 'en'
+      locale = localization.normalizeNomenclatureLocale(locale)
       return (this.name || {})[locale]
     },
     getType: function (locale) {
-      locale = locale || $translate.$language || 'en'
+      locale = localization.normalizeNomenclatureLocale(locale)
       return (this.type || {})[locale]
     },
     toString: function (locale) {
-      locale = locale || $translate.$language || 'en'
+      locale = localization.normalizeNomenclatureLocale(locale)
       return (this.type || {})[locale] + ' ' + (this.name || {})[locale] + ', ' + (this.area || {})[locale]
     }
   })
