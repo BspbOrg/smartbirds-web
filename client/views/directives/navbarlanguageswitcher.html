@@ -1,10 +1,8 @@
-<li class="dropdown" uib-dropdown>
-  <a href role="button" id="languages-dropdown" type="button" class="dropdown-toggle" uib-dropdown-toggle>
-    <span translate>{{$ctrl.currentLanguageLabel}}</span>
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="languages-dropdown">
-    <li ng-repeat="(langId, lang) in $ctrl.availableLanguages" role="menuitem"><a href="#"
-        ng-click="$ctrl.changeLanguage(langId)" translate>{{lang.label}}</a></li>
-  </ul>
-</li>
+<a href role="button" id="languages-dropdown" type="button" class="dropdown-toggle" uib-dropdown-toggle>
+  <span translate>{{$ctrl.currentLanguageLabel}}</span>
+  <span class="caret"></span>
+</a>
+<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="languages-dropdown">
+  <li ng-repeat="(langId, lang) in $ctrl.availableLanguages" role="menuitem"><a href="#"
+      ng-click="$ctrl.changeLanguage(langId)" translate>{{lang.label}}</a></li>
+</ul>

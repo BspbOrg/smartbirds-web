@@ -1,10 +1,15 @@
 const languages = require('../../../config/languages')
 
-require('../app').directive('navbarLanguageSwitcher', function () {
+require('../app').directive('navbarLanguageSwitcher', function ($compile) {
   return {
-    restrict: 'E',
-    replace: true,
+    restrict: 'A',
     templateUrl: '/views/directives/navbarlanguageswitcher.html',
+    link: function (scope, element) {
+      element.addClass('dropdown')
+      element.attr('uib-dropdown', '')
+      element.removeAttr('navbar-language-switcher')
+      $compile(element)(scope)
+    },
     controller: /* @ngInject */function ($translate) {
       var ctrl = this
       ctrl.currentLanguageLabel = languages[$translate.$language].label
