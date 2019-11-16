@@ -63,8 +63,6 @@ var dependencies = [
   'pascalprecht.translate'
 ]
 
-console.log(dependencies)
-
 // install service worker
 if ('serviceWorker' in navigator) {
   var wb = new Workbox('/sw.js')
