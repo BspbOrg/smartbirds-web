@@ -1,4 +1,4 @@
-@libs: "../../bower_components";
+@libs: "../../node_modules";
 
 // Bootstrap
 @import "@{libs}/bootstrap/less/bootstrap";
@@ -11,7 +11,7 @@
 @import (inline) "@{libs}/angular/angular-csp.css";
 
 // Angular UI Bootstrap csp
-@import (inline) "@{libs}/angular-bootstrap/ui-bootstrap-csp.css";
+@import (inline) "@{libs}/angular-ui-bootstrap/dist/ui-bootstrap-csp.css";
 
 // Bootstrap theme
 @import "@{libs}/startbootstrap-sb-admin-2/less/sb-admin-2";
@@ -20,11 +20,11 @@
 @import (inline) "@{libs}/ui-select/dist/select.css";
 
 // nya-bootstrap-select
-@import "@{libs}/nya-bootstrap-select/less/nya-bs-select";
+@import "@{libs}/@lordfriend/nya-bootstrap-select/less/nya-bs-select";
 
 // ngToast
-@import (inline) "@{libs}/ngToast/dist/ngToast.css";
-@import (inline) "@{libs}/ngToast/dist/ngToast-animations.css";
+@import (inline) "@{libs}/ng-toast/dist/ngToast.css";
+@import (inline) "@{libs}/ng-toast/dist/ngToast-animations.css";
 
 // angular-bootstrap-lightbox
 @import (inline) "@{libs}/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css";

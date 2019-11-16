@@ -3,48 +3,38 @@ var bulk = require('bulk-require')
 var info = require('../../package.json')
 var Workbox = require('workbox-window').Workbox
 
-// include angular dependencies
-require('angular-i18n')
-require('ui.bootstrap')
-require('uiGmapgoogle-maps')
-require('ui.router')
-require('ngSanitize')
-require('ui.select')
-require('angular-resource')
-require('angular-cookies')
-require('angular-strap')
-require('angular-strap-tpl')
-require('nya-bootstrap-select')
-require('ngAnimate')
-require('ngToast')
-require('ngInfiniteScroll')
-require('angular-loading-bar')
-require('angular-filter')
-require('angulartics')
-require('angulartics-ga')
-require('angular-file-upload')
-require('ngstorage')
-require('x2js')
-require('angular-xml')
-require('angular-bootstrap-lightbox')
-require('angular-translate')
-require('angular-translate-loader-url')
 require('./services/crashReporting')
 
+// used by angular-google-maps
+global._ = require('lodash')
+require('angular-simple-logger')
+// required by angular-xml
+global.X2JS = require('x2js')
+
+// include angular dependencies
+require('angular-google-maps')
+require('ng-toast')
+require('ng-infinite-scroll')
+require('angular-file-upload')
+require('ngstorage')
+require('angular-translate')
+require('angular-translate-loader-url')
+require('angular-bootstrap-lightbox')
+
 var dependencies = [
-  'ngLocale',
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngAnimate',
+  require('angular-i18n/bg'),
+  require('angular-cookies'),
+  require('angular-resource'),
+  require('angular-sanitize'),
+  require('angular-animate'),
 
-  'ui.router',
-  'ui.bootstrap',
-  'ui.select',
+  require('angular-ui-router'),
+  require('angular-ui-bootstrap'),
+  require('ui-select'),
 
-  'mgcrea.ngStrap',
+  require('angular-strap'),
 
-  'nya.bootstrap.select',
+  require('@lordfriend/nya-bootstrap-select'),
 
   'ngToast',
 
@@ -52,26 +42,28 @@ var dependencies = [
 
   'infinite-scroll',
 
-  'angular-loading-bar',
+  require('angular-loading-bar'),
 
   'ngRaven',
 
-  'angular.filter',
+  require('angular-filter'),
 
-  'angulartics',
+  require('angulartics'),
 
-  'angulartics.google.analytics',
+  require('angulartics-google-analytics'),
 
   'angularFileUpload',
 
   'ngStorage',
 
-  'xml',
+  require('angular-xml'),
 
   'bootstrapLightbox',
 
   'pascalprecht.translate'
 ]
+
+console.log(dependencies)
 
 // install service worker
 if ('serviceWorker' in navigator) {

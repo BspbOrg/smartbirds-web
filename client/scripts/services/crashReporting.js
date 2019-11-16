@@ -6,7 +6,7 @@ if (RAVEN_CONFIG) {
   var Raven = require('raven-js')
   Raven
     .config(RAVEN_CONFIG)
-    .addPlugin(require('raven-js-angular'), angular)
+    .addPlugin(require('raven-js/dist/plugins/angular'), angular)
     .install()
 
   var storage = localforage.createInstance({
