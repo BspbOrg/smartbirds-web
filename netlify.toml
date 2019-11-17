@@ -1,8 +1,7 @@
 [build]
     publish = "public/"
-    command = "npm i budo cypress standard start-server-and-test && npm run build && npm run build:fonts && npm run build:views && npm run test:ci"
+    command = "npm run build && npm run build:fonts && npm run build:views && npm run test:ci"
 [build.environment]
-    NODE_ENV = "production"
     STATS_PREFIX = "/stats"
 
 [dev]
