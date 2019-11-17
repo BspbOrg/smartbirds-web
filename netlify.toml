@@ -5,6 +5,11 @@
     NODE_ENV = "production"
     STATS_PREFIX = "/stats"
 
+[dev]
+    command = "npm run start"
+    port = 9966
+    publish = "public/"
+
 # proxy api requests
 [[redirects]]
     from = "/api/*"
