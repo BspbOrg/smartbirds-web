@@ -25,7 +25,7 @@
 
 # Redirect default Netlify subdomain to primary domain
 [[redirects]]
-    from = "https://amazing-edison-a3dad6.netlify.com/*"
+    from = "https://smartbirds.netlify.com/*"
     to = "https://next.smartbirds.org/:splat"
     status = 301
     force = true
