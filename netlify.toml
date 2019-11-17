@@ -2,6 +2,7 @@
     publish = "public/"
     command = "npm run build && npm run build:fonts && npm run build:views && npm run test:ci"
 [build.environment]
+    NODE_ENV = "netlify"
     STATS_PREFIX = "/stats"
 
 [dev]
