@@ -16,7 +16,7 @@
     "lint-staged": "^9.4.3",
     "parallelshell": "^3.0.2",
     "standard": "^14.3.1",
-    "start-server-and-test": "^1.10.6",
+    "start-server-and-test": "^1.10.5",
     "watch": "^1.0.2",
     "watchify": "^3.11.1"
   },
@@ -27,7 +27,7 @@
     "test": "echo 'No tests are defined'",
     "cypress": "cypress run",
     "cypress:open": "cypress open",
-    "test:ci": "start-server-and-test start http://localhost:9966/js/scripts.js cypress",
+    "test:ci": "echo NODE_ENV=$NODE_ENV; start-server-and-test start http://localhost:9966/js/scripts.js cypress",
     "dev": "parallelshell 'npm run budo' 'npm run build:css:watch'",
     "build:js:debug": "browserify ./client/scripts/app.js -d -o ./public/js/scripts.js",
     "build:js": "cross-env NODE_ENV=${ENV:=production} browserify -g envify --debug -e ./client/scripts/app.js | uglifyjs -c -m > ./public/js/scripts.js",
