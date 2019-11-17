@@ -1,6 +1,6 @@
 [build]
     publish = "public/"
-    command = "CI=1 npm i cypress && npm run test:ci && npm run build && npm run build:fonts && npm run build:views"
+    command = "npm run test:ci && npm run build && npm run build:fonts && npm run build:views"
 [build.environment]
     NODE_ENV = "netlify"
     STATS_PREFIX = "/stats"
