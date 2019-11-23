@@ -27,8 +27,6 @@
     "test": "echo 'No tests are defined'",
     "cypress": "cypress run",
     "cypress:open": "cypress open",
-    "pretest:ci": "CI=1 npm i cypress",
-    "test:ci": "start-server-and-test start http://localhost:9966/js/scripts.js cypress",
     "dev": "parallelshell 'npm run budo' 'npm run build:css:watch'",
     "build:js:debug": "browserify ./client/scripts/app.js -d -o ./public/js/scripts.js",
     "build:js": "cross-env NODE_ENV=${ENV:=production} browserify -g envify --debug -e ./client/scripts/app.js | uglifyjs -c -m > ./public/js/scripts.js",

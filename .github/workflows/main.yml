@@ -1,0 +1,26 @@
+name: End-to-end tests
+on: [push]
+jobs:
+  cypress-run:
+    name: E2E on Node v${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [10, 12, 13]
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout
+        uses: actions/checkout@v1
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          cache-key: node-v${{ matrix.node }}-on-${{ runner.os }}-hash-${{ hashFiles('yarn.lock') }}
+          group: Tests on Node v${{ matrix.node }}
+          start: npm start
+          wait-on: http://localhost:9966/js/scripts.js
+          wait-on-timeout: 120
