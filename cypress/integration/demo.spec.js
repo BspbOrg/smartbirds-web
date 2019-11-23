@@ -7,7 +7,7 @@ context('Demo', () => {
     })
 
     it('display copyright', () => {
-      cy.get('body').contains('Copyright © COPYRIGHT_OWNER')
+      cy.get('body').contains('Copyright ©')
     })
   })
 })
