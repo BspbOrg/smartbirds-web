@@ -37,14 +37,34 @@
     "build:css": "lessc --clean-css --source-map --source-map-less-inline client/styles/main.less public/css/main.css",
     "build:css:watch": "watch 'npm run build:css' client/styles",
     "build": "npm run build:css && npm run build:js",
-    "postinstall": "bower install --allow-root",
     "budo": "budo ./client/scripts/app.js --serve js/scripts.js  -d public/ --live --pushstate",
-    "build:fonts": "rm -rf public/fonts/font-awesome; cp -r bower_components/font-awesome/fonts public/fonts/font-awesome; rm -rf public/fonts/glyphicons; cp -r bower_components/bootstrap/fonts public/fonts/glyphicons",
+    "build:fonts": "rm -rf public/fonts/font-awesome; cp -r node_modules/font-awesome/fonts public/fonts/font-awesome; rm -rf public/fonts/glyphicons; cp -r node_modules/bootstrap/fonts public/fonts/glyphicons",
     "build:views": "rm -rf public/views; cp -r client/views public/views"
   },
   "dependencies": {
+    "@lordfriend/nya-bootstrap-select": "^2.1.10",
+    "angular": "^1.6.7",
+    "angular-animate": "^1.6.7",
+    "angular-bootstrap-lightbox": "^0.12.0",
+    "angular-cookies": "^1.6.7",
+    "angular-file-upload": "^2.3.4",
+    "angular-filter": "^0.5.17",
+    "angular-google-maps": "^2.3.4",
+    "angular-i18n": "^1.4.14",
+    "angular-loading-bar": "^0.9.0",
+    "angular-resource": "^1.6.7",
+    "angular-sanitize": "^1.6.7",
+    "angular-simple-logger": "^0.1.7",
+    "angular-strap": "^2.3.12",
+    "angular-translate": "^2.18.1",
+    "angular-translate-loader-url": "^2.18.1",
+    "angular-ui-bootstrap": "^1.3.3",
+    "angular-ui-router": "^0.4.3",
+    "angular-xml": "^2.2.5",
+    "angulartics": "^1.1.3",
+    "angulartics-google-analytics": "^0.2.1",
     "blueimp-md5": "^2.12.0",
-    "bower": "^1.8.8",
+    "bootstrap": "^3.3.7",
     "browserify": "~16.5.0",
     "browserify-ngannotate": "^2.0.0",
     "browserify-shim": "~3.8.0",
@@ -52,6 +72,7 @@
     "bulkify": "~1.4.2",
     "cross-env": "^6.0.3",
     "envify": "~4.1.0",
+    "font-awesome": "^4.5.0",
     "less": "~3.10.3",
     "less-plugin-clean-css": "~1.5.1",
     "localforage": "^1.7.3",
@@ -59,148 +80,43 @@
     "minifyify": "^7.3.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
+    "ng-infinite-scroll": "^1.2.1",
+    "ng-toast": "^1.5.6",
+    "ngstorage": "^0.3.11",
+    "odometer": "^0.4.8",
     "querystring": "^0.2.0",
     "raven": "^2.6.4",
+    "raven-js": "^2.3.0",
     "simplify-js": "^1.2.1",
+    "startbootstrap-sb-admin-2": "^1.0.7",
     "stringify": "^5.2.0",
     "uglify-js": "^3.6.9",
+    "ui-select": "^0.14.10",
     "underscore.string": "^3.3.5",
-    "workbox-window": "^4.3.1"
+    "workbox-window": "^4.3.1",
+    "x2js": "^2.0.1"
   },
   "browser": {
-    "angular": "./bower_components/angular/angular.js",
-    "angular-i18n": "./bower_components/angular-i18n/angular-locale_bg.js",
-    "ui.bootstrap": "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-    "uiGmapgoogle-maps": "./bower_components/angular-google-maps/dist/angular-google-maps.js",
-    "ngSanitize": "./bower_components/angular-sanitize/angular-sanitize.js",
-    "angular-simple-logger": "./bower_components/angular-simple-logger/dist/index.light.js",
-    "ui.router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
-    "ui.select": "./bower_components/ui-select/dist/select.js",
-    "chance": "./bower_components/chance/chance.js",
-    "angular-resource": "./bower_components/angular-resource/angular-resource.js",
-    "angular-cookies": "./bower_components/angular-cookies/angular-cookies.js",
-    "angular-strap": "./bower_components/angular-strap/dist/angular-strap.compat.js",
-    "angular-strap-tpl": "./bower_components/angular-strap/dist/angular-strap.tpl.js",
-    "nya-bootstrap-select": "./bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js",
-    "ngToast": "./bower_components/ngToast/dist/ngToast.js",
-    "ngAnimate": "./bower_components/angular-animate/angular-animate.js",
-    "ngInfiniteScroll": "./bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
-    "angular-loading-bar": "./bower_components/angular-loading-bar/build/loading-bar.js",
-    "raven-js": "./bower_components/raven-js/dist/raven.js",
-    "raven-js-angular": "./bower_components/raven-js/dist/plugins/angular.js",
-    "angular-filter": "./bower_components/angular-filter/dist/angular-filter.js",
-    "angulartics": "./bower_components/angulartics/src/angulartics.js",
-    "angulartics-ga": "./bower_components/angulartics-google-analytics/lib/angulartics-ga.js",
-    "angular-file-upload": "./bower_components/angular-file-upload/dist/angular-file-upload.js",
-    "ngstorage": "./bower_components/ngstorage/ngStorage.js",
-    "x2js": "./bower_components/x2js/xml2json.js",
-    "angular-xml": "./bower_components/angular-xml/angular-xml.js",
-    "angular-bootstrap-lightbox": "./bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js",
-    "debug": "./node_modules/debug/src/debug.js",
-    "angular-translate": "./bower_components/angular-translate/angular-translate.js",
-    "angular-translate-loader-url": "./bower_components/angular-translate-loader-url/angular-translate-loader-url.js",
-    "odometer": "./bower_components/odometer/odometer.js"
+    "angular-bootstrap-lightbox": "./node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js",
+    "ng-infinite-scroll": "./node_modules/ng-infinite-scroll/build/ng-infinite-scroll.js"
   },
   "browserify-shim": {
     "angular": "angular",
-    "raven-js": "Raven",
-    "raven-js-angular": {
-      "depends": [
-        "raven-js:Raven"
-      ]
-    },
-    "angular-i18n": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "ui.bootstrap": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "uiGmapgoogle-maps": {
+    "angular-google-maps": {
       "depends": [
         "angular:angular",
-        "angular-simple-logger",
         "lodash:_"
       ]
     },
-    "ngSanitize": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "ui.router": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "ui.select": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "chance": "chance",
     "lodash": "_",
-    "angular-resource": {
+    "ng-toast": {
       "depends": [
         "angular:angular"
       ]
     },
-    "angular-cookies": {
+    "ng-infinite-scroll": {
       "depends": [
         "angular:angular"
-      ]
-    },
-    "angular-strap": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "angular-strap-tpl": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "nya-bootstrap-select": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "ngToast": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "ngAnimate": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "ngInfiniteScroll": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "angular-loading-bar": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "angular-filter": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "angulartics": {
-      "depends": [
-        "angular:angular"
-      ]
-    },
-    "angulartics-ga": {
-      "depends": [
-        "angulartics:angulartics"
       ]
     },
     "angular-file-upload": {
@@ -214,12 +130,6 @@
       ]
     },
     "x2js": "X2JS",
-    "angular-xml": {
-      "depends": [
-        "angular:angular",
-        "x2js:X2JS"
-      ]
-    },
     "angular-bootstrap-lightbox": {
       "depends": [
         "angular:angular"
