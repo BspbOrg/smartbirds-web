@@ -1005,5 +1005,8 @@
     "PUBLIC_THREATS_TITLE": "Форма заплахи",
     "PUBLIC_THREATS_SUBTITLE": "Наблюдения на заплахи",
     "PUBLIC_THREATS_TEXT": "Заплахите са част от Smartbirds.org",
-    "FORM_LABEL_THREATS": "Заплахи"
+    "FORM_LABEL_THREATS": "Заплахи",
+    "LOGO_LIFENEOPHRON_ALT": "Програма Life+",
+    "LOGO_BIRDLIFE_ALT": "Birdlife International",
+    "LOGO_LEVENTIS_ALT": "Фонадация \"Левентис\""
 }
