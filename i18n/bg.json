@@ -1004,6 +1004,6 @@
     "THREATS_LIST_FILTER_CATEGORY": "Категория",
     "PUBLIC_THREATS_TITLE": "Форма заплахи",
     "PUBLIC_THREATS_SUBTITLE": "Наблюдения на заплахи",
-    "PUBLIC_THREATS_TEXT": "Заплахите са част от Smartbirds.org",
+    "PUBLIC_THREATS_TEXT": "Тази част от SmartBirds.org е осъществена в рамките на проект {{linkStart}}„Нова Надежда За Египетския Лешояд”{{linkEnd}} (LIFE16 NAT/BG/000874), финансиран от програма LIFE+ на Европейския съюз.",
     "FORM_LABEL_THREATS": "Заплахи"
 }
