@@ -1005,5 +1005,8 @@
     "PUBLIC_THREATS_TITLE": "Form Threats",
     "PUBLIC_THREATS_SUBTITLE": "Observations of threats",
     "PUBLIC_THREATS_TEXT": "This module of SmartBirds.org has been implemented within the project {{linkStart}}\"Egyptian vulture New LIFE\"{{linkEnd}} (LIFE16 NAT/BG/000874) financed by the LIFE + program The European Union.",
-    "FORM_LABEL_THREATS": "Threats"
+    "FORM_LABEL_THREATS": "Threats",
+    "LOGO_LIFENEOPHRON_ALT": "Program Life+",
+    "LOGO_BIRDLIFE_ALT": "BirdLife International",
+    "LOGO_LEVENTIS_ALT": "A. G. Leventis Foundation"
 }
