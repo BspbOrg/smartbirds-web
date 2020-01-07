@@ -15,7 +15,7 @@ require('../app').service('Nomenclature', /* @ngInject */function ($resource, $t
   angular.extend(Nomenclature.prototype, {
     toString: function (locale) {
       locale = locale || $translate.$language || 'en'
-      return (this.label || {})[locale]
+      return (this.label || {})[locale] || (this.label || {}).en
     }
   })
 
