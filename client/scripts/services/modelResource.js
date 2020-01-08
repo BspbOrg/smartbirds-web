@@ -1,6 +1,6 @@
 var angular = require('angular')
 
-require('../app').service('modelResource', /* @ngInject */function ($q, Raven) {
+require('../app').service('modelResource', /* @ngInject */function ($q, Raven, Nomenclature, $translate) {
   var service = this
 
   service.genSingleObservationCode = function (data) {
@@ -23,6 +23,13 @@ require('../app').service('modelResource', /* @ngInject */function ($q, Raven) {
       delete data.id
     }
     delete data.$local
+
+    angular.forEach(data, function (item, key) {
+      if (item instanceof Nomenclature) {
+        item.label.local = item.label[$translate.$language]
+      }
+    })
+
     var resource = new Resource(data)
     if (!resource.monitoringCode) {
       resource.monitoringCode = service.genSingleObservationCode(data)
