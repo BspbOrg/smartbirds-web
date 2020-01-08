@@ -1,5 +1,5 @@
 var hackProviders = {}
-const languages = require('../../../config/languages')
+var languages = require('../../../config/languages')
 
 require('../app')
   .config(/* @ngInject */function (nyaBsConfigProvider) {

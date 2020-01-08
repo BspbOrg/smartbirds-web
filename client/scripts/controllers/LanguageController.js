@@ -1,4 +1,4 @@
-const languages = require('../../../config/languages')
+var languages = require('../../../config/languages')
 
 require('../app').controller('LanguageController', /* @ngInject */function ($scope, $translate) {
   var ctrl = this
