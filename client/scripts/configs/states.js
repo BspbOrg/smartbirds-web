@@ -504,6 +504,19 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
     })
 
     /// ////////
+    // Organizations //
+    /// ////////
+    .state('auth.organizations', {
+      url: '/organizations?slug',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/organizations/list.html',
+          controller: 'OrganizationsController as $ctrl'
+        }
+      }
+    })
+
+    /// ////////
     // Stats //
     /// ////////
     .state('auth.stats', {

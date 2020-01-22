@@ -90,6 +90,12 @@
           <translate>NAV_SPECIES</translate>
         </a>
       </li>
+      <li ng-if="$root.$user.isAdmin()">
+        <a ui-sref="auth.organizations" ui-sref-active="active">
+          <i class="fa fa-database fa-fw"></i>
+          <translate>NAV_ORGANIZATIONS</translate>
+        </a>
+      </li>
     </ul>
   </div>
   <!-- /.sidebar-collapse -->

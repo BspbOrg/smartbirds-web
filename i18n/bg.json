@@ -1009,5 +1009,12 @@
     "LOGO_LIFENEOPHRON_ALT": "Програма Life+",
     "LOGO_BIRDLIFE_ALT": "Birdlife International",
     "LOGO_LEVENTIS_ALT": "Фонадация \"Левентис\"",
-    "MULTIPLE_CHOICE_SELECTED": "избран"
+    "MULTIPLE_CHOICE_SELECTED": "избран",
+    "USER_DETAIL_ORGANIZATION": "Организация",
+    "ORGANIZATIONS_TITLE": "Организации",
+    "ORGANIZATIONS_UNSAVED_DATA_TITLE": "Имате незаписани промени!",
+    "ORGANIZATIONS_UNSAVED_DATA_MESSAGE": "Имате незаписани промени. Сигурни ли сте, че искате да продължите?",
+    "ORGANIZATIONS_BUTTON_SAVE": "Запис",
+    "NAV_ORGANIZATIONS": "Организации",
+    "Could not save changes": "Промените не могат да бъдат запазени!"
 }
