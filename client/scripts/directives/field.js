@@ -52,7 +52,7 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
       $scope.form = formCtrl
     },
     controllerAs: 'field',
-    controller: /* @ngInject */function ($scope, $attrs, $filter, $parse, $rootElement, $timeout, $translate, Nomenclature, Species, db) {
+    controller: /* @ngInject */function ($scope, $attrs, $filter, $parse, $rootElement, $timeout, $translate, Nomenclature, Species, db, Organization) {
       var field = this
 
       while (!field.name || $rootElement.querySelectorAll('#' + field.name).length) {
@@ -180,9 +180,15 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
         case 'single-choice':
         case 'multiple-choice': {
           field.values = []
-          angular.forEach(db.nomenclatures[field.nomenclature], function (item) {
-            field.values.push(item)
-          })
+          if (field.nomenclature === 'organization') {
+            angular.forEach(db.organizations, function (item) {
+              field.values.push(item)
+            })
+          } else {
+            angular.forEach(db.nomenclatures[field.nomenclature], function (item) {
+              field.values.push(item)
+            })
+          }
 
           $scope.$watch('field.model', function () {
             if (field.model) {
@@ -193,8 +199,14 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
                   }
                 })
               } else if (angular.isObject(field.model)) {
-                if (!(field.model instanceof Nomenclature)) {
-                  field.model = db.nomenclatures[field.nomenclature][field.model.label.en] || new Nomenclature(field.model)
+                if (field.nomenclature === 'organization') {
+                  if (!(field.model instanceof Organization)) {
+                    field.model = db.organizations[field.model.slug] || new Organization(field.model)
+                  }
+                } else {
+                  if (!(field.model instanceof Nomenclature)) {
+                    field.model = db.nomenclatures[field.nomenclature][field.model.label.en] || new Nomenclature(field.model)
+                  }
                 }
               }
             }
