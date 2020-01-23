@@ -192,6 +192,13 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
 
           $scope.$watch('field.model', function () {
             if (field.model) {
+              if (field.nomenclature === 'organization') {
+                if (!(field.model instanceof Organization)) {
+                  field.model = db.organizations[field.model] || new Organization(field.model)
+                }
+                return
+              }
+
               if (angular.isArray(field.model)) {
                 field.model.forEach(function (item, idx, array) {
                   if (angular.isObject(item) && !(item instanceof Nomenclature)) {
@@ -199,14 +206,8 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
                   }
                 })
               } else if (angular.isObject(field.model)) {
-                if (field.nomenclature === 'organization') {
-                  if (!(field.model instanceof Organization)) {
-                    field.model = db.organizations[field.model.slug] || new Organization(field.model)
-                  }
-                } else {
-                  if (!(field.model instanceof Nomenclature)) {
-                    field.model = db.nomenclatures[field.nomenclature][field.model.label.en] || new Nomenclature(field.model)
-                  }
+                if (!(field.model instanceof Nomenclature)) {
+                  field.model = db.nomenclatures[field.nomenclature][field.model.label.en] || new Nomenclature(field.model)
                 }
               }
             }
