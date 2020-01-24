@@ -24,6 +24,9 @@
                        ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }">
                 <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block" translate>PROFILE_ERROR_FIELD_REQUIRED</span>
               </div>
+              <div class="form-group">
+                <organization-selector model="user.organization" placeholder="{{'PROFILE_FIELD_ORGANIZATION_HINT' | translate}}"></organization-selector>
+              </div>
               <div class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$invalid }">
                 <input class="form-control" translate-attr="{placeholder: 'PROFILE_FIELD_EMAIL_HINT'}" name="email" type="email" required
                        ng-model="user.email"
