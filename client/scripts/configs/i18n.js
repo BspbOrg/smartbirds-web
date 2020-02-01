@@ -10,9 +10,9 @@ require('../app')
     if (process.env.TRANSLATION_PREFIX) {
       $translateProvider.useUrlLoader(process.env.TRANSLATION_PREFIX)
     } else {
-      // TODO Load files depending on config languages
-      $translateProvider.translations('en', require('../../../i18n/en.json'))
-      $translateProvider.translations('bg', require('../../../i18n/bg.json'))
+      Object.keys(languages).forEach(function (key) {
+        $translateProvider.translations(key, require('../../../i18n/' + key + '.json'))
+      })
     }
 
     var languageAliases = {}
