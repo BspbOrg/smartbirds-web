@@ -6,11 +6,11 @@ require('../app')
     hackProviders.nyaBsConfigProvider = nyaBsConfigProvider
   })
   .config(/* @ngInject */function ($translateProvider, ENDPOINT_URL) {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.TRANSLATION_PREFIX) {
+      $translateProvider.useUrlLoader(process.env.TRANSLATION_PREFIX)
+    } else {
       $translateProvider.translations('en', require('../../../i18n/en.json'))
       $translateProvider.translations('bg', require('../../../i18n/bg.json'))
-    } else {
-      $translateProvider.useUrlLoader(ENDPOINT_URL + '/i18n')
     }
     $translateProvider
       .registerAvailableLanguageKeys(['en', 'bg'], {

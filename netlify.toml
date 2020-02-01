@@ -3,6 +3,7 @@
     command = "npm run build && npm run build:fonts && npm run build:views"
 [build.environment]
     NODE_ENV = "production"
+    TRANSLATION_PREFIX = "/api/staging/i18n"
 
 # Redirect default Netlify subdomain to primary domain
 [[redirects]]
