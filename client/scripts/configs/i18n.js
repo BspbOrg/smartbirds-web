@@ -10,8 +10,11 @@ require('../app')
     if (process.env.TRANSLATION_PREFIX) {
       $translateProvider.useUrlLoader(process.env.TRANSLATION_PREFIX)
     } else {
+      var bulk = require('bulk-require')
+      // eslint-disable-next-line no-path-concat
+      var langs = bulk(__dirname + '/../../../i18n/', ['*.json'])
       Object.keys(languages).forEach(function (key) {
-        $translateProvider.translations(key, require('../../../i18n/' + key + '.json'))
+        $translateProvider.translations(key, langs[key])
       })
     }
 
