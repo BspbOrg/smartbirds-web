@@ -103,6 +103,12 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
       })
   }
 
+  controller.organizationChanged = function () {
+    if (controller.data.role !== 'user') {
+      controller.showOrganizationWarning = true
+    }
+  }
+
   function hackAutocompletion () {
     var timeout = false
     var deregister = $scope.$watch(function () {

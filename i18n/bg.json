@@ -1017,5 +1017,6 @@
     "ORGANIZATIONS_BUTTON_SAVE": "Запис",
     "NAV_ORGANIZATIONS": "Организации",
     "Could not save changes": "Промените не могат да бъдат запазени!",
-    "PROFILE_FIELD_ORGANIZATION_HINT": "Организация"
+    "PROFILE_FIELD_ORGANIZATION_HINT": "Организация",
+    "CHANGE_ORGANIZATION_WARNING_MESSAGE": "При промяна на организазията, правата за достъп ще бъдат променени на \"Наблюдател\""
 }

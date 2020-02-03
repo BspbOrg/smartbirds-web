@@ -85,7 +85,12 @@
 
       <field name="organization" type="single-choice" nomenclature="organization" required="true"
              label="{{'USER_DETAIL_ORGANIZATION' | translate}}"
-             model="user.data.organization"></field>
+             model="user.data.organization"
+             on-select="user.organizationChanged()"></field>
+
+      <div ng-if="user.showOrganizationWarning" class="alert alert-danger" translate>
+        CHANGE_ORGANIZATION_WARNING_MESSAGE
+      </div>
 
       <div ng-if="$user.isAdmin()">
         <hr>
