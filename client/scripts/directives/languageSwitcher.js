@@ -1,4 +1,4 @@
-require('../app').directive('languageSwitcher', function ($compile) {
+require('../app').directive('languageSwitcher', /* @ngInject */function ($compile) {
   return {
     restrict: 'A',
     templateUrl: '/views/directives/languageswitcher.html',
