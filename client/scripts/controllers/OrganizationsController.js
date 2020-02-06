@@ -3,8 +3,12 @@ require('../app').controller('OrganizationsController', /* @ngInject */function 
 
   $ctrl.organizations = db.organizations
 
-  if ($stateParams.slug && $stateParams.slug in db.organizations) {
-    $ctrl.selected = db.organizations[$stateParams.slug] || {}
+  if ($stateParams.slug) {
+    if ($stateParams.slug in db.organizations) {
+      $ctrl.selected = db.organizations[$stateParams.slug] || {}
+    } else {
+      $state.go('.', { slug: null }, {})
+    }
   }
 
   $ctrl.save = function () {
