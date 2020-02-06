@@ -180,25 +180,12 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
         case 'single-choice':
         case 'multiple-choice': {
           field.values = []
-          if (field.nomenclature === 'organization') {
-            angular.forEach(db.organizations, function (item) {
-              field.values.push(item)
-            })
-          } else {
-            angular.forEach(db.nomenclatures[field.nomenclature], function (item) {
-              field.values.push(item)
-            })
-          }
+          angular.forEach(db.nomenclatures[field.nomenclature], function (item) {
+            field.values.push(item)
+          })
 
           $scope.$watch('field.model', function () {
             if (field.model) {
-              if (field.nomenclature === 'organization') {
-                if (!(field.model instanceof Organization)) {
-                  field.model = db.organizations[field.model] || new Organization(field.model)
-                }
-                return
-              }
-
               if (angular.isArray(field.model)) {
                 field.model.forEach(function (item, idx, array) {
                   if (angular.isObject(item) && !(item instanceof Nomenclature)) {
@@ -304,6 +291,25 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
                 })
             }
           })
+
+          break
+        }
+        case 'organization': {
+          field.values = []
+          angular.forEach(db.organizations, function (item) {
+            field.values.push(item)
+          })
+
+          // set viewModel as empty string for default value, otherwise typeahead filter is not working
+          $scope.$watch('field.model', function () {
+            if (field.model) {
+              if (!(field.model instanceof Organization)) {
+                field.viewModel = db.organizations[field.model] || new Organization(field.model)
+              }
+            }
+          })
+
+          break
         }
       }
     }
