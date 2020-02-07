@@ -42,6 +42,9 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
           className: 'success',
           content: $translate.instant('Profile changes are saved successfully')
         })
+        controller.showOrganizationWarning = false
+        user.setIdentity(res)
+
         return res
       }, function (error) {
         Raven.captureMessage(JSON.stringify(error))
