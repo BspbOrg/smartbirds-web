@@ -140,17 +140,16 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
     });
 
   (db.$updateOrganizations = function () {
-    db.organizations = {}
     db.organizations.$promise = user.authPromise
       .then(function () {
         return Organization.query({ limit: -1, nomenclature: true }).$promise
       })
       .then(function (organizations) {
-        var res = db.organizations
+        db.organizations = {}
         organizations.forEach(function (organization) {
-          res[organization.slug] = organization
+          db.organizations[organization.slug] = organization
         })
-        return res
+        return db.organizations
       }).finally(function () {
         delete db.organizations.$promise
       })
