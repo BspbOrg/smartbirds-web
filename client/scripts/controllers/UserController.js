@@ -42,8 +42,10 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
           className: 'success',
           content: $translate.instant('Profile changes are saved successfully')
         })
-        controller.showOrganizationWarning = false
-        user.setIdentity(res)
+        // update the user if it's the current one
+        if (user.id === res.id) {
+          user.setIdentity(res)
+        }
 
         return res
       }, function (error) {
