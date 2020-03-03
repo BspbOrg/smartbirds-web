@@ -1,7 +1,15 @@
-require('../app').factory('languageInterceptor', /* @ngInject */function ($translate) {
+require('../app').factory('languageInterceptor', /* @ngInject */function ($injector) {
+  var $translate
   return {
     request: function (config) {
-      config.headers.Language = $translate.$language
+      try {
+        if (!$translate) {
+          $translate = $injector.get('$translate')
+        }
+        config.headers.Language = $translate.$language
+      } catch (e) {
+        console.warn(e)
+      }
       return config
     }
   }

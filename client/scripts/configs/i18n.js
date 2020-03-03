@@ -29,8 +29,9 @@ require('../app')
       .determinePreferredLanguage(function () {
         var m = global.location.search.match(/lang=(\w+)/)
         if (m) return m[1]
-        return $translateProvider.resolveClientLocale() || 'bg'
+        return $translateProvider.resolveClientLocale() || 'en'
       })
+      .fallbackLanguage('en')
   })
   .run(/* @ngInject */function ($translate, $rootScope) {
     function updateLang (language) {
