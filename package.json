@@ -94,7 +94,7 @@
     "ui-select": "^0.19.8",
     "underscore.string": "^3.3.5",
     "workbox-window": "^4.3.1",
-    "x2js": "^2.0.1"
+    "x2js": "^3.4.0"
   },
   "browser": {
     "angular-bootstrap-lightbox": "./node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js",
