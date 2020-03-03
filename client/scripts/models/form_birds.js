@@ -1,7 +1,7 @@
 var angular = require('angular')
 var LocalCache = require('./mixins/local_cache')
 
-require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $resource, $translate, ENDPOINT_URL, db) {
+require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $resource, ENDPOINT_URL, db, localization) {
   var FormBirds = $resource(ENDPOINT_URL + '/birds/:id', {
     id: '@id'
   }, {
@@ -21,7 +21,7 @@ require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $
       return db.species.birds && db.species.birds[this.species]
     },
     getCount: function (locale) {
-      locale = locale || $translate.$language || 'en'
+      locale = localization.normalizeNomenclatureLocale(locale)
       var parts = []
       parts.push(this.typeUnit.label[locale])
       if (!['Min.', 'Max.', 'Range', 'Unspecified number'].includes(this.typeUnit.label.en)) {

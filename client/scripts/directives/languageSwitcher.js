@@ -1,15 +1,14 @@
-/**
- * Created by dani on 29.11.17.
- */
-
-require('../app').directive('languageSwitcher', function () {
+require('../app').directive('languageSwitcher', /* @ngInject */function ($compile) {
   return {
-    controller: /* @ngInject */function ($translate) {
-      var ctrl = this
-      ctrl.changeLanguage = function (language) {
-        $translate.use(language)
-      }
+    restrict: 'A',
+    templateUrl: '/views/directives/languageswitcher.html',
+    link: function (scope, element) {
+      element.addClass('dropdown')
+      element.attr('uib-dropdown', '')
+      element.removeAttr('language-switcher')
+      $compile(element)(scope)
     },
+    controller: 'LanguageController',
     controllerAs: '$ctrl'
   }
 })

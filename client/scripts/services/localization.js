@@ -4,5 +4,15 @@ require('../app').service('localization', /* @ngInject */function ($rootScope, $
       $translate.use(newVal)
     }
   })
-  return this
+  var service = this
+
+  service.normalizeNomenclatureLocale = function (locale) {
+    var res = locale || $translate.$language || 'en'
+    if (res !== 'en') {
+      res = 'local'
+    }
+    return res
+  }
+
+  return service
 })

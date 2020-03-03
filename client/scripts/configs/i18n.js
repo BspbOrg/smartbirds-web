@@ -1,4 +1,5 @@
 var hackProviders = {}
+var languages = require('../../../config/languages')
 
 require('../app')
   .config(/* @ngInject */function (nyaBsConfigProvider) {
@@ -9,15 +10,22 @@ require('../app')
     if (process.env.TRANSLATION_PREFIX) {
       $translateProvider.useUrlLoader(process.env.TRANSLATION_PREFIX)
     } else {
-      $translateProvider.translations('en', require('../../../i18n/en.json'))
-      $translateProvider.translations('bg', require('../../../i18n/bg.json'))
-    }
-    $translateProvider
-      .registerAvailableLanguageKeys(['en', 'bg'], {
-        'en_*': 'en',
-        'bg_*': 'bg',
-        '*': 'en'
+      var bulk = require('bulk-require')
+      // eslint-disable-next-line no-path-concat
+      var langs = bulk(__dirname + '/../../../i18n/', ['*.json'])
+      Object.keys(languages).forEach(function (key) {
+        $translateProvider.translations(key, langs[key])
       })
+    }
+
+    var languageAliases = {}
+    Object.keys(languages).forEach(function (key) {
+      languageAliases[key + '_*'] = key
+    })
+    languageAliases['*'] = 'en'
+
+    $translateProvider
+      .registerAvailableLanguageKeys(Object.keys(languages), languageAliases)
       .determinePreferredLanguage(function () {
         var m = global.location.search.match(/lang=(\w+)/)
         if (m) return m[1]

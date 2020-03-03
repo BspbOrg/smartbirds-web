@@ -62,13 +62,14 @@
              model="user.data.password"
       ></field>
 
-      <field ng-if="$user.getIdentity().id === user.data.id" language-switcher name="language" type="select"
-             required="true"
-             choices="[{id: 'bg', label: 'LANGUAGE_BULGARIAN'}, {id: 'en', label: 'LANGUAGE_ENGLISH'}]"
-             label="{{'USER_DETAIL_LANGUAGE' | translate}}"
-             model="user.data.language"
-             on-select="$ctrl.changeLanguage(model)"></field>
-
+      <div ng-controller="LanguageController as $languageController">
+        <field ng-if="$user.getIdentity().id === user.data.id" name="language" type="select"
+                required="true"
+                choices="$languageController.availableLanguagesFieldArray"
+                label="{{'USER_DETAIL_LANGUAGE' | translate}}"
+                model="user.data.language"
+                on-select="$languageController.changeLanguage(model)"></field>
+      </div>
       <field ng-if="$user.getIdentity().id === user.data.id" name="privacy" type="select" required="true"
              choices="[{id: 'public', label: 'PRIVACY_PUBLIC'}, {id: 'private', label: 'PRIVACY_PRIVATE'}]"
              label="{{'USER_DETAIL_PRIVACY' | translate}}"
