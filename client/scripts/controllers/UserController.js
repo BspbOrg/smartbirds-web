@@ -107,9 +107,7 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
   }
 
   controller.organizationChanged = function () {
-    if (controller.data.role !== 'user') {
-      controller.showOrganizationWarning = true
-    }
+    controller.data.role = 'user'
   }
 
   function hackAutocompletion () {
