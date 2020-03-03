@@ -3,7 +3,7 @@
  */
 
 var angular = require('angular')
-require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclature, Species, User, Visit, Zone, user) {
+require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclature, Species, User, Visit, Zone, user, Organization) {
   var db = {
     locations: {},
     nomenclatures: {},
@@ -11,7 +11,8 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
     publicUsers: {},
     users: {},
     zones: {},
-    visits: {}
+    visits: {},
+    organizations: {}
   }
 
   db.locations.$promise = user.authPromise
@@ -136,7 +137,23 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       return res
     }).finally(function () {
       delete db.visits.$promise
-    })
+    });
+
+  (db.$updateOrganizations = function () {
+    db.organizations.$promise = user.authPromise
+      .then(function () {
+        return Organization.query({ limit: -1, nomenclature: true }).$promise
+      })
+      .then(function (organizations) {
+        db.organizations = {}
+        organizations.forEach(function (organization) {
+          db.organizations[organization.slug] = organization
+        })
+        return db.organizations
+      }).finally(function () {
+        delete db.organizations.$promise
+      })
+  })()
 
   var promises = []
   angular.forEach(db, function (table) {

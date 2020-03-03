@@ -83,6 +83,15 @@
              label="{{'USER_DETAIL_NOTES' | translate}}"
              model="user.data.notes"></field>
 
+      <field name="organization" type="organization" required="true"
+             label="{{'USER_DETAIL_ORGANIZATION' | translate}}"
+             model="user.data.organization"
+             on-select="user.organizationChanged()"></field>
+
+      <div class="alert alert-danger" translate>
+        CHANGE_ORGANIZATION_WARNING_MESSAGE
+      </div>
+
       <div ng-if="$user.isAdmin()">
         <hr>
 

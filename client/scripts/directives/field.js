@@ -52,7 +52,7 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
       $scope.form = formCtrl
     },
     controllerAs: 'field',
-    controller: /* @ngInject */function ($scope, $attrs, $filter, $parse, $rootElement, $timeout, $translate, Nomenclature, Species, db) {
+    controller: /* @ngInject */function ($scope, $attrs, $filter, $parse, $rootElement, $timeout, $translate, Nomenclature, Species, db, Organization) {
       var field = this
 
       while (!field.name || $rootElement.querySelectorAll('#' + field.name).length) {
@@ -217,8 +217,6 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
         case 'select':
         case 'checkbox-group':
         case 'single-choice-button': {
-          var fieldValues
-
           // set viewModel as empty string for default value, otherwise typeahead filter is not working
           field.viewModel = ''
           $scope.$watch('field.model', function () {
@@ -235,36 +233,43 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
             }
           })
 
+          var updateValues = function (fieldValues) {
+            field.values = fieldValues.map(function (el) {
+              if (typeof el !== 'object') {
+                el = {
+                  id: el,
+                  label: el
+                }
+              }
+
+              if (el.id === field.model) {
+                field.viewModel = el.label
+              }
+
+              $translate(el.label).then(function (val) { el.label = val }).catch(angular.noop)
+              el.label = $translate.instant(el.label)
+              return el
+            })
+          }
+
           if ($attrs.config) {
             if (!($attrs.config in formsConfig)) {
               throw new Error('Unsupported config type: "' + $attrs.config + '"\nAvailable values are: ' + Object.keys(formsConfig).join(', '))
             }
-            fieldValues = Object.values(formsConfig[$attrs.config]).map(function (el) {
+            updateValues(Object.values(formsConfig[$attrs.config]).map(function (el) {
               return {
                 id: el.id,
                 label: el.label
               }
-            })
+            }))
           } else {
-            fieldValues = $parse($attrs.choices)($scope.$parent)
+            var expr = $parse($attrs.choices)
+            $scope.$on('$destroy', $scope.$parent.$watch(function () {
+              return expr($scope.$parent)
+            }, function (newValue) {
+              updateValues(newValue)
+            }))
           }
-
-          field.values = fieldValues.map(function (el) {
-            if (typeof el !== 'object') {
-              el = {
-                id: el,
-                label: el
-              }
-            }
-
-            if (el.id === field.model) {
-              field.viewModel = el.label
-            }
-
-            $translate(el.label).then(function (val) { el.label = val }).catch(angular.noop)
-            el.label = $translate.instant(el.label)
-            return el
-          })
 
           break
         }
@@ -291,6 +296,25 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
                 })
             }
           })
+
+          break
+        }
+        case 'organization': {
+          field.values = []
+          angular.forEach(db.organizations, function (item) {
+            field.values.push(item)
+          })
+
+          // set viewModel as empty string for default value, otherwise typeahead filter is not working
+          $scope.$watch('field.model', function () {
+            if (field.model) {
+              if (!(field.model instanceof Organization)) {
+                field.viewModel = db.organizations[field.model] || new Organization(field.model)
+              }
+            }
+          })
+
+          break
         }
       }
     }

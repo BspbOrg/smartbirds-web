@@ -42,6 +42,11 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
           className: 'success',
           content: $translate.instant('Profile changes are saved successfully')
         })
+        // update the user if it's the current one
+        if (user.id === res.id) {
+          user.setIdentity(res)
+        }
+
         return res
       }, function (error) {
         Raven.captureMessage(JSON.stringify(error))
@@ -101,6 +106,10 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
         controller.form.$setPristine()
         $state.go('^')
       })
+  }
+
+  controller.organizationChanged = function () {
+    controller.data.role = 'user'
   }
 
   function hackAutocompletion () {

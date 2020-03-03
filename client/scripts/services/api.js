@@ -88,4 +88,13 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       })
     }
   })
+
+  api.organizations = function () {
+    return $http({
+      method: 'GET',
+      url: (process.env.STATS_PREFIX || '') + '/organizations.json'
+    }).then(function (response) {
+      return response.data
+    })
+  }
 })
