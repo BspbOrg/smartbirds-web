@@ -76,7 +76,7 @@
     "cross-env": "^6.0.3",
     "envify": "~4.1.0",
     "font-awesome": "^4.5.0",
-    "less": "~3.10.3",
+    "less": "~3.11.1",
     "less-plugin-clean-css": "~1.5.1",
     "localforage": "^1.7.3",
     "lodash": "^4.17.15",
