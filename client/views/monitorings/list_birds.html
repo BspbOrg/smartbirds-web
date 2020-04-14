@@ -178,13 +178,13 @@
         ng-checked="row.$selected">
       </td>
       <td><a href ui-sref=".{{::(row.$local ? 'local-' : '')}}detail({id: row.id, offset: $index})">{{::row.id}}</a></td>
-      <td ng-if="::$user.canAccess(monitoringController.formName)">{{row.getUser().getName()}}</td>
+      <td ng-if="::$user.canAccess(monitoringController.formName)">{{::row.getUser().getName()}}</td>
       <td>{{::row.location}}</td>
       <td>{{::row.observationDateTime|date:'d.MM.yyyy HH:mm'}}</td>
       <td>{{::row.updatedAt|date:'d.MM.yyyy HH:mm'}}</td>
       <td>
-        {{row.getSpecies().label[$language]}}<br/>
-        <strong>{{row.getSpecies().label.la}}</strong>
+        {{::getLocalLabel(row.getSpecies().label)}}<br/>
+        <strong>{{::row.getSpecies().label.la}}</strong>
       </td>
       <td>{{::row.getCount($language)}}</td>
       <td>

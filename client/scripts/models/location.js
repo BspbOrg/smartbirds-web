@@ -12,20 +12,18 @@ require('../app').factory('Location', /* @ngInject */function ($resource, ENDPOI
   // instance methods
   angular.extend(Location.prototype, {
     getArea: function (locale) {
-      locale = localization.normalizeNomenclatureLocale(locale)
-      return (this.area || {})[locale]
+      return localization.getLocalLabel(this.area, locale)
     },
     getName: function (locale) {
-      locale = localization.normalizeNomenclatureLocale(locale)
-      return (this.name || {})[locale]
+      return localization.getLocalLabel(this.name, locale)
     },
     getType: function (locale) {
-      locale = localization.normalizeNomenclatureLocale(locale)
-      return (this.type || {})[locale]
+      return localization.getLocalLabel(this.type, locale)
     },
     toString: function (locale) {
-      locale = localization.normalizeNomenclatureLocale(locale)
-      return (this.type || {})[locale] + ' ' + (this.name || {})[locale] + ', ' + (this.area || {})[locale]
+      return Location.prototype.getType.apply(this, locale) + ' ' +
+        Location.prototype.getName.apply(this, locale) + ', ' +
+        Location.prototype.getArea.apply(this, locale)
     }
   })
 

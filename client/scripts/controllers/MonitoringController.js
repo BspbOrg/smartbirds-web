@@ -4,7 +4,7 @@
 
 var _ = require('lodash')
 var angular = require('angular')
-require('../app').controller('MonitoringController', /* @ngInject */function ($state, $stateParams, $q, $translate, model, ngToast, db, Raven, ENDPOINT_URL, $httpParamSerializer, formName, user, User, formDef, context) {
+require('../app').controller('MonitoringController', /* @ngInject */function ($scope, $state, $stateParams, $q, $translate, model, ngToast, db, Raven, ENDPOINT_URL, $httpParamSerializer, formName, user, User, formDef, context, localization) {
   var controller = this
 
   controller.maxExportCount = 20000
@@ -16,6 +16,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
   controller.db = db
   controller.filter = angular.copy($stateParams)
   controller.offline = false
+  $scope.getLocalLabel = localization.getLocalLabel
 
   // transform threat filter to nomenclature object
   $q.resolve(db.nomenclatures.$promise || db.nomenclatures).then(function (nomenclatures) {

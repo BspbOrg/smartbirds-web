@@ -21,9 +21,8 @@ require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $
       return db.species.birds && db.species.birds[this.species]
     },
     getCount: function (locale) {
-      locale = localization.normalizeNomenclatureLocale(locale)
       var parts = []
-      parts.push(this.typeUnit.label[locale])
+      parts.push(localization.getLocalLabel(this.typeUnit.label, locale))
       if (!['Min.', 'Max.', 'Range', 'Unspecified number'].includes(this.typeUnit.label.en)) {
         parts.push(this.count)
       }
@@ -36,7 +35,7 @@ require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $
       if (['Max.', 'Range'].includes(this.typeUnit.label.en)) {
         parts.push(this.countMax)
       }
-      parts.push(('' + this.countUnit.label[locale]).toLowerCase())
+      parts.push(('' + localization.getLocalLabel(this.countUnit.label, locale, 'lowercase')))
       return parts.join(' ')
     },
     hasSource: true,

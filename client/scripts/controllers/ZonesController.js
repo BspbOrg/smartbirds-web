@@ -6,7 +6,7 @@ var angular = require('angular')
 require('../app').controller('ZonesController', /* @ngInject */function ($scope, $state, $stateParams, Zone, GMAP_KEY, user, User, localization) {
   var controller = this
 
-  $scope.normalizeNomenclatureLocale = localization.normalizeNomenclatureLocale
+  $scope.getLocalLabel = localization.getLocalLabel
 
   $scope.zoneStatuses = Zone.statuses()
   if (!user.isAdmin() && !user.isModerator('cbm')) {
