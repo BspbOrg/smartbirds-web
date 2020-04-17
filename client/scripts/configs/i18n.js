@@ -33,7 +33,7 @@ require('../app')
       })
       .fallbackLanguage('en')
   })
-  .run(/* @ngInject */function ($translate, $rootScope) {
+  .run(/* @ngInject */function ($translate, $rootScope, localization) {
     function updateLang (language) {
       $rootScope.localeLanguage = $rootScope.$language = $translate.$language = language
       hackProviders.nyaBsConfigProvider.setLocalizedText(language, {
@@ -46,6 +46,7 @@ require('../app')
 
     updateLang($translate.proposedLanguage())
     $rootScope.$on('$translateChangeSuccess', function (e, params) { updateLang(params.language) })
+    $rootScope.getLocalLabel = localization.getLocalLabel
   })
   .config(/* @ngInject */function ($httpProvider) {
     $httpProvider.interceptors.push('languageInterceptor')
