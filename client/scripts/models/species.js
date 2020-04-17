@@ -3,7 +3,7 @@
  */
 var angular = require('angular')
 
-require('../app').service('Species', /* @ngInject */function ($resource, $translate, ENDPOINT_URL) {
+require('../app').service('Species', /* @ngInject */function ($resource, $translate, ENDPOINT_URL, localization) {
   var Species = $resource(ENDPOINT_URL + '/species/:type/:la', {
     type: '@type',
     la: '@la'
@@ -14,16 +14,10 @@ require('../app').service('Species', /* @ngInject */function ($resource, $transl
   // instance methods
   angular.extend(Species.prototype, {
     localeLabel: function (locale) {
-      locale = locale || $translate.$language || 'en'
-      var label = (this.label || {})
-
-      return label[locale]
+      return localization.getLocalLabel(this.label, locale)
     },
     toString: function (locale) {
-      locale = locale || $translate.$language || 'en'
-      var label = (this.label || {})
-
-      return label.la + ' | ' + (label[locale] || label.en)
+      return this.label.la + ' | ' + Species.prototype.localeLabel.apply(this, locale)
     }
   })
 

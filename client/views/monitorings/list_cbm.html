@@ -220,18 +220,18 @@
       ng-checked="row.$selected">
     </td>
     <td><a href ui-sref=".{{::(row.$local ? 'local-' : '')}}detail({id: row.id, offset: $index})">{{::row.id}}</a></td>
-    <td ng-if="::$user.canAccess(monitoringController.formName)">{{row.getUser().getName()}}</td>
-    <td>{{row.getZone().location | locationLabel}}</td>
+    <td ng-if="::$user.canAccess(monitoringController.formName)">{{::row.getUser().getName()}}</td>
+    <td>{{::row.getZone().location | locationLabel}}</td>
     <td>{{::row.zone}}</td>
-    <td>{{::row.visit.label[$language]}}</td>
+    <td>{{::getLocalLabel(row.visit.label)}}</td>
     <td>{{::row.observationDateTime|date:'d.MM.yyyy HH:mm'}}</td>
     <td>{{::row.updatedAt|date:'d.MM.yyyy HH:mm'}}</td>
     <td>
-      {{row.getSpecies().label[$language]}}<br/>
-      <strong>{{row.getSpecies().label.la}}</strong>
+      {{::getLocalLabel(row.getSpecies().label)}}<br/>
+      <strong>{{::row.getSpecies().label.la}}</strong>
     </td>
-    <td>{{::row.plot.label[$language]}}</td>
-    <td>{{::row.distance.label[$language]}}</td>
+    <td>{{::getLocalLabel(row.plot.label)}}</td>
+    <td>{{::getLocalLabel(row.distance.label)}}</td>
     <td>{{::row.count}}</td>
     <td>
       <preview-pictures pictures="::row.pictures" />
