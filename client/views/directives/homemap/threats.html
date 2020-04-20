@@ -1,20 +1,51 @@
-<ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
-  <ui-gmap-markers ng-if="map.records.length"
-                   models="map.records"
-                   static="true"
-                   coords="'self'"
-                   type="'cluster'"
-                   modelsbyref="true"
-                   fit="true"
-                   click="map.marker.click"
-  ></ui-gmap-markers>
-  <ui-gmap-window show="map.activeModel.show" coords="map.activeModel" options="map.windowOptions">
-    <div>
-      <h4 class="text-uppercase text-justify">
-        {{map.activeModel['threats'+($root.$language | capitalize)] || map.activeModel.threatsEn}}
-      </h4>
-    </div>
-  </ui-gmap-window>
-</ui-gmap-google-map>
+<div>
+  <div class="navbar navbar-default">
+    <form class="navbar-form navbar-left">
+      <div class="form-group">
+        <label for="threatFilter" translate>PUBLIC_THREATS_FILTER_BY_THREAT</label>
+        <select
+          id="threatFilter"
+          class="form-control"
+          ng-change="map.filters.updated()"
+          ng-model="map.filters.current.threat"
+          ng-options="option for option in map.filters.getLocalThreatOptions() track by option"
+        >
+          <option value="" translate>PUBLIC_THREATS_FILTER_ALL_THREATS</option>
+        </select>
+      </div>
 
-<ng-include src="'/views/directives/homemap/helptext.html'"></ng-include>
+      <div class="form-group">
+        <label for="dateFilter" translate>PUBLIC_THREATS_FILTER_BY_DATE</label>
+        <select id="dateFilter" class="form-control" ng-model="map.filters.current.observationDateTime"
+                ng-change="map.filters.updated()">
+          <option value="" translate>PUBLIC_THREATS_FILTER_ALL_TIME</option>
+          <option value="1" translate>PUBLIC_THREATS_FILTER_1_MONTH</option>
+          <option value="3" translate>PUBLIC_THREATS_FILTER_3_MONTHS</option>
+          <option value="6" translate>PUBLIC_THREATS_FILTER_6_MONTHS</option>
+          <option value="12" translate>PUBLIC_THREATS_FILTER_1_YEAR</option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+    <ui-gmap-markers ng-if="map.filteredRecords.length"
+                     models="map.filteredRecords"
+                     static="true"
+                     coords="'self'"
+                     type="'cluster'"
+                     modelsbyref="true"
+                     fit="true"
+                     click="map.marker.click"
+    ></ui-gmap-markers>
+    <ui-gmap-window show="map.activeModel.show" coords="map.activeModel" options="map.windowOptions">
+      <div>
+        <h4 class="text-uppercase text-justify">
+          {{map.activeModel['threats'+($root.$language | capitalize)] || map.activeModel.threatsEn}}
+        </h4>
+      </div>
+    </ui-gmap-window>
+  </ui-gmap-google-map>
+
+  <ng-include src="'/views/directives/homemap/helptext.html'"></ng-include>
+</div>
