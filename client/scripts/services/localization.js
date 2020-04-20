@@ -22,7 +22,7 @@ require('../app').service('localization', /* @ngInject */function ($rootScope, $
    * @param {(lowercase|uppercase)} [transform?] apply filter
    * @returns {string}
    */
-  service.getLocalLabel = function (label, locale, transform, ctx) {
+  service.getLocalLabel = function (label, locale, transform) {
     if (label == null) return ''
     locale = service.normalizeNomenclatureLocale(locale)
     var value = label[locale] || label.en || ''

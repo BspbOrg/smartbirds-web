@@ -8,7 +8,7 @@ require('../app').directive('organizationSelector', /* @ngInject */function () {
     bindToController: true,
     templateUrl: '/views/directives/organizationselector.html',
     controllerAs: '$ctrl',
-    controller: /* @ngInject */function ($scope, api, $translate) {
+    controller: /* @ngInject */function ($scope, api, $translate, Organization) {
       var ctrl = this
       ctrl.organizations = []
 
@@ -19,7 +19,7 @@ require('../app').directive('organizationSelector', /* @ngInject */function () {
         ctrl.organizations = res.map(function (organization) {
           return {
             id: organization.slug,
-            label: organization.label[$translate.$language] || organization.label.en
+            label: Organization.prototype.toString.apply(organization)
           }
         })
       })

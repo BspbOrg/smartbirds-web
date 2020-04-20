@@ -24,12 +24,6 @@ require('../app').service('modelResource', /* @ngInject */function ($q, Raven, N
     }
     delete data.$local
 
-    angular.forEach(data, function (item, key) {
-      if (item instanceof Nomenclature) {
-        item.label.local = item.label[$translate.$language]
-      }
-    })
-
     var resource = new Resource(data)
     if (!resource.monitoringCode) {
       resource.monitoringCode = service.genSingleObservationCode(data)

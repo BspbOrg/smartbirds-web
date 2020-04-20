@@ -11,7 +11,7 @@
   <ui-gmap-window show="map.activeModel.show" coords="map.activeModel" options="map.windowOptions">
     <div>
       <h4 class="text-uppercase text-justify">
-        {{map.activeModel['threats'+($root.$language | capitalize)]}}
+        {{map.activeModel['threats'+($root.$language | capitalize)] || map.activeModel.threatsEn}}
       </h4>
     </div>
   </ui-gmap-window>

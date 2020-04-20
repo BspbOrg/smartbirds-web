@@ -3,7 +3,7 @@
  */
 var angular = require('angular')
 
-require('../app').service('Nomenclature', /* @ngInject */function ($resource, $translate, ENDPOINT_URL) {
+require('../app').service('Nomenclature', /* @ngInject */function ($resource, $translate, ENDPOINT_URL, localization) {
   var Nomenclature = $resource(ENDPOINT_URL + '/nomenclature/:type/:label', {
     type: '@type',
     label: '@label'
@@ -14,8 +14,7 @@ require('../app').service('Nomenclature', /* @ngInject */function ($resource, $t
   // instance methods
   angular.extend(Nomenclature.prototype, {
     toString: function (locale) {
-      locale = locale || $translate.$language || 'en'
-      return (this.label || {})[locale] || (this.label || {}).en
+      return localization.getLocalLabel(this.label, locale)
     }
   })
 
