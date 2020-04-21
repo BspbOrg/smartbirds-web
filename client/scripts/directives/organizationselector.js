@@ -15,12 +15,14 @@ require('../app').directive('organizationSelector', /* @ngInject */function () {
       // Preselect BSPB organization if none is selected
       ctrl.model = ctrl.model || 'bspb'
 
-      api.organizations().then(function (res) {
-        ctrl.organizations = res.map(function (organization) {
-          return {
-            id: organization.slug,
-            label: Organization.prototype.toString.apply(organization)
-          }
+      $scope.$watch(function () { return $translate.$language }, function () {
+        api.organizations().then(function (res) {
+          ctrl.organizations = res.map(function (organization) {
+            return {
+              id: organization.slug,
+              label: Organization.prototype.toString.apply(organization)
+            }
+          })
         })
       })
     }
