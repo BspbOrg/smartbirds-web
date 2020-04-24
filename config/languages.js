@@ -1,9 +1,9 @@
 module.exports = {
-  bg: {
-    label: 'LANGUAGE_BULGARIAN'
-  },
   en: {
     label: 'LANGUAGE_ENGLISH'
+  },
+  bg: {
+    label: 'LANGUAGE_BULGARIAN'
   },
   sq: {
     label: 'LANGUAGE_ALBANIAN'

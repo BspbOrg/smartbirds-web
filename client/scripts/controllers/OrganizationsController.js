@@ -1,7 +1,10 @@
+const languages = require('../../../config/languages')
+
 require('../app').controller('OrganizationsController', /* @ngInject */function ($scope, $state, $stateParams, db, Organization, $q, $translate, ngToast, Raven) {
   var $ctrl = this
 
   $ctrl.organizations = db.organizations
+  $ctrl.languages = languages
 
   if ($stateParams.slug) {
     if ($stateParams.slug in db.organizations) {

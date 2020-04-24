@@ -22,13 +22,8 @@
       confirm-message-window="{{'ORGANIZATIONS_UNSAVED_DATA_TITLE' | translate}}"
       confirm-message-route="{{'ORGANIZATIONS_UNSAVED_DATA_MESSAGE' | translate}}">
       <div class="col-md-12" ng-if="$ctrl.selected">
-        <div class="row">
-          <div class="col-md-6">
-            <field type="text" label="BG" model="$ctrl.selected.label.bg"></field>
-          </div>
-          <div class="col-md-6">
-            <field type="text" label="EN" model="$ctrl.selected.label.en"></field>
-          </div>
+        <div class="row" ng-repeat="(key, language) in $ctrl.languages track by key">
+          <field type="text" label="Label {{::key|uppercase}} ({{::language.label|translate}})" model="$ctrl.selected.label[key]"></field>
         </div>
         <div class="row">
           <div class="pull-right">
