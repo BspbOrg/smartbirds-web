@@ -14,6 +14,15 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
   controller.data.id = id
 
   controller.moderatorForms = []
+  controller.privacyChoices = [
+    { id: 'public', label: 'PRIVACY_PUBLIC' },
+    { id: 'private', label: 'PRIVACY_PRIVATE' }
+  ]
+  controller.roleChoices = [
+    { id: 'user', label: 'USER_DETAIL_ROLE_USER' },
+    { id: 'moderator', label: 'USER_DETAIL_ROLE_MODERATOR' },
+    { id: 'admin', label: 'USER_DETAIL_ROLE_ADMIN' }
+  ]
 
   angular.forEach(forms, function (formDef) {
     controller.moderatorForms.push({ id: formDef.serverModel, label: formDef.label })
