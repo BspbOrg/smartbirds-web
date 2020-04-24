@@ -6,6 +6,14 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
 ) {
   var controller = this
 
+  controller.threatsClassChoices = [
+    { id: 'birds', label: 'CLASS_BIRDS' },
+    { id: 'herptiles', label: 'CLASS_HERPTILES' },
+    { id: 'mammals', label: 'CLASS_MAMMALS' },
+    { id: 'invertebrates', label: 'CLASS_INVERTEBRATES' },
+    { id: 'plants', label: 'CLASS_PLANTS' }
+  ]
+
   var id = $stateParams.id
   var isCopy = false
   if (!$stateParams.id && $stateParams.fromId) {
