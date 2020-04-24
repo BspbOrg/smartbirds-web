@@ -9,7 +9,7 @@
         <form role="form" class="form form-filter" name="$ctrl.form">
             <div class="row">
                 <div class="col-md-4 col-lg-4">
-                    <field name="latitude" type="float" required="true" 
+                    <field name="latitude" type="float" required="true"
                         label="{{ ::'LIST_FILTER_LATITUDE' | translate }}"
                         model="$ctrl.location.latitude"
                         on-select="$ctrl.updateRadius()"></field>
@@ -24,7 +24,7 @@
 
                 <div class="col-md-4 col-lg-4">
                     <field name="radius" type="select" required="true"
-                        choices="[{id: '0.5', label: 'DISTANCE_500_M'}, {id: '1', label: 'DISTANCE_1_KM'}, {id: '2', label: 'DISTANCE_2_KM'}, {id: '5', label: 'DISTANCE_5_KM'}, {id: '10', label: 'DISTANCE_10_KM'}]"
+                        choices="$ctrl.radiusChoices"
                         label="{{ ::'LIST_FILTER_RADIUS' | translate }}" placeholder="{{ ::'LIST_FILTER_RADIUS_PLACEHOLDER' | translate }}"
                         on-select="$ctrl.updateRadius()"
                         model="$ctrl.location.radius"></field>
@@ -46,7 +46,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" 
+    <button class="btn btn-primary" type="button"
     ng-disabled="$ctrl.form.$invalid"
     ng-click="$ctrl.locationSelected()" translate>BTN_OK</button>
 </div>

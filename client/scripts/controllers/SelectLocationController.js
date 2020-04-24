@@ -6,6 +6,13 @@ require('../app').controller('SelectLocationController', /* @ngInject */function
   var lonKilometersPerDegree = 82.445
 
   $ctrl.location = defaults({}, location, { radius: '5' })
+  $ctrl.radiusChoices = [
+    { id: '0.5', label: 'DISTANCE_500_M' },
+    { id: '1', label: 'DISTANCE_1_KM' },
+    { id: '2', label: 'DISTANCE_2_KM' },
+    { id: '5', label: 'DISTANCE_5_KM' },
+    { id: '10', label: 'DISTANCE_10_KM' }
+  ]
 
   $ctrl.radiusCoordinates = []
   $ctrl.map = {
