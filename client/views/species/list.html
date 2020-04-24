@@ -32,8 +32,7 @@
         <tr>
           <th>#</th>
           <th>LA</th>
-          <th>BG</th>
-          <th>EN</th>
+          <th ng-repeat="(key, language) in $ctrl.languages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
           <th translate>SPECIES_COL_INTERESTING</th>
           <th translate>SPECIES_COL_SENSITIVE</th>
           <th class="btn-group btn-group-xs">
@@ -62,13 +61,8 @@
                    model="item.label.la"
                    required></field>
           </td>
-          <td>
-            <field type="text"
-                   model="item.label.bg"></field>
-          </td>
-          <td>
-            <field type="text"
-                   model="item.label.en"></field>
+          <td ng-repeat="(key, language) in $ctrl.languages track by key">
+            <field type="text" model="item.label[key]"></field>
           </td>
           <td>
             <field type="bool"
@@ -90,8 +84,7 @@
         <tr>
           <th>#</th>
           <th>LA</th>
-          <th>BG</th>
-          <th>EN</th>
+          <th ng-repeat="(key, language) in $ctrl.languages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
           <th translate>SPECIES_COL_INTERESTING</th>
           <th translate>SPECIES_COL_SENSITIVE</th>
           <th class="btn-group btn-group-xs">

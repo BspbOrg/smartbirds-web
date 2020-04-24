@@ -1,8 +1,10 @@
+var languages = require('../../../config/languages')
 var angular = require('angular')
 require('../app').controller('NomenclaturesController', /* @ngInject */function ($scope, $state, $stateParams, db, Nomenclature) {
   var $ctrl = this
 
   $ctrl.nomenclatures = db.nomenclatures
+  $ctrl.languages = languages
   $ctrl.groups = {}
   angular.forEach(db.nomenclatures, function (nomenclature, key) {
     var parts = key.split('_')

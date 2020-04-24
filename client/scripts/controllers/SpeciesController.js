@@ -1,8 +1,10 @@
+var languages = require('../../../config/languages')
 var angular = require('angular')
 require('../app').controller('SpeciesController', /* @ngInject */function ($scope, $state, $stateParams, db, Species) {
   var $ctrl = this
 
   $ctrl.species = db.species
+  $ctrl.languages = languages
   if ($stateParams.type && $stateParams.type in db.species) {
     $ctrl.selected = $ctrl.selected || {}
     $ctrl.selected.type = $stateParams.type

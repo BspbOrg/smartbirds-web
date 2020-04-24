@@ -44,8 +44,7 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>BG</th>
-          <th>EN</th>
+          <th ng-repeat="(key, language) in $ctrl.languages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
           <th class="btn-group btn-group-xs">
             <button
               type="button"
@@ -67,15 +66,9 @@
         <tbody>
         <tr class="hover" ng-repeat="item in $ctrl.selected.nomenclature">
           <td>{{$index+1}}</td>
-          <td>
-            <field type="text"
-                   model="item.label.bg"
-                   required></field>
-          </td>
-          <td>
-            <field type="text"
-                   model="item.label.en"
-                   required></field>
+          <td ng-repeat="(key, language) in $ctrl.languages track by key">
+            <field ng-if="::key==='en'" type="text" model="item.label[key]" required></field>
+            <field ng-if="::key!=='en'" type="text" model="item.label[key]"></field>
           </td>
           <td>
             <button type="button" class="btn btn-danger btn-xs visible-hover"
@@ -88,8 +81,7 @@
         <tfoot>
         <tr>
           <th>#</th>
-          <th>BG</th>
-          <th>EN</th>
+          <th ng-repeat="(key, language) in $ctrl.languages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
           <th class="btn-group btn-group-xs">
             <button
               type="button"
