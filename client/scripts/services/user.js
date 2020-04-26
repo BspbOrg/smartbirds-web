@@ -33,6 +33,8 @@ require('../app')
           return true
         case 'admin':
           return _identity.isAdmin
+        case 'org-admin':
+          return _identity.isOrgAdmin
         case 'moderator':
           return _identity.isModerator
         default:
@@ -48,6 +50,10 @@ require('../app')
 
     service.isAdmin = function () {
       return service.isInRole('admin')
+    }
+
+    service.isOrgAdmin = function () {
+      return service.isInRole('org-admin')
     }
 
     service.isModerator = function (formName) {

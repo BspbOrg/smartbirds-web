@@ -13,11 +13,11 @@
       </button>
       <a class="navbar-brand" ui-sref="auth.dashboard">
         <translate>SITE_NAME</translate>
-        <span ng-if="main.SW" style="margin-left: 0.25em; font-size: 50%; vertical-align: middle;"
+        <span ng-if="::main.SW" style="margin-left: 0.25em; font-size: 50%; vertical-align: middle;"
               ng-style="{color: isOnline ? '#8BC34A' : '#F44336'}">
           <i class="fa fa-circle"></i>
         </span>
-        <span ng-if="$user.isAdmin()" class="text-danger">ADMIN</span>
+        <span ng-if="::$user.isAdmin() || $user.isOrgAdmin()" class="text-danger">ADMIN</span>
       </a>
     </div>
     <!-- /.navbar-header -->
@@ -27,7 +27,8 @@
         <li class="dropdown" uib-dropdown>
           <a href role="button" id="user-dropdown" type="button" class="dropdown-toggle"
              uib-dropdown-toggle>
-            <translate translate-values="{userName: $user.getIdentity().firstName}">NAV_HELLO
+            <translate translate-values="::{userName: $user.getIdentity().firstName}">
+              NAV_HELLO
             </translate>
             <span class="caret"></span>
           </a>
@@ -88,7 +89,7 @@
         <a href ui-sref="gdpr" translate>GDPR_LABEL</a>
       </p>
       <p class="revision">
-        {{$system.name}} {{$system.version}}
+        {{::$system.name}} {{::$system.version}}
       </p>
     </div>
   </footer>
