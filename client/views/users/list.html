@@ -39,7 +39,8 @@
               <option value="">{{::'USER_LIST_FILTER_ROLE_ALL' | translate}}</option>
               <option value="user">{{::'USER_LIST_FILTER_ROLE_USER' | translate}}</option>
               <option value="moderator">{{::'USER_LIST_FILTER_ROLE_MODERATOR' | translate}}</option>
-              <option value="admin">{{::'USER_LIST_FILTER_ROLE_ADMINISTRATOR' | translate}}</option>
+              <option value="org-admin">{{::'USER_LIST_FILTER_ROLE_ADMINISTRATOR' | translate}}</option>
+              <option ng-if="$root.$user.isAdmin()" value="admin"><span class="text-danger">admin</span></option>
             </select>
           </div>
 
@@ -79,7 +80,11 @@
         <td>{{::row.lastLoginAt | date}}</td>
         <td class="col-md-1 text-center">
           <span ng-if="::row.role === 'user'">{{::'USER_DETAIL_ROLE_USER' | translate}}</span>
-          <span ng-if="::row.role === 'admin'">{{::'USER_DETAIL_ROLE_ADMIN' | translate}}</span>
+          <span ng-if="::row.role === 'admin'" class="text-danger">admin</span>
+          <span ng-if="::row.role === 'org-admin'">
+            {{::'USER_DETAIL_ROLE_ADMIN' | translate}}
+            <span ng-if="::$root.$user.isAdmin()">{{::row.organization}}</span>
+          </span>
           <span ng-if="::row.role === 'moderator'">
             {{::'USER_DETAIL_ROLE_MODERATOR' | translate}}
             <span ng-repeat="form in ::row.forms | formLabels"><span

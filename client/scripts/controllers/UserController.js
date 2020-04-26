@@ -21,8 +21,12 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
   controller.roleChoices = [
     { id: 'user', label: 'USER_DETAIL_ROLE_USER' },
     { id: 'moderator', label: 'USER_DETAIL_ROLE_MODERATOR' },
-    { id: 'admin', label: 'USER_DETAIL_ROLE_ADMIN' }
+    { id: 'org-admin', label: 'USER_DETAIL_ROLE_ADMIN' }
   ]
+
+  if (user.isAdmin()) {
+    controller.roleChoices.push({ id: 'admin', label: 'admin' })
+  }
 
   angular.forEach(forms, function (formDef) {
     controller.moderatorForms.push({ id: formDef.serverModel, label: formDef.label })

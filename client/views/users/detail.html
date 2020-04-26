@@ -6,13 +6,13 @@
           <button type="button"
                   class="btn btn-danger"
                   ng-disabled="!user.data.getName()"
-                  ng-if="$user.isAdmin() && user.data.id"
-                  confirm="{{user.deleteConfirmMessage}}"
-                  confirm-text="{{user.data.getName()}}"
+                  ng-if="::$user.isAdmin() && user.data.id"
+                  confirm="{{::user.deleteConfirmMessage}}"
+                  confirm-text="{{::user.data.getName()}}"
                   confirm-size="md"
                   ng-click="user.delete()">
             <i class="fa fa-trash fa-fw"></i>
-            {{'USER_DETAIL_BUTTON_DELETE'|translate}}
+            {{::'USER_DETAIL_BUTTON_DELETE'|translate}}
           </button>
           <button type="button" class="btn btn-primary"
                   ng-disabled="user.form.$pristine || user.form.$invalid"
@@ -32,8 +32,8 @@
           role="form"
           autocomplete="off"
           confirm-on-exit="user.form.$dirty"
-          confirm-message-window="{{'USER_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
-          confirm-message-route="{{'USER_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
+          confirm-message-window="{{::'USER_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
+          confirm-message-route="{{::'USER_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
 
       <field name="firstName" type="text" required="true"
              label="{{'USER_DETAIL_FIRST_NAME' | translate}}"
@@ -63,14 +63,14 @@
       ></field>
 
       <div ng-controller="LanguageController as $languageController">
-        <field ng-if="$user.getIdentity().id === user.data.id" name="language" type="select"
+        <field ng-if="::$user.getIdentity().id === user.data.id" name="language" type="select"
                 required="true"
                 choices="$languageController.availableLanguagesFieldArray"
                 label="{{'USER_DETAIL_LANGUAGE' | translate}}"
                 model="user.data.language"
                 on-select="$languageController.changeLanguage(model)"></field>
       </div>
-      <field ng-if="$user.getIdentity().id === user.data.id" name="privacy" type="select" required="true"
+      <field ng-if="::$user.getIdentity().id === user.data.id" name="privacy" type="select" required="true"
              choices="user.privacyChoices"
              label="{{'USER_DETAIL_PRIVACY' | translate}}"
              model="user.data.privacy"></field>
@@ -83,64 +83,69 @@
              label="{{'USER_DETAIL_NOTES' | translate}}"
              model="user.data.notes"></field>
 
-      <field name="organization" type="organization" required="true"
+      <field ng-if="::$user.isAdmin() || $user.getIdentity().id === user.data.id"
+             name="organization" type="organization" required="true"
              label="{{'USER_DETAIL_ORGANIZATION' | translate}}"
              model="user.data.organization"
              on-select="user.organizationChanged()"></field>
 
-      <div class="alert alert-danger" translate>
+      <div ng-if="::$user.getIdentity().id === user.data.id"
+           class="alert alert-danger" translate>
         CHANGE_ORGANIZATION_WARNING_MESSAGE
       </div>
 
-      <div ng-if="$user.isAdmin()">
+      <div ng-if="::$user.isAdmin() || $user.isOrgAdmin()">
         <hr>
 
         <h3 translate>USER_DETAIL_RIGHTS</h3>
 
-        <field name="role" type="select" disabled="!$user.isAdmin()" required="true"
+        <field name="role" type="select" disabled="::!$user.isAdmin() && !$user.isOrgAdmin()"
+               required="true"
                choices="user.roleChoices"
-               label="{{'USER_DETAIL_ROLE' | translate}}"
+               label="{{::'USER_DETAIL_ROLE' | translate}}"
                model="user.data.role"></field>
 
         <field name="forms" type="checkbox-group"
                disabled="user.data.role !== 'moderator'"
                choices="user.moderatorForms"
-               label="{{'USER_DETAIL_FORMS' | translate}}"
+               label="{{::'USER_DETAIL_FORMS' | translate}}"
                model="user.data.forms"></field>
       </div>
 
-      <hr>
+      <div ng-if="::$user.getIdentity().id === user.data.id">
+        <hr>
 
-      <h3 translate>USER_DETAIL_SIGNATURE</h3>
+        <h3 translate>USER_DETAIL_SIGNATURE</h3>
 
-      <img ng-src="{{user.data.getBannerUrl()}}">
+        <img ng-src="{{user.data.getBannerUrl()}}">
 
-      <div class="form-group">
-        <label class="control-label"
-               for="banner1" translate>USER_DETAIL_EMBED_IN_BB_FORUM</label>
-        <input type="text"
-               id="banner1"
-               class="form-control"
-               value="[URL=https://smartbirds.org/][IMG]{{user.data.getBannerUrl()}}[/IMG][/URL]"
-               readonly>
-      </div>
-      <div class="form-group">
-        <label class="control-label"
-               for="banner3" translate>USER_DETAIL_ALTERNATIVE_EMBED_IN_BB_FORUM</label>
-        <input type="text"
-               id="banner3"
-               class="form-control"
-               value="[URL=https://smartbirds.org/][IMG={{user.data.getBannerUrl()}}][/IMG][/URL]"
-               readonly>
-      </div>
-      <div class="form-group">
-        <label class="control-label"
-               for="banner2" translate>USER_DETAIL_EMBED_HTML</label>
-        <input type="text"
-               id="banner2"
-               class="form-control"
-               value='<a href="https://smartbirds.org/"><img src="{{user.data.getBannerUrl()}}" border="0"></a>'
-               readonly>
+        <div class="form-group">
+          <label class="control-label"
+                 for="banner1" translate>USER_DETAIL_EMBED_IN_BB_FORUM</label>
+          <input type="text"
+                 id="banner1"
+                 class="form-control"
+                 value="[URL=https://smartbirds.org/][IMG]{{user.data.getBannerUrl()}}[/IMG][/URL]"
+                 readonly>
+        </div>
+        <div class="form-group">
+          <label class="control-label"
+                 for="banner3" translate>USER_DETAIL_ALTERNATIVE_EMBED_IN_BB_FORUM</label>
+          <input type="text"
+                 id="banner3"
+                 class="form-control"
+                 value="[URL=https://smartbirds.org/][IMG={{user.data.getBannerUrl()}}][/IMG][/URL]"
+                 readonly>
+        </div>
+        <div class="form-group">
+          <label class="control-label"
+                 for="banner2" translate>USER_DETAIL_EMBED_HTML</label>
+          <input type="text"
+                 id="banner2"
+                 class="form-control"
+                 value='<a href="https://smartbirds.org/"><img src="{{user.data.getBannerUrl()}}" border="0"></a>'
+                 readonly>
+        </div>
       </div>
     </form>
   </div>
