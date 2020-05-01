@@ -1,0 +1,42 @@
+<div>
+  <h1 class="page-header">
+    Tasks management
+  </h1>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Auto locations</div>
+    <div class="panel-body">
+      <form name="autoLocation" class="form-inline">
+        <div class="form-group">
+          <label for="auto-location-form">Form</label>
+          <select class="form-control" id="auto-location-form"
+                  ng-model="autoLocation.form"
+                  ng-options="::v.serverModel as ::v.label|translate for v in ::$ctrl.forms">
+            <option value="">all forms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="auto-location-id">Record ID</label>
+          <input type="number" class="form-control" id="auto-location-id"
+                 placeholder="all without location"
+                 ng-model="autoLocation.id">
+        </div>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.autoLocation(autoLocation.form, autoLocation.id)">
+          Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.autoLocation.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.autoLocation.response" class="alert alert-success" role="alert">
+        {{$ctrl.autoLocation.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.autoLocation.error" class="alert alert-danger" role="alert">
+        {{$ctrl.autoLocation.error}}
+      </div>
+    </div>
+  </div>
+</div>

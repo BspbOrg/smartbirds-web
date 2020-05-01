@@ -96,6 +96,12 @@
           <translate>NAV_ORGANIZATIONS</translate>
         </a>
       </li>
+      <li ng-if="::$root.$user.isAdmin()">
+        <a ui-sref="auth.tasks" ui-sref-active="active">
+          <i class="fa fa-gears fa-fw"></i>
+          Tasks
+        </a>
+      </li>
     </ul>
   </div>
   <!-- /.sidebar-collapse -->

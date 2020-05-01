@@ -519,6 +519,19 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
     /// ////////
     // Stats //
     /// ////////
+    .state('auth.tasks', {
+      url: '/tasks',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/tasks.html',
+          controller: 'TasksController as $ctrl'
+        }
+      }
+    })
+
+    /// ////////
+    // Stats //
+    /// ////////
     .state('auth.stats', {
       url: '/stats'
     })

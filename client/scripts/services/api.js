@@ -58,6 +58,19 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     }
   }
 
+  api.tasks = {
+    autoLocation: function (form, id) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/auto-location',
+        data: {
+          form: form,
+          id: id
+        }
+      })
+    }
+  }
+
   api.stats = {}
 
   var forms = [
