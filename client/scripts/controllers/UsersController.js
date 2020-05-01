@@ -17,6 +17,11 @@ require('../app').controller('UsersController', /* @ngInject */function ($filter
           return false
         }
       }
+      if (config && config.organization) {
+        if (config.organization !== row.organization) {
+          return false
+        }
+      }
       if (config && config.search) {
         if (!filter([row], config.search).length) {
           return false

@@ -44,6 +44,13 @@
             </select>
           </div>
 
+          <div class="form-group" ng-if="::$user.isAdmin()">
+            <field name="organization" type="organization"
+                   label="{{::'LIST_FILTER_ORGANIZATION' | translate}}"
+                   placeholder="- {{::'INPUT_PLACEHOLDER_ALL' | translate}} -"
+                   model="data.filter.organization"></field>
+          </div>
+
         </form>
 
       </div>
@@ -64,6 +71,10 @@
           {{::'USER_LIST_TABLE_LAST_LOGIN' | translate}}
         </th>
         <th class="col-md-1 text-center" sortable-column="role">{{::'USER_LIST_TABLE_ROLE' | translate}}</th>
+        <th ng-if="::$user.isAdmin()"
+            sb-sorting="organization">
+          {{::'LIST_TABLE_ORGANIZATION' | translate }}
+        </th>
         <th class="col-md-1 text-center" sortable-column="gdprConsent">
           {{::'USER_LIST_TABLE_GDPR_CONSENT' | translate}}
         </th>
@@ -81,17 +92,14 @@
         <td class="col-md-1 text-center">
           <span ng-if="::row.role === 'user'">{{::'USER_DETAIL_ROLE_USER' | translate}}</span>
           <span ng-if="::row.role === 'admin'" class="text-danger">admin</span>
-          <span ng-if="::row.role === 'org-admin'">
-            {{::'USER_DETAIL_ROLE_ADMIN' | translate}}
-            <span ng-if="::$root.$user.isAdmin()">{{::row.organization}}</span>
-          </span>
+          <span ng-if="::row.role === 'org-admin'">{{::'USER_DETAIL_ROLE_ADMIN' | translate}}</span>
           <span ng-if="::row.role === 'moderator'">
             {{::'USER_DETAIL_ROLE_MODERATOR' | translate}}
             <span ng-repeat="form in ::row.forms | formLabels"><span
               ng-if="::!$first">, </span>{{::form | translate}}</span>
           </span>
-
         </td>
+        <td ng-if="::$user.isAdmin()">{{::row.organization | organizationName}}</td>
         <td class="col-md-1 text-center">
           <span ng-if="::row.gdprConsent">{{::'USER_DETAIL_GDPR_CONSENT_GRANTED' | translate}}</span>
           <span ng-if="::!row.gdprConsent">{{::'USER_DETAIL_GDPR_CONSENT_NOT_GRANTED' | translate}}</span>
