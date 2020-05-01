@@ -112,8 +112,16 @@
                 on-select="monitoringController.updateFilter()">
               </filter-map>
             </div>
-          </div>
 
+            <div class="col-md-4 col-lg-3" ng-if="::$user.isAdmin()">
+              <field name="organization" type="organization"
+                     label="{{::'LIST_FILTER_ORGANIZATION' | translate}}"
+                     placeholder="- {{::'INPUT_PLACEHOLDER_ALL' | translate}} -"
+                     on-select="monitoringController.updateFilter()"
+                     model="monitoringController.filter.organization"></field>
+            </div>
+
+          </div>
         </form>
 
       </div>
@@ -165,6 +173,10 @@
           sb-sorting="getUser().getName()" translate>
         THREATS_LIST_TABLE_USER
       </th>
+      <th ng-if="::$user.isAdmin()"
+          sb-sorting="organization">
+        {{::'LIST_TABLE_ORGANIZATION' | translate }}
+      </th>
       <th
         sb-sorting="location" translate>
         THREATS_LIST_TABLE_LOCATION
@@ -200,6 +212,7 @@
       </td>
       <td><a href ui-sref=".detail({id: row.id, offset: $index})">{{::row.id}}</a></td>
       <td ng-if="::$user.canAccess(monitoringController.formName)">{{row.getUser().getName()}}</td>
+      <td ng-if="::$user.isAdmin()">{{::row.organization | organizationName}}</td>
       <td>{{::row.location}}</td>
       <td>{{::row.observationDateTime|date:'d.MM.yyyy HH:mm'}}</td>
       <td>{{::row.updatedAt|date:'d.MM.yyyy HH:mm'}}</td>
