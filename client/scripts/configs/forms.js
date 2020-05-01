@@ -23,7 +23,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   birds: {
@@ -46,7 +47,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   herptiles: {
@@ -69,7 +71,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   mammals: {
@@ -92,7 +95,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   invertebrates: {
@@ -115,7 +119,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   plants: {
@@ -138,7 +143,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   ciconia: {
@@ -158,7 +164,8 @@ var forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat'
+      'threat',
+      'organization'
     ]
   },
   threats: {
@@ -182,7 +189,8 @@ var forms = module.exports = {
       'class',
       'primaryType',
       'species',
-      'category'
+      'category',
+      'organization'
     ]
   }
 }
