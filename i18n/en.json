@@ -1024,5 +1024,6 @@
     "ORGANIZATIONS_BUTTON_SAVE": "Save",
     "CHANGE_ORGANIZATION_WARNING_MESSAGE": "Changing organization will reset user's role to observer",
     "LIST_TABLE_ORGANIZATION": "Organization",
-    "LIST_FILTER_ORGANIZATION": "Organization"
+    "LIST_FILTER_ORGANIZATION": "Organization",
+    "USER_DETAIL_ORGANIZATION": "Organization"
 }

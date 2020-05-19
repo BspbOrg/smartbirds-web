@@ -1024,5 +1024,6 @@
     "ORGANIZATIONS_BUTTON_SAVE": "Запис",
     "CHANGE_ORGANIZATION_WARNING_MESSAGE": "Промяната на организация ще смени ролята на наблюдател",
     "LIST_TABLE_ORGANIZATION": "Организация",
-    "LIST_FILTER_ORGANIZATION": "Организация"
+    "LIST_FILTER_ORGANIZATION": "Организация",
+    "USER_DETAIL_ORGANIZATION": "Организация"
 }
