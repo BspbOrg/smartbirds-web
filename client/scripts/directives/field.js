@@ -311,6 +311,8 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
               if (!(field.model instanceof Organization)) {
                 field.viewModel = db.organizations[field.model] || new Organization(field.model)
               }
+            } else {
+              field.viewModel = ''
             }
           })
 
