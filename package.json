@@ -80,7 +80,7 @@
     "localforage": "^1.7.3",
     "lodash": "^4.17.15",
     "minifyify": "^7.3.5",
-    "moment": "^2.24.0",
+    "moment": "^2.26.0",
     "moment-timezone": "^0.5.28",
     "ng-infinite-scroll": "^1.2.1",
     "ng-toast": "^2.0.0",
