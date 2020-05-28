@@ -11,14 +11,14 @@ require('../app').controller('RequestZoneController', /* @ngInject */function ($
   $scope.zones = []
 
   $scope.$watch(function () {
-    return vc.location && vc.location.area && vc.location.area.local
-  }, function (areaLocal) {
-    if (!areaLocal) return
+    return vc.location && vc.location.area && vc.location.area.en
+  }, function (areaName) {
+    if (!areaName) return
     // cancel any previous request if any
     if ($scope.zones && $scope.zones.$cancelRequest && isFunction($scope.zones.$cancelRequest)) { $scope.zones.$cancelRequest() }
 
     $scope.zones = Zone.listByArea({
-      area: areaLocal,
+      area: areaName,
       filter: 'free'
     })
   })
