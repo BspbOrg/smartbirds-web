@@ -13,7 +13,7 @@
     "disc": "^1.3.3",
     "http-server": "^0.12.1",
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.4",
+    "lint-staged": "^10.2.8",
     "local-cors-proxy": "^1.1.0",
     "parallelshell": "^3.0.2",
     "standard": "^14.3.3",
