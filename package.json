@@ -46,7 +46,7 @@
   "dependencies": {
     "@lordfriend/nya-bootstrap-select": "^2.1.10",
     "angular": "^1.6.7",
-    "angular-animate": "^1.6.7",
+    "angular-animate": "^1.8.0",
     "angular-bootstrap-lightbox": "^0.12.0",
     "angular-cookies": "^1.6.7",
     "angular-file-upload": "^2.3.4",
