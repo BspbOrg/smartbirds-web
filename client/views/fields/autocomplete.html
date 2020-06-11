@@ -1,0 +1,32 @@
+<sb-include src="/views/fields/container.html">
+  <div ng-class="field.loading || field.model && !field.required ? 'input-group' : ''" uib-dropdown dropdown-append-to-body="true">
+    <input type="text"
+           class="form-control"
+           autocomplete="off"
+           id="{{::field.name}}"
+           name="{{::field.name}}"
+           aria-describedby="{{::field.name}}HelpBlock"
+           placeholder="{{::field.placeholder}}"
+           ng-blur="field.onSelect()"
+           ng-model="field.model"
+           ng-required="::field.required"
+           ng-disabled="field.disabled"
+           typeahead-loading="field.loading"
+           typeahead-append-to-body="false"
+           typeahead-editable="true"
+           typeahead-focus-first="::field.required"
+           typeahead-min-length="1"
+           typeahead-wait-ms="300"
+           uib-typeahead="item for item in field.load($viewValue)"
+    >
+    <span ng-if="field.loading" class="input-group-addon">
+      <i class="glyphicon glyphicon-refresh"></i>
+    </span>
+    <span class="input-group-btn">
+      <button ng-if="field.model && !field.required" type="button" class="btn btn-default"
+              ng-click="field.model = null; field.form[field.name].$setDirty(); field.onSelect()">
+        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+      </button>
+    </span>
+  </div>
+</sb-include>

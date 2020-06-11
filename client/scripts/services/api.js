@@ -97,4 +97,19 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       return response.data
     })
   }
+
+  /**
+   * @param {{q: string, type: string}}params
+   * @returns {Promise<{string[]>}
+   */
+  api.autocomplete = function (params) {
+    return $http({
+      method: 'GET',
+      url: ENDPOINT_URL + '/autocomplete',
+      params: params,
+      withCredentials: true
+    }).then(function (response) {
+      return response.data
+    })
+  }
 })
