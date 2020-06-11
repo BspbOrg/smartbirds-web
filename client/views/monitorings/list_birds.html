@@ -50,6 +50,14 @@
             </div>
 
             <div class="col-md-4 col-lg-3">
+              <field name="auto_location" type="location"
+                     label="{{'LIST_FILTER_SETTLEMENT' | translate}}"
+                     placeholder="- {{'INPUT_PLACEHOLDER_ALL' | translate}} -"
+                     on-select="monitoringController.updateFilter()"
+                     model="monitoringController.filter.auto_location"></field>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
               <field name="location" type="location"
                      label="{{'BIRDS_LIST_FILTER_LOCATION' | translate}}"
                      placeholder="- {{'INPUT_PLACEHOLDER_ALL' | translate}} -"
@@ -163,6 +171,10 @@
         BIRDS_LIST_TABLE_LOCATION
       </th>
       <th
+        sb-sorting="auto_location" translate>
+        LIST_TABLE_SETTLEMENT
+      </th>
+      <th
         sb-sorting="observationDateTime|date:'yyyyMMddHHmmss'" translate>
         BIRDS_LIST_TABLE_DATE
       </th>
@@ -193,6 +205,7 @@
       <td ng-if="::$user.canAccess(monitoringController.formName)">{{::row.getUser().getName()}}</td>
       <td ng-if="::$user.isAdmin()">{{::row.organization | organizationName}}</td>
       <td>{{::row.location}}</td>
+      <td>{{::row.autoLocation.label|localLabel}}</td>
       <td>{{::row.observationDateTime|date:'d.MM.yyyy HH:mm'}}</td>
       <td>{{::row.updatedAt|date:'d.MM.yyyy HH:mm'}}</td>
       <td>
