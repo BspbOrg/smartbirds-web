@@ -38,7 +38,7 @@ var forms = module.exports = {
     shortLabel: 'FORM_BIRDS_SHORT',
     hasStats: true,
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'species',
       'from_date',
@@ -62,7 +62,7 @@ var forms = module.exports = {
     shortLabel: 'FORM_HERPTILES_SHORT',
     hasStats: true,
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'species',
       'from_date',
@@ -86,7 +86,7 @@ var forms = module.exports = {
     shortLabel: 'FORM_MAMMALS_SHORT',
     hasStats: true,
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'species',
       'from_date',
@@ -110,7 +110,7 @@ var forms = module.exports = {
     shortLabel: 'FORM_INVERTEBRATES_SHORT',
     hasStats: true,
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'species',
       'from_date',
@@ -134,7 +134,7 @@ var forms = module.exports = {
     shortLabel: 'FORM_PLANTS_SHORT',
     hasStats: true,
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'species',
       'from_date',
@@ -156,7 +156,7 @@ var forms = module.exports = {
     longLabel: 'FORM_CICONIA_LONG',
     shortLabel: 'FORM_CICONIA_SHORT',
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'from_date',
       'to_date',
@@ -178,7 +178,7 @@ var forms = module.exports = {
     shortLabel: 'FORM_THREATS_SHORT',
     publicTemplate: '/views/monitorings/list_threats_public.html',
     filters: [
-      'location',
+      'auto_location',
       '{user:int}',
       'from_date',
       'to_date',

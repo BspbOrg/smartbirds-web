@@ -58,14 +58,6 @@
             </div>
 
             <div class="col-md-4 col-lg-3">
-              <field name="location" type="location"
-                     label="{{'BIRDS_LIST_FILTER_LOCATION' | translate}}"
-                     placeholder="- {{'INPUT_PLACEHOLDER_ALL' | translate}} -"
-                     on-select="monitoringController.updateFilter()"
-                     model="monitoringController.filter.location"></field>
-            </div>
-
-            <div class="col-md-4 col-lg-3">
               <field name="fromDate" type="date"
                      label="{{'BIRDS_LIST_FILTER_FROM_DATE' | translate}}"
                      on-select="monitoringController.updateFilter()"
@@ -167,10 +159,6 @@
         {{::'LIST_TABLE_ORGANIZATION' | translate }}
       </th>
       <th
-        sb-sorting="location" translate>
-        BIRDS_LIST_TABLE_LOCATION
-      </th>
-      <th
         sb-sorting="auto_location" translate>
         LIST_TABLE_SETTLEMENT
       </th>
@@ -204,7 +192,6 @@
       <td><a href ui-sref=".{{::(row.$local ? 'local-' : '')}}detail({id: row.id, offset: $index})">{{::row.id}}</a></td>
       <td ng-if="::$user.canAccess(monitoringController.formName)">{{::row.getUser().getName()}}</td>
       <td ng-if="::$user.isAdmin()">{{::row.organization | organizationName}}</td>
-      <td>{{::row.location}}</td>
       <td>{{::row.autoLocation.label|localLabel}}</td>
       <td>{{::row.observationDateTime|date:'d.MM.yyyy HH:mm'}}</td>
       <td>{{::row.updatedAt|date:'d.MM.yyyy HH:mm'}}</td>
