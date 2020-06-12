@@ -16,6 +16,7 @@
            typeahead-editable="true"
            typeahead-focus-first="::field.required"
            typeahead-min-length="1"
+           typeahead-on-select="field.onSelect()"
            typeahead-wait-ms="300"
            uib-typeahead="item for item in field.load($viewValue)"
     >
