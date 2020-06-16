@@ -24,7 +24,8 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
     ]
   },
   birds: {
@@ -48,7 +49,8 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
     ]
   },
   herptiles: {
@@ -72,7 +74,9 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
+
     ]
   },
   mammals: {
@@ -96,7 +100,9 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
+
     ]
   },
   invertebrates: {
@@ -120,7 +126,9 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
+
     ]
   },
   plants: {
@@ -144,7 +152,9 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
+
     ]
   },
   ciconia: {
@@ -165,7 +175,9 @@ var forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization'
+      'organization',
+      'moderatorReview'
+
     ]
   },
   threats: {
@@ -190,10 +202,15 @@ var forms = module.exports = {
       'primaryType',
       'species',
       'category',
-      'organization'
+      'organization',
+      'moderatorReview'
     ]
   }
 }
+
+Object.entries(forms).forEach(function (entry) {
+  entry[1].key = entry[0]
+})
 
 require('../app')
   .run(

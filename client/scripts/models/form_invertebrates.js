@@ -1,12 +1,14 @@
 var angular = require('angular')
 var LocalCache = require('./mixins/local_cache')
+var countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormInvertebrates', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
   var FormInvertebrates = $resource(ENDPOINT_URL + '/invertebrates/:id', {
     id: '@id'
   }, {
     // api methods
-    export: { method: 'POST', url: ENDPOINT_URL + '/export/invertebrates' }
+    export: { method: 'POST', url: ENDPOINT_URL + '/export/invertebrates' },
+    countPendingReview: countPendingReview
   })
 
   // instance methods
