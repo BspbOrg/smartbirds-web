@@ -16,7 +16,7 @@
         </a>
         <ul class="nav collapse" role="menu" aria-labelledby="private-forms" uib-collapse="$ctrl.isPrivateCollapsed">
           <li ng-repeat="(key, form) in ::$ctrl.forms" translate-attr="::{title: form.longLabel}">
-            <a ui-sref="auth.monitoring.private.{{::key}}" ui-sref-active="active">
+            <a ui-sref="auth.monitoring.private.{{::key}}" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
               <i class="icon icon-{{::key}} icon-fw"></i>
               {{form.shortLabel | translate}} <span ng-if="form.modelRef.localCount > 0" class="badge">{{form.modelRef.localCount}}</span>
             </a>
@@ -32,7 +32,7 @@
         </a>
         <ul class="nav collapse" role="menu" aria-labelledby="public-forms" uib-collapse="$ctrl.isPublicCollapsed">
           <li ng-repeat="(key, form) in ::$ctrl.forms" translate-attr="::{title: form.longLabel}">
-            <a ui-sref="auth.monitoring.public.{{::key}}" ui-sref-active="active">
+            <a ui-sref="auth.monitoring.public.{{::key}}" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
               <i class="icon icon-{{::key}} icon-fw"></i>
               {{form.shortLabel | translate}}
             </a>
@@ -48,7 +48,7 @@
         </a>
         <ul class="nav collapse" role="menu" aria-labelledby="stats" uib-collapse="$ctrl.isStatsCollapsed">
           <li ng-repeat="(key, form) in ::$ctrl.forms" ng-if="form.hasStats" translate-attr="::{title: form.longLabel}">
-            <a ui-sref="auth.stats.{{::key}}" ui-sref-active="active">
+            <a ui-sref="auth.stats.{{::key}}" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
               <i class="icon icon-{{::key}} icon-fw"></i>
               {{form.shortLabel | translate}}
             </a>
