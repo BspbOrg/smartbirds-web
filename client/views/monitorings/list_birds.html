@@ -104,6 +104,15 @@
                      model="monitoringController.filter.organization"></field>
             </div>
 
+            <div class="col-md-4 col-lg-3">
+              <field name="moderatorReview" type="bool"
+                     label="{{::'LIST_FILTER_MODERATOR_REVIEW' | translate}}"
+                     on-select="monitoringController.updateFilter()"
+                     value-true="1"
+                     value-false="0"
+                     model="monitoringController.filter.moderatorReview"></field>
+            </div>
+
           </div>
 
         </form>
@@ -183,7 +192,7 @@
     <tr
       ng-repeat="row in monitoringController.rows | orderBy:monitoringController.order.key:monitoringController.order.reverse"
       ng-click="$state.go('.'+(row.$local?'local-':'')+'detail', {id: row.id, offset: $index})"
-      ng-class="{info: row.$selected, danger: row.$local}"
+      ng-class="{info: row.$selected, danger: row.$local, warning: row.moderatorReview}"
     >
       <td ng-click="$event.stopPropagation(); monitoringController.toggleSelected(row)"><input
         type="checkbox"

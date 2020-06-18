@@ -2,22 +2,25 @@
   <div>
     <div class="btn-group">
       <button type="button"
-             class="btn btn-default"
-             aria-describedby="{{::field.name}}HelpBlock"
-             ng-disabled="::field.readonly"
-             ng-model="field.model"
-             uib-btn-radio="true" translate>
-        SWITCHER_BUTTON_YES
+              class="btn btn-default"
+              aria-describedby="{{::field.name}}HelpBlock"
+              ng-click="field.onSelect()"
+              ng-disabled="::field.readonly"
+              ng-model="field.model"
+              uib-btn-radio="field.values.true"
+              uib-uncheckable="::!field.required">
+        {{::(field.labels.true || 'SWITCHER_BUTTON_YES')|translate}}
       </button>
       <button type="button"
-             class="btn btn-default"
-             aria-describedby="{{::field.name}}HelpBlock"
-             ng-disabled="::field.readonly"
-             ng-model="field.model"
-             uib-btn-radio="false" translate>
-        SWITCHER_BUTTON_NO
+              class="btn btn-default"
+              aria-describedby="{{::field.name}}HelpBlock"
+              ng-click="field.onSelect()"
+              ng-disabled="::field.readonly"
+              ng-model="field.model"
+              uib-btn-radio="field.values.false"
+              uib-uncheckable="::!field.required">
+        {{::(field.labels.false || 'SWITCHER_BUTTON_NO')|translate}}
       </button>
     </div>
   </div>
-  <span ng-if="::field.help" id="{{::field.name}}HelpBlock" class="help-block">{{::field.help}}</span>
 </sb-include>
