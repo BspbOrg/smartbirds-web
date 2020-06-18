@@ -27,6 +27,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
 
   function checkCanSave () {
     controller.canSave = !controller.data.user || controller.data.user === user.getIdentity().id || user.canAccess(formName)
+    controller.canSave = controller.canSave && (!controller.data.moderatorReview || controller.data.pictures.length > 0)
   }
 
   controller.formName = formName
@@ -67,6 +68,10 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
   }
   if (controller.data && controller.data.$promise) {
     controller.data.$promise.then(function () {
+      if (user.canAccess(formName) && controller.data.moderatorReview) {
+        controller.data.moderatorReview = false
+        $scope.smartform.$setDirty()
+      }
       checkCanSave()
     })
   }

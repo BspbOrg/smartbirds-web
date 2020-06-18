@@ -20,15 +20,23 @@
   <div ng-include="'/views/monitorings/common.html'"></div>
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <field name="species" type="species" nomenclature="birds" required="true"
              label="{{'BIRDS_DETAIL_SPECIES' | translate}}"
              model="monitoringDetailController.data.species"></field>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <field name="confidential" type="bool"
              label="{{'BIRDS_DETAIL_CONFIDENTIAL' | translate}}"
              model="monitoringDetailController.data.confidential"></field>
+    </div>
+    <div class="col-md-2">
+      <field name="moderatorReview" type="bool"
+             label="{{::'FIELD_MODERATOR_REVIEW' | translate}}"
+             label-true="FIELD_MODERATOR_REVIEW_TRUE"
+             label-false="FIELD_MODERATOR_REVIEW_FALSE"
+             help="{{::'FIELD_MODERATOR_REVIEW_HELP' | translate}}"
+             model="monitoringDetailController.data.moderatorReview"></field>
     </div>
   </div>
 

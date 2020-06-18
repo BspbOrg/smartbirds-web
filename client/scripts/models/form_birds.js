@@ -89,6 +89,8 @@ require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $
     initDefaults: function () {
       this.countUnit = (($localStorage.defaults || {}).birds || {}).countUnit
       this.typeUnit = (($localStorage.defaults || {}).birds || {}).typeUnit
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })
