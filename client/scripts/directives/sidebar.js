@@ -11,6 +11,7 @@ require('../app').directive('sidebar', /* @ngInject */function () {
         ctrl.isPrivateCollapsed = !$state.includes('auth.monitoring.private')
         ctrl.isPublicCollapsed = !$state.includes('auth.monitoring.public')
         ctrl.isStatsCollapsed = !$state.includes('auth.stats')
+        ctrl.isAtlasCollapsed = !$state.includes('auth.atlas')
       }
 
       updateFlags()
