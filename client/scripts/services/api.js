@@ -139,4 +139,14 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       return response.data
     })
   }
+
+  api.gridCells = function (gridId) {
+    return $http({
+      method: 'GET',
+      url: ENDPOINT_URL + '/grids/' + encodeURIComponent(gridId),
+      params: { limit: -1 }
+    }).then(function (response) {
+      return response.data
+    })
+  }
 })

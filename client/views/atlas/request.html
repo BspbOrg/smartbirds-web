@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>{{::'ATLAS_REQUEST_TITLE'|translate}}</h1>
+</div>
+
+<ui-gmap-google-map
+  center="$ctrl.map.state.center"
+  options="$ctrl.map.options"
+  zoom="$ctrl.map.state.zoom"
+  >
+
+  <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                    clickable="true"
+                    fit="true"
+                    fill="'fill'"
+                    models="::$ctrl.cells"
+                    path="'coordinates'"
+                    static="true"
+                    stroke="'stroke'"
+                    events="$ctrl.events"
+                    control="$ctrl.control"
+  ></ui-gmap-polygons>
+
+</ui-gmap-google-map>
