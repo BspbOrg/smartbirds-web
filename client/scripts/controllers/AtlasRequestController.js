@@ -31,17 +31,12 @@ require('../app')
 
     $ctrl.cells = []
     api.gridCells('test-bg-utm10').then(function (cells) {
-      $ctrl.cells = cells.map(function (cell, idx) {
+      $ctrl.cells = cells.map(function (cell) {
         return {
           id: cell.cellId,
           fill: { color: unselectedColor, opacity: 0.3 },
           stroke: { color: unselectedColor, opacity: 0.8, weight: 1 },
-          coordinates: cell.vertexes.map(function (v) {
-            return {
-              latitude: v.lat,
-              longitude: v.lon
-            }
-          })
+          coordinates: cell.coordinates
         }
       })
     })
