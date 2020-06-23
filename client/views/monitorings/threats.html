@@ -20,8 +20,12 @@
 
 
   <div class="row">
-    <div class="col-md-8 col-lg-7" ng-include="'/views/monitorings/geolocation.html'"></div>
+    <div class="col-md-8 col-lg-7" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
     <div class="col-md-4 col-lg-5">
+      <div class="row">
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
+      </div>
       <div class="row">
         <div class="col-md-12">
           <field name="primaryType" type="single-choice-button" required="true" config="threatsPrimaryTypes"
