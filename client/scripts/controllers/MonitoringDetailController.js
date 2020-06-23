@@ -223,6 +223,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
         $scope.smartform.$setPristine()
         controller.data = res
         local = res.$local
+        controller.isReview = res.moderatorReview
         return res
       })
       .then(function (res) {
