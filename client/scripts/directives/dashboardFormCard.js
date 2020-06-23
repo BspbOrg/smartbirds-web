@@ -6,7 +6,7 @@ require('../app').directive('dashboardFormCard', /* @ngInject */function () {
       form: '<'
     },
     bindToController: true,
-    controller: /* @ngInject */function ($timeout) {
+    controller: /* @ngInject */function () {
       var $ctrl = this
 
       $ctrl.load = function () {
