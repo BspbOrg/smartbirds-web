@@ -70,6 +70,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     controller.data.$promise.then(function () {
       if (user.canAccess(formName) && controller.data.moderatorReview) {
         controller.data.moderatorReview = false
+        controller.isReview = true
         $scope.smartform.$setDirty()
       }
       checkCanSave()

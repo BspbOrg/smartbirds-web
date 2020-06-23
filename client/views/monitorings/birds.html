@@ -20,28 +20,17 @@
   <div ng-include="'/views/monitorings/common.html'"></div>
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-5 col-lg-7">
       <field name="species" type="species" nomenclature="birds" required="true"
              label="{{'BIRDS_DETAIL_SPECIES' | translate}}"
              model="monitoringDetailController.data.species"></field>
     </div>
-    <div class="col-md-2">
-      <field name="confidential" type="bool"
-             label="{{'BIRDS_DETAIL_CONFIDENTIAL' | translate}}"
-             model="monitoringDetailController.data.confidential"></field>
-    </div>
-    <div class="col-md-2">
-      <field name="moderatorReview" type="bool"
-             label="{{::'FIELD_MODERATOR_REVIEW' | translate}}"
-             label-true="FIELD_MODERATOR_REVIEW_TRUE"
-             label-false="FIELD_MODERATOR_REVIEW_FALSE"
-             help="{{::'FIELD_MODERATOR_REVIEW_HELP' | translate}}"
-             model="monitoringDetailController.data.moderatorReview"></field>
-    </div>
+    <div class="col-md-3 col-lg-2" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+    <div class="col-md-4 col-lg-3" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
   </div>
 
   <div class="row">
-    <div class="col-md-8 col-lg-7" ng-include="'/views/monitorings/geolocation.html'"></div>
+    <div class="col-md-8 col-lg-7" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
     <div class="col-md-4 col-lg-5">
       <div class="row">
         <div class="col-md-6">
