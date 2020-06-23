@@ -13,6 +13,9 @@ require('../app').factory('FormCiconia', /* @ngInject */function ($resource, END
 
   // instance methods
   angular.extend(FormCiconia.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -37,6 +40,13 @@ require('../app').factory('FormCiconia', /* @ngInject */function ($resource, END
       delete this.diedOtherReasons
       delete this.reason
       delete this.speciesNotes
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })

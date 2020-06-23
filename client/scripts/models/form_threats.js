@@ -13,6 +13,9 @@ require('../app').factory('FormThreats', /* @ngInject */function ($localStorage,
 
   // instance methods
   angular.extend(FormThreats.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -35,6 +38,13 @@ require('../app').factory('FormThreats', /* @ngInject */function ($localStorage,
       delete this.sampleCode3
       delete this.count
       delete this.threatsNotes
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     }
   })
 

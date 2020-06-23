@@ -13,6 +13,9 @@ require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOIN
 
   // instance methods
   angular.extend(FormCBM.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -30,6 +33,13 @@ require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOIN
       delete this.distance
       delete this.count
       delete this.plot
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasVisit: true,
     hasNotes: false

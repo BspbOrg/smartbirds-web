@@ -13,6 +13,9 @@ require('../app').factory('FormInvertebrates', /* @ngInject */function ($resourc
 
   // instance methods
   angular.extend(FormInvertebrates.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -28,6 +31,13 @@ require('../app').factory('FormInvertebrates', /* @ngInject */function ($resourc
       delete this.count
       delete this.marking
       delete this.speciesNotes
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })

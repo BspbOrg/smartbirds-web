@@ -13,6 +13,9 @@ require('../app').factory('FormHerptiles', /* @ngInject */function ($resource, E
 
   // instance methods
   angular.extend(FormHerptiles.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -40,6 +43,13 @@ require('../app').factory('FormHerptiles', /* @ngInject */function ($resource, E
       delete this.sqCaud
       delete this.sqDors
       delete this.speciesNotes
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })
