@@ -64,7 +64,7 @@ require('../app')
     }
 
     service.canAccess = function (formName) {
-      return service.isAdmin() || service.isModerator(formName)
+      return service.isAdmin() || service.isOrgAdmin() || service.isModerator(formName)
     }
 
     service.getIdentity = function () {
