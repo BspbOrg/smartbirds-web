@@ -127,6 +127,17 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
       }
 
       switch (field.type) {
+        case 'bool': {
+          field.labels = {
+            true: $attrs.labelTrue,
+            false: $attrs.labelFalse
+          }
+          field.values = {
+            true: $attrs.valueTrue != null ? $attrs.valueTrue : true,
+            false: $attrs.valueFalse != null ? $attrs.valueFalse : false
+          }
+          break
+        }
         case 'date':
         case 'time': {
           $scope.$watch('field.model', function () {

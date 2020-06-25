@@ -1,12 +1,14 @@
 var angular = require('angular')
 var LocalCache = require('./mixins/local_cache')
+var countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $resource, ENDPOINT_URL, db, localization) {
   var FormBirds = $resource(ENDPOINT_URL + '/birds/:id', {
     id: '@id'
   }, {
     // api methods
-    export: { method: 'POST', url: ENDPOINT_URL + '/export/birds' }
+    export: { method: 'POST', url: ENDPOINT_URL + '/export/birds' },
+    countPendingReview: countPendingReview
   })
 
   // instance methods
@@ -87,6 +89,8 @@ require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $
     initDefaults: function () {
       this.countUnit = (($localStorage.defaults || {}).birds || {}).countUnit
       this.typeUnit = (($localStorage.defaults || {}).birds || {}).typeUnit
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })

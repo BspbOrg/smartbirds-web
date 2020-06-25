@@ -14,10 +14,19 @@
           accesskey="s"
           ng-disabled="smartform.$invalid || (smartform.$pristine && (!monitoringDetailController.data.$local || !$root.isOnline)) || !monitoringDetailController.canSave"
           ng-click="monitoringDetailController.save()"
-          translate-attr="{title: 'FORM_DETAIL_BUTTON_SAVE'}"
+          translate-attr="{title: (monitoringDetailController.isReview && !monitoringDetailController.data.moderatorReview) ? 'FORM_DETAIL_BUTTON_CONFIRM' : 'FORM_DETAIL_BUTTON_SAVE'}"
   >
-    <span class="visible-lg-inline">{{'FORM_DETAIL_BUTTON_SAVE' | translate}}</span>
-    <i class="fa fa-save fa-fw"></i>
+    <span ng-if="!monitoringDetailController.isReview || monitoringDetailController.data.moderatorReview"
+          class="visible-lg-inline">
+      {{::'FORM_DETAIL_BUTTON_SAVE' | translate}}
+    </span>
+    <span ng-if="monitoringDetailController.isReview && !monitoringDetailController.data.moderatorReview"
+          class="visible-lg-inline">
+      {{::'FORM_DETAIL_BUTTON_CONFIRM' | translate}}
+    </span>
+    <i class="fa fa-save"></i>
+    <i ng-if="monitoringDetailController.isReview && !monitoringDetailController.data.moderatorReview" class="fa fa-check"></i>
+    <i ng-if="monitoringDetailController.data.moderatorReview" class="fa fa-question"></i>
   </button>
   <button type="button"
           class="btn btn-default"

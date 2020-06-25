@@ -1,16 +1,21 @@
 var angular = require('angular')
 var LocalCache = require('./mixins/local_cache')
+var countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormCiconia', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
   var FormCiconia = $resource(ENDPOINT_URL + '/ciconia/:id', {
     id: '@id'
   }, {
     // api methods
-    export: { method: 'POST', url: ENDPOINT_URL + '/export/ciconia' }
+    export: { method: 'POST', url: ENDPOINT_URL + '/export/ciconia' },
+    countPendingReview: countPendingReview
   })
 
   // instance methods
   angular.extend(FormCiconia.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -35,6 +40,13 @@ require('../app').factory('FormCiconia', /* @ngInject */function ($resource, END
       delete this.diedOtherReasons
       delete this.reason
       delete this.speciesNotes
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })

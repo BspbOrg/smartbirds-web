@@ -27,6 +27,8 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
 
   function checkCanSave () {
     controller.canSave = !controller.data.user || controller.data.user === user.getIdentity().id || user.canAccess(formName)
+    // cannot save with moderatorReview but without pictures
+    controller.canSave = controller.canSave && (!controller.data.moderatorReview || controller.data.pictures.length > 0)
   }
 
   controller.formName = formName
@@ -67,6 +69,15 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
   }
   if (controller.data && controller.data.$promise) {
     controller.data.$promise.then(function () {
+      // moderator/admin opens record with requested moderator review
+      if (user.canAccess(formName) && controller.data.moderatorReview) {
+        // mark it as reviewed
+        controller.data.moderatorReview = false
+        // flag for the ui
+        controller.isReview = true
+        // form can be saved without further changes
+        $scope.smartform.$setDirty()
+      }
       checkCanSave()
     })
   }
@@ -217,6 +228,8 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
         $scope.smartform.$setPristine()
         controller.data = res
         local = res.$local
+        // update the flag after save
+        controller.isReview = res.moderatorReview
         return res
       })
       .then(function (res) {

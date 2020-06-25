@@ -1,6 +1,4 @@
-/**
- * Created by groupsky on 21.01.16.
- */
+var forms = require('../configs/forms')
 
 require('../app').controller('DashboardController', /* @ngInject */function (Zone, user) {
   var vc = this
@@ -15,4 +13,6 @@ require('../app').controller('DashboardController', /* @ngInject */function (Zon
     limit: 100,
     owner: user.getIdentity().id
   })
+
+  vc.forms = forms
 })

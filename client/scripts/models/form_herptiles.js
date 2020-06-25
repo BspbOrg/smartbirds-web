@@ -1,16 +1,21 @@
 var angular = require('angular')
 var LocalCache = require('./mixins/local_cache')
+var countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormHerptiles', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
   var FormHerptiles = $resource(ENDPOINT_URL + '/herptiles/:id', {
     id: '@id'
   }, {
     // api methods
-    export: { method: 'POST', url: ENDPOINT_URL + '/export/herptiles' }
+    export: { method: 'POST', url: ENDPOINT_URL + '/export/herptiles' },
+    countPendingReview: countPendingReview
   })
 
   // instance methods
   angular.extend(FormHerptiles.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -38,6 +43,13 @@ require('../app').factory('FormHerptiles', /* @ngInject */function ($resource, E
       delete this.sqCaud
       delete this.sqDors
       delete this.speciesNotes
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasNotes: true
   })

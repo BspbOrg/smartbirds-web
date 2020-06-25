@@ -1,16 +1,21 @@
 var angular = require('angular')
 var LocalCache = require('./mixins/local_cache')
+var countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
   var FormCBM = $resource(ENDPOINT_URL + '/cbm/:id', {
     id: '@id'
   }, {
     // api methods
-    export: { method: 'POST', url: ENDPOINT_URL + '/export/cbm' }
+    export: { method: 'POST', url: ENDPOINT_URL + '/export/cbm' },
+    countPendingReview: countPendingReview
   })
 
   // instance methods
   angular.extend(FormCBM.prototype, {
+    afterCreate: function () {
+      this.initDefaults()
+    },
     getUser: function () {
       return db.users[this.user]
     },
@@ -28,6 +33,13 @@ require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOIN
       delete this.distance
       delete this.count
       delete this.plot
+    },
+    postCopy: function () {
+      this.initDefaults()
+    },
+    initDefaults: function () {
+      this.confidential = false
+      this.moderatorReview = false
     },
     hasVisit: true,
     hasNotes: false
