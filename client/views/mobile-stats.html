@@ -33,11 +33,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="record in $ctrl.stats[form]">
-                  <td>{{$root.getLocalLabel(record.species.label)}}<br>{{record.species.label.la}}</td>
+                  <td>{{$root.getLocalLabel(record.species.label)}}<br>{{::record.species.label.la}}</td>
                   <td class="text-right">{{::record.date | date | replace:" ":"&nbsp;"}}</td>
-                  <td>{{record.location}}</td>
+                  <td>{{record.autoLocation|localLabel}}</td>
                   <td class="text-right">{{::record.count}}</td>
-                  <td>{{record.observer.firstName}} {{record.observer.lastName}}</td>
+                  <td>{{::record.observer.firstName}} {{::record.observer.lastName}}</td>
                 </tr>
                 </tbody>
               </table>
