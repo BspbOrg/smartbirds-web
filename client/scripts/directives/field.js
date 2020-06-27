@@ -22,7 +22,7 @@ function watchBoolAttribute ($attrs, $scope, $parse, field) {
   }
 }
 
-require('../app').directive('field', /* @ngInject */function ($q, Raven, geolocation) {
+require('../app').directive('field', /* @ngInject */function ($q, api, Raven, geolocation) {
   var cnt = 0
   return {
     restrict: 'AE',
@@ -186,6 +186,12 @@ require('../app').directive('field', /* @ngInject */function ($q, Raven, geoloca
           angular.forEach(db.locations, function (item) {
             field.values.push(item)
           })
+          break
+        }
+        case 'autocomplete': {
+          field.load = function (q) {
+            return api.autocomplete({ q: q, type: field.subtypes })
+          }
           break
         }
         case 'single-choice':
