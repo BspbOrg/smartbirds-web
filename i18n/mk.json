@@ -289,7 +289,7 @@
     "HERP_DETAIL_TITLE_EDIT": "Надополни го записот",
     "HERP_DETAIL_LATITUDE": "Географска широчина",
     "HERP_DETAIL_LONGITUDE": "Географска должина",
-    "HERP_DETAIL_SPECIES": "Научно име",
+    "FIELD_SPECIES": "Научно име",
     "HERP_DETAIL_COUNT": "Број",
     "HERP_DETAIL_AGE": "Возраст",
     "HERP_DETAIL_SEX": "Пол",
@@ -981,5 +981,6 @@
     "PUBLIC_THREATS_FILTER_1_MONTH": "последен месец",
     "PUBLIC_THREATS_FILTER_3_MONTHS": "последни 3 месеци",
     "PUBLIC_THREATS_FILTER_6_MONTHS": "последни 6 месеци",
-    "PUBLIC_THREATS_FILTER_1_YEAR": "последна година"
+    "PUBLIC_THREATS_FILTER_1_YEAR": "последна година",
+    "FIELD_CONFIDENTIAL": "Доверливо"
 }
