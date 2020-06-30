@@ -13,7 +13,7 @@ function responseIsXml (response) {
 require('../app').factory('sbXmlHttpInterceptor', /* @ngInject */function ($q, x2js) {
   function responseHandler (response) {
     if (response && responseIsXml(response)) {
-      response.data = x2js.xml_str2json(response.data)
+      response.data = x2js.xml2js(response.data)
       return response
     } else {
       return $q.when(response)
