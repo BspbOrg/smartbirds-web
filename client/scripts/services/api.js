@@ -59,13 +59,27 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
   }
 
   api.tasks = {
-    autoLocation: function (form, id) {
+    autoLocation: function (form, id, limit, force) {
       return $http({
         method: 'POST',
         url: ENDPOINT_URL + '/tasks/auto-location',
         data: {
           form: form,
-          id: id
+          id: id,
+          limit: limit,
+          force: force
+        }
+      })
+    },
+    bgatlas2008: function (form, id, limit, force) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/bgatlas2008',
+        data: {
+          form: form,
+          id: id,
+          limit: limit,
+          force: force
         }
       })
     }

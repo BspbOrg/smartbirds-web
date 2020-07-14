@@ -1,7 +1,13 @@
-<div>
+<div class="page-tasks">
   <h1 class="page-header">
     Tasks management
   </h1>
+
+  <style>
+    .page-tasks label {
+      display: block;
+    }
+  </style>
 
   <div class="panel panel-default">
     <div class="panel-heading">Auto locations</div>
@@ -21,7 +27,21 @@
                  placeholder="all without location"
                  ng-model="autoLocation.id">
         </div>
-        <button type="button" class="btn btn-default" ng-click="$ctrl.autoLocation(autoLocation.form, autoLocation.id)">
+        <div class="form-group">
+          <label for="auto-location-limit">Records</label>
+          <input type="number" class="form-control" id="auto-location-limit"
+                 placeholder="all records"
+                 ng-value="10"
+                 ng-model="autoLocation.limit">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="autoLocation.force">
+            Force
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.autoLocation(autoLocation.form, autoLocation.id, autoLocation.limit, autoLocation.force)">
           Run
         </button>
       </form>
@@ -36,6 +56,57 @@
       </div>
       <div ng-if="$ctrl.autoLocation.error" class="alert alert-danger" role="alert">
         {{$ctrl.autoLocation.error}}
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">BG Atlas 2008</div>
+    <div class="panel-body">
+      <form name="bgatlas2008" class="form-inline">
+        <div class="form-group">
+          <label for="bgatlas2008-form">Form</label>
+          <select class="form-control" id="bgatlas2008-form"
+                  ng-model="bgatlas2008.form"
+                  ng-options="::v.serverModel as ::v.label|translate for v in ::$ctrl.forms">
+            <option value="">all forms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bgatlas2008-id">Record ID</label>
+          <input type="number" class="form-control" id="bgatlas2008-id"
+                 placeholder="all without location"
+                 ng-model="bgatlas2008.id">
+        </div>
+        <div class="form-group">
+          <label for="bgatlas2008-limit">Records</label>
+          <input type="number" class="form-control" id="bgatlas2008-limit"
+                 placeholder="all records"
+                 ng-value="10"
+                 ng-model="bgatlas2008.limit">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="bgatlas2008.force">
+            Force
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.bgatlas2008(bgatlas2008.form, bgatlas2008.id, bgatlas2008.limit, bgatlas2008.force)">
+          Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.bgatlas2008.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.bgatlas2008.response" class="alert alert-success" role="alert">
+        {{$ctrl.bgatlas2008.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.bgatlas2008.error" class="alert alert-danger" role="alert">
+        {{$ctrl.bgatlas2008.error}}
       </div>
     </div>
   </div>
