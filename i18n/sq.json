@@ -220,7 +220,6 @@
     "BIRDS_DETAIL_TITLE_NEW": "Vrojtim i ri",
     "BIRDS_DETAIL_TITLE_EDIT": "Modifiko të dhënat e regjistruara",
     "BIRDS_DETAIL_SPECIES": "Emri shkencor",
-    "BIRDS_DETAIL_CONFIDENTIAL": "E fshehtë",
     "BIRDS_DETAIL_LATITUDE": "Gjerësi gjeografike",
     "BIRDS_DETAIL_LONGITUDE": "Gjatësi gjeografike",
     "BIRDS_DETAIL_COUNT_UNIT": "Njësia e numëruar",
@@ -698,9 +697,6 @@
     "WARNING_EXPORT_LIMIT": "Sistemi lejon eksportimin e 20 000 të dhënave të regjistruara në të njëjtën kohë",
     "SPECIES_COL_INTERESTING": "I veçantë",
     "SPECIES_COL_SENSITIVE": "I ndjeshëm",
-    "HERPTILES_DETAIL_CONFIDENTIAL": "E fshehtë",
-    "MAMMALS_DETAIL_CONFIDENTIAL": "E fshehtë",
-    "INVERTEBRATES_DETAIL_CONFIDENTIAL": "E fshehtë",
     "WARNING_EXPORT_DISABLED": "Eksportimi i të dhënave të përdoruesve të tjerë nuk lejohet",
     "NAV_FRIENDS": "Miqtë",
     "FRIENDS_TITLE": "Menaxhimi i \"Miqtë\"",
@@ -714,7 +710,6 @@
     "FRIENDS_UNSAVED_DATA_ALERT_MESSAGE": "Ndryshimet nuk janë ruajtur! Jeni i sigurt që doni të vazhdoni?",
     "FRIENDS_SAVE_SUCCESS": "\"Miqtë\" u ruajtën me sukses",
     "FRIENDS_SAVE_ERROR": "Problem gjatë ruajtjes  \"Miqtë\"",
-    "CBM_DETAIL_CONFIDENTIAL": "E fshehtë",
     "PUBLIC_BIRDS_STATISTIC_TABLE_COL_COUNT_SPECIES": "{{numri}} lloji",
     "PUBLIC_BIRDS_STATISTIC_TABLE_COL_COUNT_RECORDS": "{{numri}} vrojtimet",
     "NAV_PRIVATE_FORMS": "Të dhënat e mia dhe shpërndarja e tyre",
@@ -778,7 +773,6 @@
     "PLANTS_DETAIL_UNSAVED_DATA_ALERT_TITLE": "Ndryshimet nuk janë ruajtur!",
     "PLANTS_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "Ndryshimet nuk janë ruajtur! Jeni i sigurt që doni të vazhdoni?",
     "PLANTS_DETAIL_SPECIES": "Lloji",
-    "PLANTS_DETAIL_CONFIDENTIAL": "E fshehtë",
     "PLANTS_DETAIL_ELEVATION": "Lartësia",
     "PLANTS_DETAIL_HABITAT": "Habitat",
     "PLANTS_DETAIL_REPORTING_UNIT": "Njësia e raportuar",
@@ -1034,5 +1028,7 @@
     "FIELD_MODERATOR_REVIEW_HELP": "Nëse keni nevojë për rishikim të të dhënave nga moderatori. Kërkohet një foto bashkëngjitur.",
     "LIST_FILTER_MODERATOR_REVIEW": "Rishikim i moderatorit",
     "FIELD_CONFIDENTIAL": "E fshehtë",
-    "FORM_DETAIL_BUTTON_CONFIRM": "Konfirmo"
+    "FORM_DETAIL_BUTTON_CONFIRM": "Konfirmo",
+    "SETTLEMENT_VALUE_UNKNOWN": "E panjohur",
+    "SETTLEMENT_VALUE_PENDING": "Duke u procesuar"
 }

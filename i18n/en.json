@@ -220,7 +220,6 @@
     "BIRDS_DETAIL_TITLE_NEW": "New observation",
     "BIRDS_DETAIL_TITLE_EDIT": "Edit record",
     "BIRDS_DETAIL_SPECIES": "Scientific name",
-    "BIRDS_DETAIL_CONFIDENTIAL": "Confidential",
     "BIRDS_DETAIL_LATITUDE": "Latitude",
     "BIRDS_DETAIL_LONGITUDE": "Longitude",
     "BIRDS_DETAIL_COUNT_UNIT": "Count unit",
@@ -698,9 +697,6 @@
     "WARNING_EXPORT_LIMIT": "The system limits exporting up to 20 000 records at a time",
     "SPECIES_COL_INTERESTING": "Interesting",
     "SPECIES_COL_SENSITIVE": "Sensitive",
-    "HERPTILES_DETAIL_CONFIDENTIAL": "Confidential",
-    "MAMMALS_DETAIL_CONFIDENTIAL": "Confidential",
-    "INVERTEBRATES_DETAIL_CONFIDENTIAL": "Confidential",
     "WARNING_EXPORT_DISABLED": "Exports of other user's data is not allowed",
     "NAV_FRIENDS": "Friends",
     "FRIENDS_TITLE": "Friends Management",
@@ -714,7 +710,6 @@
     "FRIENDS_UNSAVED_DATA_ALERT_MESSAGE": "There are unsaved changes! Are you sure you want to continue?",
     "FRIENDS_SAVE_SUCCESS": "Friends saved successfully",
     "FRIENDS_SAVE_ERROR": "Error while saving friends",
-    "CBM_DETAIL_CONFIDENTIAL": "Confidential",
     "PUBLIC_BIRDS_STATISTIC_TABLE_COL_COUNT_SPECIES": "{{count}} species",
     "PUBLIC_BIRDS_STATISTIC_TABLE_COL_COUNT_RECORDS": "{{count}} observations",
     "NAV_PRIVATE_FORMS": "My and shared data",
@@ -778,7 +773,6 @@
     "PLANTS_DETAIL_UNSAVED_DATA_ALERT_TITLE": "There are unsaved changes!",
     "PLANTS_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "There are unsaved changes! Are you sure you want to continue?",
     "PLANTS_DETAIL_SPECIES": "Species",
-    "PLANTS_DETAIL_CONFIDENTIAL": "Confidential",
     "PLANTS_DETAIL_ELEVATION": "Elevation",
     "PLANTS_DETAIL_HABITAT": "Habitat",
     "PLANTS_DETAIL_REPORTING_UNIT": "Reporting unit",
@@ -1034,5 +1028,7 @@
     "FIELD_MODERATOR_REVIEW_HELP": "If you want a moderator to review your record. Requires a picture attachment!",
     "LIST_FILTER_MODERATOR_REVIEW": "Moderator review",
     "FIELD_CONFIDENTIAL": "Confidential",
-    "FORM_DETAIL_BUTTON_CONFIRM": "Confirm"
+    "FORM_DETAIL_BUTTON_CONFIRM": "Confirm",
+    "SETTLEMENT_VALUE_UNKNOWN": "Unknown",
+    "SETTLEMENT_VALUE_PENDING": "Processing…"
 }
