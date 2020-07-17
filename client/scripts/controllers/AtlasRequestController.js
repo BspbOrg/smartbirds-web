@@ -1,5 +1,22 @@
 var selectedColor = '#3c3'
-var unselectedColor = '#555'
+var selectedOpacityFill = 0.65
+var selectedOpacityStroke = 1
+var unselectedColor = function (percent) {
+  if (percent < 30) {
+    return '#555'
+  }
+  if (percent < 65) {
+    return '#55c'
+  }
+  return '#85c'
+}
+var unselectedOpacityFill = function (percent) {
+  return percent < 45 ? 0.15 + percent / 100 : 0.6
+}
+
+var unselectedOpacityStroke = function (percent) {
+  return percent < 70 ? 0.3 + percent / 100 : 1
+}
 
 require('../app')
   .controller('AtlasRequestController', /* @ngInject */function (api) {
@@ -30,12 +47,14 @@ require('../app')
     }
 
     $ctrl.cells = []
-    api.gridCells('test-bg-utm10').then(function (cells) {
+    api.bgatlas2008.userGrid().then(function (cells) {
       $ctrl.cells = cells.map(function (cell) {
+        var percent = cell.spec_old > 0 ? 100.0 * cell.spec_known / cell.spec_old : 0
         return {
-          id: cell.cellId,
-          fill: { color: unselectedColor, opacity: 0.3 },
-          stroke: { color: unselectedColor, opacity: 0.8, weight: 1 },
+          id: cell.utm_code,
+          percent: percent,
+          fill: { color: unselectedColor(percent), opacity: unselectedOpacityFill(percent) },
+          stroke: { color: unselectedColor(percent), opacity: unselectedOpacityStroke(percent), weight: 1 },
           coordinates: cell.coordinates
         }
       })
@@ -48,12 +67,16 @@ require('../app')
         var selectedIdx = $ctrl.selected.indexOf(model)
         if (selectedIdx !== -1) {
           $ctrl.selected.splice(selectedIdx, 1)
-          model.stroke.color = unselectedColor
-          model.fill.color = unselectedColor
+          model.stroke.color = unselectedColor(model.percent)
+          model.stroke.opacity = unselectedOpacityStroke(model.percent)
+          model.fill.color = unselectedColor(model.percent)
+          model.fill.opacity = unselectedOpacityFill(model.percent)
         } else {
           $ctrl.selected.push(model)
           model.stroke.color = selectedColor
+          model.stroke.opacity = selectedOpacityStroke
           model.fill.color = selectedColor
+          model.fill.opacity = selectedOpacityFill
         }
       }
     }
