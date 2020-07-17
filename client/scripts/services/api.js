@@ -140,13 +140,14 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     })
   }
 
-  api.gridCells = function (gridId) {
-    return $http({
-      method: 'GET',
-      url: ENDPOINT_URL + '/grids/' + encodeURIComponent(gridId),
-      params: { limit: -1 }
-    }).then(function (response) {
-      return response.data
-    })
+  api.bgatlas2008 = {
+    userGrid: function () {
+      return $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/2008/'
+      }).then(function (response) {
+        return response.data
+      })
+    }
   }
 })
