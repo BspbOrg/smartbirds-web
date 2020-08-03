@@ -92,7 +92,7 @@
     "simplify-js": "^1.2.4",
     "startbootstrap-sb-admin-2": "^1.0.7",
     "stringify": "^5.2.0",
-    "uglify-js": "^3.10.0",
+    "uglify-js": "^3.10.1",
     "ui-select": "^0.19.8",
     "underscore.string": "^3.3.5",
     "workbox-window": "^4.3.1",
