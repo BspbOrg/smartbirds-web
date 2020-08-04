@@ -2,16 +2,18 @@
   .page-atlas-request .panel-heading > .label {
     float: right;
   }
-  .page-atlas-request .list-group-item > .close {
-    position: absolute;
-    top: -0.5em;
-    right: -0.3em;
-    color: red;
-    opacity: 0;
+
+  .page-atlas-request .list-group-item > .badge {
+    float: none;
   }
 
-  .page-atlas-request .list-group-item:hover > .close {
-    opacity: 1;
+  .page-atlas-request .list-group-item > .close {
+    float: right;
+    color: red;
+    background: transparent;
+    font-size: 21px;
+    padding: 0 2px 0 0;
+    line-height: 1;
   }
 
   .page-atlas-request .list-group-item > .code {
@@ -82,10 +84,10 @@
           <li ng-repeat="cell in $ctrl.selected"
               class="list-group-item"
               ng-class="$index >= $ctrl.MAX ? 'list-group-item-danger' : ''">
-            <button class="close" ng-click="$ctrl.unselect($index)"><span aria-hidden="true">&times;</span></button>
-            <span class="badge">{{::cell.percent | number:1}}%</span>
+            <button class="btn btn-xs close" ng-click="$ctrl.unselect($index)"><span aria-hidden="true">&times;</span></button>
             <span class="index">{{$index + 1}}.</span>
             <span class="code">{{::cell.id}}</span>
+            <span class="badge">{{::cell.percent | number:1}}%</span>
           </li>
           <li ng-if="$ctrl.selected.length === 0"
               class="list-group-item">
