@@ -1,23 +1,81 @@
-<div class="page-header">
-  <h1>{{::'ATLAS_REQUEST_TITLE'|translate}}</h1>
+<style>
+  .page-atlas-request .panel-heading > .label {
+    float: right;
+  }
+  .page-atlas-request .list-group-item > .close {
+    position: absolute;
+    top: -0.5em;
+    right: -0.3em;
+    color: red;
+    opacity: 0;
+  }
+
+  .page-atlas-request .list-group-item:hover > .close {
+    opacity: 1;
+  }
+
+  .page-atlas-request .list-group-item > .code {
+    font-weight: bold;
+  }
+</style>
+
+<div class="page-atlas-request">
+  <div class="page-header">
+    <h1>{{::'ATLAS_REQUEST_TITLE' | translate}}</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7">
+      <ui-gmap-google-map
+        center="$ctrl.map.state.center"
+        options="$ctrl.map.options"
+        zoom="$ctrl.map.state.zoom"
+      >
+
+        <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                          clickable="true"
+                          fit="true"
+                          fill="'fill'"
+                          models="::$ctrl.cells"
+                          path="'coordinates'"
+                          static="true"
+                          stroke="'stroke'"
+                          events="$ctrl.events"
+                          control="$ctrl.control"
+        ></ui-gmap-polygons>
+
+      </ui-gmap-google-map>
+    </div>
+
+    <div class="col-md-4 col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="label"
+                ng-class="'label-' + ($ctrl.selected.length <= $ctrl.MAX ? 'default' : 'danger')">
+            {{$ctrl.selected.length}}/10
+          </span>
+          {{::'ATLAS_REQUEST_ZONES_HEADING' | translate}}
+        </div>
+        <div class="panel-body">
+          <p>{{::'ATLAS_REQUEST_ZONES_TEXT' | translate}}</p>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <li ng-repeat="cell in $ctrl.selected"
+              class="list-group-item"
+              ng-class="$index >= $ctrl.MAX ? 'list-group-item-danger' : ''">
+            <button class="close" ng-click="$ctrl.unselect($index)"><span aria-hidden="true">&times;</span></button>
+            <span class="badge">{{::cell.percent | number:1}}%</span>
+            <span class="index">{{::$index + 1}}.</span>
+            <span class="code">{{::cell.id}}</span>
+          </li>
+          <li ng-if="$ctrl.selected.length === 0"
+              class="list-group-item">
+            {{::'ATLAS_REQUEST_ZONES_HINT' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
-
-<ui-gmap-google-map
-  center="$ctrl.map.state.center"
-  options="$ctrl.map.options"
-  zoom="$ctrl.map.state.zoom"
-  >
-
-  <ui-gmap-polygons ng-if="$ctrl.cells.length"
-                    clickable="true"
-                    fit="true"
-                    fill="'fill'"
-                    models="::$ctrl.cells"
-                    path="'coordinates'"
-                    static="true"
-                    stroke="'stroke'"
-                    events="$ctrl.events"
-                    control="$ctrl.control"
-  ></ui-gmap-polygons>
-
-</ui-gmap-google-map>

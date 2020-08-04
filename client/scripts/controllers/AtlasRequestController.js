@@ -22,6 +22,8 @@ require('../app')
   .controller('AtlasRequestController', /* @ngInject */function (api) {
     var $ctrl = this
 
+    $ctrl.MAX = 10
+
     $ctrl.map = {
       state: {
         bounds: {
@@ -62,15 +64,23 @@ require('../app')
 
     $ctrl.selected = []
 
+    $ctrl.unselect = function (selectedIdx) {
+      if (!(selectedIdx in $ctrl.selected)) {
+        return
+      }
+      var model = $ctrl.selected[selectedIdx]
+      $ctrl.selected.splice(selectedIdx, 1)
+      model.stroke.color = unselectedColor(model.percent)
+      model.stroke.opacity = unselectedOpacityStroke(model.percent)
+      model.fill.color = unselectedColor(model.percent)
+      model.fill.opacity = unselectedOpacityFill(model.percent)
+    }
+
     $ctrl.events = {
       click: function (poly, event, model, args) {
         var selectedIdx = $ctrl.selected.indexOf(model)
         if (selectedIdx !== -1) {
-          $ctrl.selected.splice(selectedIdx, 1)
-          model.stroke.color = unselectedColor(model.percent)
-          model.stroke.opacity = unselectedOpacityStroke(model.percent)
-          model.fill.color = unselectedColor(model.percent)
-          model.fill.opacity = unselectedOpacityFill(model.percent)
+          $ctrl.unselect(selectedIdx)
         } else {
           $ctrl.selected.push(model)
           model.stroke.color = selectedColor
