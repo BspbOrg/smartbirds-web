@@ -148,6 +148,22 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       }).then(function (response) {
         return response.data
       })
+    },
+
+    /**
+     * Set user selected cells
+     * @param {string[]} cells - list of utm codes for selected cells
+     */
+    setSelected: function (cells) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/bgatlas/user/selected',
+        data: {
+          cells: cells
+        }
+      }).then(function (response) {
+        return response.data
+      })
     }
   }
 })

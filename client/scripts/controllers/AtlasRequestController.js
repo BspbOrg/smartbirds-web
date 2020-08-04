@@ -19,7 +19,7 @@ var unselectedOpacityStroke = function (percent) {
 }
 
 require('../app')
-  .controller('AtlasRequestController', /* @ngInject */function (api) {
+  .controller('AtlasRequestController', /* @ngInject */function (api, $state) {
     var $ctrl = this
 
     $ctrl.MAX = 10
@@ -89,5 +89,10 @@ require('../app')
           model.fill.opacity = selectedOpacityFill
         }
       }
+    }
+
+    $ctrl.save = function () {
+      api.bgatlas2008.setSelected($ctrl.selected.map(function (model) { return model.id }))
+      $state.go('auth.dashboard')
     }
   })
