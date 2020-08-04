@@ -24,6 +24,23 @@
     <h1>{{::'ATLAS_REQUEST_TITLE' | translate}}</h1>
   </div>
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="pull-right">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" ng-disabled="$ctrl.selected.length > $ctrl.MAX" ng-click="$ctrl.save()">
+            {{::'ATLAS_REQUEST_BTN_SAVE'|translate}}
+            <i class="fa fa-save fa-fw"></i>
+          </button>
+        </div>
+      </div>
+      <h5>
+        <i class="fa fa-edit fa-fw"></i>
+        {{::'ATLAS_REQUEST_SUBTITLE'|translate}}
+      </h5>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-8 col-lg-7">
       <ui-gmap-google-map
