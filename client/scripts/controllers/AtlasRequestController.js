@@ -3,19 +3,19 @@ var selectedOpacityFill = 0.65
 var selectedOpacityStroke = 1
 var unselectedColor = function (percent) {
   if (percent < 30) {
-    return '#555'
+    return '#a33'
   }
   if (percent < 65) {
-    return '#55c'
+    return '#838'
   }
-  return '#85c'
+  return '#33a'
 }
 var unselectedOpacityFill = function (percent) {
-  return percent < 45 ? 0.15 + percent / 100 : 0.6
+  return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
 }
 
 var unselectedOpacityStroke = function (percent) {
-  return percent < 70 ? 0.3 + percent / 100 : 1
+  return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
 }
 
 require('../app')
