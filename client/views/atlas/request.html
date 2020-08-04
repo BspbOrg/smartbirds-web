@@ -84,7 +84,7 @@
               ng-class="$index >= $ctrl.MAX ? 'list-group-item-danger' : ''">
             <button class="close" ng-click="$ctrl.unselect($index)"><span aria-hidden="true">&times;</span></button>
             <span class="badge">{{::cell.percent | number:1}}%</span>
-            <span class="index">{{::$index + 1}}.</span>
+            <span class="index">{{$index + 1}}.</span>
             <span class="code">{{::cell.id}}</span>
           </li>
           <li ng-if="$ctrl.selected.length === 0"
