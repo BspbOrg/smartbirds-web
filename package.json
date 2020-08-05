@@ -77,7 +77,7 @@
     "font-awesome": "^4.5.0",
     "less": "~3.12.2",
     "less-plugin-clean-css": "~1.5.1",
-    "localforage": "^1.7.4",
+    "localforage": "^1.9.0",
     "lodash": "^4.17.19",
     "minifyify": "^7.3.5",
     "moment": "^2.27.0",
