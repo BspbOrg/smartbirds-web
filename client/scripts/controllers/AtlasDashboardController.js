@@ -45,26 +45,12 @@ require('../app')
 
     $ctrl.cells = (user.getIdentity().bgatlasCells || []).map(function (cell) {
       var percent = cell.spec_old > 0 ? 100.0 * cell.spec_known / cell.spec_old : 0
-      var model = {
+      return {
         id: cell.utm_code,
         percent: percent,
         fill: { color: unselectedColor(percent), opacity: unselectedOpacityFill(percent) },
         stroke: { color: unselectedColor(percent), opacity: unselectedOpacityStroke(percent), weight: 1 },
-        coordinates: cell.coordinates,
-        cell: cell
+        coordinates: cell.coordinates
       }
-      return model
     })
-
-    $ctrl.selected = null
-
-    $ctrl.events = {
-      click: function (poly, event, model, args) {
-        if (model === $ctrl.selected) {
-          $ctrl.selected = null
-        } else {
-          $ctrl.selected = model
-        }
-      }
-    }
   })
