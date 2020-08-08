@@ -85,7 +85,9 @@ require('../app')
         service.logout()
         return $q.when(null)
       }
-      return api.session.login(credentials).then(function (response) {
+      var credentialsWithInclude = Object.assign({}, credentials)
+      credentialsWithInclude.include = ['bgatlasCells']
+      return api.session.login(credentialsWithInclude).then(function (response) {
         if (response.data.success) {
           $cookies.put(_sessionKey, response.data.csrfToken)
           service.setIdentity(response.data.user)
