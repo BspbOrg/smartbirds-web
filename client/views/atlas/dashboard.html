@@ -15,15 +15,12 @@
       >
 
         <ui-gmap-polygons ng-if="$ctrl.cells.length"
-                          clickable="true"
                           fit="true"
                           fill="'fill'"
                           models="::$ctrl.cells"
                           path="'coordinates'"
                           static="true"
                           stroke="'stroke'"
-                          events="$ctrl.events"
-                          control="$ctrl.control"
         ></ui-gmap-polygons>
 
       </ui-gmap-google-map>
