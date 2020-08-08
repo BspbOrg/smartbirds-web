@@ -57,7 +57,8 @@ require('../app')
           percent: percent,
           fill: { color: unselectedColor(percent), opacity: unselectedOpacityFill(percent) },
           stroke: { color: unselectedColor(percent), opacity: unselectedOpacityStroke(percent), weight: 1 },
-          coordinates: cell.coordinates
+          coordinates: cell.coordinates,
+          cell: cell
         }
         if (user.getIdentity().bgatlasCells && user.getIdentity().bgatlasCells.some(function (c) {
           return c.utm_code === model.id
@@ -106,10 +107,7 @@ require('../app')
         .then(function () {
           var identity = user.getIdentity()
           identity.bgatlasCells = $ctrl.selected.map(function (model) {
-            return {
-              utm_code: model.id,
-              coordinates: model.coordinates
-            }
+            return model.cell
           })
           user.setIdentity(identity)
 

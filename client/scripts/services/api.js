@@ -8,21 +8,29 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
 
   api.session = {
     login: function (auth) {
+      var data = {}
+      Object.assign(data, {
+        include: ['bgatlasCells']
+      }, auth)
       return $http({
         method: 'POST',
         url: ENDPOINT_URL + '/session',
-        data: auth,
+        data: data,
         withCredentials: true,
         skipSessionExpiredInterceptor: true
       })
     },
-    restore: function (xsrf, opts) {
+    restore: function (xsrf, opts, data) {
+      data = Object.assign({},
+        {
+          include: ['bgatlasCells']
+        }, data, {
+          csrfToken: xsrf
+        })
       return $http(angular.extend({
         method: 'PUT',
         url: ENDPOINT_URL + '/session',
-        data: {
-          csrfToken: xsrf
-        },
+        data: data,
         withCredentials: true
       }, opts))
     },
