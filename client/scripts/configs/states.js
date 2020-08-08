@@ -563,7 +563,13 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
   /// ////////
   $stateProvider
     .state('auth.atlas', {
-      url: '/atlas'
+      url: '/atlas',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/atlas/dashboard.html',
+          controller: 'AtlasDashboardController as $ctrl'
+        }
+      }
     })
     .state('auth.atlas.request', {
       url: '/request',
