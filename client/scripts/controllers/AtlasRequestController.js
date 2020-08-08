@@ -19,7 +19,7 @@ var unselectedOpacityStroke = function (percent) {
 }
 
 require('../app')
-  .controller('AtlasRequestController', /* @ngInject */function (api, $state) {
+  .controller('AtlasRequestController', /* @ngInject */function (api, ngToast, $state, $translate, user) {
     var $ctrl = this
 
     $ctrl.MAX = 10
@@ -52,13 +52,19 @@ require('../app')
     api.bgatlas2008.userGrid().then(function (cells) {
       $ctrl.cells = cells.map(function (cell) {
         var percent = cell.spec_old > 0 ? 100.0 * cell.spec_known / cell.spec_old : 0
-        return {
+        var model = {
           id: cell.utm_code,
           percent: percent,
           fill: { color: unselectedColor(percent), opacity: unselectedOpacityFill(percent) },
           stroke: { color: unselectedColor(percent), opacity: unselectedOpacityStroke(percent), weight: 1 },
           coordinates: cell.coordinates
         }
+        if (user.getIdentity().bgatlasCells && user.getIdentity().bgatlasCells.some(function (c) {
+          return c.utm_code === model.id
+        })) {
+          $ctrl.select(model)
+        }
+        return model
       })
     })
 
@@ -76,23 +82,50 @@ require('../app')
       model.fill.opacity = unselectedOpacityFill(model.percent)
     }
 
+    $ctrl.select = function (model) {
+      $ctrl.selected.push(model)
+      model.stroke.color = selectedColor
+      model.stroke.opacity = selectedOpacityStroke
+      model.fill.color = selectedColor
+      model.fill.opacity = selectedOpacityFill
+    }
+
     $ctrl.events = {
       click: function (poly, event, model, args) {
         var selectedIdx = $ctrl.selected.indexOf(model)
         if (selectedIdx !== -1) {
           $ctrl.unselect(selectedIdx)
         } else {
-          $ctrl.selected.push(model)
-          model.stroke.color = selectedColor
-          model.stroke.opacity = selectedOpacityStroke
-          model.fill.color = selectedColor
-          model.fill.opacity = selectedOpacityFill
+          $ctrl.select(model)
         }
       }
     }
 
     $ctrl.save = function () {
       api.bgatlas2008.setSelected($ctrl.selected.map(function (model) { return model.id }))
-      $state.go('auth.dashboard')
+        .then(function () {
+          var identity = user.getIdentity()
+          identity.bgatlasCells = $ctrl.selected.map(function (model) {
+            return {
+              utm_code: model.id,
+              coordinates: model.coordinates
+            }
+          })
+          user.setIdentity(identity)
+
+          $state.go('auth.dashboard')
+        })
+        .then(function (res) {
+          ngToast.create({
+            className: 'success',
+            content: $translate.instant('Saved successfully')
+          })
+        })
+        .catch(function (error) {
+          ngToast.create({
+            className: 'danger',
+            content: '<p>' + $translate.instant('Error while saving') + '</p><pre>' + (error && error.data ? error.data.error : JSON.stringify(error, null, 2)) + '</pre>'
+          })
+        })
     }
   })
