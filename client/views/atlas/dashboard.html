@@ -1,0 +1,32 @@
+<style>
+</style>
+
+<div class="page-atlas-dashboard">
+  <div class="page-header">
+    <h1>{{::'ATLAS_DASHBOARD_TITLE' | translate}}</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7">
+      <ui-gmap-google-map
+        center="$ctrl.map.state.center"
+        options="$ctrl.map.options"
+        zoom="$ctrl.map.state.zoom"
+      >
+
+        <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                          clickable="true"
+                          fit="true"
+                          fill="'fill'"
+                          models="::$ctrl.cells"
+                          path="'coordinates'"
+                          static="true"
+                          stroke="'stroke'"
+                          events="$ctrl.events"
+                          control="$ctrl.control"
+        ></ui-gmap-polygons>
+
+      </ui-gmap-google-map>
+    </div>
+  </div>
+</div>
