@@ -60,7 +60,9 @@ var dependencies = [
 
   'bootstrapLightbox',
 
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+
+  require('./atlas')
 ]
 
 // install service worker
