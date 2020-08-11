@@ -1,6 +1,3 @@
-<style>
-</style>
-
 <div class="page-atlas-dashboard">
   <div class="page-header">
     <h1>{{::'ATLAS_DASHBOARD_TITLE' | translate}}</h1>
@@ -24,6 +21,8 @@
         ></ui-gmap-polygons>
 
       </ui-gmap-google-map>
+
+      <div ng-include="'/views/atlas/_legend.html'"></div>
     </div>
   </div>
 </div>
