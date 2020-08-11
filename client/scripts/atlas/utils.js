@@ -21,12 +21,12 @@ var selectedOpacityStroke = 1
 
 var unselectedColor = function (percent) {
   if (percent < 30) {
-    return '#a33'
+    return '#33a'
   }
   if (percent < 65) {
     return '#838'
   }
-  return '#33a'
+  return '#a33'
 }
 var unselectedOpacityFill = function (percent) {
   return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
