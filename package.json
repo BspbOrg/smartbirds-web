@@ -49,7 +49,7 @@
     "angular-animate": "^1.6.7",
     "angular-bootstrap-lightbox": "^0.12.0",
     "angular-cookies": "^1.6.7",
-    "angular-file-upload": "^2.6.0",
+    "angular-file-upload": "^2.6.1",
     "angular-filter": "^0.5.17",
     "angular-google-maps": "^2.3.4",
     "angular-i18n": "^1.7.9",
