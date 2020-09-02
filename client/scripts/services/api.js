@@ -187,6 +187,15 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       })
       promise.cancel = canceler.resolve
       return promise
+    },
+
+    globalCellStats: function () {
+      return $http({
+        method: 'GET',
+        url: (process.env.STATS_PREFIX || '') + '/bgatlas2008_global_stats.json'
+      }).then(function (response) {
+        return response.data
+      })
     }
   }
 })
