@@ -61,7 +61,7 @@
             <tr ng-repeat="row in $ctrl.rows">
               <td>
                 {{::getLocalLabel(row.species | species:"label")}}<br/>
-                <strong>{{::row.species | species:"label.la"}}</strong>
+                <strong>{{::row.species}}</strong>
               </td>
               <td class="text-center">
                 <i class="fa" ng-class="::'fa-' + (row.known ? 'check' : 'times')"></i>
