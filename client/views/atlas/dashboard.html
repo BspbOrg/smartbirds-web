@@ -60,7 +60,7 @@
             <tbody>
             <tr ng-repeat="row in $ctrl.rows">
               <td>
-                {{::getLocalLabel(row.species | species:"label")}}<br/>
+                {{::getLocalLabel(row.species | species:"label")}}<br ng-if="::getLocalLabel(row.species | species:'label')"/>
                 <strong>{{::row.species}}</strong>
               </td>
               <td class="text-center">
