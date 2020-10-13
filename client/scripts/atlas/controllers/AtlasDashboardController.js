@@ -42,7 +42,7 @@ module.exports = /* @ngInject */function AtlasDashboardController (api, ngToast,
             if (error && error.status !== -1) {
               ngToast.create({
                 className: 'danger',
-                content: '<p>' + $translate.instant('Error while loading') + '</p><pre>' + (error && error.data ? error.data.error : JSON.stringify(error, null, 2)) + '</pre>'
+                content: '<p>' + $translate.instant('Error while loading') + '</p><pre>' + (error.data ? error.data.error : JSON.stringify(error, null, 2)) + '</pre>'
               })
             }
           })
