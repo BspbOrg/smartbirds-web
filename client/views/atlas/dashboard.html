@@ -55,6 +55,7 @@
               <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_SPECIES' | translate}}</th>
               <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_ATLAS' | translate}}</th>
               <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_OBSERVATION' | translate}}</th>
+              <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_OTHER' | translate}}</th>
             </tr>
             </thead>
             <tbody>
@@ -68,6 +69,9 @@
               </td>
               <td class="text-center">
                 <i class="fa" ng-class="::'fa-' + (row.observed ? 'check' : 'times')"></i>
+              </td>
+              <td class="text-center">
+                <i class="fa" ng-class="::'fa-' + (row.other ? 'check' : 'times')"></i>
               </td>
             </tr>
             <tr ng-if="$ctrl.rows.length === 0">
