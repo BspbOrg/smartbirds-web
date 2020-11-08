@@ -15,25 +15,25 @@ var defaultCenter = {
 
 var defaultZoom = 7
 
-var selectedColor = '#3c3'
+var selectedColor = '#33c'
 var selectedOpacityFill = 0.65
 var selectedOpacityStroke = 1
 
 var unselectedColor = function (percent) {
   if (percent < 30) {
-    return '#33a'
+    return '#E41A1C'
   }
   if (percent < 65) {
-    return '#838'
+    return '#FCE949'
   }
-  return '#a33'
+  return '#4C9900'
 }
 var unselectedOpacityFill = function (percent) {
-  return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
+  return 0.35
 }
 
 var unselectedOpacityStroke = function (percent) {
-  return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
+  return 0.3
 }
 
 function mapCellToMapModel (cell, selected) {
