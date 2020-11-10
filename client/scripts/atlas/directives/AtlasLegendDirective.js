@@ -1,4 +1,4 @@
-const AtlasLegendController = require('../controllers/AtlasLegendController')
+var AtlasLegendController = require('../controllers/AtlasLegendController')
 
 module.exports = function AtlasLegendDirective () {
   return {
