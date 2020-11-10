@@ -36,8 +36,14 @@ var unselectedOpacityFill = function () {
   return 0.35
 }
 
-var unselectedOpacityStroke = function () {
-  return 0.5
+var unselectedOpacityStroke = function (percent) {
+  if (percent < 30) {
+    return 0.4
+  }
+  if (percent < 65) {
+    return 0.8
+  }
+  return 0.4
 }
 
 function mapCellToMapModel (cell, selected) {
