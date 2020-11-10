@@ -19,14 +19,18 @@ var selectedColor = '#33c'
 var selectedOpacityFill = 0.65
 var selectedOpacityStroke = 1
 
+var highColor = '#4C9900'
+var medColor = '#FCE949'
+var lowColor = '#E41A1C'
+
 var unselectedColor = function (percent) {
   if (percent < 30) {
-    return '#E41A1C'
+    return lowColor
   }
   if (percent < 65) {
-    return '#FCE949'
+    return medColor
   }
-  return '#4C9900'
+  return highColor
 }
 var unselectedOpacityFill = function (percent) {
   return 0.35
@@ -72,5 +76,6 @@ module.exports = {
   unselectedOpacityFill: unselectedOpacityFill,
   unselectedOpacityStroke: unselectedOpacityStroke,
   mapCellToMapModel: mapCellToMapModel,
-  updateModelStyle: updateModelStyle
+  updateModelStyle: updateModelStyle,
+  colors: { low: lowColor, med: medColor, high: highColor }
 }
