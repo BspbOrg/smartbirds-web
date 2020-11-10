@@ -61,7 +61,7 @@ function mapCellToMapModel (cell, selected) {
 function updateModelStyle (model, selected) {
   model.fill = {
     color: selected ? selectedColor : unselectedColor(model.percent),
-    opacity: selected ? selectedOpacityFill : unselectedOpacityFill(model.percent)
+    opacity: selected ? selectedOpacityFill : unselectedOpacityFill()
   }
   model.stroke = {
     color: selected ? selectedColor : unselectedColor(model.percent),
