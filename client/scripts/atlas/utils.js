@@ -32,12 +32,12 @@ var unselectedColor = function (percent) {
   }
   return highColor
 }
-var unselectedOpacityFill = function (percent) {
+var unselectedOpacityFill = function () {
   return 0.35
 }
 
-var unselectedOpacityStroke = function (percent) {
-  return 0.3
+var unselectedOpacityStroke = function () {
+  return 0.5
 }
 
 function mapCellToMapModel (cell, selected) {
