@@ -15,25 +15,35 @@ var defaultCenter = {
 
 var defaultZoom = 7
 
-var selectedColor = '#3c3'
+var selectedColor = '#33c'
 var selectedOpacityFill = 0.65
 var selectedOpacityStroke = 1
 
+var highColor = '#4C9900'
+var medColor = '#FCE949'
+var lowColor = '#E41A1C'
+
 var unselectedColor = function (percent) {
   if (percent < 30) {
-    return '#33a'
+    return lowColor
   }
   if (percent < 65) {
-    return '#838'
+    return medColor
   }
-  return '#a33'
+  return highColor
 }
-var unselectedOpacityFill = function (percent) {
-  return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
+var unselectedOpacityFill = function () {
+  return 0.35
 }
 
 var unselectedOpacityStroke = function (percent) {
-  return percent < 30 ? 0.8 : percent < 80 ? 1.1 - percent / 100 : 0.3
+  if (percent < 30) {
+    return 0.4
+  }
+  if (percent < 65) {
+    return 0.8
+  }
+  return 0.4
 }
 
 function mapCellToMapModel (cell, selected) {
@@ -51,7 +61,7 @@ function mapCellToMapModel (cell, selected) {
 function updateModelStyle (model, selected) {
   model.fill = {
     color: selected ? selectedColor : unselectedColor(model.percent),
-    opacity: selected ? selectedOpacityFill : unselectedOpacityFill(model.percent)
+    opacity: selected ? selectedOpacityFill : unselectedOpacityFill()
   }
   model.stroke = {
     color: selected ? selectedColor : unselectedColor(model.percent),
@@ -72,5 +82,6 @@ module.exports = {
   unselectedOpacityFill: unselectedOpacityFill,
   unselectedOpacityStroke: unselectedOpacityStroke,
   mapCellToMapModel: mapCellToMapModel,
-  updateModelStyle: updateModelStyle
+  updateModelStyle: updateModelStyle,
+  colors: { low: lowColor, med: medColor, high: highColor }
 }
