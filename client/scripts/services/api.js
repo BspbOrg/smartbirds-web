@@ -152,7 +152,8 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     userGrid: function () {
       return $http({
         method: 'GET',
-        url: ENDPOINT_URL + '/bgatlas/2008/'
+        url: ENDPOINT_URL + '/bgatlas/2008/',
+        withCredentials: true
       }).then(function (response) {
         return response.data
       })
@@ -172,6 +173,20 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       }).then(function (response) {
         return response.data
       })
+    },
+
+    getCellInfo: function (utmCode) {
+      var canceler = $q.defer()
+      var promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode,
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
     }
   }
 })

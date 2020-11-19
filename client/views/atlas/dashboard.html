@@ -1,3 +1,9 @@
+<style>
+  .page-atlas-dashboard td {
+    vertical-align: middle;
+  }
+</style>
+
 <div class="page-atlas-dashboard">
   <div class="page-header">
     <h1>{{::'ATLAS_DASHBOARD_TITLE' | translate}}</h1>
@@ -18,11 +24,65 @@
                           path="'coordinates'"
                           static="true"
                           stroke="'stroke'"
+                          events="$ctrl.events"
         ></ui-gmap-polygons>
 
       </ui-gmap-google-map>
 
       <atlas-legend></atlas-legend>
+    </div>
+
+    <div class="col-md-4 col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span ng-if="$ctrl.selected">
+            {{$ctrl.selected.cell.utm_code}}
+          </span>
+          <span ng-if="!$ctrl.selected">
+            {{::'ATLAS_DASHBOARD_ZONE_HEADING' | translate}}
+          </span>
+          <i ng-if="$ctrl.loading" class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="panel-body">
+          <p>{{::'ATLAS_DASHBOARD_ZONE_TEXT' | translate}}</p>
+        </div>
+
+        <!-- List group -->
+        <div class="table-responsive">
+          <table ng-if="$ctrl.selected && !$ctrl.loading" class="table table-condensed table-striped">
+            <thead>
+            <tr>
+              <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_SPECIES' | translate}}</th>
+              <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_ATLAS' | translate}}</th>
+              <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_OBSERVATION' | translate}}</th>
+              <th>{{::'ATLAS_DASHBOARD_ZONE_HEADER_OTHER' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in $ctrl.rows">
+              <td>
+                {{::getLocalLabel(row.species | species:"label")}}<br ng-if="::getLocalLabel(row.species | species:'label')"/>
+                <strong>{{::row.species}}</strong>
+              </td>
+              <td class="text-center">
+                <i class="fa" ng-class="::'fa-' + (row.known ? 'check' : 'times')"></i>
+              </td>
+              <td class="text-center">
+                <i class="fa" ng-class="::'fa-' + (row.observed ? 'check' : 'times')"></i>
+              </td>
+              <td class="text-center">
+                <i class="fa" ng-class="::'fa-' + (row.other ? 'check' : 'times')"></i>
+              </td>
+            </tr>
+            <tr ng-if="$ctrl.rows.length === 0">
+              <td colspan="3">
+                {{::'ATLAS_DASHBOARD_ZONE_NO_ROWS' | translate}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
