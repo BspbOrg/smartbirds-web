@@ -26,7 +26,7 @@
                   <span class="network-name" translate>FORM_BIRDS_SHORT</span>
                 </a>
               </li>
-              <li>
+              <li ng-if="$user.isBetaEnabled()">
                 <a ui-sref="public_atlas" class="btn btn-default btn-lg" translate-attr="{title: 'PUBLIC_ATLAS_LONG'}">
                   <i class="icon icon-bgatlas"></i>
                   <span class="network-name" translate>PUBLIC_ATLAS_SHORT</span>

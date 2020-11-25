@@ -103,7 +103,7 @@
         </a>
       </li>
 
-      <li>
+      <li ng-if="::$root.$user.isBetaEnabled()">
         <a id="atlas" href=""
            ng-click="$ctrl.isAtlasCollapsed=!$ctrl.isAtlasCollapsed">
           <i class="fa fa-globe fa-fw"></i>
