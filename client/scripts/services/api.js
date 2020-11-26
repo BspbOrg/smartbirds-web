@@ -8,21 +8,29 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
 
   api.session = {
     login: function (auth) {
+      var data = {}
+      Object.assign(data, {
+        include: ['bgatlasCells']
+      }, auth)
       return $http({
         method: 'POST',
         url: ENDPOINT_URL + '/session',
-        data: auth,
+        data: data,
         withCredentials: true,
         skipSessionExpiredInterceptor: true
       })
     },
-    restore: function (xsrf, opts) {
+    restore: function (xsrf, opts, data) {
+      data = Object.assign({},
+        {
+          include: ['bgatlasCells']
+        }, data, {
+          csrfToken: xsrf
+        })
       return $http(angular.extend({
         method: 'PUT',
         url: ENDPOINT_URL + '/session',
-        data: {
-          csrfToken: xsrf
-        },
+        data: data,
         withCredentials: true
       }, opts))
     },
@@ -138,5 +146,56 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     }).then(function (response) {
       return response.data
     })
+  }
+
+  api.bgatlas2008 = {
+    userGrid: function () {
+      return $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/2008/',
+        withCredentials: true
+      }).then(function (response) {
+        return response.data
+      })
+    },
+
+    /**
+     * Set user selected cells
+     * @param {string[]} cells - list of utm codes for selected cells
+     */
+    setSelected: function (cells) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/bgatlas/user/selected',
+        data: {
+          cells: cells
+        }
+      }).then(function (response) {
+        return response.data
+      })
+    },
+
+    getCellInfo: function (utmCode) {
+      var canceler = $q.defer()
+      var promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode,
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
+    },
+
+    globalCellStats: function () {
+      return $http({
+        method: 'GET',
+        url: (process.env.STATS_PREFIX || '') + '/bgatlas2008_global_stats.json'
+      }).then(function (response) {
+        return response.data
+      })
+    }
   }
 })

@@ -63,6 +63,10 @@ require('../app')
       return false
     }
 
+    service.isBetaEnabled = function () {
+      return service.isInAnyRole(['moderator', 'org-admin', 'admin'])
+    }
+
     service.canAccess = function (formName) {
       return service.isAdmin() || service.isOrgAdmin() || service.isModerator(formName)
     }

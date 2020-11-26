@@ -102,6 +102,26 @@
           Tasks
         </a>
       </li>
+
+      <li ng-if="::$root.$user.isBetaEnabled()">
+        <a id="atlas" href=""
+           ng-click="$ctrl.isAtlasCollapsed=!$ctrl.isAtlasCollapsed">
+          <i class="fa fa-globe fa-fw"></i>
+          {{'NAV_ATLAS'|translate}}
+        </a>
+        <ul class="nav collapse" role="menu" aria-labelledby="atlas" uib-collapse="$ctrl.isAtlasCollapsed">
+          <li>
+            <a ui-sref="auth.atlas" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
+              <i class="fa fa-dashboard fa-fw"></i>
+              {{'NAV_ATLAS_DASHBOARD'|translate}}
+            </a>
+            <a ui-sref="auth.atlas.request" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
+              <i class="fa fa-gear fa-fw"></i>
+              {{'NAV_ATLAS_REQUEST'|translate}}
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
   <!-- /.sidebar-collapse -->

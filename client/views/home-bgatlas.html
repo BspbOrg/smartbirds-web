@@ -1,0 +1,61 @@
+<ng-include src="'/views/layout/navbar.html'"></ng-include>
+
+<!-- Page Header -->
+<!-- Page Header -->
+<header class="heroimage bgatlas"></header>
+
+<!-- Main Content -->
+<header class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="site-heading">
+          <h1 translate>PUBLIC_ATLAS_TITLE</h1>
+          <h2 translate>PUBLIC_ATLAS_SUBTITLE</h2>
+          <hr class="small">
+          <div>
+            <ui-gmap-google-map
+              center="$ctrl.map.state.center"
+              options="$ctrl.map.options"
+              zoom="$ctrl.map.state.zoom"
+            >
+
+              <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                                fit="true"
+                                fill="'fill'"
+                                models="::$ctrl.cells"
+                                path="'coordinates'"
+                                static="true"
+                                stroke="'stroke'"
+              ></ui-gmap-polygons>
+
+            </ui-gmap-google-map>
+
+            <atlas-legend></atlas-legend>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Footer -->
+<footer class="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <p class="text-muted" translate translate-values="{
+          linkStart: '<a href=\'https://www.activecitizensfund.bg\' target=\'_blank\'>',
+          linkEnd: '</a>'
+          }">PUBLIC_ATLAS_TEXT</p>
+      </div>
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <p class="pull-right">
+          <a class="logo bspb" href="http://bspb.org" target="_blank"></a>
+          <a class="logo activecitizensfund" href="https://www.activecitizensfund.bg" target="_blank"></a>
+        </p>
+        <ng-include src="'/views/layout/footer-inside.html'"></ng-include>
+      </div>
+    </div>
+  </div>
+</footer>

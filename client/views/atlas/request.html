@@ -1,0 +1,102 @@
+<style>
+  .page-atlas-request .panel-heading > .label {
+    float: right;
+  }
+
+  .page-atlas-request .list-group-item > .badge {
+    float: none;
+  }
+
+  .page-atlas-request .list-group-item > .close {
+    float: right;
+    color: red;
+    background: transparent;
+    font-size: 21px;
+    padding: 0 2px 0 0;
+    line-height: 1;
+  }
+
+  .page-atlas-request .list-group-item > .code {
+    font-weight: bold;
+  }
+</style>
+
+<div class="page-atlas-request">
+  <div class="page-header">
+    <h1>{{::'ATLAS_REQUEST_TITLE' | translate}}</h1>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="pull-right">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" ng-disabled="$ctrl.selected.length > $ctrl.MAX" ng-click="$ctrl.save()">
+            {{::'ATLAS_REQUEST_BTN_SAVE'|translate}}
+            <i class="fa fa-save fa-fw"></i>
+          </button>
+        </div>
+      </div>
+      <h5>
+        <i class="fa fa-edit fa-fw"></i>
+        {{::'ATLAS_REQUEST_SUBTITLE'|translate}}
+      </h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7">
+      <ui-gmap-google-map
+        center="$ctrl.map.state.center"
+        options="$ctrl.map.options"
+        zoom="$ctrl.map.state.zoom"
+      >
+
+        <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                          clickable="true"
+                          fit="true"
+                          fill="'fill'"
+                          models="::$ctrl.cells"
+                          path="'coordinates'"
+                          static="true"
+                          stroke="'stroke'"
+                          events="$ctrl.events"
+                          control="$ctrl.control"
+        ></ui-gmap-polygons>
+
+      </ui-gmap-google-map>
+
+      <atlas-legend></atlas-legend>
+    </div>
+
+    <div class="col-md-4 col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="label"
+                ng-class="'label-' + ($ctrl.selected.length <= $ctrl.MAX ? 'default' : 'danger')">
+            {{$ctrl.selected.length}}/10
+          </span>
+          {{::'ATLAS_REQUEST_ZONES_HEADING' | translate}}
+        </div>
+        <div class="panel-body">
+          <p>{{::'ATLAS_REQUEST_ZONES_TEXT' | translate}}</p>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <li ng-repeat="cell in $ctrl.selected"
+              class="list-group-item"
+              ng-class="$index >= $ctrl.MAX ? 'list-group-item-danger' : ''">
+            <button class="btn btn-xs close" ng-click="$ctrl.unselect($index)"><span aria-hidden="true">&times;</span></button>
+            <span class="index">{{$index + 1}}.</span>
+            <span class="code">{{::cell.id}}</span>
+            <span class="badge">{{::cell.percent | number:1}}%</span>
+          </li>
+          <li ng-if="$ctrl.selected.length === 0"
+              class="list-group-item">
+            {{::'ATLAS_REQUEST_ZONES_HINT' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
