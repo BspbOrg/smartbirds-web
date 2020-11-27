@@ -1,0 +1,81 @@
+<div class="page-atlas-stats">
+  <div class="page-header">
+    <h1>
+      {{::'ATLAS_STATS_TITLE' | translate}}
+      <small>{{::'ATLAS_STATS_SUBTITLE' | translate}}</small>
+    </h1>
+  </div>
+
+  <ul class="nav nav-tabs" ng-init="$ctrl.tab='top_observers'">
+    <li role="presentation" ng-class="{active: $ctrl.tab == 'top_observers'}">
+      <a href
+         ng-click="$ctrl.tab = 'top_observers'"
+         title="{{::'ATLAS_STATS_TOP_OBSERVERS' | translate}}">
+        {{::'ATLAS_STATS_TOP_OBSERVERS_TITLE_TAB' | translate}}
+      </a>
+    </li>
+  </ul>
+
+  <div ng-if="$ctrl.tab === 'top_observers'">
+    <div class="row">
+      <div class="col-md-8 col-lg-7">
+        <ui-gmap-google-map
+          center="$ctrl.map.state.center"
+          options="$ctrl.map.options"
+          zoom="$ctrl.map.state.zoom"
+        >
+
+          <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                            clickable="true"
+                            fit="true"
+                            fill="'fill'"
+                            models="::$ctrl.cells"
+                            path="'coordinates'"
+                            static="true"
+                            stroke="'stroke'"
+                            events="$ctrl.events"
+                            control="$ctrl.control"
+          ></ui-gmap-polygons>
+
+        </ui-gmap-google-map>
+
+        <atlas-legend></atlas-legend>
+      </div>
+
+      <div class="col-md-4 col-lg-5">
+        <div class="panel panel-default">
+          <h3 class="panel-heading">
+            <span ng-if="$ctrl.selected">
+              {{$ctrl.selected}}
+            </span>
+            <span ng-if="!$ctrl.selected">
+              {{::'ATLAS_STATS_TOP_OBSERVERS_HEADING' | translate}}
+            </span>
+          </h3>
+          <div ng-if="!$ctrl.selected" class="panel-body">
+            <p>{{::'ATLAS_STATS_TOP_OBSERVERS_HINT' | translate}}</p>
+          </div>
+          <div ng-if="$ctrl.loading" class="panel-body text-center">
+            <i ng-if="$ctrl.loading" class="fa fa-spinner fa-spin fa-3x"></i>
+          </div>
+          <div ng-if="$ctrl.selected && !$ctrl.loading" class="panel-body">
+            <h4>{{::'ATLAS_STATS_TOP_OBSERVERS_TEXT' | translate:$ctrl}}</h4>
+          </div>
+
+          <!-- List group -->
+          <ol class="list-group">
+            <li ng-repeat="row in $ctrl.rows"
+                class="list-group-item"
+                ng-class="$index >= $ctrl.MAX ? 'list-group-item-danger' : ''">
+              <span class="index">{{$index + 1}}.</span>
+              <span class="observer">{{::row.user | userName}}</span>
+              -
+              <span class="value">{{::'ATLAS_STATS_TOP_OBSERVERS_ROW_VALUE' | translate:row}}</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

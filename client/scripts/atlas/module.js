@@ -3,8 +3,9 @@ var modulename = require('./modulename')
 var states = require('./states')
 var AtlasDashboardController = require('./controllers/AtlasDashboardController')
 var AtlasHomeController = require('./controllers/AtlasHomeController')
-var AtlasRequestController = require('./controllers/AtlasRequestController')
 var AtlasLegendDirective = require('./directives/AtlasLegendDirective')
+var AtlasRequestController = require('./controllers/AtlasRequestController')
+var AtlasStatsController = require('./controllers/AtlasStatsController')
 
 module.exports = angular
   .module(modulename, [])
@@ -12,4 +13,5 @@ module.exports = angular
   .controller('AtlasDashboardController', AtlasDashboardController)
   .controller('AtlasHomeController', AtlasHomeController)
   .controller('AtlasRequestController', AtlasRequestController)
+  .controller('AtlasStatsController', AtlasStatsController)
   .directive('atlasLegend', AtlasLegendDirective)

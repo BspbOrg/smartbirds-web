@@ -25,4 +25,13 @@ module.exports = /* @ngInject */function ($stateProvider) {
         }
       }
     })
+    .state('auth.stats.atlas', {
+      url: '/atlas',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/atlas/stats.html',
+          controller: 'AtlasStatsController as $ctrl'
+        }
+      }
+    })
 }

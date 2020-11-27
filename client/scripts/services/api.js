@@ -189,6 +189,20 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       return promise
     },
 
+    getCellStats: function (utmCode) {
+      var canceler = $q.defer()
+      var promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode + '/stats',
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
+    },
+
     globalCellStats: function () {
       return $http({
         method: 'GET',
