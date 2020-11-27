@@ -68,8 +68,6 @@ module.exports = /* @ngInject */function AtlasStatsController (api, ngToast, $tr
       })
   }
 
-  setSelectedCell('GN45')
-
   $ctrl.events = {
     click: function (poly, event, model) {
       setSelectedCell(model.cell.utm_code, model)
