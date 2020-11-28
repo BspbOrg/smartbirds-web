@@ -210,6 +210,20 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       }).then(function (response) {
         return response.data
       })
+    },
+
+    observerRanking: function () {
+      var canceler = $q.defer()
+      var promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/stats/user_rank',
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
     }
   }
 })
