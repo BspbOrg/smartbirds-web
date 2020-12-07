@@ -1056,5 +1056,16 @@
     "ATLAS_DASHBOARD_ZONE_HEADER_OTHER": "Всички наблюдения",
     "PUBLIC_ATLAS_TEXT": "Този модул е разработен в рамките на проект „Наука на гражданите в полза на местните общности и природата“ с финансова подкрепа на {{linkStart}} фонд Активни граждани {{linkEnd}} по линия на Финансовия механизъм на ЕИП.“",
     "PUBLIC_ATLAS_LONG": "Атлас на гнездящите птици в България",
-    "PUBLIC_ATLAS_SHORT": "Атлас"
+    "PUBLIC_ATLAS_SHORT": "Атлас",
+    "ATLAS_STATS_TOP_OBSERVERS_HEADING": "Изберете квадрат от картата",
+    "ATLAS_STATS_TOP_OBSERVERS_ROW_VALUE": "{{ species }} вида",
+    "ATLAS_STATS_TOP_OBSERVERS_TEXT": "Общ брой видове: {{ species }} вида",
+    "ATLAS_STATS_TOP_OBSERVERS_HINT": "Изберете квадрата от картата за да видите информация за него",
+    "ATLAS_STATS_TITLE": "Атлас статистики",
+    "ATLAS_STATS_SUBTITLE": "Наблюдатели въвели данни за най-голям брой УТМ (10х10 km) квадрати",
+    "ATLAS_STATS_TOP_OBSERVERS": "Най-много наблюдения на квадрат",
+    "ATLAS_STATS_TOP_OBSERVERS_TITLE_TAB": "Наблюдатели по квадрати",
+    "ATLAS_STATS_RANKING_LABEL_COUNT": "{{ count }} квадрата",
+    "ATLAS_STATS_RANKING_TITLE_TAB": "Най-много квадрати",
+    "ATLAS_STATS_RANKING": "Най-много посетени квадрати от наблюдател"
 }
