@@ -1,0 +1,30 @@
+<div class="page-atlas-stats">
+  <div class="page-header">
+    <h1>
+      {{::'ATLAS_STATS_TITLE' | translate}}
+      <small>{{::'ATLAS_STATS_SUBTITLE' | translate}}</small>
+    </h1>
+  </div>
+
+  <ul class="nav nav-tabs" ng-init="$ctrl.tab='ranking'">
+    <li role="presentation" ng-class="{active: $ctrl.tab == 'ranking'}">
+      <a href
+         ng-click="$ctrl.tab = 'ranking'"
+         title="{{::'ATLAS_STATS_RANKING' | translate}}">
+        {{::'ATLAS_STATS_RANKING_TITLE_TAB' | translate}}
+      </a>
+    </li>
+
+    <li role="presentation" ng-class="{active: $ctrl.tab == 'cells'}">
+      <a href
+         ng-click="$ctrl.tab = 'cells'"
+         title="{{::'ATLAS_STATS_TOP_OBSERVERS' | translate}}">
+        {{::'ATLAS_STATS_TOP_OBSERVERS_TITLE_TAB' | translate}}
+      </a>
+    </li>
+  </ul>
+
+  <atlas-stats-cell ng-if="$ctrl.tab === 'cells'"></atlas-stats-cell>
+  <atlas-stats-ranking ng-if="$ctrl.tab === 'ranking'"></atlas-stats-ranking>
+
+</div>

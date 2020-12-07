@@ -5,7 +5,7 @@ module.exports = function AtlasLegendDirective () {
     restrict: 'AE',
     templateUrl: '/views/atlas/_legend.html',
     scope: {},
-    controller: /* @ngInject */AtlasLegendController,
+    controller: AtlasLegendController,
     controllerAs: '$ctrl'
   }
 }
