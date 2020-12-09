@@ -17,6 +17,7 @@ module.exports = /* @ngInject */function AtlasStatsCellController (api, ngToast,
     })
 
   $ctrl.selected = null
+  $ctrl.selectedModel = null
   $ctrl.loading = false
   $ctrl.rows = []
   $ctrl.species = 0
@@ -25,6 +26,9 @@ module.exports = /* @ngInject */function AtlasStatsCellController (api, ngToast,
     // unselect on second select
     if ($ctrl.selected === utmCode) {
       utmCode = null
+    } else if ($ctrl.selectedModel) {
+      // unselect the previous
+      utils.updateModelStyle($ctrl.selectedModel, false)
     }
 
     if (lastCellInfoRequest) {
@@ -35,6 +39,7 @@ module.exports = /* @ngInject */function AtlasStatsCellController (api, ngToast,
       utils.updateModelStyle(model, !!utmCode)
     }
     $ctrl.selected = utmCode || null
+    $ctrl.selectedModel = utmCode ? model : null
     $ctrl.rows = []
     $ctrl.species = 0
     $ctrl.loading = !!utmCode
