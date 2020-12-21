@@ -40,7 +40,7 @@
               <div class="btn-group">
                 <a class="btn btn-sm btn-default ng-binding"
                    ng-disabled="!$ctrl.cells.length"
-                   download="atlas_species.tsv"
+                   download="observed_species_atlas-{{::$ctrl.selected.cell.utm_code}}-{{::$ctrl.date|date:'yyyy-MM-dd'}}.tsv"
                    ng-href="{{::$ctrl.tsvHref}}"
                 >
                   <i class="fa fa-download fa-fw"></i>

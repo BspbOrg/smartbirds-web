@@ -49,6 +49,7 @@ module.exports = /* @ngInject */function AtlasDashboardController (api, $filter,
               tsvContent.unshift([
                 'UTM_CODE', 'OBSERVED(+/-)', 'SPECIES_LA', 'SPECIES_LOCAL'
               ])
+              $ctrl.date = new Date()
               $ctrl.tsvHref = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
                 tsvContent
                   .map(function (row) { return row.join('\t') })
