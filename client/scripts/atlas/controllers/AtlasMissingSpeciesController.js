@@ -1,0 +1,26 @@
+var utils = require('../utils')
+
+var BaseMapController = require('./BaseMapController')
+
+module.exports = /* @ngInject */function AtlasMissingSpeciesController (api, ngToast, $translate) {
+  var $ctrl = this
+
+  $ctrl.selectable = true
+  BaseMapController.apply(this, [ngToast, $translate])
+
+  api.bgatlas2008.globalCellStats()
+    .then(function (cells) {
+      $ctrl.cells = cells.map(function (cell) {
+        return utils.mapCellToMapModel(cell)
+      })
+    })
+
+  $ctrl.loadCellInfo = function (model) {
+    return api.bgatlas2008.getCellInfo(model.cell.utm_code)
+      .then(function (rows) {
+        return rows.filter(function (row) {
+          return row.known && !row.other && !row.observed
+        })
+      })
+  }
+}

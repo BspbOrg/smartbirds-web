@@ -1,0 +1,70 @@
+<div class="page-atlas-missing-species">
+  <div class="page-header">
+    <h1>{{::'ATLAS_MISSING_SPECIES_TITLE' | translate}}</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7">
+      <ui-gmap-google-map
+        center="$ctrl.map.state.center"
+        options="$ctrl.map.options"
+        zoom="$ctrl.map.state.zoom"
+      >
+
+        <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                          fit="true"
+                          fill="'fill'"
+                          models="::$ctrl.cells"
+                          path="'coordinates'"
+                          static="true"
+                          stroke="'stroke'"
+                          events="$ctrl.events"
+        ></ui-gmap-polygons>
+
+      </ui-gmap-google-map>
+
+      <atlas-legend></atlas-legend>
+    </div>
+
+    <div class="col-md-4 col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span ng-if="$ctrl.selected">
+            {{$ctrl.selected.cell.utm_code}}
+          </span>
+          <span ng-if="!$ctrl.selectedInfo">
+            {{::'ATLAS_MISSING_SPECIES_ZONE_HEADING' | translate}}
+          </span>
+          <i ng-if="$ctrl.loading" class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="panel-body">
+          <p>{{::'ATLAS_MISSING_SPECIES_ZONE_TEXT' | translate}}</p>
+        </div>
+
+        <!-- List group -->
+        <div class="table-responsive">
+          <table ng-if="$ctrl.selectedInfo && !$ctrl.loading" class="table table-condensed table-striped">
+            <thead>
+            <tr>
+              <th>{{::'ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in $ctrl.selectedInfo">
+              <td>
+                {{::getLocalLabel(row.species | species:"label")}}<br ng-if="::getLocalLabel(row.species | species:'label')"/>
+                <strong>{{::row.species}}</strong>
+              </td>
+            </tr>
+            <tr ng-if="$ctrl.rows.length === 0">
+              <td colspan="1">
+                {{::'ATLAS_MISSING_SPECIES_ZONE_NO_ROWS' | translate}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
