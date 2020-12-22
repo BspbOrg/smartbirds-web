@@ -46,7 +46,11 @@
           <table ng-if="$ctrl.selectedInfo && !$ctrl.loading" class="table table-condensed table-striped">
             <thead>
             <tr>
-              <th>{{::'ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES' | translate}}</th>
+              <th>
+                <span class="label label-default pull-right">{{::$ctrl.selectedInfo.length}}</span>
+                {{::'ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES' | translate}}
+                <div class="clearfix"></div>
+              </th>
             </tr>
             </thead>
             <tbody>
