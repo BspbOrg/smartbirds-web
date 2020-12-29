@@ -88,7 +88,7 @@
     "odometer": "^0.4.8",
     "querystring": "^0.2.0",
     "raven": "^2.6.4",
-    "raven-js": "^2.3.0",
+    "raven-js": "^3.27.2",
     "simplify-js": "^1.2.4",
     "startbootstrap-sb-admin-2": "^1.0.7",
     "stringify": "^5.2.0",
