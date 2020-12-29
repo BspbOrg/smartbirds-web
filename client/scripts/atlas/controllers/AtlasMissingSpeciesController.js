@@ -1,12 +1,12 @@
 var utils = require('../utils')
 
-var BaseMapController = require('./BaseMapController')
+var BaseExtendedMapController = require('./BaseExtendedMapController')
 
 module.exports = /* @ngInject */function AtlasMissingSpeciesController (api, ngToast, $translate) {
   var $ctrl = this
 
   $ctrl.selectable = true
-  BaseMapController.apply(this, [ngToast, $translate])
+  BaseExtendedMapController.apply(this, [ngToast, $translate])
 
   api.bgatlas2008.globalCellStats()
     .then(function (cells) {
