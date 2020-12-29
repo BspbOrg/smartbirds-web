@@ -72,7 +72,7 @@
     "browserify-shim": "~3.8.0",
     "bulk-require": "~1.0.1",
     "bulkify": "~1.4.2",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
     "envify": "~4.1.0",
     "font-awesome": "^4.5.0",
     "less": "~3.12.2",
