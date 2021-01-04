@@ -1007,7 +1007,7 @@
     "LANGUAGE_MACEDONIAN": "Macedonian",
     "PUBLIC_THREATS_FILTER_BY_THREAT": "Threat:",
     "PUBLIC_THREATS_FILTER_ALL_THREATS": "- all threats -",
-    "PUBLIC_THREATS_FILTER_BY_DATE": "Date:",
+    "PUBLIC_THREATS_FILTER_BY_DATE": "Period:",
     "PUBLIC_THREATS_FILTER_ALL_TIME": "- all times -",
     "PUBLIC_THREATS_FILTER_1_MONTH": "last month",
     "PUBLIC_THREATS_FILTER_3_MONTHS": "last 3 months",
@@ -1067,5 +1067,11 @@
     "ATLAS_STATS_TOP_OBSERVERS_TITLE_TAB": "Observers by squares",
     "ATLAS_STATS_RANKING_LABEL_COUNT": "{{ count }} squres",
     "ATLAS_STATS_RANKING_TITLE_TAB": "Most squares",
-    "ATLAS_STATS_RANKING": "Most visited squares by an observer"
+    "ATLAS_STATS_RANKING": "Most visited squares by an observer",
+    "ATLAS_MISSING_SPECIES_TITLE": "Unidentified species by squares",
+    "NAV_ATLAS_MISSING_SPECIES": "Unidentified species",
+    "ATLAS_MISSING_SPECIES_ZONE_HEADING": "Information on unidentified species",
+    "ATLAS_MISSING_SPECIES_ZONE_TEXT": "Select a square on the map to see the unidentified species",
+    "ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES": "Species",
+    "ATLAS_MISSING_SPECIES_ZONE_NO_ROWS": "There are no unidentified species for this square"
 }

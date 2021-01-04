@@ -1007,7 +1007,7 @@
     "LANGUAGE_MACEDONIAN": "Македонски",
     "PUBLIC_THREATS_FILTER_BY_THREAT": "Заплаха:",
     "PUBLIC_THREATS_FILTER_ALL_THREATS": "- всички заплахи -",
-    "PUBLIC_THREATS_FILTER_BY_DATE": "Дата:",
+    "PUBLIC_THREATS_FILTER_BY_DATE": "Период:",
     "PUBLIC_THREATS_FILTER_ALL_TIME": "- за целия период -",
     "PUBLIC_THREATS_FILTER_1_MONTH": "последния месец",
     "PUBLIC_THREATS_FILTER_3_MONTHS": "последните 3 месеца",
@@ -1067,5 +1067,11 @@
     "ATLAS_STATS_TOP_OBSERVERS_TITLE_TAB": "Наблюдатели по квадрати",
     "ATLAS_STATS_RANKING_LABEL_COUNT": "{{ count }} квадрата",
     "ATLAS_STATS_RANKING_TITLE_TAB": "Най-много квадрати",
-    "ATLAS_STATS_RANKING": "Най-много посетени квадрати от наблюдател"
+    "ATLAS_STATS_RANKING": "Най-много посетени квадрати от наблюдател",
+    "ATLAS_MISSING_SPECIES_TITLE": "Неустановени видове по квадрати",
+    "NAV_ATLAS_MISSING_SPECIES": "Неустановени видове",
+    "ATLAS_MISSING_SPECIES_ZONE_HEADING": "Информация за неустановени видове",
+    "ATLAS_MISSING_SPECIES_ZONE_TEXT": "Изберете квадрат от картата за да видите неустановените видове",
+    "ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES": "Вид",
+    "ATLAS_MISSING_SPECIES_ZONE_NO_ROWS": "Липсват неустановени видове за този квадрат"
 }
