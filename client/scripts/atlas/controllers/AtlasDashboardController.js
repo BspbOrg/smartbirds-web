@@ -2,8 +2,10 @@ var utils = require('../utils')
 
 var BaseMapController = require('./BaseMapController')
 
-module.exports = /* @ngInject */function AtlasDashboardController (api, ngToast, $state, $translate, user) {
+module.exports = /* @ngInject */function AtlasDashboardController (api, $filter, localization, ngToast, $state, $translate, user) {
   var $ctrl = this
+  var getLocalLabel = localization.getLocalLabel
+  var getSpecies = $filter('species')
 
   BaseMapController.apply(this)
 
@@ -40,6 +42,23 @@ module.exports = /* @ngInject */function AtlasDashboardController (api, ngToast,
           .then(function (rows) {
             if ($ctrl.selected === model) {
               $ctrl.rows = rows
+              var tsvContent = rows.map(function (row) {
+                return [
+                  model.cell.utm_code,
+                  row.observed ? '+' : '-',
+                  row.species,
+                  getLocalLabel(getSpecies(row.species, 'label'))
+                ]
+              })
+              tsvContent.unshift([
+                'UTM_CODE', 'OBSERVED(+/-)', 'SPECIES_LA', 'SPECIES_LOCAL'
+              ])
+              $ctrl.date = new Date()
+              $ctrl.tsvHref = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+                tsvContent
+                  .map(function (row) { return row.join('\t') })
+                  .join('\n')
+              )
             }
           })
           .catch(function (error) {

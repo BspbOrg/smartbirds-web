@@ -34,10 +34,23 @@
 
     <div class="col-md-4 col-lg-5">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <span ng-if="$ctrl.selected">
+        <div class="panel-heading clearfix">
+          <h4 ng-if="$ctrl.selected">
+            <div ng-if="!$ctrl.loading" class="pull-right">
+              <div class="btn-group">
+                <a class="btn btn-sm btn-default ng-binding"
+                   ng-disabled="!$ctrl.cells.length"
+                   download="observed_species_atlas-{{::$ctrl.selected.cell.utm_code}}-{{::$ctrl.date|date:'yyyy-MM-dd'}}.tsv"
+                   ng-href="{{::$ctrl.tsvHref}}"
+                >
+                  <i class="fa fa-download fa-fw"></i>
+                  tsv
+                </a>
+              </div>
+            </div>
+
             {{$ctrl.selected.cell.utm_code}}
-          </span>
+          </h4>
           <span ng-if="!$ctrl.selected">
             {{::'ATLAS_DASHBOARD_ZONE_HEADING' | translate}}
           </span>
