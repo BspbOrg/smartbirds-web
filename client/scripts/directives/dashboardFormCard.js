@@ -7,7 +7,7 @@ require('../app').directive('dashboardFormCard', /* @ngInject */function () {
     },
     bindToController: true,
     controller: /* @ngInject */function () {
-      var $ctrl = this
+      const $ctrl = this
 
       $ctrl.load = function () {
         $ctrl.status = 'primary'
@@ -34,7 +34,9 @@ require('../app').directive('dashboardFormCard', /* @ngInject */function () {
           })
       }
 
-      $ctrl.load()
+      $ctrl.$onInit = function () {
+        $ctrl.load()
+      }
     },
     controllerAs: '$ctrl'
   }

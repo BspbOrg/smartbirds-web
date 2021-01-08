@@ -9,11 +9,13 @@ require('../app').directive('organizationSelector', /* @ngInject */function () {
     templateUrl: '/views/directives/organizationselector.html',
     controllerAs: '$ctrl',
     controller: /* @ngInject */function ($scope, api, $translate, Organization) {
-      var ctrl = this
+      const ctrl = this
       ctrl.organizations = []
 
       // Preselect BSPB organization if none is selected
-      ctrl.model = ctrl.model || 'bspb'
+      ctrl.$onInit = function () {
+        ctrl.model = ctrl.model || 'bspb'
+      }
 
       $scope.$watch(function () { return $translate.$language }, function () {
         api.organizations().then(function (res) {

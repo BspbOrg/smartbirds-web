@@ -10,10 +10,12 @@ require('../app').directive('topStats', /* @ngInject */function () {
     },
     bindToController: true,
     controller: /* @ngInject */function ($q, api) {
-      var $ctrl = this
-      api.stats[$ctrl.form + '_top_stats']().then(function (stats) {
-        $ctrl.stats = stats
-      })
+      const $ctrl = this
+      $ctrl.$onInit = function () {
+        api.stats[$ctrl.form + '_top_stats']().then(function (stats) {
+          $ctrl.stats = stats
+        })
+      }
     },
     controllerAs: '$ctrl'
   }
