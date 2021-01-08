@@ -1,7 +1,7 @@
-var angular = require('angular')
-var bulk = require('bulk-require')
-var info = require('../../package.json')
-var Workbox = require('workbox-window').Workbox
+const angular = require('angular')
+const bulk = require('bulk-require')
+const info = require('../../package.json')
+const Workbox = require('workbox-window').Workbox
 
 require('./services/crashReporting')
 
@@ -21,14 +21,14 @@ require('angular-translate')
 require('angular-translate-loader-url')
 require('angular-bootstrap-lightbox')
 
-var dependencies = [
+const dependencies = [
   require('angular-i18n/bg'),
   require('angular-cookies'),
   require('angular-resource'),
   require('angular-sanitize'),
   require('angular-animate'),
 
-  require('angular-ui-router'),
+  require('angular-ui-router').default,
   require('angular-ui-bootstrap'),
   require('ui-select'),
 
@@ -67,12 +67,12 @@ var dependencies = [
 
 // install service worker
 if ('serviceWorker' in navigator) {
-  var wb = new Workbox('/sw.js')
+  const wb = new Workbox('/sw.js')
   wb.register()
   window.SW_STATUS = 'registered'
 }
 
-var app = module.exports = angular.module('sb', dependencies)
+const app = module.exports = angular.module('sb', dependencies)
 
 app.run(/* @ngInject */function ($rootScope) {
   $rootScope.$system = info
