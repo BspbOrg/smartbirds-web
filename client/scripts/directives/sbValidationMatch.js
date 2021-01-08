@@ -1,7 +1,7 @@
 /**
  * Created by groupsky on 12.01.16.
  */
-var angular = require('angular')
+const angular = require('angular')
 
 require('../app').directive('sbValidationMatch', /* @ngInject */function ($parse) {
   return {
@@ -15,21 +15,21 @@ require('../app').directive('sbValidationMatch', /* @ngInject */function ($parse
         return
       }
 
-      var matchGetter = $parse(attrs.sbValidationMatch)
-      var caselessGetter = $parse(attrs.sbValidationMatchCaseless)
-      var noMatchGetter = $parse(attrs.sbValidationNotMatch)
+      const matchGetter = $parse(attrs.sbValidationMatch)
+      const caselessGetter = $parse(attrs.sbValidationMatchCaseless)
+      const noMatchGetter = $parse(attrs.sbValidationNotMatch)
 
       scope.$watch(getMatchValue, function () {
         ctrl.$$parseAndValidate()
       })
 
       ctrl.$validators.match = function () {
-        var match = getMatchValue()
-        var notMatch = noMatchGetter(scope)
-        var value
+        const match = getMatchValue()
+        const notMatch = noMatchGetter(scope)
+        let value
 
         if (caselessGetter(scope)) {
-          value = angular.lowercase(ctrl.$viewValue) === angular.lowercase(match)
+          value = String(ctrl.$viewValue).toLocaleLowerCase() === String(match).toLocaleLowerCase()
         } else {
           value = ctrl.$viewValue === match
         }
@@ -38,7 +38,7 @@ require('../app').directive('sbValidationMatch', /* @ngInject */function ($parse
       }
 
       function getMatchValue () {
-        var match = matchGetter(scope)
+        let match = matchGetter(scope)
         if (angular.isObject(match) && Object.hasOwnProperty.call(match, '$viewValue')) {
           match = match.$viewValue
         }
