@@ -1,4 +1,4 @@
-var angular = require('angular')
+const angular = require('angular')
 
 require('../app').directive('filterMap', /* @ngInject */function () {
   return {
@@ -11,15 +11,17 @@ require('../app').directive('filterMap', /* @ngInject */function () {
     },
     bindToController: true,
     controller: /* @ngInject */function ($scope, $uibModal, $timeout) {
-      var $ctrl = this
-      $ctrl.location = {
-        latitude: $ctrl.latitude,
-        longitude: $ctrl.longitude,
-        radius: $ctrl.radius
+      const $ctrl = this
+      $ctrl.$onInit = function () {
+        $ctrl.location = {
+          latitude: $ctrl.latitude,
+          longitude: $ctrl.longitude,
+          radius: $ctrl.radius
+        }
       }
 
       $ctrl.openModal = function () {
-        var modal = $uibModal.open({
+        const modal = $uibModal.open({
           ariaLabeledBy: 'modal-title',
           ariaDescribeBy: 'modal-body',
           templateUrl: '/views/modals/select_location.html',
