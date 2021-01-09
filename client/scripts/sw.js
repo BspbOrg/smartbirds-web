@@ -9,9 +9,10 @@ import { initialize as googleAnalyticsInitialize } from 'workbox-google-analytic
 import {
     cleanupOutdatedCaches,
     createHandlerBoundToURL,
+    matchPrecache,
     precache
 } from 'workbox-precaching'
-import { NavigationRoute, registerRoute } from 'workbox-routing'
+import { NavigationRoute, registerRoute, setCatchHandler } from 'workbox-routing'
 import { CacheFirst, NetworkFirst, NetworkOnly, StaleWhileRevalidate } from 'workbox-strategies'
 
 // network timeout for network first strategies - if not response in this time, serve from cache
@@ -35,7 +36,17 @@ const navigationRoute = new NavigationRoute(handler, {
 })
 registerRoute(navigationRoute)
 
-// the primary resources that are precashed
+// Catch routing errors, like if the user is offline
+setCatchHandler(async ({ event }) => {
+    // Return the precached offline page if a document is being requested
+    if (event.request.destination === 'document') {
+        return matchPrecache(SINGLE_PAGE_URL)
+    }
+
+    return Response.error()
+})
+
+// the primary resources that are precached
 registerRoute(
     /\/(js\/scripts\.js|css\/main\.css)$/,
     new NetworkFirst({
