@@ -2,14 +2,24 @@
 /* global self, caches, fetch, importScripts, workbox, Response */
 /* eslint-disable indent */
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-sw.js')
+import { CacheableResponsePlugin } from 'workbox-cacheable-response'
+import { cacheNames, clientsClaim } from 'workbox-core'
+import { ExpirationPlugin } from 'workbox-expiration'
+import { initialize as googleAnalyticsInitialize } from 'workbox-google-analytics'
+import {
+    cleanupOutdatedCaches,
+    createHandlerBoundToURL,
+    precache
+} from 'workbox-precaching'
+import { NavigationRoute, registerRoute } from 'workbox-routing'
+import { CacheFirst, NetworkFirst, NetworkOnly, StaleWhileRevalidate } from 'workbox-strategies'
 
 // network timeout for network first strategies - if not response in this time, serve from cache
-var NETWORK_TIMEOUT_SECONDS = 0.5
+const NETWORK_TIMEOUT_SECONDS = 0.5
 // default html document to serve
-var SINGLE_PAGE_URL = '/index.html'
+const SINGLE_PAGE_URL = '/index.html'
 
-workbox.precaching.precache([
+precache([
     SINGLE_PAGE_URL,
     '/js/scripts.js',
     '/css/main.css'
@@ -17,68 +27,64 @@ workbox.precaching.precache([
     ignoreURLParametersMatching: true
 })
 
-workbox.precaching.cleanupOutdatedCaches()
+cleanupOutdatedCaches()
 
-workbox.routing.registerNavigationRoute(
-    // Assuming '/' has been precached,
-    // look up its corresponding cache key.
-    workbox.precaching.getCacheKeyForURL(SINGLE_PAGE_URL), {
-        blacklist: [
-            new RegExp('/api/')
-        ]
-    }
-)
+const handler = createHandlerBoundToURL(SINGLE_PAGE_URL)
+const navigationRoute = new NavigationRoute(handler, {
+    denylist: ['/api/']
+})
+registerRoute(navigationRoute)
 
 // the primary resources that are precashed
-workbox.routing.registerRoute(
+registerRoute(
     /\/(js\/scripts\.js|css\/main\.css)$/,
-    new workbox.strategies.NetworkFirst({
-        cacheName: workbox.core.cacheNames.precache,
+    new NetworkFirst({
+        cacheName: cacheNames.precache,
         networkTimeoutSeconds: NETWORK_TIMEOUT_SECONDS
     })
 )
 
 // nomenclature data
-workbox.routing.registerRoute(
+registerRoute(
     /^.*\/api\/(i18n|locations|nomenclature|species|user|zone|visit)/,
-    new workbox.strategies.StaleWhileRevalidate({
+    new StaleWhileRevalidate({
         cacheName: 'api-cache'
     })
 )
 
 // every other api request
-workbox.routing.registerRoute(
+registerRoute(
     /^.*\/api\//,
-    new workbox.strategies.NetworkOnly()
+    new NetworkOnly()
 )
 
-workbox.routing.registerRoute(
+registerRoute(
     /\.json$/,
-    new workbox.strategies.NetworkFirst({
+    new NetworkFirst({
         cacheName: 'stats-cache',
         networkTimeoutSeconds: NETWORK_TIMEOUT_SECONDS
     })
 )
 
-workbox.routing.registerRoute(
+registerRoute(
     // Cache HTML views files.
     /\/views\/.*\.html$/,
     // Use cache but update in the background.
-    new workbox.strategies.StaleWhileRevalidate({
+    new StaleWhileRevalidate({
         // Use a custom cache name.
         cacheName: 'view-cache'
     })
 )
 
-workbox.routing.registerRoute(
+registerRoute(
     // Cache image files.
     /\/img\/.*\.(?:png|jpg|jpeg|svg|gif)$/,
     // Use the cache if it's available.
-    new workbox.strategies.CacheFirst({
+    new CacheFirst({
         // Use a custom cache name.
         cacheName: 'image-cache',
         plugins: [
-            new workbox.expiration.Plugin({
+            new ExpirationPlugin({
                 // Cache only 20 images.
                 maxEntries: 20,
                 // Cache for a maximum of a week.
@@ -90,25 +96,25 @@ workbox.routing.registerRoute(
     })
 )
 
-workbox.routing.registerRoute(
+registerRoute(
     // Cache CSS files.
     /\.css$/,
     // Use cache but update in the background.
-    new workbox.strategies.StaleWhileRevalidate({
+    new StaleWhileRevalidate({
         // Use a custom cache name.
         cacheName: 'css-cache'
     })
 )
 
-workbox.routing.registerRoute(
+registerRoute(
     // Cache fonts.
     /\/fonts\//,
     // Use cache but update in the background.
-    new workbox.strategies.StaleWhileRevalidate({
+    new StaleWhileRevalidate({
         // Use a custom cache name.
         cacheName: 'font-cache',
         plugins: [
-            new workbox.expiration.Plugin({
+            new ExpirationPlugin({
                 // Cache for a maximum of a year.
                 maxAgeSeconds: 365 * 24 * 60 * 60
             })
@@ -117,23 +123,23 @@ workbox.routing.registerRoute(
 )
 
 // Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
-workbox.routing.registerRoute(
+registerRoute(
     /^https:\/\/fonts\.googleapis\.com/,
-    new workbox.strategies.StaleWhileRevalidate({
+    new StaleWhileRevalidate({
         cacheName: 'google-fonts-stylesheets'
     })
 )
 
 // Cache the underlying font files with a cache-first strategy for 1 year.
-workbox.routing.registerRoute(
+registerRoute(
     /^https:\/\/fonts\.gstatic\.com/,
-    new workbox.strategies.CacheFirst({
+    new CacheFirst({
         cacheName: 'google-fonts-webfonts',
         plugins: [
-            new workbox.cacheableResponse.Plugin({
+            new CacheableResponsePlugin({
                 statuses: [0, 200]
             }),
-            new workbox.expiration.Plugin({
+            new ExpirationPlugin({
                 maxAgeSeconds: 60 * 60 * 24 * 365,
                 maxEntries: 30,
                 purgeOnQuotaError: true
@@ -142,24 +148,24 @@ workbox.routing.registerRoute(
     })
 )
 
-workbox.googleAnalytics.initialize()
+googleAnalyticsInitialize()
 
-workbox.routing.registerRoute(
+registerRoute(
     /^https:\/\/maps\.googleapis\.com/,
-    new workbox.strategies.StaleWhileRevalidate({
+    new StaleWhileRevalidate({
         cacheName: 'gmaps-cache'
     })
 )
 
-workbox.routing.registerRoute(
+registerRoute(
     /^https:\/\/maps\.gstatic\.com/,
-    new workbox.strategies.CacheFirst({
+    new CacheFirst({
         cacheName: 'gmaps-static-cache',
         plugins: [
-            new workbox.cacheableResponse.Plugin({
+            new CacheableResponsePlugin({
                 statuses: [0, 200]
             }),
-            new workbox.expiration.Plugin({
+            new ExpirationPlugin({
                 maxAgeSeconds: 60 * 60 * 24 * 365,
                 maxEntries: 30,
                 purgeOnQuotaError: true
@@ -168,5 +174,5 @@ workbox.routing.registerRoute(
     })
 )
 
-workbox.core.skipWaiting()
-workbox.core.clientsClaim()
+self.skipWaiting()
+clientsClaim()
