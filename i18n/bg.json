@@ -1073,5 +1073,6 @@
     "ATLAS_MISSING_SPECIES_ZONE_HEADING": "Информация за неустановени видове",
     "ATLAS_MISSING_SPECIES_ZONE_TEXT": "Изберете квадрат от картата за да видите неустановените видове",
     "ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES": "Вид",
-    "ATLAS_MISSING_SPECIES_ZONE_NO_ROWS": "Липсват неустановени видове за този квадрат"
+    "ATLAS_MISSING_SPECIES_ZONE_NO_ROWS": "Липсват неустановени видове за този квадрат",
+    "FORM_ATLAS_SHORT": "Атлас Птици"
 }
