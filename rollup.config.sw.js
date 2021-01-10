@@ -1,7 +1,7 @@
 import inject from '@rollup/plugin-inject'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import virtual from '@rollup/plugin-virtual'
-// import { terser } from 'rollup-plugin-terser'
+import { terser } from 'rollup-plugin-terser'
 
 export default {
   input: 'client/scripts/sw.js',
@@ -11,12 +11,14 @@ export default {
   },
   plugins: [
     virtual({
-      process_env: 'export default {env: {NODE_ENV: \'production\'}}'
+      process_env: `export default {env: ${JSON.stringify({
+        NODE_ENV: process.env.NODE_ENV
+      })}}`
     }),
     inject({
       process: 'process_env'
     }),
-    nodeResolve({})
-    // terser()
+    nodeResolve({}),
+    terser()
   ]
 }
