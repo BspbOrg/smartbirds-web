@@ -82,4 +82,4 @@ app.run(/* @ngInject */function ($rootScope) {
 // noinspection JSUnnecessarySemicolon
 ; // eslint-disable-line semi
 // include all js files
-bulk(__dirname, ['./**/!(app|*.spec).js'])
+bulk(__dirname, ['./**/!(app|*.spec|sw).js'])
