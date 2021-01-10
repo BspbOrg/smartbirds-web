@@ -32,7 +32,7 @@ cleanupOutdatedCaches()
 
 const handler = createHandlerBoundToURL(SINGLE_PAGE_URL)
 const navigationRoute = new NavigationRoute(handler, {
-    denylist: ['/api/']
+    denylist: [/\/api\//]
 })
 registerRoute(navigationRoute)
 
