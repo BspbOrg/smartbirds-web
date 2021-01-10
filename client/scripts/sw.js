@@ -57,7 +57,7 @@ registerRoute(
 
 // nomenclature data
 registerRoute(
-    /^.*\/api\/(i18n|locations|nomenclature|species|user|zone|visit)/,
+    /^.*\/api\/(staging\/)?(i18n|locations|nomenclature|organization|species|user|zone|visit)/,
     new StaleWhileRevalidate({
         cacheName: 'api-cache'
     })
