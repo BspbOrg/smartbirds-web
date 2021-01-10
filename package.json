@@ -32,7 +32,7 @@
     "dev": "parallelshell 'npm run budo' 'npm run build:css:watch'",
     "build:js:debug": "browserify ./client/scripts/app.js -d -o ./public/js/scripts.js",
     "build:js": "cross-env NODE_ENV=${ENV:=production} browserify -g envify --debug -e ./client/scripts/app.js | uglifyjs -c -m > ./public/js/scripts.js",
-    "postbuild:js": "rollup ./client/scripts/sw.js --file ./public/sw.js -p @rollup/plugin-node-resolve --compact -f es -p rollup-plugin-terser",
+    "postbuild:js": "cross-env NODE_ENV=${ENV:=production} rollup -c rollup.config.sw.js",
     "discify": "cross-env NODE_ENV=${ENV:=production} browserify --full-paths -g envify --debug -e ./client/scripts/app.js | uglifyjs -c warnings=false -m | discify > ./public/disc.html",
     "build:js:watch": "watchify ./client/scripts/app.js -d -o ./public/js/scripts.js -v",
     "build:css": "lessc --clean-css --source-map --source-map-less-inline client/styles/main.less public/css/main.css",
@@ -46,7 +46,9 @@
   },
   "dependencies": {
     "@lordfriend/nya-bootstrap-select": "^2.1.10",
+    "@rollup/plugin-inject": "^4.0.2",
     "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-virtual": "^2.0.3",
     "angular": "^1.8.0",
     "angular-animate": "^1.8.2",
     "angular-bootstrap-lightbox": "^0.12.0",
