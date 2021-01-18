@@ -47,7 +47,7 @@
   "dependencies": {
     "@lordfriend/nya-bootstrap-select": "^2.1.10",
     "@rollup/plugin-inject": "^4.0.2",
-    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-virtual": "^2.0.3",
     "angular": "^1.8.0",
     "angular-animate": "^1.8.2",
