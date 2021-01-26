@@ -1074,5 +1074,9 @@
     "ATLAS_MISSING_SPECIES_ZONE_TEXT": "Select a square on the map to see the unidentified species",
     "ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES": "Species",
     "ATLAS_MISSING_SPECIES_ZONE_NO_ROWS": "There are no unidentified species for this square",
-    "FORM_ATLAS_SHORT": "Atlas Birds"
+    "FORM_ATLAS_SHORT": "Atlas Birds",
+    "LANGUAGE_GREEK": "Greek",
+    "LANGUAGE_TURKISH": "Turkish",
+    "LANGUAGE_ARABIC": "Arabic",
+    "LANGUAGE_FRENCH": "French"
 }

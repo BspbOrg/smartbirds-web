@@ -1074,5 +1074,9 @@
     "ATLAS_MISSING_SPECIES_ZONE_TEXT": "Изберете квадрат от картата за да видите неустановените видове",
     "ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES": "Вид",
     "ATLAS_MISSING_SPECIES_ZONE_NO_ROWS": "Липсват неустановени видове за този квадрат",
-    "FORM_ATLAS_SHORT": "Атлас Птици"
+    "FORM_ATLAS_SHORT": "Атлас Птици",
+    "LANGUAGE_GREEK": "Гръцки",
+    "LANGUAGE_TURKISH": "Турски",
+    "LANGUAGE_ARABIC": "Арабски",
+    "LANGUAGE_FRENCH": "Френски"
 }
