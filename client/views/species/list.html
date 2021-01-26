@@ -1,7 +1,26 @@
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header" translate>
-      SPECIES_TITLE
+    <h1 class="page-header clearfix">
+      <div class="pull-right">
+        <div class="btn-group" uib-dropdown is-open="$ctrl.languageSelectorIsOpen">
+          <button type="button" class="btn btn-default" uib-dropdown-toggle>
+            {{$ctrl.currentLanguage ? ($ctrl.languages[$ctrl.currentLanguage].label|translate) : 'ALL'}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu list-group" uib-dropdown-menu>
+            <li class="list-group-item"
+                ng-class="{active: !$ctrl.currentLanguage}">
+              <a href="#" ng-click="$ctrl.setCurrentLanguage('', $event)">- ALL -</a>
+            </li>
+            <li class="list-group-item"
+                ng-repeat="(key, language) in $ctrl.languages track by key"
+                ng-class="{active: key === $ctrl.currentLanguage}">
+              <a href="#" ng-click="$ctrl.setCurrentLanguage(key, $event)">{{::language.label|translate}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {{::'SPECIES_TITLE'|translate}}
     </h1>
   </div>
 </div>
@@ -32,7 +51,7 @@
         <tr>
           <th>#</th>
           <th>LA</th>
-          <th ng-repeat="(key, language) in $ctrl.languages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
           <th translate>SPECIES_COL_INTERESTING</th>
           <th translate>SPECIES_COL_SENSITIVE</th>
           <th class="btn-group btn-group-xs">
@@ -61,7 +80,7 @@
                    model="item.label.la"
                    required></field>
           </td>
-          <td ng-repeat="(key, language) in $ctrl.languages track by key">
+          <td ng-repeat="(key, language) in $ctrl.visibleLanguages track by key">
             <field type="text" model="item.label[key]"></field>
           </td>
           <td>
@@ -84,7 +103,7 @@
         <tr>
           <th>#</th>
           <th>LA</th>
-          <th ng-repeat="(key, language) in $ctrl.languages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
           <th translate>SPECIES_COL_INTERESTING</th>
           <th translate>SPECIES_COL_SENSITIVE</th>
           <th class="btn-group btn-group-xs">
