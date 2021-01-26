@@ -4,6 +4,8 @@ require('../app').controller('NomenclaturesController', /* @ngInject */function 
   db, Nomenclature, $scope, $state, $stateParams, $translate) {
   const $ctrl = this
 
+  $ctrl.page = 1
+  $ctrl.pageSize = 10
   $ctrl.nomenclatures = db.nomenclatures
 
   $ctrl.currentLanguage = $translate.$language || 'en'
@@ -46,6 +48,14 @@ require('../app').controller('NomenclaturesController', /* @ngInject */function 
       })
     }
   })
+
+  $ctrl.pageChanged = function () {
+    const start = ($ctrl.page - 1) * $ctrl.pageSize
+    $ctrl.visible = $ctrl.selected.nomenclature.slice(start, start + $ctrl.pageSize)
+  }
+  if ($ctrl.selected && $ctrl.selected.nomenclature) {
+    $ctrl.pageChanged()
+  }
 
   $ctrl.remove = function (idx) {
     $ctrl.selected.nomenclature.splice(idx, 1)

@@ -4,6 +4,8 @@ require('../app').controller('SpeciesController', /* @ngInject */function (
   db, $scope, Species, $state, $stateParams, $translate) {
   const $ctrl = this
 
+  $ctrl.page = 1
+  $ctrl.pageSize = 10
   $ctrl.species = db.species
 
   $ctrl.currentLanguage = $translate.$language || 'en'
@@ -33,6 +35,14 @@ require('../app').controller('SpeciesController', /* @ngInject */function (
     angular.forEach(db.species[$stateParams.type], function (item) {
       $ctrl.selected.species.push(angular.copy(item))
     })
+  }
+
+  $ctrl.pageChanged = function () {
+    const start = ($ctrl.page - 1) * $ctrl.pageSize
+    $ctrl.visible = $ctrl.selected.species.slice(start, start + $ctrl.pageSize)
+  }
+  if ($ctrl.selected && $ctrl.selected.species) {
+    $ctrl.pageChanged()
   }
 
   $ctrl.remove = function (idx) {
