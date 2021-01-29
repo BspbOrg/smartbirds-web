@@ -19,7 +19,7 @@
     "standard": "^16.0.3",
     "start-server-and-test": "^1.11.7",
     "watch": "^1.0.2",
-    "watchify": "^3.11.1"
+    "watchify": "^4.0.0"
   },
   "scripts": {
     "start": "npm run budo",
