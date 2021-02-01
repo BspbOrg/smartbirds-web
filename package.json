@@ -108,7 +108,7 @@
     "workbox-precaching": "^6.0.2",
     "workbox-routing": "^6.0.2",
     "workbox-strategies": "^6.0.2",
-    "workbox-window": "^6.0.2",
+    "workbox-window": "^6.1.0",
     "x2js": "^3.4.0"
   },
   "browser": {
