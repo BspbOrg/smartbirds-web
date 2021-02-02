@@ -1,15 +1,36 @@
-var languages = require('../../../config/languages')
-var angular = require('angular')
-require('../app').controller('NomenclaturesController', /* @ngInject */function ($scope, $state, $stateParams, db, Nomenclature) {
-  var $ctrl = this
+const languages = require('../../../config/languages')
+const angular = require('angular')
+require('../app').controller('NomenclaturesController', /* @ngInject */function (
+  db, Nomenclature, $scope, $state, $stateParams, $translate) {
+  const $ctrl = this
 
   $ctrl.nomenclatures = db.nomenclatures
+
+  $ctrl.currentLanguage = $translate.$language || 'en'
   $ctrl.languages = languages
+  $ctrl.visibleLanguages = { en: languages.en }
+  $ctrl.visibleLanguages[$ctrl.currentLanguage] = languages[$ctrl.currentLanguage]
+  $ctrl.languageSelectorIsOpen = false
+  $ctrl.setCurrentLanguage = function (key, $event) {
+    if ($event) {
+      $event.preventDefault()
+      $event.stopPropagation()
+    }
+    $ctrl.languageSelectorIsOpen = false
+    $ctrl.currentLanguage = key
+    if (key) {
+      $ctrl.visibleLanguages = { en: languages.en }
+      $ctrl.visibleLanguages[$ctrl.currentLanguage] = languages[$ctrl.currentLanguage]
+    } else {
+      $ctrl.visibleLanguages = languages
+    }
+  }
+
   $ctrl.groups = {}
   angular.forEach(db.nomenclatures, function (nomenclature, key) {
-    var parts = key.split('_')
-    var group = parts.shift()
-    var name = parts.join('_')
+    const parts = key.split('_')
+    const group = parts.shift()
+    const name = parts.join('_')
     $ctrl.groups[group] = $ctrl.groups[group] || {}
     $ctrl.groups[group][name] = nomenclature
 
