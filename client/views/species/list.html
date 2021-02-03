@@ -73,8 +73,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="hover" ng-repeat="item in $ctrl.selected.species">
-          <td>{{$index+1}}</td>
+        <tr class="hover" ng-repeat="item in $ctrl.visible track by item.label.la">
+          <td>{{$index+1+($ctrl.page-1)*$ctrl.pageSize}}</td>
           <td>
             <field type="text"
                    model="item.label.la"
@@ -126,5 +126,15 @@
         </tfoot>
       </table>
     </form>
+
+    <div class="actions actions-species">
+      <ul uib-pagination
+          total-items="$ctrl.selected.species.length"
+          items-per-page="$ctrl.pageSize"
+          max-size="5"
+          boundary-link-numbers="true"
+          ng-model="$ctrl.page"
+          ng-change="$ctrl.pageChanged()"></ul>
+    </div>
   </div>
 </div>

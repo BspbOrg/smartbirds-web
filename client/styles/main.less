@@ -47,6 +47,15 @@ input[type=file] {
   background: @body-bg;
   z-index: @zindex-navbar-fixed;
   float: right;
+
+  &-species, &-nomenclatures {
+    top: auto;
+    bottom: 0;
+  }
+
+  .pagination {
+    margin: 0;
+  }
 }
 
 @media (max-width: @screen-sm-min) {
