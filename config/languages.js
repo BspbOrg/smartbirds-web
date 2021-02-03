@@ -10,5 +10,17 @@ module.exports = {
   },
   mk: {
     label: 'LANGUAGE_MACEDONIAN'
+  },
+  el: {
+    label: 'LANGUAGE_GREEK'
+  },
+  tr: {
+    label: 'LANGUAGE_TURKISH'
+  },
+  ar: {
+    label: 'LANGUAGE_ARABIC'
+  },
+  fr: {
+    label: 'LANGUAGE_FRENCH'
   }
 }
