@@ -58,14 +58,21 @@ require('../app').controller('NomenclaturesController', /* @ngInject */function 
   }
 
   $ctrl.remove = function (idx) {
-    $ctrl.selected.nomenclature.splice(idx, 1)
+    const start = ($ctrl.page - 1) * $ctrl.pageSize
+    $ctrl.selected.nomenclature.splice(start + idx, 1)
+    if (start >= $ctrl.selected.nomenclature.length && $ctrl.page > 0) {
+      $ctrl.page--
+    }
+    $ctrl.pageChanged()
     $scope.editform.$setDirty()
   }
 
   $ctrl.add = function (key) {
-    $ctrl.selected.nomenclature.push(new Nomenclature({
+    const len = $ctrl.selected.nomenclature.push(new Nomenclature({
       type: $ctrl.selected.type
     }))
+    $ctrl.page = Math.ceil(len / $ctrl.pageSize)
+    $ctrl.pageChanged()
     $scope.editform.$setDirty()
   }
 

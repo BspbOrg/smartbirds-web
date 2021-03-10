@@ -46,14 +46,21 @@ require('../app').controller('SpeciesController', /* @ngInject */function (
   }
 
   $ctrl.remove = function (idx) {
-    $ctrl.selected.species.splice(idx, 1)
+    const start = ($ctrl.page - 1) * $ctrl.pageSize
+    $ctrl.selected.species.splice(start + idx, 1)
+    if (start >= $ctrl.selected.species.length && $ctrl.page > 0) {
+      $ctrl.page--
+    }
+    $ctrl.pageChanged()
     $scope.editform.$setDirty()
   }
 
   $ctrl.add = function (key) {
-    $ctrl.selected.species.push(new Species({
+    const len = $ctrl.selected.species.push(new Species({
       type: $ctrl.selected.type
     }))
+    $ctrl.page = Math.ceil(len / $ctrl.pageSize)
+    $ctrl.pageChanged()
     $scope.editform.$setDirty()
   }
 
