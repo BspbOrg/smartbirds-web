@@ -96,6 +96,11 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
       templateUrl: '/views/gdpr/gdpr-page.html'
     })
 
+    .state('privacy', {
+      url: '/privacy',
+      templateUrl: '/views/privacy.html'
+    })
+
     .state('mobileStats', {
       url: '/mobile-stats',
       templateUrl: '/views/mobile-stats.html',
