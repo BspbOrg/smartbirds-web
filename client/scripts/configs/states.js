@@ -1,6 +1,6 @@
-const angular = require('angular')
-const forms = require('./forms')
-const module = require('../app')
+var angular = require('angular')
+var forms = require('./forms')
+var module = require('../app')
 
 module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true)
@@ -12,7 +12,7 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
   // State Configurations //
   /// ///////////////////////
 
-  const resolveUser = {
+  var resolveUser = {
     user: /* @ngInject */function ($rootScope, user) {
       return user.resolve(true).then(function (identity) {
         $rootScope.$user = user
@@ -541,7 +541,7 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
       url: '/stats'
     })
 
-  const statForms = ['birds', 'herptiles', 'mammals', 'plants', 'invertebrates']
+  var statForms = ['birds', 'herptiles', 'mammals', 'plants', 'invertebrates']
   angular.forEach(statForms, function (form) {
     $stateProvider
       .state('auth.stats.' + form, {
