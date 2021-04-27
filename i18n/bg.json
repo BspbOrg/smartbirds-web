@@ -1038,7 +1038,7 @@
     "ATLAS_REQUEST_TITLE": "Избор на квадрати",
     "ATLAS_REQUEST_SUBTITLE": "Изберете квадратите, които искате да проучите. По възможност, предпочетете по-слабо проучени. Може да изберете до 10 квадрата.",
     "ATLAS_REQUEST_BTN_SAVE": "Запис",
-    "ATLAS_REQUEST_ZONES_HEADING": "Избрани квадрати",
+    "ATLAS_REQUEST_ZONES_HEADING": "Избрани квадрати. За всеки избран квадрат е посочено колко процента от видовете установени в рамките на предния атлас (Янков, 2007) са установени след 2016г.",
     "ATLAS_REQUEST_ZONES_TEXT": "Избрани квадрати (10 X 10 km) за атласно проучване.",
     "ATLAS_LEGEND_LOW": "Слабо проучен",
     "ATLAS_LEGEND_MEDIUM": "Средно проучен",
@@ -1081,5 +1081,6 @@
     "LANGUAGE_FRENCH": "Френски",
     "PUBLIC_HOME_FUNDING_LIST": "<li>{{linkLIFEStart}}Програма LIFE на Европейския съюз{{linkEnd}}\n<li>{{linkUS4BGStart}}Фондация Америка за България{{linkEnd}}\n<li>Програма Мтел еко грант\n<li>{{linkEEAGrantsStart}}Програма BG03 в България по Финансовия механизъм на Европейското икономическо пространство 2009–2014 г.{{linkEnd}}\n<li>{{linkPUDOOSStart}}Предприятие за управление на дейностите по опазване на околната среда{{linkEnd}}\n<li>{{linkLeventisStart}}Фондация A. G. Leventis{{linkEnd}}\n<li>{{linkEurNaturStart}}Фондация EuroNatur, Германия.{{linkEnd}}\n<li>{{linkActiveCitizensFundStart}}Фонд Активни граждани {{linkEnd}}по линия на Финансовия механизъм на ЕИП.",
     "LOGO_ACTIVECITIZENSFUND_ALT": "Фонд Активни граждани",
-    "LOGO_PUDOOS_ALT": "Предприятие за управление на дейностите по опазване на околната среда"
+    "LOGO_PUDOOS_ALT": "Предприятие за управление на дейностите по опазване на околната среда",
+    "FIELD_OBSERVATION_METHODOLOGY": "Методика на наблюдение"
 }

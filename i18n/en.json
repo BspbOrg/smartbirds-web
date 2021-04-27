@@ -1038,7 +1038,7 @@
     "ATLAS_REQUEST_TITLE": "Request quadrants",
     "ATLAS_REQUEST_SUBTITLE": "Choose up to 10 quadrants",
     "ATLAS_REQUEST_BTN_SAVE": "Save",
-    "ATLAS_REQUEST_ZONES_HEADING": "Selected quadrants",
+    "ATLAS_REQUEST_ZONES_HEADING": "For each selected square it is indicated what percentage of the species registered during the previous atlas (Yankov, 2007) were also recorded after 2016.",
     "ATLAS_REQUEST_ZONES_TEXT": "Selected squares (10 X 10 km) for atlas survey",
     "ATLAS_LEGEND_LOW": "Poorly studied",
     "ATLAS_LEGEND_MEDIUM": "Мedium studied",
@@ -1081,5 +1081,6 @@
     "LANGUAGE_FRENCH": "French",
     "PUBLIC_HOME_FUNDING_LIST": "<li> {{linkLIFEStart}} European Union LIFE Program {{linkEnd}}\n<li> {{linkUS4BGStart}} America for Bulgaria Foundation {{linkEnd}}\n<li> Mtel eco grant program\n<li> {{linkEEAGrantsStart}} Program BG03 in Bulgaria under the Financial Mechanism of the European Economic Area 2009-2014 {{linkEnd}}\n<li> {{linkPUDOOSStart}} Environmental Management Company {{linkEnd}}\n<li> {{linkLeventisStart}} A. G. Leventis Foundation {{linkEnd}}\n<li> {{linkEurNaturStart}} EuroNatur Foundation, Germany. {{linkEnd}}\n<li> {{linkActiveCitizensFundStart}} Active Citizens Fund {{linkEnd}} under the EEA Financial Mechanism.",
     "LOGO_ACTIVECITIZENSFUND_ALT": "Active Citizens Fund",
-    "LOGO_PUDOOS_ALT": "Environmental Management Company"
+    "LOGO_PUDOOS_ALT": "Environmental Management Company",
+    "FIELD_OBSERVATION_METHODOLOGY": "Observation methodology"
 }
