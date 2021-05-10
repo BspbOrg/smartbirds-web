@@ -82,7 +82,7 @@
     "less": "~4.1.0",
     "less-plugin-clean-css": "~1.5.1",
     "localforage": "^1.9.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "minifyify": "^7.3.5",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.32",
