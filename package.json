@@ -101,7 +101,7 @@
     "uglify-js": "^3.12.6",
     "ui-select": "^0.19.8",
     "underscore.string": "^3.3.5",
-    "workbox-cacheable-response": "^6.0.2",
+    "workbox-cacheable-response": "^6.2.3",
     "workbox-core": "^6.0.2",
     "workbox-expiration": "^6.0.2",
     "workbox-google-analytics": "^6.0.2",
