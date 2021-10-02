@@ -43,4 +43,13 @@ module.exports = /* @ngInject */function ($stateProvider) {
         }
       }
     })
+    .state('auth.atlas.interest_map', {
+      url: '/interest',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/atlas/interest.html',
+          controller: 'AtlasInterestMapController as $ctrl'
+        }
+      }
+    })
 }

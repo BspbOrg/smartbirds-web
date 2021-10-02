@@ -1,0 +1,66 @@
+<div class="page-atlas-missing-species">
+  <div class="page-header">
+    <h1>{{::'ATLAS_INTEREST_MAP_TITLE' | translate}}</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7">
+      <ui-gmap-google-map
+        center="$ctrl.map.state.center"
+        options="$ctrl.map.options"
+        zoom="$ctrl.map.state.zoom"
+      >
+
+        <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                          fit="true"
+                          fill="'fill'"
+                          models="::$ctrl.cells"
+                          path="'coordinates'"
+                          static="true"
+                          stroke="'stroke'"
+        ></ui-gmap-polygons>
+
+      </ui-gmap-google-map>
+
+      <div class="atlas-legend">
+        <style>
+          .atlas-legend li:before {
+            content: "";
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 0.25em;
+          }
+
+          .atlas-legend li.none:before {
+            background-color: {{$ctrl.colors.none}};
+          }
+          .atlas-legend li.low:before {
+            background-color: {{$ctrl.colors.low}};
+          }
+          .atlas-legend li.medium:before {
+            background-color: {{$ctrl.colors.med}};
+          }
+          .atlas-legend li.high:before {
+            background-color: {{$ctrl.colors.high}};
+          }
+        </style>
+
+        <ul class="list-inline">
+          <li class="none">
+            {{'ATLAS_INTEREST_MAP_NONE' | translate}}
+          </li>
+          <li class="low">
+            {{'ATLAS_INTEREST_MAP_LOW' | translate}}
+          </li>
+          <li class="medium">
+            {{'ATLAS_INTEREST_MAP_MEDIUM' | translate}}
+          </li>
+          <li class="high">
+            {{'ATLAS_INTEREST_MAP_HIGH' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
