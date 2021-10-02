@@ -1,0 +1,118 @@
+<style>
+  .page-atlas-request .panel-heading > .label {
+    float: right;
+  }
+
+  .page-atlas-request .list-group-item > .badge {
+    float: none;
+  }
+
+  .page-atlas-request .list-group-item > .close {
+    float: right;
+    color: red;
+    background: transparent;
+    font-size: 21px;
+    padding: 0 2px 0 0;
+    line-height: 1;
+  }
+
+  .page-atlas-request .list-group-item > .code {
+    font-weight: bold;
+  }
+</style>
+
+<div class="page-atlas-request">
+  <div class="page-header">
+    <h1>{{::'ATLAS_MODERATOR_PROGRESS_TITLE' | translate}}</h1>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5>
+        <i class="fa fa-edit fa-fw"></i>
+        {{::'ATLAS_MODERATOR_PROGRESS_SUBTITLE'|translate}}
+      </h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7">
+      <ui-gmap-google-map
+        center="$ctrl.map.state.center"
+        options="$ctrl.map.options"
+        zoom="$ctrl.map.state.zoom"
+      >
+
+        <ui-gmap-polygons ng-if="$ctrl.cells.length"
+                          clickable="true"
+                          fit="true"
+                          fill="'fill'"
+                          models="::$ctrl.cells"
+                          path="'coordinates'"
+                          static="true"
+                          stroke="'stroke'"
+                          events="$ctrl.events"
+                          control="$ctrl.control"
+        ></ui-gmap-polygons>
+
+      </ui-gmap-google-map>
+
+      <div class="atlas-legend">
+        <style>
+          .atlas-legend li:before {
+            content: "";
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 0.25em;
+          }
+
+          .atlas-legend li.low:before {
+            background-color: {{$ctrl.colors.low}};
+          }
+          .atlas-legend li.medium:before {
+            background-color: {{$ctrl.colors.med}};
+          }
+          .atlas-legend li.high:before {
+            background-color: {{$ctrl.colors.high}};
+          }
+          .atlas-legend li.vhigh:before {
+            background-color: {{$ctrl.colors.vhigh}};
+          }
+        </style>
+
+        <ul class="list-inline">
+          <li class="low">
+            {{'ATLAS_LEGEND_LOW' | translate}}
+          </li>
+          <li class="medium">
+            {{'ATLAS_LEGEND_MEDIUM' | translate}}
+          </li>
+          <li class="high">
+            {{'ATLAS_LEGEND_HIGH' | translate}}
+          </li>
+          <li class="vhigh">
+            {{'ATLAS_LEGEND_VHIGH' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <span ng-if="$ctrl.selected">
+            {{$ctrl.selected.cell.utm_code}}
+          </span>
+          <span ng-if="!$ctrl.selectedInfo">
+            {{::'ATLAS_MODERATOR_PROGRESS_ZONE_HEADING' | translate}}
+          </span>
+          <i ng-if="$ctrl.loading" class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="panel-body">
+          <p>{{::'ATLAS_MODERATOR_PROGRESS_ZONE_TEXT' | translate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

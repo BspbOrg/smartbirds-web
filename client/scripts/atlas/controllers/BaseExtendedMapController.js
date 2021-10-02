@@ -1,17 +1,19 @@
-var utils = require('../utils')
-var BaseMapController = require('./BaseMapController')
+const utils = require('../utils')
+const BaseMapController = require('./BaseMapController')
 
 module.exports = function BaseExtendedMapController (ngToast, $translate) {
   if (!ngToast || !$translate) throw new Error('missing dependencies')
 
-  var $ctrl = this
+  const $ctrl = this
 
   BaseMapController.apply(this)
 
   $ctrl.loadCellInfo = $ctrl.loadCellInfo || function () {}
   $ctrl.cells = []
 
-  var lastCellInfoRequest = null
+  let lastCellInfoRequest = null
+
+  $ctrl.updateModelStyle = utils.updateModelStyle
 
   function setSelectedCell (model) {
     // cancel last cell request if any
@@ -22,7 +24,7 @@ module.exports = function BaseExtendedMapController (ngToast, $translate) {
 
     // unselect previous
     if ($ctrl.selected) {
-      utils.updateModelStyle($ctrl.selected, false)
+      $ctrl.updateModelStyle($ctrl.selected, false)
     }
 
     // unselect on second select
@@ -33,11 +35,11 @@ module.exports = function BaseExtendedMapController (ngToast, $translate) {
       return
     }
 
-    utils.updateModelStyle(model, true)
+    $ctrl.updateModelStyle(model, true)
     $ctrl.selected = model
     $ctrl.loading = true
 
-    var call = lastCellInfoRequest = $ctrl.loadCellInfo(model)
+    const call = lastCellInfoRequest = $ctrl.loadCellInfo(model)
     call
       .then(function (info) {
         if ($ctrl.selected === model) {
