@@ -9,7 +9,7 @@ module.exports = /* @ngInject */function AtlasModeratorProgressController (api, 
   BaseExtendedMapController.apply(this, [ngToast, $translate])
 
   $ctrl.colors = utils.colors
-  $ctrl.colors.vhigh = '#3141f1'
+  $ctrl.colors.vhigh = '#31c1f1'
 
   $ctrl.updateModelStyle = function (model, selected) {
     if (selected) {
