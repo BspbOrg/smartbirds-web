@@ -18,7 +18,10 @@ module.exports = /* @ngInject */function AtlasModeratorProgressController (api, 
 
     model.fill.opacity = utils.unselectedOpacityFill()
     model.stroke.opacity = 0.4
-    if (model.percent <= 40) {
+    if (model.completed) {
+      model.fill.color = utils.colors.completed
+      model.stroke.color = utils.colors.completed
+    } else if (model.percent <= 40) {
       model.fill.color = utils.colors.low
       model.stroke.color = utils.colors.low
     } else if (model.percent <= 70) {
