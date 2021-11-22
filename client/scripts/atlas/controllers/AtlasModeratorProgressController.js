@@ -46,6 +46,25 @@ module.exports = /* @ngInject */function AtlasModeratorProgressController (api, 
   })
 
   $ctrl.loadCellInfo = function (model) {
-    return Promise.resolve(model)
+    return Promise.all([
+      api.bgatlas2008.moderatorCellMethodology(model.id),
+      api.bgatlas2008.moderatorCellUsers(model.id),
+      api.bgatlas2008.cellStatus(model.id)
+    ]).then(function (data) {
+      return {
+        methodology: data[0],
+        users: data[1],
+        status: data[2]
+      }
+    })
+  }
+
+  $ctrl.updateStatus = function (model, status) {
+    api.bgatlas2008.setCellStatus(model.id, status)
+      .then(function (newStatus) {
+        if ($ctrl.selected === model) {
+          $ctrl.selectedInfo.status = newStatus
+        }
+      })
   }
 }
