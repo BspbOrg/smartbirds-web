@@ -64,6 +64,7 @@ module.exports = /* @ngInject */function AtlasModeratorProgressController (api, 
       .then(function (newStatus) {
         if ($ctrl.selected === model) {
           $ctrl.selectedInfo.status = newStatus
+          model.completed = status.completed
         }
       })
   }

@@ -79,6 +79,9 @@
           .atlas-legend li.vhigh:before {
             background-color: {{$ctrl.colors.vhigh}};
           }
+          .atlas-legend li.completed:before {
+          background-color: {{$ctrl.colors.completed}};
+          }
         </style>
 
         <ul class="list-inline">
@@ -93,6 +96,9 @@
           </li>
           <li class="vhigh">
             {{'ATLAS_LEGEND_VHIGH' | translate}}
+          </li>
+          <li class="completed">
+            {{'ATLAS_LEGEND_COMPLETED' | translate}}
           </li>
         </ul>
       </div>

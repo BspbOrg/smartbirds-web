@@ -61,14 +61,25 @@ function mapCellToMapModel (cell, selected) {
 }
 
 function updateModelStyle (model, selected) {
-  model.fill = {
-    color: selected ? selectedColor : unselectedColor(model.percent),
-    opacity: selected ? selectedOpacityFill : unselectedOpacityFill()
-  }
-  model.stroke = {
-    color: selected ? selectedColor : unselectedColor(model.percent),
-    opacity: selected ? selectedOpacityStroke : unselectedOpacityStroke(model.percent),
-    weight: 1
+  model.fill = model.fill || {}
+  model.stroke = model.stroke || {}
+  model.stroke.weight = 1
+  if (selected) {
+    model.fill.color = selectedColor
+    model.fill.opacity = selectedOpacityFill
+    model.stroke.color = selectedColor
+    model.stroke.opacity = selectedOpacityStroke
+  } else {
+    model.fill.opacity = unselectedOpacityFill()
+    model.stroke.opacity = unselectedOpacityStroke(model.percent)
+
+    if (model.completed) {
+      model.fill.color = completedColor
+      model.stroke.color = completedColor
+    } else {
+      model.fill.color = unselectedColor(model.percent)
+      model.stroke.color = unselectedColor(model.percent)
+    }
   }
   return model
 }
