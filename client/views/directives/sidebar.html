@@ -133,7 +133,7 @@
               <i class="fa fa-users fa-fw"></i>
               {{'NAV_ATLAS_INTEREST_MAP'|translate}}
             </a>
-            <a ui-sref="auth.atlas.moderator_progress" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
+            <a ng-if="::$root.$user.isModerator('formBirds')" ui-sref="auth.atlas.moderator_progress" ui-sref-active="active" ui-sref-opts="{reload: true, inherit: false}">
               <i class="fa fa-area-chart fa-fw"></i>
               {{'NAV_ATLAS_MODERATOR_PROGRESS'|translate}}
             </a>
