@@ -42,6 +42,7 @@
     "build:fonts": "rm -rf public/fonts/font-awesome; cp -r node_modules/font-awesome/fonts public/fonts/font-awesome; rm -rf public/fonts/glyphicons; cp -r node_modules/bootstrap/fonts public/fonts/glyphicons",
     "build:views": "rm -rf public/views; cp -r client/views public/views",
     "proxy": "lcp --proxyUrl http://smartbirds-staging.herokuapp.com/ --proxyPartial '' --origin http://localhost:9966 --credentials",
+    "proxy:prod": "lcp --proxyUrl https://smartbirds.org/ --proxyPartial '' --origin http://localhost:9966 --credentials",
     "start:proxied": "STATS_PREFIX=http://localhost:8010 API_PREFIX=http://localhost:8010/api TRANSLATION_PREFIX=http://localhost:8010/api/i18n npm run budo"
   },
   "dependencies": {
