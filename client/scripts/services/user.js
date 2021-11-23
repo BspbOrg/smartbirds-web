@@ -1,19 +1,19 @@
 /**
  * Created by groupsky on 11.11.15.
  */
-var angular = require('angular')
+const angular = require('angular')
 
-var forms = require('../configs/forms')
+const forms = require('../configs/forms')
 
 require('../app')
   .service('user', /* @ngInject */function ($q, $cookies, api) {
-    var service = this
+    const service = this
 
-    var _identity
+    let _identity
 
-    var _sessionKey = service.sessionKey = 'sb-csrf-token'
+    const _sessionKey = service.sessionKey = 'sb-csrf-token'
 
-    var authDeferred = $q.defer()
+    const authDeferred = $q.defer()
 
     service.authPromise = authDeferred.promise
 
@@ -57,6 +57,9 @@ require('../app')
     }
 
     service.isModerator = function (formName) {
+      if (service.isInAnyRole(['admin', 'org-admin'])) {
+        return true
+      }
       if (service.isInRole('moderator')) {
         return forms[formName] && !!(_identity.forms && _identity.forms[forms[formName].serverModel])
       }
@@ -116,7 +119,7 @@ require('../app')
     }
 
     service.resolve = function (silent) {
-      var deferred = $q.defer()
+      const deferred = $q.defer()
 
       if (_identity != null) {
         deferred.resolve(_identity)
