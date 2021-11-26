@@ -44,6 +44,9 @@
           .atlas-legend li.high:before {
             background-color: {{$ctrl.colors.high}};
           }
+          .atlas-legend li.completed:before {
+            background-color: {{$ctrl.colors.completed}};
+          }
         </style>
 
         <ul class="list-inline">
@@ -58,6 +61,9 @@
           </li>
           <li class="high">
             {{'ATLAS_INTEREST_MAP_HIGH' | translate}}
+          </li>
+          <li class="completed">
+            {{'ATLAS_LEGEND_COMPLETED' | translate}}
           </li>
         </ul>
       </div>

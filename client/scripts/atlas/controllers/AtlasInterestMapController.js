@@ -19,23 +19,28 @@ module.exports = /* @ngInject */function AtlasInterestMapController (api, ngToas
           coordinates: cell.coordinates,
           cell: cell
         }
-        switch (cell.selected) {
-          case 0:
-            model.fill = { color: $ctrl.colors.none, opacity: 0.1 }
-            model.stroke = { color: $ctrl.colors.none, opacity: 0.4 }
-            break
-          case 1:
-            model.fill = { color: $ctrl.colors.low, opacity: 0.35 }
-            model.stroke = { color: $ctrl.colors.low, opacity: 0.4 }
-            break
-          case 2:
-            model.fill = { color: $ctrl.colors.med, opacity: 0.35 }
-            model.stroke = { color: $ctrl.colors.med, opacity: 0.8 }
-            break
-          default:
-            model.fill = { color: $ctrl.colors.high, opacity: 0.35 }
-            model.stroke = { color: $ctrl.colors.high, opacity: 0.4 }
-            break
+        if (cell.completed) {
+          model.fill = { color: $ctrl.colors.completed, opacity: utils.unselectedOpacityFill }
+          model.stroke = { color: $ctrl.colors.completed, opacity: utils.unselectedOpacityStroke }
+        } else {
+          switch (cell.selected) {
+            case 0:
+              model.fill = { color: $ctrl.colors.none, opacity: 0.1 }
+              model.stroke = { color: $ctrl.colors.none, opacity: 0.4 }
+              break
+            case 1:
+              model.fill = { color: $ctrl.colors.low, opacity: 0.35 }
+              model.stroke = { color: $ctrl.colors.low, opacity: 0.4 }
+              break
+            case 2:
+              model.fill = { color: $ctrl.colors.med, opacity: 0.35 }
+              model.stroke = { color: $ctrl.colors.med, opacity: 0.8 }
+              break
+            default:
+              model.fill = { color: $ctrl.colors.high, opacity: 0.35 }
+              model.stroke = { color: $ctrl.colors.high, opacity: 0.4 }
+              break
+          }
         }
         return model
       })
