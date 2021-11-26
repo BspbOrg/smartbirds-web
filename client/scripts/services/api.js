@@ -2,13 +2,13 @@
  * Created by groupsky on 10.11.15.
  */
 
-var angular = require('angular')
+const angular = require('angular')
 require('../app').service('api', /* @ngInject */function ($log, $http, $resource, $q, $window, ENDPOINT_URL, User) {
-  var api = this
+  const api = this
 
   api.session = {
     login: function (auth) {
-      var data = {}
+      const data = {}
       Object.assign(data, {
         include: ['bgatlasCells']
       }, auth)
@@ -95,7 +95,7 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
 
   api.stats = {}
 
-  var forms = [
+  const forms = [
     'campaign',
     'birds',
     'cbm',
@@ -176,8 +176,8 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     },
 
     getCellInfo: function (utmCode) {
-      var canceler = $q.defer()
-      var promise = $http({
+      const canceler = $q.defer()
+      const promise = $http({
         method: 'GET',
         url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode,
         withCredentials: true,
@@ -190,8 +190,8 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     },
 
     getCellStats: function (utmCode) {
-      var canceler = $q.defer()
-      var promise = $http({
+      const canceler = $q.defer()
+      const promise = $http({
         method: 'GET',
         url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode + '/stats',
         withCredentials: true,
@@ -213,12 +213,69 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     },
 
     observerRanking: function () {
-      var canceler = $q.defer()
-      var promise = $http({
+      const canceler = $q.defer()
+      const promise = $http({
         method: 'GET',
         url: ENDPOINT_URL + '/bgatlas/stats/user_rank',
         withCredentials: true,
         timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
+    },
+
+    moderatorCellMethodology: function (utmCode) {
+      const canceler = $q.defer()
+      const promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/moderator/' + utmCode + '/methodology',
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
+    },
+
+    moderatorCellUsers: function (utmCode) {
+      const canceler = $q.defer()
+      const promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/moderator/' + utmCode + '/user',
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
+    },
+
+    cellStatus: function (utmCode) {
+      const canceler = $q.defer()
+      const promise = $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode + '/status',
+        withCredentials: true,
+        timeout: canceler.promise
+      }).then(function (response) {
+        return response.data
+      })
+      promise.cancel = canceler.resolve
+      return promise
+    },
+
+    setCellStatus: function (utmCode, update) {
+      const canceler = $q.defer()
+      const promise = $http({
+        method: 'PATCH',
+        url: ENDPOINT_URL + '/bgatlas/cell/' + utmCode + '/status',
+        withCredentials: true,
+        timeout: canceler.promise,
+        data: update
       }).then(function (response) {
         return response.data
       })

@@ -52,4 +52,13 @@ module.exports = /* @ngInject */function ($stateProvider) {
         }
       }
     })
+    .state('auth.atlas.moderator_progress', {
+      url: '/mod_progress',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/atlas/moderator_progress.html',
+          controller: 'AtlasModeratorProgressController as $ctrl'
+        }
+      }
+    })
 }

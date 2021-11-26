@@ -1,9 +1,9 @@
-var utils = require('../utils')
+const utils = require('../utils')
 
-var BaseMapController = require('./BaseMapController')
+const BaseMapController = require('./BaseMapController')
 
 module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $state, $translate, user) {
-  var $ctrl = this
+  const $ctrl = this
 
   $ctrl.MAX = 10
 
@@ -14,11 +14,11 @@ module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $
 
   api.bgatlas2008.userGrid().then(function (cells) {
     $ctrl.cells = cells.map(function (cell) {
-      var selected = user.getIdentity().bgatlasCells && user.getIdentity().bgatlasCells.some(function (c) {
+      const selected = user.getIdentity().bgatlasCells && user.getIdentity().bgatlasCells.some(function (c) {
         return c.utm_code === cell.utm_code
       })
 
-      var model = utils.mapCellToMapModel(cell, selected)
+      const model = utils.mapCellToMapModel(cell, selected)
 
       if (selected) {
         $ctrl.selected.push(model)
@@ -31,19 +31,20 @@ module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $
     if (!(selectedIdx in $ctrl.selected)) {
       return
     }
-    var model = $ctrl.selected[selectedIdx]
+    const model = $ctrl.selected[selectedIdx]
     $ctrl.selected.splice(selectedIdx, 1)
     utils.updateModelStyle(model, false)
   }
 
   $ctrl.select = function (model) {
+    if (model.completed) return
     $ctrl.selected.push(model)
     utils.updateModelStyle(model, true)
   }
 
   $ctrl.events = {
     click: function (poly, event, model) {
-      var selectedIdx = $ctrl.selected.indexOf(model)
+      const selectedIdx = $ctrl.selected.indexOf(model)
       if (selectedIdx !== -1) {
         $ctrl.unselect(selectedIdx)
       } else {
@@ -55,7 +56,7 @@ module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $
   $ctrl.save = function () {
     api.bgatlas2008.setSelected($ctrl.selected.map(function (model) { return model.id }))
       .then(function () {
-        var identity = user.getIdentity()
+        const identity = user.getIdentity()
         identity.bgatlasCells = $ctrl.selected.map(function (model) {
           return model.cell
         })
