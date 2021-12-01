@@ -1082,5 +1082,22 @@
     "PUBLIC_HOME_FUNDING_LIST": "<li>{{linkLIFEStart}}Програма LIFE на Европейския съюз{{linkEnd}}\n<li>{{linkUS4BGStart}}Фондация Америка за България{{linkEnd}}\n<li>Програма Мтел еко грант\n<li>{{linkEEAGrantsStart}}Програма BG03 в България по Финансовия механизъм на Европейското икономическо пространство 2009–2014 г.{{linkEnd}}\n<li>{{linkPUDOOSStart}}Предприятие за управление на дейностите по опазване на околната среда{{linkEnd}}\n<li>{{linkLeventisStart}}Фондация A. G. Leventis{{linkEnd}}\n<li>{{linkEurNaturStart}}Фондация EuroNatur, Германия.{{linkEnd}}\n<li>{{linkActiveCitizensFundStart}}Фонд Активни граждани {{linkEnd}}по линия на Финансовия механизъм на ЕИП.",
     "LOGO_ACTIVECITIZENSFUND_ALT": "Фонд Активни граждани",
     "LOGO_PUDOOS_ALT": "Предприятие за управление на дейностите по опазване на околната среда",
-    "FIELD_OBSERVATION_METHODOLOGY": "Методика на наблюдение"
+    "FIELD_OBSERVATION_METHODOLOGY": "Методика на наблюдение",
+    "NAV_ATLAS_INTEREST_MAP": "Степен на интерес",
+    "ATLAS_INTEREST_MAP_TITLE": "Карта степен на интерес",
+    "ATLAS_INTEREST_MAP_NONE": "Свободен квадрат (0)",
+    "ATLAS_INTEREST_MAP_LOW": "Заявен (1)",
+    "ATLAS_INTEREST_MAP_MEDIUM": "Среден интерес (2)",
+    "ATLAS_INTEREST_MAP_HIGH": "Висок интерес (3+)",
+    "NAV_ATLAS_MODERATOR_PROGRESS": "Проученост на квадрати (за модератори)",
+    "ATLAS_MODERATOR_PROGRESS_TITLE": "Проученост на квадрати",
+    "ATLAS_MODERATOR_PROGRESS_SUBTITLE": "Установени видове спрамо стария атлас",
+    "ATLAS_LEGEND_VHIGH": "Добре проучен",
+    "ATLAS_MODERATOR_PROGRESS_ZONE_HEADING": "Избрани квадрати",
+    "ATLAS_MODERATOR_PROGRESS_ZONE_TEXT": "Статус на кваратите на база \"Наблюдател\" и \"Методика\"",
+    "ATLAS_MODERATOR_PROGRESS_ZONE_COMPLETE": "Завършен квадрат",
+    "ATLAS_MODERATOR_PROGRESS_ZONE_UNCOMPLETE": "Отворен квадрат",
+    "ATLAS_MODERATOR_PROGRESS_ZONE_COMPLETE_CONFIRM": "Моля потвърдете завършването на квадрата. Тази операция ще премахне квадрата от всички потребители. Опреацията може да бъде върната само от Администратора.",
+    "ATLAS_MODERATOR_PROGRESS_ZONE_UNCOMPLETE_CONFIRM": "Моля потвърдете за повторно отваряне на квадрата",
+    "ATLAS_LEGEND_COMPLETED": "Приключен"
 }
