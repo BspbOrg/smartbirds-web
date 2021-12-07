@@ -4,7 +4,7 @@ require('../app').controller('TasksController', /* @ngInject */function (api) {
 
   $ctrl.forms = forms
 
-  for (const task of Object.keys(api.tasks)) {
+  Object.keys(api.tasks).forEach(function (task) {
     $ctrl[task] = function (form, id, limit, force) {
       delete $ctrl[task].response
       delete $ctrl[task].error
@@ -17,5 +17,5 @@ require('../app').controller('TasksController', /* @ngInject */function (api) {
         delete $ctrl[task].loading
       })
     }
-  }
+  })
 })
