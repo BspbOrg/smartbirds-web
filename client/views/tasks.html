@@ -108,4 +108,104 @@
       </div>
     </div>
   </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Auto visit number</div>
+    <div class="panel-body">
+      <form name="auto-visit" class="form-inline">
+        <div class="form-group">
+          <label for="auto-visit-form">Form</label>
+          <select class="form-control" id="auto-visit-form"
+                  ng-model="autoVisit.form"
+                  ng-options="::v.serverModel as ::v.label|translate for v in ::$ctrl.forms">
+            <option value="">all forms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="auto-visit-id">Record ID</label>
+          <input type="number" class="form-control" id="auto-visit-id"
+                 placeholder="all not already processed"
+                 ng-model="autoVisit.id">
+        </div>
+        <div class="form-group">
+          <label for="auto-visit-limit">Records</label>
+          <input type="number" class="form-control" id="auto-visit-limit"
+                 placeholder="newest records"
+                 ng-model="autoVisit.limit">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="autoVisit.force">
+            Force
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.autoVisit(autoVisit.form, autoVisit.id, autoVisit.limit, autoVisit.force)">
+          Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.autoVisit.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.autoVisit.response" class="alert alert-success" role="alert">
+        {{$ctrl.autoVisit.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.autoVisit.error" class="alert alert-danger" role="alert">
+        {{$ctrl.autoVisit.error}}
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Birds new species moderator review</div>
+    <div class="panel-body">
+      <form name="birdsNewSpeciesModeratorReview" class="form-inline">
+        <div class="form-group">
+          <label for="birdsNewSpeciesModeratorReview-form">Form</label>
+          <select class="form-control" id="birdsNewSpeciesModeratorReview-form"
+                  ng-model="birdsNewSpeciesModeratorReview.form"
+                  ng-options="::v.serverModel as ::v.label|translate for v in ::$ctrl.forms">
+            <option value="">all forms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="birdsNewSpeciesModeratorReview-id">Record ID</label>
+          <input type="number" class="form-control" id="birdsNewSpeciesModeratorReview-id"
+                 placeholder="all without location"
+                 ng-model="birdsNewSpeciesModeratorReview.id">
+        </div>
+        <div class="form-group">
+          <label for="birdsNewSpeciesModeratorReview-limit">Records</label>
+          <input type="number" class="form-control" id="birdsNewSpeciesModeratorReview-limit"
+                 placeholder="newest records"
+                 ng-model="birdsNewSpeciesModeratorReview.limit">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="birdsNewSpeciesModeratorReview.force">
+            Force
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.birdsNewSpeciesModeratorReview(birdsNewSpeciesModeratorReview.form, birdsNewSpeciesModeratorReview.id, birdsNewSpeciesModeratorReview.limit, birdsNewSpeciesModeratorReview.force)">
+          Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.birdsNewSpeciesModeratorReview.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.birdsNewSpeciesModeratorReview.response" class="alert alert-success" role="alert">
+        {{$ctrl.birdsNewSpeciesModeratorReview.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.birdsNewSpeciesModeratorReview.error" class="alert alert-danger" role="alert">
+        {{$ctrl.birdsNewSpeciesModeratorReview.error}}
+      </div>
+    </div>
+  </div>
 </div>

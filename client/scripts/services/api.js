@@ -90,6 +90,30 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
           force: force
         }
       })
+    },
+    autoVisit: function (form, id, limit, force) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/auto-visit',
+        data: {
+          form: form,
+          id: id,
+          limit: limit,
+          force: force
+        }
+      })
+    },
+    birdsNewSpeciesModeratorReview: function (form, id, limit, force) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/birds-new-species-moderator-review',
+        data: {
+          form: form,
+          id: id,
+          limit: limit,
+          force: force
+        }
+      })
     }
   }
 
