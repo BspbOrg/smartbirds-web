@@ -227,7 +227,7 @@
   <tr
     ng-repeat="row in monitoringController.rows | orderBy:monitoringController.order.key:monitoringController.order.reverse"
     ng-click="$state.go('.'+(row.$local?'local-':'')+'detail', {id: row.id, offset: $index})"
-    ng-class="{info: row.$selected, danger: row.$local}"
+    ng-class="{info: row.$selected, danger: row.$local, warning: row.moderatorReview || row.newSpeciesModeratorReview}"
   >
     <td ng-click="$event.stopPropagation(); monitoringController.toggleSelected(row)"><input
       type="checkbox"
