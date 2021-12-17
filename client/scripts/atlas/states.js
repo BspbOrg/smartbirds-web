@@ -25,6 +25,15 @@ module.exports = /* @ngInject */function ($stateProvider) {
         }
       }
     })
+    .state('auth.atlas.new_species', {
+      url: '/new',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/atlas/new_species.html',
+          controller: 'AtlasNewSpeciesController as $ctrl'
+        }
+      }
+    })
     .state('auth.atlas.request', {
       url: '/request',
       views: {

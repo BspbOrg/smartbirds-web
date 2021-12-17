@@ -1,6 +1,6 @@
 <div class="page-atlas-missing-species">
   <div class="page-header">
-    <h1>{{::'ATLAS_MISSING_SPECIES_TITLE' | translate}}</h1>
+    <h1>{{::'ATLAS_NEW_SPECIES_TITLE' | translate}}</h1>
   </div>
 
   <div class="row">
@@ -33,12 +33,12 @@
             {{$ctrl.selected.cell.utm_code}}
           </span>
           <span ng-if="!$ctrl.selectedInfo">
-            {{::'ATLAS_MISSING_SPECIES_ZONE_HEADING' | translate}}
+            {{::'ATLAS_NEW_SPECIES_ZONE_HEADING' | translate}}
           </span>
           <i ng-if="$ctrl.loading" class="fa fa-spinner fa-spin"></i>
         </div>
         <div class="panel-body">
-          <p>{{::'ATLAS_MISSING_SPECIES_ZONE_TEXT' | translate}}</p>
+          <p>{{::'ATLAS_NEW_SPECIES_ZONE_TEXT' | translate}}</p>
         </div>
 
         <!-- List group -->
@@ -48,7 +48,7 @@
             <tr>
               <th>
                 <span class="label label-default pull-right">{{::$ctrl.selectedInfo.length}}</span>
-                {{::'ATLAS_MISSING_SPECIES_ZONE_HEADER_SPECIES' | translate}}
+                {{::'ATLAS_NEW_SPECIES_ZONE_HEADER_SPECIES' | translate}}
                 <div class="clearfix"></div>
               </th>
             </tr>
@@ -62,7 +62,7 @@
             </tr>
             <tr ng-if="$ctrl.selectedInfo.length === 0">
               <td colspan="1">
-                {{::'ATLAS_MISSING_SPECIES_ZONE_NO_ROWS' | translate}}
+                {{::'ATLAS_NEW_SPECIES_ZONE_NO_ROWS' | translate}}
               </td>
             </tr>
             </tbody>
