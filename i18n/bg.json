@@ -1099,5 +1099,11 @@
     "ATLAS_MODERATOR_PROGRESS_ZONE_UNCOMPLETE": "Отворен квадрат",
     "ATLAS_MODERATOR_PROGRESS_ZONE_COMPLETE_CONFIRM": "Моля потвърдете завършването на квадрата. Тази операция ще премахне квадрата от всички потребители. Опреацията може да бъде върната само от Администратора.",
     "ATLAS_MODERATOR_PROGRESS_ZONE_UNCOMPLETE_CONFIRM": "Моля потвърдете за повторно отваряне на квадрата",
-    "ATLAS_LEGEND_COMPLETED": "Приключен"
+    "ATLAS_LEGEND_COMPLETED": "Приключен",
+    "ATLAS_NEW_SPECIES_TITLE": "Нови видове по квадрати",
+    "NAV_ATLAS_NEW_SPECIES": "Нови видове",
+    "ATLAS_NEW_SPECIES_ZONE_HEADING": "Информация за нови видове",
+    "ATLAS_NEW_SPECIES_ZONE_TEXT": "Изберете квадрат от картата за да видите новите видове",
+    "ATLAS_NEW_SPECIES_ZONE_HEADER_SPECIES": "Вид",
+    "ATLAS_NEW_SPECIES_ZONE_NO_ROWS": "Липсват нови видове за този квадрат"
 }

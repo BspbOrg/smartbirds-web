@@ -1099,5 +1099,11 @@
     "ATLAS_MODERATOR_PROGRESS_ZONE_UNCOMPLETE": "Open square",
     "ATLAS_MODERATOR_PROGRESS_ZONE_COMPLETE_CONFIRM": "Please confirm finishing the square. This operation will remove the cell from all users selections and can only be reverted by an administrator.",
     "ATLAS_MODERATOR_PROGRESS_ZONE_UNCOMPLETE_CONFIRM": "Please confirm reopening the square",
-    "ATLAS_LEGEND_COMPLETED": "Completed"
+    "ATLAS_LEGEND_COMPLETED": "Completed",
+    "ATLAS_NEW_SPECIES_TITLE": "New species by squares",
+    "NAV_ATLAS_NEW_SPECIES": "New species",
+    "ATLAS_NEW_SPECIES_ZONE_HEADING": "Information on new species",
+    "ATLAS_NEW_SPECIES_ZONE_TEXT": "Select a square on the map to see the new species",
+    "ATLAS_NEW_SPECIES_ZONE_HEADER_SPECIES": "Species",
+    "ATLAS_NEW_SPECIES_ZONE_NO_ROWS": "There are no new species for this square"
 }
