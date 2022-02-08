@@ -1,10 +1,10 @@
-var angular = require('angular')
+const angular = require('angular')
 
 require('../app').controller('MonitoringDetailController', /* @ngInject */function (
   $filter, $http, $scope, $state, $stateParams, $q, $timeout, $translate, model, ngToast, db,
   Raven, Track, formName, user, geolocation, local, modelResource
 ) {
-  var controller = this
+  const controller = this
 
   controller.threatsClassChoices = [
     { id: 'birds', label: 'CLASS_BIRDS' },
@@ -14,8 +14,8 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     { id: 'plants', label: 'CLASS_PLANTS' }
   ]
 
-  var id = $stateParams.id
-  var isCopy = false
+  let id = $stateParams.id
+  let isCopy = false
   if (!$stateParams.id && $stateParams.fromId) {
     isCopy = true
     id = $stateParams.fromId
@@ -70,7 +70,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
   if (controller.data && controller.data.$promise) {
     controller.data.$promise.then(function () {
       // moderator/admin opens record with requested moderator review
-      if (user.canAccess(formName) && controller.data.moderatorReview) {
+      if (user.canAccess(formName) && (controller.data.moderatorReview || controller.data.newSpeciesModeratorReview)) {
         // mark it as reviewed
         controller.data.moderatorReview = false
         // flag for the ui
@@ -82,7 +82,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     })
   }
   if (angular.isDefined($stateParams.offset)) {
-    var q = angular.extend({}, $stateParams, {
+    const q = angular.extend({}, $stateParams, {
       offset: Math.max(0, $stateParams.offset - 1),
       limit: $stateParams.offset > 0 ? 3 : 2,
       id: null
@@ -90,7 +90,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     model
       .query(q).$promise
       .then(function (neighbours) {
-        var lastIdx = 2
+        let lastIdx = 2
         if ($stateParams.offset > 0) {
           controller.prevParams = {
             offset: $stateParams.offset - 1,
@@ -186,7 +186,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
   // when zone is changed recenter the poi
   controller.onZoneSelected = function () {
     if (!controller.data.getZone || !controller.data.getZone()) return
-    var zoneCenter = controller.data.getZone().getCenter()
+    const zoneCenter = controller.data.getZone().getCenter()
 
     if (!controller.data.latitude || !controller.data.longitude) {
       controller.data.latitude = zoneCenter.latitude
@@ -229,17 +229,19 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
         controller.data = res
         local = res.$local
         // update the flag after save
-        controller.isReview = res.moderatorReview
+        controller.isReview = res.moderatorReview || res.newSpeciesModeratorReview
         return res
       })
       .then(function (res) {
-        ngToast.create(local ? {
-          className: 'info',
-          content: $translate.instant('Form saved locally.')
-        } : {
-          className: 'success',
-          content: $translate.instant('Form saved successfully.')
-        })
+        ngToast.create(local
+          ? {
+              className: 'info',
+              content: $translate.instant('Form saved locally.')
+            }
+          : {
+              className: 'success',
+              content: $translate.instant('Form saved successfully.')
+            })
         return res
       }, function (error) {
         ngToast.create({
@@ -254,7 +256,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
   }
 
   controller.observationDateChange = function () {
-    var change = controller.data.startDateTime ? controller.data.endDateTime : !controller.data.monitoringCode
+    const change = controller.data.startDateTime ? controller.data.endDateTime : !controller.data.monitoringCode
     if (change || !controller.data.startDateTime) {
       controller.data.startDateTime = controller.data.observationDateTime
     }
@@ -270,8 +272,8 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     }, function (date) {
       controller.visit = null
       if (!date || angular.isString(date)) return
-      var year = date.getUTCFullYear()
-      var visit = controller.visit = db.visits[year]
+      const year = date.getUTCFullYear()
+      const visit = controller.visit = db.visits[year]
       controller.isEarly = false
       controller.isLate = false
       if (visit) {
