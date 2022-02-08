@@ -73,6 +73,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
       if (user.canAccess(formName) && (controller.data.moderatorReview || controller.data.newSpeciesModeratorReview)) {
         // mark it as reviewed
         controller.data.moderatorReview = false
+        controller.data.newSpeciesModeratorReview = false
         // flag for the ui
         controller.isReview = true
         // form can be saved without further changes
