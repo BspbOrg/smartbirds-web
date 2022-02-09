@@ -1121,5 +1121,10 @@
     "MONITORING_LIST_TABLE_DATE": "Date/time",
     "MONITORING_LIST_TABLE_UPDATED": "Updated",
     "MONITORING_LIST_TABLE_SPECIES": "Species",
-    "MONITORING_LIST_TABLE_COUNT": "Count"
+    "MONITORING_LIST_TABLE_COUNT": "Count",
+    "MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE": "There are unsaved changes!",
+    "MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "There are unsaved changes! Are you sure you want to continue?",
+    "MONITORING_DETAIL_TITLE_NEW": "New observation",
+    "MONITORING_DETAIL_TITLE_EDIT": "Edit record",
+    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Species marked with * are \"protected\""
 }

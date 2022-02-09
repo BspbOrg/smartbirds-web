@@ -992,5 +992,10 @@
     "MONITORING_LIST_TABLE_DATE": "Датум/време",
     "MONITORING_LIST_TABLE_UPDATED": "Обновено",
     "MONITORING_LIST_TABLE_SPECIES": "Вид",
-    "MONITORING_LIST_TABLE_COUNT": "Број"
+    "MONITORING_LIST_TABLE_COUNT": "Број",
+    "MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE": "Има незачувани промени",
+    "MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "Постојат назачувани промени! Дали сте сигурни дека сакате да продолжите?",
+    "MONITORING_DETAIL_TITLE_NEW": "Ново набљудување",
+    "MONITORING_DETAIL_TITLE_EDIT": "Надополнете го записот",
+    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Видовите кои се обележани со * се заштитени"
 }

@@ -1121,5 +1121,10 @@
     "MONITORING_LIST_TABLE_DATE": "Дата/час",
     "MONITORING_LIST_TABLE_UPDATED": "Променен",
     "MONITORING_LIST_TABLE_SPECIES": "Вид",
-    "MONITORING_LIST_TABLE_COUNT": "Брой"
+    "MONITORING_LIST_TABLE_COUNT": "Брой",
+    "MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE": "Имате незаписани промени!",
+    "MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "Имате незаписани промени. Сигурни ли сте че искате да продължите?",
+    "MONITORING_DETAIL_TITLE_NEW": "Ново наблюдение",
+    "MONITORING_DETAIL_TITLE_EDIT": "Редакция на запис",
+    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Видовете отбелязани с * са „защитени“"
 }
