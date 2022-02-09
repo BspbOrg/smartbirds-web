@@ -144,7 +144,7 @@
       <th sb-sorting="id">#</th>
       <th ng-if="$user.canAccess(monitoringController.formName)"
           sb-sorting="getUser().getName()" translate>
-        CICONIA_LIST_TABLE_USER
+        MONITORING_LIST_TABLE_USER
       </th>
       <th ng-if="::$user.isAdmin()"
           sb-sorting="organization">
@@ -156,11 +156,11 @@
       </th>
       <th
         sb-sorting="observationDateTime|date:'yyyyMMddHHmmss'" translate>
-        CICONIA_LIST_TABLE_DATE
+        MONITORING_LIST_TABLE_DATE
       </th>
       <th
         sb-sorting="updatedAt|date:'yyyyMMddHHmmss'" translate>
-        CICONIA_LIST_TABLE_UPDATED
+        MONITORING_LIST_TABLE_UPDATED
       </th>
       <td>&nbsp;</td>
     </tr>

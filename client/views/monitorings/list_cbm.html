@@ -181,7 +181,7 @@
     <th sb-sorting="id">#</th>
     <th ng-if="$user.canAccess(monitoringController.formName)"
         sb-sorting="getUser().getName()" translate>
-      CBM_LIST_TABLE_USER
+      MONITORING_LIST_TABLE_USER
     </th>
     <th ng-if="::$user.isAdmin()"
         sb-sorting="organization">
@@ -200,14 +200,14 @@
     </th>
     <th
       sb-sorting="observationDateTime|date:'yyyyMMddHHmmss'" translate>
-      CBM_LIST_TABLE_DATE
+      MONITORING_LIST_TABLE_DATE
     </th>
     <th
       sb-sorting="updatedAt|date:'yyyyMMddHHmmss'" translate>
-      CBM_LIST_TABLE_UPDATED
+      MONITORING_LIST_TABLE_UPDATED
     </th>
     <th sb-sorting="species.label[$language]" translate>
-      CBM_LIST_TABLE_SPECIES
+      MONITORING_LIST_TABLE_SPECIES
     </th>
     <th
       sb-sorting="plot.label[$language]" translate>
@@ -218,7 +218,7 @@
     </th>
     <th
       sb-sorting="count" translate>
-      CBM_LIST_TABLE_COUNT
+      MONITORING_LIST_TABLE_COUNT
     </th>
     <td>&nbsp;</td>
   </tr>

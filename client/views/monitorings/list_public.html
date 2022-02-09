@@ -91,17 +91,17 @@
       </th>
       <th sb-sorting="id">#</th>
       <th sb-sorting="getUser().getName()" translate>
-        PUBLIC_LIST_TABLE_USER
+        MONITORING_LIST_TABLE_USER
       </th>
       <th
         sb-sorting="observationDateTime|date:'yyyyMMddHHmmss'" translate>
-        PUBLIC_LIST_TABLE_DATE
+        MONITORING_LIST_TABLE_DATE
       </th>
       <th ng-if="monitoringController.formSpeciesType" sb-sorting="species.label[$language]" translate>
-        PUBLIC_LIST_TABLE_SPECIES
+        MONITORING_LIST_TABLE_SPECIES
       </th>
       <th ng-if="::monitoringController.formDef.hasCount" sb-sorting="count" translate>
-        PUBLIC_LIST_TABLE_COUNT
+        MONITORING_LIST_TABLE_COUNT
       </th>
       <td>&nbsp;</td>
     </tr>
