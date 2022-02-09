@@ -135,9 +135,9 @@
      class="row">
   <div class="col-md-12">
     <p ng-if="monitoringController.count > monitoringController.rows.length" class="text-warning">
-      {{'HERPTILES_LIST_MAP_SHOWN_RECORDS_WARNING' | translate: monitoringController.resultRowsTranslationValues()}}
+      {{'MONITORING_LIST_MAP_SHOWN_RECORDS_WARNING' | translate: monitoringController.resultRowsTranslationValues()}}
       <button ng-if="$user.canAccess(monitoringController.formName) && !monitoringController.loading" type="button" class="btn btn-default btn-xs"
-              ng-click="monitoringController.nextPage(-1)" translate>HERPTILES_LIST_MAP_BUTTON_SHOW_ALL
+              ng-click="monitoringController.nextPage(-1)" translate>MONITORING_LIST_MAP_BUTTON_SHOW_ALL
       </button>
     </p>
     <list-map rows="monitoringController.selectedRows.length > 0 ? monitoringController.selectedRows : monitoringController.rows" ctrl="monitoringController.map"></list-map>
