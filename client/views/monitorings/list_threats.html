@@ -6,10 +6,10 @@
           <button type="button"
                   class="btn btn-danger"
                   ng-disabled="!monitoringController.selectedRows.length"
-                  confirm="{{'THREATS_LIST_BUTTON_DELETE_CONFIRM_MESSAGE' | translate:monitoringController.deleteSelecterRowsTranslationValues()}}"
+                  confirm="{{'MONITORING_LIST_BUTTON_DELETE_CONFIRM_MESSAGE' | translate:monitoringController.deleteSelecterRowsTranslationValues()}}"
                   ng-click="monitoringController.deleteRows(monitoringController.selectedRows)">
             <i class="fa fa-trash fa-fw"></i>
-            {{'THREATS_LIST_BUTTON_DELETE' | translate}}
+            {{'MONITORING_LIST_BUTTON_DELETE' | translate}}
             <span ng-if="monitoringController.selectedRows.length>1" class="badge">{{monitoringController.selectedRows.length}}</span>
           </button>
         </div>
