@@ -1105,5 +1105,21 @@
     "ATLAS_NEW_SPECIES_ZONE_HEADING": "Information on new species",
     "ATLAS_NEW_SPECIES_ZONE_TEXT": "Select a square on the map to see the new species",
     "ATLAS_NEW_SPECIES_ZONE_HEADER_SPECIES": "Species",
-    "ATLAS_NEW_SPECIES_ZONE_NO_ROWS": "There are no new species for this square"
+    "ATLAS_NEW_SPECIES_ZONE_NO_ROWS": "There are no new species for this square",
+    "MONITORING_LIST_FILTER_USER": "Observer",
+    "MONITORING_LIST_FILTER_FROM_DATE": "From",
+    "MONITORING_LIST_FILTER_TO_DATE": "To",
+    "MONITORING_LIST_BUTTON_DELETE_CONFIRM_MESSAGE": "Confirm the deletion of {{count}} records",
+    "MONITORING_LIST_BUTTON_DELETE": "Delete",
+    "MONITORING_LIST_BUTTON_NEW_ENTRY": "New observation",
+    "MONITORING_LIST_FILTER_SPECIES": "Species",
+    "MONITORING_LIST_TAB_LIST": "List",
+    "MONITORING_LIST_TAB_MAP": "Map",
+    "MONITORING_LIST_MAP_BUTTON_SHOW_ALL": "Show all",
+    "MONITORING_LIST_MAP_SHOWN_RECORDS_WARNING": "Only the last {{count}} records are shown!",
+    "MONITORING_LIST_TABLE_USER": "Observer",
+    "MONITORING_LIST_TABLE_DATE": "Date/time",
+    "MONITORING_LIST_TABLE_UPDATED": "Updated",
+    "MONITORING_LIST_TABLE_SPECIES": "Species",
+    "MONITORING_LIST_TABLE_COUNT": "Count"
 }

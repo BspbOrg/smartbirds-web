@@ -1105,5 +1105,21 @@
     "ATLAS_NEW_SPECIES_ZONE_HEADING": "Информация за нови видове",
     "ATLAS_NEW_SPECIES_ZONE_TEXT": "Изберете квадрат от картата за да видите новите видове",
     "ATLAS_NEW_SPECIES_ZONE_HEADER_SPECIES": "Вид",
-    "ATLAS_NEW_SPECIES_ZONE_NO_ROWS": "Липсват нови видове за този квадрат"
+    "ATLAS_NEW_SPECIES_ZONE_NO_ROWS": "Липсват нови видове за този квадрат",
+    "MONITORING_LIST_FILTER_USER": "Наблюдател",
+    "MONITORING_LIST_FILTER_FROM_DATE": "От",
+    "MONITORING_LIST_FILTER_TO_DATE": "До",
+    "MONITORING_LIST_BUTTON_DELETE_CONFIRM_MESSAGE": "Потвърдете изтриването на {{count}} запис(а)",
+    "MONITORING_LIST_BUTTON_DELETE": "Изтриване",
+    "MONITORING_LIST_BUTTON_NEW_ENTRY": "Ново наблюдение",
+    "MONITORING_LIST_FILTER_SPECIES": "Вид",
+    "MONITORING_LIST_TAB_LIST": "Списък",
+    "MONITORING_LIST_TAB_MAP": "Карта",
+    "MONITORING_LIST_MAP_BUTTON_SHOW_ALL": "Покажи всички",
+    "MONITORING_LIST_MAP_SHOWN_RECORDS_WARNING": "Показани са само последните {{count}} записа!",
+    "MONITORING_LIST_TABLE_USER": "Наблюдател",
+    "MONITORING_LIST_TABLE_DATE": "Дата/час",
+    "MONITORING_LIST_TABLE_UPDATED": "Променен",
+    "MONITORING_LIST_TABLE_SPECIES": "Вид",
+    "MONITORING_LIST_TABLE_COUNT": "Брой"
 }
