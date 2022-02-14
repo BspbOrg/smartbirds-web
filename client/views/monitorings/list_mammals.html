@@ -6,10 +6,10 @@
           <button type="button"
                   class="btn btn-danger"
                   ng-disabled="!monitoringController.selectedRows.length"
-                  confirm="{{'MAMMALS_LIST_BUTTON_DELETE_CONFIRM_MESSAGE' | translate:monitoringController.deleteSelecterRowsTranslationValues()}}"
+                  confirm="{{'MONITORING_LIST_BUTTON_DELETE_CONFIRM_MESSAGE' | translate:monitoringController.deleteSelecterRowsTranslationValues()}}"
                   ng-click="monitoringController.deleteRows(monitoringController.selectedRows)">
             <i class="fa fa-trash fa-fw"></i>
-            {{'MAMMALS_LIST_BUTTON_DELETE' | translate}}
+            {{'MONITORING_LIST_BUTTON_DELETE' | translate}}
             <span ng-if="monitoringController.selectedRows.length>1" class="badge">{{monitoringController.selectedRows.length}}</span>
           </button>
         </div>
@@ -19,7 +19,7 @@
              ui-sref=".new"
           >
             <i class="fa fa-file-o fa-fw"></i>
-            {{'MAMMALS_LIST_BUTTON_NEW_ENTRY' | translate}}
+            {{'MONITORING_LIST_BUTTON_NEW_ENTRY' | translate}}
           </a>
         </div>
       </div>
@@ -43,7 +43,7 @@
 
             <div ng-if="monitoringController.canFilterByUser" class="col-md-4 col-lg-3">
               <field name="user" type="user"
-                     label="{{'MAMMALS_LIST_FILTER_USER' | translate}}"
+                     label="{{'MONITORING_LIST_FILTER_USER' | translate}}"
                      placeholder="- {{'INPUT_PLACEHOLDER_ALL' | translate}} -"
                      on-select="monitoringController.updateFilter()"
                      model="monitoringController.filter.user"></field>
@@ -59,21 +59,21 @@
 
             <div class="col-md-4 col-lg-3">
               <field name="fromDate" type="date"
-                     label="{{'MAMMALS_LIST_FILTER_FROM_DATE' | translate}}"
+                     label="{{'MONITORING_LIST_FILTER_FROM_DATE' | translate}}"
                      on-select="monitoringController.updateFilter()"
                      model="monitoringController.filter.from_date"></field>
             </div>
 
             <div class="col-md-4 col-lg-3">
               <field name="toDate" type="date"
-                     label="{{'MAMMALS_LIST_FILTER_TO_DATE' | translate}}"
+                     label="{{'MONITORING_LIST_FILTER_TO_DATE' | translate}}"
                      on-select="monitoringController.updateFilter()"
                      model="monitoringController.filter.to_date"></field>
             </div>
 
             <div class="col-md-4 col-lg-3">
               <field name="species" type="species" nomenclature="mammals"
-                     label="{{'MAMMALS_LIST_FILTER_SPECIES' | translate}}"
+                     label="{{'MONITORING_LIST_FILTER_SPECIES' | translate}}"
                      placeholder="- {{'INPUT_PLACEHOLDER_ALL' | translate}} -"
                      on-select="monitoringController.updateFilter()"
                      model="monitoringController.filter.species"></field>
@@ -119,12 +119,12 @@
     <ul class="nav nav-tabs">
       <li role="presentation" ng-class="{active: monitoringController.tab == 'list'}">
         <a href ng-click="monitoringController.tab = 'list'" translate>
-          MAMMALS_LIST_TAB_LIST
+          MONITORING_LIST_TAB_LIST
         </a>
       </li>
       <li role="presentation" ng-class="{active: monitoringController.tab == 'map'}">
         <a href ng-click="monitoringController.tab = 'map'; monitoringController.nextPage(1000)" translate>
-          MAMMALS_LIST_TAB_MAP
+          MONITORING_LIST_TAB_MAP
         </a>
       </li>
     </ul>
@@ -134,9 +134,9 @@
      class="row">
   <div class="col-md-12">
     <p ng-if="monitoringController.count > monitoringController.rows.length" class="text-warning">
-      {{'MAMMALS_LIST_MAP_SHOWN_RECORDS_WARNING' | translate: monitoringController.resultRowsTranslationValues()}}
+      {{'MONITORING_LIST_MAP_SHOWN_RECORDS_WARNING' | translate: monitoringController.resultRowsTranslationValues()}}
       <button ng-if="$user.canAccess(monitoringController.formName) && !monitoringController.loading" type="button" class="btn btn-default btn-xs"
-              ng-click="monitoringController.nextPage(-1)" translate>MAMMALS_LIST_MAP_BUTTON_SHOW_ALL
+              ng-click="monitoringController.nextPage(-1)" translate>MONITORING_LIST_MAP_BUTTON_SHOW_ALL
       </button>
     </p>
     <list-map rows="monitoringController.selectedRows.length > 0 ? monitoringController.selectedRows : monitoringController.rows" ctrl="monitoringController.map"></list-map>
@@ -152,7 +152,7 @@
       <th sb-sorting="id">#</th>
       <th ng-if="$user.canAccess(monitoringController.formName)"
           sb-sorting="getUser().getName()" translate>
-        MAMMALS_LIST_TABLE_USER
+        MONITORING_LIST_TABLE_USER
       </th>
       <th ng-if="::$user.isAdmin()"
           sb-sorting="organization">
@@ -164,18 +164,18 @@
       </th>
       <th
         sb-sorting="observationDateTime|date:'yyyyMMddHHmmss'" translate>
-        MAMMALS_LIST_TABLE_DATE
+        MONITORING_LIST_TABLE_DATE
       </th>
       <th
         sb-sorting="updatedAt|date:'yyyyMMddHHmmss'" translate>
-        MAMMALS_LIST_TABLE_UPDATED
+        MONITORING_LIST_TABLE_UPDATED
       </th>
       <th sb-sorting="species.label[$language]" translate>
-        MAMMALS_LIST_TABLE_SPECIES
+        MONITORING_LIST_TABLE_SPECIES
       </th>
       <th
         sb-sorting="count" translate>
-        MAMMALS_LIST_TABLE_COUNT
+        MONITORING_LIST_TABLE_COUNT
       </th>
       <td>&nbsp;</td>
     </tr>
