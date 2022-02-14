@@ -1,5 +1,5 @@
 #### Stage BUILD ########################################################################################################
-FROM node:16.13.1-alpine3.15 AS build
+FROM node:17.5.0-alpine3.15 AS build
 
 # Install tools, create app dir, add user and set rights
 RUN set -ex && \
