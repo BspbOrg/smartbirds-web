@@ -19,6 +19,9 @@ require('../app').factory('FormPylonsCasualties', /* @ngInject */function ($reso
     getUser: function () {
       return db.users[this.user]
     },
+    getSpecies: function () {
+      return db.species.birds && db.species.birds[this.species]
+    },
     preCopy: function () {
       delete this.species
       delete this.count

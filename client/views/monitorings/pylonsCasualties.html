@@ -29,12 +29,8 @@
                  label="{{'FIELD_SPECIES' | translate}}"
                  model="monitoringDetailController.data.species"></field>
         </div>
-      </div>
-      <div class="row">
         <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
         <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
-      </div>
-      <div class="row">
         <div class="col-md-6 col-lg-6">
           <field name="count" type="int" min="1" required="true"
                  label="{{'PYLONS_CASUALTIES_DETAIL_COUNT' | translate}}"
@@ -45,8 +41,6 @@
                  label="{{'PYLONS_CASUALTIES_DETAIL_CAUSE_OF_DEATH' | translate}}"
                  model="monitoringDetailController.data.causeOfDeath"></field>
         </div>
-      </div>
-      <div class="row">
         <div class="col-md-6 col-lg-6">
           <field name="age" type="single-choice" nomenclature="birds_age"
                  label="{{'PYLONS_CASUALTIES_DETAIL_AGE' | translate}}"
@@ -57,25 +51,25 @@
                  label="{{'PYLONS_CASUALTIES_DETAIL_SEX' | translate}}"
                  model="monitoringDetailController.data.sex"></field>
         </div>
+        <div class="col-md-12 col-lg-12">
+          <field name="bodyCondition" type="single-choice" nomenclature="pylons_body_condition"
+                 label="{{'PYLONS_CASUALTIES_DETAIL_BODY_CONDITION' | translate}}"
+                 model="monitoringDetailController.data.bodyCondition"></field>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <field name="habitat100mPrime" type="single-choice" nomenclature="pylons_habitat"
+                 label="{{'PYLONS_DETAIL_HABITAT_100M_PRIME' | translate}}"
+                 model="monitoringDetailController.data.habitat100mPrime"></field>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <field name="habitat100mSecond" type="single-choice" nomenclature="pylons_habitat"
+                 label="{{'PYLONS_DETAIL_HABITAT_100M_SECOND' | translate}}"
+                 model="monitoringDetailController.data.habitat100mSecond"></field>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 col-lg-12">
-      <field name="bodyCondition" type="single-choice" nomenclature="pylons_body_condition"
-             label="{{'PYLONS_CASUALTIES_DETAIL_BODY_CONDITION' | translate}}"
-             model="monitoringDetailController.data.bodyCondition"></field>
-    </div>
-    <div class="col-md-6 col-lg-6">
-      <field name="habitat100mPrime" type="single-choice" nomenclature="pylons_habitat"
-             label="{{'PYLONS_DETAIL_HABITAT_100M_PRIME' | translate}}"
-             model="monitoringDetailController.data.habitat100mPrime"></field>
-    </div>
-    <div class="col-md-6 col-lg-6">
-      <field name="habitat100mSecond" type="single-choice" nomenclature="pylons_habitat"
-             label="{{'PYLONS_DETAIL_HABITAT_100M_SECOND' | translate}}"
-             model="monitoringDetailController.data.habitat100mSecond"></field>
-    </div>
   </div>
 
   <div class="row">

@@ -19,6 +19,9 @@ require('../app').factory('FormPylons', /* @ngInject */function ($resource, ENDP
     getUser: function () {
       return db.users[this.user]
     },
+    getSpeciesNestOnPylon: function () {
+      return db.species.birds && db.species.birds[this.speciesNestOnPylon]
+    },
     preCopy: function () {
       delete this.speciesNestOnPylon
       delete this.typeNest
