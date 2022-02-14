@@ -1,11 +1,11 @@
+.env
 .idea/
 node_modules/
-bower_components/
-public/js/scripts.js
 npm-debug.log
 log/
 pids/
-public/css/main.css*
-uploads/
+
 public/*_stats.json
+public/css/main.css*
+public/js/scripts.js
 public/sw.js
