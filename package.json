@@ -101,7 +101,7 @@
     "stringify": "^5.2.0",
     "uglify-js": "^3.15.1",
     "ui-select": "^0.19.8",
-    "underscore.string": "^3.3.5",
+    "underscore.string": "^3.3.6",
     "workbox-cacheable-response": "^6.5.0",
     "workbox-core": "^6.0.2",
     "workbox-expiration": "^6.4.2",
