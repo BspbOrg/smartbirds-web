@@ -36,6 +36,7 @@ require('../app').factory('FormPylonsCasualties', /* @ngInject */function ($reso
     initDefaults: function () {
       this.confidential = false
       this.moderatorReview = false
+      this.count = 1
     },
     hasNotes: true
   })

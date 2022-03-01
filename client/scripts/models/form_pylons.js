@@ -33,6 +33,7 @@ require('../app').factory('FormPylons', /* @ngInject */function ($resource, ENDP
     initDefaults: function () {
       this.confidential = false
       this.moderatorReview = false
+      this.pylonInsulated = false
     },
     hasNotes: true
   })
