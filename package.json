@@ -43,7 +43,8 @@
     "build:views": "rm -rf public/views; cp -r client/views public/views",
     "proxy": "lcp --proxyUrl http://smartbirds-staging.herokuapp.com/ --proxyPartial '' --origin http://localhost:9966 --credentials",
     "proxy:prod": "lcp --proxyUrl https://smartbirds.org/ --proxyPartial '' --origin http://localhost:9966 --credentials",
-    "start:proxied": "STATS_PREFIX=http://localhost:8010 API_PREFIX=http://localhost:8010/api TRANSLATION_PREFIX=http://localhost:8010/api/i18n npm run budo"
+    "start:proxied": "STATS_PREFIX=http://localhost:8010 API_PREFIX=http://localhost:8010/api TRANSLATION_PREFIX=http://localhost:8010/api/i18n npm run budo",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@lordfriend/nya-bootstrap-select": "^2.1.10",
@@ -175,11 +176,6 @@
     "ignore": [
       "/public/"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.js": [
