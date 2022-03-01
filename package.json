@@ -17,7 +17,7 @@
     "local-cors-proxy": "^1.1.0",
     "parallelshell": "^3.0.2",
     "standard": "^16.0.3",
-    "start-server-and-test": "^1.11.7",
+    "start-server-and-test": "^1.14.0",
     "watch": "^1.0.2",
     "watchify": "^4.0.0"
   },
