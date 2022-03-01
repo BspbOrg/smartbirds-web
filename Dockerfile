@@ -10,6 +10,7 @@ WORKDIR /app
 
 # copy package.json and lock file
 COPY package*.json ./
+ADD scripts /app/scripts
 
 # Install Build tools
 RUN npm ci --no-update-notifier --only=production
