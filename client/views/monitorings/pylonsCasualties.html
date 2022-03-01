@@ -1,0 +1,84 @@
+<form name="smartform"
+      role="form"
+      confirm-on-exit="smartform.$dirty"
+      confirm-message-window="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
+      confirm-message-route="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
+  <div class="actions actions-detail">
+    <form-detail-buttons monitoring-detail-controller="monitoringDetailController"></form-detail-buttons>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <span ng-if="monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_EDIT</span>
+        <span ng-if="!monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_NEW</span>
+      </h1>
+    </div>
+  </div>
+
+  <div ng-include="'/views/monitorings/common2.html'"></div>
+
+  <div ng-include="'/views/monitorings/common.html'"></div>
+
+  <div class="row">
+    <div class="col-md-7 col-lg-6" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
+
+    <div class="col-md-5 col-lg-6">
+      <div class="row">
+        <div class="col-md-12">
+          <field name="species" type="species" nomenclature="birds" required="true"
+                 label="{{'FIELD_SPECIES' | translate}}"
+                 model="monitoringDetailController.data.species"></field>
+        </div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
+        <div class="col-md-6 col-lg-6">
+          <field name="count" type="int" min="1" required="true"
+                 label="{{'PYLONS_CASUALTIES_DETAIL_COUNT' | translate}}"
+                 model="monitoringDetailController.data.count"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="causeOfDeath" type="single-choice" required="true" nomenclature="pylons_cause_of_death"
+                 label="{{'PYLONS_CASUALTIES_DETAIL_CAUSE_OF_DEATH' | translate}}"
+                 model="monitoringDetailController.data.causeOfDeath"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="age" type="single-choice" nomenclature="birds_age"
+                 label="{{'PYLONS_CASUALTIES_DETAIL_AGE' | translate}}"
+                 model="monitoringDetailController.data.age"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sex" type="single-choice" nomenclature="birds_sex"
+                 label="{{'PYLONS_CASUALTIES_DETAIL_SEX' | translate}}"
+                 model="monitoringDetailController.data.sex"></field>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <field name="bodyCondition" type="single-choice" nomenclature="pylons_body_condition"
+                 label="{{'PYLONS_CASUALTIES_DETAIL_BODY_CONDITION' | translate}}"
+                 model="monitoringDetailController.data.bodyCondition"></field>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <field name="habitat100mPrime" type="single-choice" nomenclature="pylons_habitat"
+                 label="{{'PYLONS_DETAIL_HABITAT_100M_PRIME' | translate}}"
+                 model="monitoringDetailController.data.habitat100mPrime"></field>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <field name="habitat100mSecond" type="single-choice" nomenclature="pylons_habitat"
+                 label="{{'PYLONS_DETAIL_HABITAT_100M_SECOND' | translate}}"
+                 model="monitoringDetailController.data.habitat100mSecond"></field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="monitoringDetailController.data.hasNotes">
+    <div class="col-md-12">
+      <field name="speciesNotes" type="memo"
+             label="{{'COMMON_SPECIES_NOTES' | translate}}"
+             model="monitoringDetailController.data.speciesNotes"></field>
+    </div>
+  </div>
+
+  <div class="row">
+    <form-pictures ng-model="monitoringDetailController.data.pictures"></form-pictures>
+  </div>
+
+</form>

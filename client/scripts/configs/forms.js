@@ -2,7 +2,7 @@
  * Created by groupsky on 15.08.16.
  */
 
-var forms = module.exports = {
+const forms = module.exports = {
   cbm: {
     model: 'FormCBM',
     serverModel: 'formCBM',
@@ -205,6 +205,51 @@ var forms = module.exports = {
       'organization',
       'moderatorReview'
     ]
+  },
+  pylons: {
+    model: 'FormPylons',
+    serverModel: 'formPylons',
+    label: 'FORM_LABEL_PYLONS',
+    translatePrefix: 'PYLONS',
+    speciesType: 'birds',
+    hasCount: false,
+    longLabel: 'FORM_PYLONS_LONG',
+    shortLabel: 'FORM_PYLONS_SHORT',
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'organization',
+      'moderatorReview'
+    ]
+  },
+  pylonsCasualties: {
+    model: 'FormPylonsCasualties',
+    serverModel: 'formPylonsCasualties',
+    label: 'FORM_LABEL_PYLONS_CASUALTIES',
+    translatePrefix: 'PYLONS_CASUALTIES',
+    speciesType: 'birds',
+    hasCount: true,
+    longLabel: 'FORM_PYLONS_CASUALTIES_LONG',
+    shortLabel: 'FORM_PYLONS_CASUALTIES_SHORT',
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'species',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'organization',
+      'moderatorReview'
+    ]
   }
 }
 
@@ -220,7 +265,7 @@ require('../app')
       .keys(forms)
       .map(function (key) { return forms[key].model })
       .concat([function () {
-        var args = arguments
+        const args = arguments
         Object
           .keys(forms)
           .forEach(function (key, idx) {
