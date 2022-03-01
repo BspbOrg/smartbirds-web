@@ -69,7 +69,12 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-if="monitoringDetailController.data.hasNotes">
+    <div class="col-md-12">
+      <field name="speciesNotes" type="memo"
+             label="{{'COMMON_SPECIES_NOTES' | translate}}"
+             model="monitoringDetailController.data.speciesNotes"></field>
+    </div>
   </div>
 
   <div class="row">
