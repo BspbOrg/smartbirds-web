@@ -1051,5 +1051,8 @@
     "MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "Ndryshimet nuk janë ruajtur! Jeni i sigurt që doni të vazhdoni?",
     "MONITORING_DETAIL_TITLE_NEW": "Vrojtim i ri",
     "MONITORING_DETAIL_TITLE_EDIT": "Modifiko të dhënat e regjistruara",
-    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Llojet e shënuara me * janë \"të mbrojtura\""
+    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Llojet e shënuara me * janë \"të mbrojtura\"",
+    "PYLONS_CASUALTIES_DETAIL_COUNT": "Numri",
+    "PYLONS_CASUALTIES_DETAIL_AGE": "Mosha",
+    "PYLONS_CASUALTIES_DETAIL_SEX": "Gjinia"
 }

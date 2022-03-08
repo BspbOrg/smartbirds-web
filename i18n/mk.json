@@ -997,5 +997,8 @@
     "MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE": "Постојат назачувани промени! Дали сте сигурни дека сакате да продолжите?",
     "MONITORING_DETAIL_TITLE_NEW": "Ново набљудување",
     "MONITORING_DETAIL_TITLE_EDIT": "Надополнете го записот",
-    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Видовите кои се обележани со * се заштитени"
+    "FIELD_SPECIES_HELP_PROTECTED_SPECIES": "Видовите кои се обележани со * се заштитени",
+    "PYLONS_CASUALTIES_DETAIL_COUNT": "Број",
+    "PYLONS_CASUALTIES_DETAIL_AGE": "Возраст",
+    "PYLONS_CASUALTIES_DETAIL_SEX": "Пол"
 }
