@@ -562,6 +562,17 @@ module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRo
         }
       })
   })
+
+  $stateProvider
+    .state('auth.stats.daily_report', {
+      url: '/daily',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/daily_report.html',
+          controller: 'DailyReportController as $ctrl'
+        }
+      }
+    })
 })
   .run(/* @ngInject */function ($rootScope, $state, $stateParams, authorization, user) {
     $rootScope.$state = $state
