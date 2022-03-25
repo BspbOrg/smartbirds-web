@@ -46,6 +46,17 @@
                  label="{{'PYLONS_FIELD_INSULATED' | translate}}"
                  model="monitoringDetailController.data.pylonInsulated"></field>
         </div>
+        <div ng-if="monitoringDetailController.data.pylonInsulated" class="col-md-6 col-lg-6">
+          <field name="damagedInsulation" type="bool"
+                 label="{{'PYLONS_FIELD_DAMAGED_INSULATION' | translate}}"
+                 model="monitoringDetailController.data.damagedInsulation"></field>
+        </div>
+        <div ng-if="!monitoringDetailController.data.pylonInsulated" class="col-md-6 col-lg-6">
+          <field name="damagedInsulation" type="bool"
+                 readonly
+                 label="{{'PYLONS_FIELD_DAMAGED_INSULATION' | translate}}"
+                 model="monitoringDetailController.data.damagedInsulation"></field>
+        </div>
         <div class="col-md-12 col-lg-12">
           <field name="habitat100mPrime" type="single-choice" nomenclature="pylons_habitat"
                  label="{{'PYLONS_DETAIL_HABITAT_100M_PRIME' | translate}}"
