@@ -1154,5 +1154,6 @@
     "PYLONS_PUBLIC_LIST_TITLE_SECONDARY": "pylons desc.",
     "PYLONS_CASUALTIES_PUBLIC_LIST_TITLE_MAIN": "Powerlines’ casualties",
     "PYLONS_CASUALTIES_PUBLIC_LIST_TITLE_SECONDARY": "casualties desc.",
-    "PYLONS_NEST_SPECIES": "Species nest on pylon"
+    "PYLONS_NEST_SPECIES": "Species nest on pylon",
+    "PYLONS_FIELD_DAMAGED_INSULATION": "Damaged insulation"
 }
