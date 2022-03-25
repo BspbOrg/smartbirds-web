@@ -1,8 +1,8 @@
 const angular = require('angular')
 const forms = require('./forms')
-const module = require('../app')
+const app = require('../app')
 
-module.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRouterProvider) {
+app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true)
 
   $urlRouterProvider
