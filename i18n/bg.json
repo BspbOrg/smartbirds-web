@@ -1154,5 +1154,6 @@
     "PYLONS_PUBLIC_LIST_TITLE_SECONDARY": "Форма за проучване на електропроводи",
     "PYLONS_CASUALTIES_PUBLIC_LIST_TITLE_MAIN": "Жертви електропроводи",
     "PYLONS_CASUALTIES_PUBLIC_LIST_TITLE_SECONDARY": "Форма за проучване на жертвите от елелтропреносната мрежа",
-    "PYLONS_NEST_SPECIES": "Наличие на гнездо"
+    "PYLONS_NEST_SPECIES": "Наличие на гнездо",
+    "PYLONS_FIELD_DAMAGED_INSULATION": "Увредена изолация"
 }

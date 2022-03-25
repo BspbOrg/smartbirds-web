@@ -26,6 +26,7 @@ require('../app').factory('FormPylons', /* @ngInject */function ($resource, ENDP
       delete this.speciesNestOnPylon
       delete this.typeNest
       delete this.pylonInsulated
+      delete this.damagedInsulation
     },
     postCopy: function () {
       this.initDefaults()
