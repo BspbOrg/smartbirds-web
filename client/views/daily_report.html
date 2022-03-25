@@ -53,17 +53,20 @@
     <table class="table table-striped table-hover">
       <thead>
       <tr>
-        <th>Form</th>
-        <th>Location</th>
-        <th>Species</th>
-        <th>Count</th>
+        <th>{{::'DAILY_REPORT_LIST_TABLE_FORM'|translate}}</th>
+        <th>{{::'DAILY_REPORT_LIST_TABLE_LOCATION'|translate}}</th>
+        <th>{{::'DAILY_REPORT_LIST_TABLE_SPECIES'|translate}}</th>
+        <th>{{::'DAILY_REPORT_LIST_TABLE_COUNT'|translate}}</th>
       </tr>
       </thead>
       <tbody>
       <tr ng-repeat="row in $ctrl.data">
-        <td>{{::row.form}}</td>
-        <td>{{::row.location.label|localLabel}}</td>
-        <td>{{::row.species}}</td>
+        <td>{{::$ctrl.formName(row.form)|translate}}</td>
+        <td>{{::row.location|localLabel}}</td>
+        <td>
+          {{::row.species|localLabel}}<br/>
+          <strong>{{::row.species.la}}</strong>
+        </td>
         <td>{{::row.count}}</td>
       </tr>
       </tbody>
