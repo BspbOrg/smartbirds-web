@@ -307,4 +307,14 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       return promise
     }
   }
+
+  api.reports = {
+    daily: (date) => $http({
+      method: 'GET',
+      url: ENDPOINT_URL + `/reports/daily/${date instanceof Date ? date.getTime() : date}`,
+      withCredentials: true
+    }).then(function (response) {
+      return response.data
+    })
+  }
 })
