@@ -72,7 +72,7 @@
     "angulartics": "^1.1.3",
     "angulartics-google-analytics": "^0.2.1",
     "blueimp-md5": "^2.19.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.6.1",
     "browserify": "~17.0.0",
     "browserify-ngannotate": "^2.0.0",
     "browserify-shim": "~3.8.0",
