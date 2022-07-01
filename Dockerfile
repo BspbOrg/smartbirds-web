@@ -24,7 +24,7 @@ RUN npm run build && \
     npm run build:views
 
 #### Stage RELEASE #####################################################################################################
-FROM nginx:1.21.6-alpine AS RELEASE
+FROM nginx:1.23.0-alpine AS RELEASE
 
 # copy generated static site
 COPY --from=build /app/public /usr/share/nginx/html
