@@ -49,6 +49,21 @@
     <div class="col-md-4 col-lg-5">
       <div class="row">
         <div class="col-md-6">
+          <field name="observationDate" type="date" required="true"
+                 label="{{'COMMON_FORM_OBSERVATION_DATE' | translate}}"
+                 on-select="monitoringDetailController.observationDateChange()"
+                 model="monitoringDetailController.data.observationDateTime"></field>
+        </div>
+
+        <div class="col-md-6">
+          <field name="observationTime" type="time" required="true"
+                 label="{{'COMMON_FORM_OBSERVATION_TIME' | translate}}"
+                 label-md="{{'COMMON_FORM_TIME' | translate}}"
+                 on-select="monitoringDetailController.observationDateChange()"
+                 model="monitoringDetailController.data.observationDateTime"></field>
+        </div>
+
+        <div class="col-md-6">
           <field name="startDate" type="date" required="true"
                  label="{{'CBM_DETAIL_START_DATE' | translate}}"
                  model="monitoringDetailController.data.startDateTime"></field>
