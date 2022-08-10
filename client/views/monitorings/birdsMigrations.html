@@ -1,0 +1,99 @@
+<form name="smartform"
+      role="form"
+      confirm-on-exit="smartform.$dirty"
+      confirm-message-window="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
+      confirm-message-route="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
+  <div class="actions actions-detail">
+    <form-detail-buttons monitoring-detail-controller="monitoringDetailController"></form-detail-buttons>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <span ng-if="monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_EDIT</span>
+        <span ng-if="!monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_NEW</span>
+      </h1>
+    </div>
+  </div>
+
+  <div ng-include="'/views/monitorings/common2.html'"></div>
+
+  <div ng-include="'/views/monitorings/common.html'"></div>
+
+  <div class="row">
+    <div class="col-md-7 col-lg-6" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
+
+    <div class="col-md-5 col-lg-6">
+      <div class="row">
+        <div class="col-md-12">
+          <field name="species" type="species" nomenclature="birds" required="true"
+                 label="{{'FIELD_SPECIES' | translate}}"
+                 model="monitoringDetailController.data.species"></field>
+        </div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
+        <div class="col-md-6 col-lg-6">
+          <field name="count" type="int" min="1" required="true"
+                 label="{{'FIELD_COUNT' | translate}}"
+                 model="monitoringDetailController.data.count"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="migrationPoint" type="single-choice" required="true" nomenclature="birds_migration_point"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_MIGRATION_POINT' | translate}}"
+                 model="monitoringDetailController.data.migrationPoint"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="locationFromMigrationPoint" type="single-choice" nomenclature="main_geo_direction"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_LOCATION_FROM_MIGRATION_POINT' | translate}}"
+                 model="monitoringDetailController.data.locationFromMigrationPoint"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sex" type="single-choice" nomenclature="birds_sex"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_SEX' | translate}}"
+                 model="monitoringDetailController.data.sex"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="plumage" type="single-choice" nomenclature="birds_migration_plumage"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_PLUMAGE' | translate}}"
+                 model="monitoringDetailController.data.plumage"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="age" type="single-choice" nomenclature="birds_age"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_AGE' | translate}}"
+                 model="monitoringDetailController.data.age"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="visochinaPolet" type="int"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_VISOCHINA_POLET' | translate}}"
+                 model="monitoringDetailController.data.visochinaPolet"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="posokaPoletFrom" type="single-choice" nomenclature="main_geo_direction"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_POSOKA_POLET_FROM' | translate}}"
+                 model="monitoringDetailController.data.posokaPoletFrom"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="posokaPoletTo" type="single-choice" nomenclature="main_geo_direction"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_POSOKA_POLET_TO' | translate}}"
+                 model="monitoringDetailController.data.posokaPoletTo"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="typeFlight" type="single-choice" nomenclature="birds_migration_type_flight"
+                 label="{{'BIRDS_MIGRATIONS_DETAIL_TYPE_FLIGHT' | translate}}"
+                 model="monitoringDetailController.data.typeFlight"></field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="monitoringDetailController.data.hasNotes">
+    <div class="col-md-12">
+      <field name="speciesNotes" type="memo"
+             label="{{'COMMON_SPECIES_NOTES' | translate}}"
+             model="monitoringDetailController.data.speciesNotes"></field>
+    </div>
+  </div>
+
+  <div class="row">
+    <form-pictures ng-model="monitoringDetailController.data.pictures"></form-pictures>
+  </div>
+
+</form>
