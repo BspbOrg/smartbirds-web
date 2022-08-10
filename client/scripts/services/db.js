@@ -2,9 +2,9 @@
  * Created by groupsky on 17.03.16.
  */
 
-var angular = require('angular')
-require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclature, Species, User, Visit, Zone, user, Organization) {
-  var db = {
+const angular = require('angular')
+require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclature, Poi, Species, User, Visit, Zone, user, Organization) {
+  const db = {
     locations: {},
     nomenclatures: {},
     species: {},
@@ -20,7 +20,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       return Location.query({ limit: -1 }).$promise
     })
     .then(function (locations) {
-      var res = db.locations
+      const res = db.locations
       locations.forEach(function (location) {
         res[location.id] = location
       })
@@ -34,13 +34,18 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
     db.nomenclatures = {}
     db.nomenclatures.$promise = user.authPromise
       .then(function () {
-        return Nomenclature.query({ limit: -1 }).$promise
+        return Promise.all([
+          Nomenclature.query({ limit: -1 }).$promise,
+          Poi.query({ limit: -1 }).$promise
+        ])
       })
-      .then(function (items) {
-        var res = db.nomenclatures
-        items.forEach(function (item) {
-          res[item.type] = res[item.type] || {}
-          res[item.type][item.label.en] = item
+      .then(function (itemsList) {
+        const res = db.nomenclatures
+        itemsList.forEach(function (items) {
+          items.forEach(function (item) {
+            res[item.type] = res[item.type] || {}
+            res[item.type][item.label.en] = item
+          })
         })
         return res
       })
@@ -56,7 +61,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
         return Species.query({ limit: -1 }).$promise
       })
       .then(function (items) {
-        var res = db.species
+        const res = db.species
         items.forEach(function (item) {
           res[item.type] = res[item.type] || {}
           res[item.type][item.label.la] = item
@@ -73,7 +78,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       return User.query({ limit: -1 }).$promise
     })
     .then(function (users) {
-      var res = db.users
+      const res = db.users
       users.forEach(function (user) {
         res[user.id] = user
       })
@@ -94,7 +99,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       return User.query({ limit: -1, context: 'public' }).$promise
     })
     .then(function (publicUsers) {
-      var res = db.publicUsers
+      const res = db.publicUsers
       publicUsers.forEach(function (user) {
         res[user.id] = user
       })
@@ -115,7 +120,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       return Zone.query({ limit: -1, nomenclature: true }).$promise
     })
     .then(function (zones) {
-      var res = db.zones
+      const res = db.zones
       zones.forEach(function (zone) {
         res[zone.id] = zone
       })
@@ -130,7 +135,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       return Visit.query({ limit: -1, nomenclature: true }).$promise
     })
     .then(function (visits) {
-      var res = db.visits
+      const res = db.visits
       visits.forEach(function (visit) {
         res[visit.year] = visit
       })
@@ -155,7 +160,7 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
       })
   })()
 
-  var promises = []
+  const promises = []
   angular.forEach(db, function (table) {
     table.$promise && promises.push(table.$promise)
   })
