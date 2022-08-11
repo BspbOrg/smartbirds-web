@@ -43,8 +43,12 @@ require('../app').controller('NomenclaturesController', /* @ngInject */function 
       $ctrl.selected.name = name
       $ctrl.selected.type = key
       $ctrl.selected.nomenclature = []
+      $ctrl.selected.nomenclature_type = 'nomenclature'
+      $ctrl.selected.constructor = Nomenclature
       angular.forEach(nomenclature, function (item) {
         $ctrl.selected.nomenclature.push(angular.copy(item))
+        $ctrl.selected.nomenclature_type = item.nomenclature_type
+        $ctrl.selected.constructor = item.constructor
       })
     }
   })
@@ -68,7 +72,7 @@ require('../app').controller('NomenclaturesController', /* @ngInject */function 
   }
 
   $ctrl.add = function (key) {
-    const len = $ctrl.selected.nomenclature.push(new Nomenclature({
+    const len = $ctrl.selected.nomenclature.push(new $ctrl.selected.constructor({
       type: $ctrl.selected.type
     }))
     $ctrl.page = Math.ceil(len / $ctrl.pageSize)
@@ -81,7 +85,7 @@ require('../app').controller('NomenclaturesController', /* @ngInject */function 
     if (!$ctrl.selected.nomenclature.length) {
       return
     }
-    Nomenclature.updateGroup({ type: $ctrl.selected.type }, { items: $ctrl.selected.nomenclature })
+    $ctrl.selected.constructor.updateGroup({ type: $ctrl.selected.type }, { items: $ctrl.selected.nomenclature })
       .$promise.then(function (items) {
         $scope.editform.$setPristine()
         db.$updateNomenclatures()

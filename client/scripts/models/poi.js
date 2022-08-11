@@ -8,14 +8,15 @@ require('../app').service('Poi', /* @ngInject */function ($resource, $translate,
     type: '@type',
     label: '@label'
   }, {
-    updateGroup: { method: 'PUT', url: ENDPOINT_URL + '/poi/:type', isArray: true }
+    updateGroup: { method: 'PUT', url: ENDPOINT_URL + '/pois/:type', isArray: true }
   })
 
   // instance methods
   angular.extend(Poi.prototype, {
     toString: function (locale) {
       return localization.getLocalLabel(this.label, locale)
-    }
+    },
+    nomenclature_type: 'poi'
   })
 
   return Poi

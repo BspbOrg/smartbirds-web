@@ -64,6 +64,8 @@
         <tr>
           <th>#</th>
           <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-if="::$ctrl.selected.nomenclature_type === 'poi'">Latitude</th>
+          <th ng-if="::$ctrl.selected.nomenclature_type === 'poi'">Longitude</th>
           <th class="btn-group btn-group-xs">
             <button
               type="button"
@@ -89,6 +91,12 @@
             <field ng-if="::key==='en'" type="text" model="item.label[key]" required></field>
             <field ng-if="::key!=='en'" type="text" model="item.label[key]"></field>
           </td>
+          <td ng-if="::$ctrl.selected.nomenclature_type === 'poi'">
+            <field type="float" model="item.latitude" required></field>
+          </td>
+          <td ng-if="::$ctrl.selected.nomenclature_type === 'poi'">
+            <field type="float" model="item.longitude" required></field>
+          </td>
           <td>
             <button type="button" class="btn btn-danger btn-xs visible-hover"
                     ng-click="$ctrl.remove($index)">
@@ -101,6 +109,8 @@
         <tr>
           <th>#</th>
           <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-if="::$ctrl.selected.nomenclature_type === 'poi'">Latitude</th>
+          <th ng-if="::$ctrl.selected.nomenclature_type === 'poi'">Longitude</th>
           <th class="btn-group btn-group-xs">
             <button
               type="button"
