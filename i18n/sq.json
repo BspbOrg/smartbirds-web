@@ -296,7 +296,7 @@
     "HERP_DETAIL_LATITUDE": "Gjerësi gjeografike",
     "HERP_DETAIL_LONGITUDE": "Gjatësi gjeografike",
     "FIELD_SPECIES": "Emri shkencor",
-    "HERP_DETAIL_COUNT": "Numri",
+    "FIELD_COUNT": "Numri",
     "HERP_DETAIL_AGE": "Mosha",
     "HERP_DETAIL_SEX": "Gjinia",
     "HERP_DETAIL_HABITAT": "Habitati",

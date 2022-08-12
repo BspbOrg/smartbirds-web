@@ -289,7 +289,7 @@
     "HERP_DETAIL_LATITUDE": "Географска широчина",
     "HERP_DETAIL_LONGITUDE": "Географска должина",
     "FIELD_SPECIES": "Научно име",
-    "HERP_DETAIL_COUNT": "Број",
+    "FIELD_COUNT": "Број",
     "HERP_DETAIL_AGE": "Возраст",
     "HERP_DETAIL_SEX": "Пол",
     "HERP_DETAIL_HABITAT": "Живеалиште",
