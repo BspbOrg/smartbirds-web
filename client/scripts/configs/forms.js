@@ -75,7 +75,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'migration_point'
     ]
   },
   herptiles: {
