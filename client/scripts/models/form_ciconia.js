@@ -1,14 +1,14 @@
-var angular = require('angular')
-var LocalCache = require('./mixins/local_cache')
-var countPendingReview = require('./mixins/countPendingReview')
+const angular = require('angular')
+const LocalCache = require('./mixins/local_cache')
+const countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormCiconia', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
-  var FormCiconia = $resource(ENDPOINT_URL + '/ciconia/:id', {
+  const FormCiconia = $resource(ENDPOINT_URL + '/ciconia/:id', {
     id: '@id'
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/ciconia' },
-    countPendingReview: countPendingReview
+    countPendingReview
   })
 
   // instance methods
@@ -19,6 +19,7 @@ require('../app').factory('FormCiconia', /* @ngInject */function ($resource, END
     getUser: function () {
       return db.users[this.user]
     },
+    hasSource: true,
     preCopy: function () {
       delete this.primarySubstrateType
       delete this.electricityPole

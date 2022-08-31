@@ -8,7 +8,7 @@ require('../app').factory('FormPylons', /* @ngInject */function ($resource, ENDP
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/pylons' },
-    countPendingReview: countPendingReview
+    countPendingReview
   })
 
   // instance methods
@@ -22,6 +22,7 @@ require('../app').factory('FormPylons', /* @ngInject */function ($resource, ENDP
     getSpeciesNestOnPylon: function () {
       return db.species.birds && db.species.birds[this.speciesNestOnPylon]
     },
+    hasSource: true,
     preCopy: function () {
       delete this.speciesNestOnPylon
       delete this.typeNest

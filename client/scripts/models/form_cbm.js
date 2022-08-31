@@ -1,14 +1,14 @@
-var angular = require('angular')
-var LocalCache = require('./mixins/local_cache')
-var countPendingReview = require('./mixins/countPendingReview')
+const angular = require('angular')
+const LocalCache = require('./mixins/local_cache')
+const countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
-  var FormCBM = $resource(ENDPOINT_URL + '/cbm/:id', {
+  const FormCBM = $resource(ENDPOINT_URL + '/cbm/:id', {
     id: '@id'
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/cbm' },
-    countPendingReview: countPendingReview
+    countPendingReview
   })
 
   // instance methods
@@ -28,6 +28,7 @@ require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOIN
     getPosition: function () {
       return { lat: this.latitude, lng: this.longitude }
     },
+    hasSource: true,
     preCopy: function () {
       delete this.species
       delete this.distance

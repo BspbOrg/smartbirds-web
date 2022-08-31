@@ -1,14 +1,14 @@
-var angular = require('angular')
-var LocalCache = require('./mixins/local_cache')
-var countPendingReview = require('./mixins/countPendingReview')
+const angular = require('angular')
+const LocalCache = require('./mixins/local_cache')
+const countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormInvertebrates', /* @ngInject */function ($resource, ENDPOINT_URL, db) {
-  var FormInvertebrates = $resource(ENDPOINT_URL + '/invertebrates/:id', {
+  const FormInvertebrates = $resource(ENDPOINT_URL + '/invertebrates/:id', {
     id: '@id'
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/invertebrates' },
-    countPendingReview: countPendingReview
+    countPendingReview
   })
 
   // instance methods
@@ -22,6 +22,7 @@ require('../app').factory('FormInvertebrates', /* @ngInject */function ($resourc
     getSpecies: function () {
       return db.species.invertebrates && db.species.invertebrates[this.species]
     },
+    hasSource: true,
     preCopy: function () {
       delete this.species
       delete this.sex

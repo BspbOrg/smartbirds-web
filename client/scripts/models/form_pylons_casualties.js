@@ -8,7 +8,7 @@ require('../app').factory('FormPylonsCasualties', /* @ngInject */function ($reso
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/pylons-casualties' },
-    countPendingReview: countPendingReview
+    countPendingReview
   })
 
   // instance methods
@@ -22,6 +22,7 @@ require('../app').factory('FormPylonsCasualties', /* @ngInject */function ($reso
     getSpecies: function () {
       return db.species.birds && db.species.birds[this.species]
     },
+    hasSource: true,
     preCopy: function () {
       delete this.species
       delete this.count

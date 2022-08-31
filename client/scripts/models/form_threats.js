@@ -1,14 +1,14 @@
-var angular = require('angular')
-var LocalCache = require('./mixins/local_cache')
-var countPendingReview = require('./mixins/countPendingReview')
+const angular = require('angular')
+const LocalCache = require('./mixins/local_cache')
+const countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormThreats', /* @ngInject */function ($localStorage, $resource, $translate, ENDPOINT_URL, db) {
-  var FormThreats = $resource(ENDPOINT_URL + '/threats/:id', {
+  const FormThreats = $resource(ENDPOINT_URL + '/threats/:id', {
     id: '@id'
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/threats' },
-    countPendingReview: countPendingReview
+    countPendingReview
   })
 
   // instance methods
@@ -22,6 +22,7 @@ require('../app').factory('FormThreats', /* @ngInject */function ($localStorage,
     getSpecies: function () {
       return db.species[this.class] && db.species[this.class][this.species]
     },
+    hasSource: true,
     preCopy: function () {
       delete this.primaryType
       delete this.category
