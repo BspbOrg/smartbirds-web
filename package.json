@@ -87,7 +87,7 @@
     "lodash": "^4.17.21",
     "minifyify": "^7.3.5",
     "moment": "^2.29.3",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.35",
     "ng-infinite-scroll": "^1.2.1",
     "ng-toast": "^2.0.0",
     "ngstorage": "^0.3.11",
