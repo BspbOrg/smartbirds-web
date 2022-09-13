@@ -276,6 +276,31 @@ const forms = module.exports = {
       'moderatorReview',
       'migration_point'
     ]
+  },
+  fishes: {
+    model: 'FormFishes',
+    serverModel: 'formFishes',
+    label: 'FORM_LABEL_FISHES',
+    translatePrefix: 'FISHES',
+    speciesType: 'fishes',
+    hasCount: true,
+    longLabel: 'FORM_FISHES_LONG',
+    shortLabel: 'FORM_FISHES_SHORT',
+    hasStats: false,
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'species',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'threat',
+      'organization',
+      'moderatorReview'
+    ]
   }
 }
 

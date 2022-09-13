@@ -1,0 +1,255 @@
+<form name="smartform"
+      role="form"
+      confirm-on-exit="smartform.$dirty"
+      confirm-message-window="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
+      confirm-message-route="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
+  <div class="actions actions-detail">
+    <form-detail-buttons monitoring-detail-controller="monitoringDetailController"></form-detail-buttons>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <span ng-if="monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_EDIT</span>
+        <span ng-if="!monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_NEW</span>
+      </h1>
+    </div>
+  </div>
+
+  <div ng-include="'/views/monitorings/common2.html'"></div>
+
+  <div ng-include="'/views/monitorings/common.html'"></div>
+
+  <div class="row">
+    <div class="col-md-7 col-lg-6" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
+
+    <div class="col-md-5 col-lg-6">
+      <div class="row">
+        <div class="col-md-12">
+          <field name="species" type="species" nomenclature="fishes" required="true"
+                 label="{{'FIELD_SPECIES' | translate}}"
+                 model="monitoringDetailController.data.species"></field>
+        </div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
+        <div class="col-md-6 col-lg-6">
+          <field name="count" type="int" min="1" required="true"
+                 label="{{'FIELD_COUNT' | translate}}"
+                 model="monitoringDetailController.data.count"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="nameWaterBody" type="text"
+                 label="{{'FISHES_DETAIL_NAME_WATER_BODY' | translate}}"
+                 model="monitoringDetailController.data.nameWaterBody"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sex" type="single-choice" nomenclature="fishes_sex"
+                 label="{{'FISHES_DETAIL_SEX' | translate}}"
+                 model="monitoringDetailController.data.sex"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sizeTL_mm" type="float"
+                 label="{{'FISHES_DETAIL_SIZE_TL_MM' | translate}}"
+                 model="monitoringDetailController.data.sizeTL_mm"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sizeSL_mm" type="float"
+                 label="{{'FISHES_DETAIL_SIZE_SL_MM' | translate}}"
+                 model="monitoringDetailController.data.sizeSL_mm"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="masa_gr" type="float"
+                 label="{{'FISHES_DETAIL_MASA_GR' | translate}}"
+                 model="monitoringDetailController.data.masa_gr"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="findings" type="single-choice" nomenclature="fishes_findings"
+                 label="{{'FISHES_DETAIL_FINDINGS' | translate}}"
+                 model="monitoringDetailController.data.findings"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="monitoringType" type="single-choice" nomenclature="fishes_monitoring_type"
+                 label="{{'FISHES_DETAIL_MONITORING_TYPE' | translate}}"
+                 model="monitoringDetailController.data.monitoringType"></field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="monitoringDetailController.data.hasNotes">
+    <div class="col-md-4 col-lg-3">
+      <field name="transectLength_M" type="float"
+             label="{{'FISHES_DETAIL_TRANSECT_LENGTH_M' | translate}}"
+             model="monitoringDetailController.data.transectLength_M"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="transectWidth_M" type="float"
+             label="{{'FISHES_DETAIL_TRANSECT_WIDTH_M' | translate}}"
+             model="monitoringDetailController.data.transectWidth_M"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="fishingArea_M" type="float"
+             label="{{'FISHES_DETAIL_FISHING_AREA_M' | translate}}"
+             model="monitoringDetailController.data.fishingArea_M"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="exposition" type="int" min="0"
+             label="{{'FISHES_DETAIL_EXPOSITION' | translate}}"
+             model="monitoringDetailController.data.exposition"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="meshSize" type="float"
+             label="{{'FISHES_DETAIL_MESH_SIZE' | translate}}"
+             model="monitoringDetailController.data.meshSize"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="countNetTrap" type="float"
+             label="{{'FISHES_DETAIL_COUNT_NET_TRAP' | translate}}"
+             model="monitoringDetailController.data.countNetTrap"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="waterTemp" type="float"
+             label="{{'FISHES_DETAIL_WATER_TEMP' | translate}}"
+             model="monitoringDetailController.data.waterTemp"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="conductivity" type="float"
+             label="{{'FISHES_DETAIL_CONDUCTIVITY' | translate}}"
+             model="monitoringDetailController.data.conductivity"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="pH" type="float"
+             label="{{'FISHES_DETAIL_PH' | translate}}"
+             model="monitoringDetailController.data.pH"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="o2mgL" type="float"
+             label="{{'FISHES_DETAIL_O2MG_L' | translate}}"
+             model="monitoringDetailController.data.o2mgL"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="o2percent" type="float"
+             label="{{'FISHES_DETAIL_O2PERCENT' | translate}}"
+             model="monitoringDetailController.data.o2percent"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="salinity" type="float"
+             label="{{'FISHES_DETAIL_SALINITY' | translate}}"
+             model="monitoringDetailController.data.salinity"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="habitatDescriptionType" type="single-choice" nomenclature="fishes_habitat_description_type"
+             label="{{'FISHES_DETAIL_HABITAT_DESCRIPTION_TYPE' | translate}}"
+             model="monitoringDetailController.data.habitatDescriptionType"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateMud" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_MUD' | translate}}"
+             model="monitoringDetailController.data.substrateMud"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateSilt" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_SILT' | translate}}"
+             model="monitoringDetailController.data.substrateSilt"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateSand" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_SAND' | translate}}"
+             model="monitoringDetailController.data.substrateSand"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateGravel" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_GRAVEL' | translate}}"
+             model="monitoringDetailController.data.substrateGravel"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateSmallStones" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_SMALL_STONES' | translate}}"
+             model="monitoringDetailController.data.substrateSmallStones"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateCobble" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_COBBLE' | translate}}"
+             model="monitoringDetailController.data.substrateCobble"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateBoulder" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_BOULDER' | translate}}"
+             model="monitoringDetailController.data.substrateBoulder"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateRock" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_ROCK' | translate}}"
+             model="monitoringDetailController.data.substrateRock"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="substrateOther" type="float"
+             label="{{'FISHES_DETAIL_SUBSTRATE_OTHER' | translate}}"
+             model="monitoringDetailController.data.substrateOther"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="waterLevel" type="single-choice" nomenclature="fishes_water_level"
+             label="{{'FISHES_DETAIL_WATER_LEVEL' | translate}}"
+             model="monitoringDetailController.data.waterLevel"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="riverCurrent" type="single-choice" nomenclature="fishes_river_current"
+             label="{{'FISHES_DETAIL_RIVER_CURRENT' | translate}}"
+             model="monitoringDetailController.data.riverCurrent"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="transectAvDepth" type="float"
+             label="{{'FISHES_DETAIL_TRANSECT_AV_DEPTH' | translate}}"
+             model="monitoringDetailController.data.transectAvDepth"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="transectMaxDepth" type="float"
+             label="{{'FISHES_DETAIL_TRANSECT_MAX_DEPTH' | translate}}"
+             model="monitoringDetailController.data.transectMaxDepth"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="slope" type="single-choice" nomenclature="fishes_slope"
+             label="{{'FISHES_DETAIL_SLOPE' | translate}}"
+             model="monitoringDetailController.data.slope"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="bankType" type="single-choice" nomenclature="fishes_bank_type"
+             label="{{'FISHES_DETAIL_BANK_TYPE' | translate}}"
+             model="monitoringDetailController.data.bankType"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="shading" type="float"
+             label="{{'FISHES_DETAIL_SHADING' | translate}}"
+             model="monitoringDetailController.data.shading"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="riparianVegetation" type="float"
+             label="{{'FISHES_DETAIL_RIPARIAN_VEGETATION' | translate}}"
+             model="monitoringDetailController.data.riparianVegetation"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="shelters" type="multiple-choice" nomenclature="fishes_shelters"
+             label="{{'FISHES_DETAIL_SHELTERS' | translate}}"
+             model="monitoringDetailController.data.shelters"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="transparency" type="float"
+             label="{{'FISHES_DETAIL_TRANSPARENCY' | translate}}"
+             model="monitoringDetailController.data.transparency"></field>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <field name="vegetationType" type="multiple-choice" nomenclature="fishes_vegetation_type"
+             label="{{'FISHES_DETAIL_VEGETATION_TYPE' | translate}}"
+             model="monitoringDetailController.data.vegetationType"></field>
+    </div>
+
+    <div class="col-md-12">
+      <field name="speciesNotes" type="memo"
+             label="{{'COMMON_SPECIES_NOTES' | translate}}"
+             model="monitoringDetailController.data.speciesNotes"></field>
+    </div>
+  </div>
+
+  <div class="row">
+    <form-pictures ng-model="monitoringDetailController.data.pictures"></form-pictures>
+  </div>
+
+</form>
