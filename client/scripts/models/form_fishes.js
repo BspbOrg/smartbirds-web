@@ -3,6 +3,11 @@ const LocalCache = require('./mixins/local_cache')
 const countPendingReview = require('./mixins/countPendingReview')
 
 const COPY_PERSIST_PROPS = Object.fromEntries([
+  'latitude',
+  'longitude',
+  'geolocationAccuracy',
+  'nameWaterBody',
+
   // common fields
   'observationMethodology',
   'source',
