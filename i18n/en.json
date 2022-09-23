@@ -1229,5 +1229,6 @@
     "FISHES_DETAIL_SHELTERS": "Shelters",
     "FISHES_DETAIL_TRANSPARENCY": "Water transperancy",
     "FISHES_DETAIL_VEGETATION_TYPE": "Vegetation type",
-    "FISHES_DETAIL_NATURAL_BARRIERS": "Natural barriers"
+    "FISHES_DETAIL_NATURAL_BARRIERS": "Natural barriers",
+    "CLASS_FISHES": "Fishes"
 }

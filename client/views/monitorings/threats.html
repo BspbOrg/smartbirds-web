@@ -81,10 +81,9 @@
           ng-if="monitoringDetailController.data.poisonedType === 'dead' || monitoringDetailController.data.poisonedType === 'alive'">
           <div class="row">
             <div class="col-md-12">
-              <field name="class" type="select" required="true"
-                choices="monitoringDetailController.threatsClassChoices"
-                label="{{'THREATS_DETAIL_CLASS' | translate}}" model="monitoringDetailController.data.class"
-                on-select="monitoringDetailController.data.species = null"></field>
+              <field name="class" type="select" config="speciesClasses" label="{{'THREATS_DETAIL_CLASS' | translate}}" required="true"
+                     model="monitoringDetailController.data.class" on-select="monitoringDetailController.data.species = null">
+              </field>
             </div>
           </div>
           <div class="row">

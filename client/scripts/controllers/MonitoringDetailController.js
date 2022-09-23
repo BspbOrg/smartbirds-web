@@ -6,14 +6,6 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
 ) {
   const controller = this
 
-  controller.threatsClassChoices = [
-    { id: 'birds', label: 'CLASS_BIRDS' },
-    { id: 'herptiles', label: 'CLASS_HERPTILES' },
-    { id: 'mammals', label: 'CLASS_MAMMALS' },
-    { id: 'invertebrates', label: 'CLASS_INVERTEBRATES' },
-    { id: 'plants', label: 'CLASS_PLANTS' }
-  ]
-
   let id = $stateParams.id
   let isCopy = false
   if (!$stateParams.id && $stateParams.fromId) {
@@ -35,14 +27,14 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
   controller.db = db
   if (id) {
     if (local) {
-      controller.data = { id: id }
+      controller.data = { id }
       controller.data.$promise = model
         .localGet(controller.data)
         .then(function (data) {
           controller.data = data
         })
     } else {
-      controller.data = model.get({ id: id })
+      controller.data = model.get({ id })
     }
   } else {
     controller.data = new model() // eslint-disable-line new-cap

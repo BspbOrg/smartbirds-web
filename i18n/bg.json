@@ -1229,5 +1229,6 @@
     "FISHES_DETAIL_SHELTERS": "Естествени укрития",
     "FISHES_DETAIL_TRANSPARENCY": "Прозрачност на водата",
     "FISHES_DETAIL_VEGETATION_TYPE": "Водна растителност",
-    "FISHES_DETAIL_NATURAL_BARRIERS": "Наличие на естествени препядствия"
+    "FISHES_DETAIL_NATURAL_BARRIERS": "Наличие на естествени препядствия",
+    "CLASS_FISHES": "Риби"
 }
