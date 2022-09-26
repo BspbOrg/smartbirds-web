@@ -62,6 +62,10 @@
              model="user.data.password"
       ></field>
 
+      <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+      <input ng-if="!user.hideFake" type="text" name="fakeusernameremembered2"/>
+      <input ng-if="!user.hideFake" type="password" name="fakepasswordremembered2"/>
+
       <div ng-controller="LanguageController as $languageController">
         <field ng-if="::$user.getIdentity().id === user.data.id" name="language" type="select"
                 required="true"
@@ -74,10 +78,12 @@
              choices="user.privacyChoices"
              label="{{'USER_DETAIL_PRIVACY' | translate}}"
              model="user.data.privacy"></field>
-
-      <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
-      <input ng-if="!user.hideFake" type="text" name="fakeusernameremembered2"/>
-      <input ng-if="!user.hideFake" type="password" name="fakepasswordremembered2"/>
+      <field ng-if="::$user.getIdentity().id === user.data.id" name="allowDataMosv" type="bool"
+             label="{{'USER_DETAIL_ALLOW_DATA_MOSV' | translate}}"
+             model="user.data.allowDataMosv"></field>
+      <field ng-if="::$user.getIdentity().id === user.data.id" name="allowDataSciencePublications" type="bool"
+             label="{{'USER_DETAIL_ALLOW_DATA_SCIENCE_PUBLICATIONS' | translate}}"
+             model="user.data.allowDataSciencePublications"></field>
 
       <field name="notes" type="memo"
              label="{{'USER_DETAIL_NOTES' | translate}}"
