@@ -84,6 +84,13 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       resolve: resolveUser
     })
 
+    .state('fishes', {
+      url: '/fishes',
+      templateUrl: '/views/home-fishes.html',
+      title: 'FORM_FISHES_SHORT',
+      resolve: resolveUser
+    })
+
     .state('ciconia', {
       url: '/ciconia',
       templateUrl: '/views/home-ciconia.html',
@@ -541,7 +548,7 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       url: '/stats'
     })
 
-  const statForms = ['birds', 'herptiles', 'mammals', 'plants', 'invertebrates']
+  const statForms = ['birds', 'fishes', 'invertebrates', 'herptiles', 'mammals', 'plants']
   angular.forEach(statForms, function (form) {
     $stateProvider
       .state('auth.stats.' + form, {

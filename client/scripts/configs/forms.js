@@ -286,7 +286,7 @@ const forms = module.exports = {
     hasCount: true,
     longLabel: 'FORM_FISHES_LONG',
     shortLabel: 'FORM_FISHES_SHORT',
-    hasStats: false,
+    hasStats: true,
     filters: [
       'auto_location',
       '{user:int}',

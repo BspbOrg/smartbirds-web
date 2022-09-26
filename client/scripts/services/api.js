@@ -15,7 +15,7 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       return $http({
         method: 'POST',
         url: ENDPOINT_URL + '/session',
-        data: data,
+        data,
         withCredentials: true,
         skipSessionExpiredInterceptor: true
       })
@@ -30,7 +30,7 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       return $http(angular.extend({
         method: 'PUT',
         url: ENDPOINT_URL + '/session',
-        data: data,
+        data,
         withCredentials: true
       }, opts))
     },
@@ -59,8 +59,8 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         method: 'PATCH',
         url: ENDPOINT_URL + '/user/' + $window.encodeURIComponent(userId),
         data: {
-          oldPassword: oldPassword,
-          newPassword: newPassword
+          oldPassword,
+          newPassword
         }
       })
     }
@@ -72,10 +72,10 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         method: 'POST',
         url: ENDPOINT_URL + '/tasks/auto-location',
         data: {
-          form: form,
-          id: id,
-          limit: limit,
-          force: force
+          form,
+          id,
+          limit,
+          force
         }
       })
     },
@@ -84,10 +84,10 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         method: 'POST',
         url: ENDPOINT_URL + '/tasks/bgatlas2008',
         data: {
-          form: form,
-          id: id,
-          limit: limit,
-          force: force
+          form,
+          id,
+          limit,
+          force
         }
       })
     },
@@ -96,10 +96,10 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         method: 'POST',
         url: ENDPOINT_URL + '/tasks/auto-visit',
         data: {
-          form: form,
-          id: id,
-          limit: limit,
-          force: force
+          form,
+          id,
+          limit,
+          force
         }
       })
     },
@@ -108,10 +108,10 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         method: 'POST',
         url: ENDPOINT_URL + '/tasks/birds-new-species-moderator-review',
         data: {
-          form: form,
-          id: id,
-          limit: limit,
-          force: force
+          form,
+          id,
+          limit,
+          force
         }
       })
     }
@@ -122,20 +122,22 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
   const forms = [
     'campaign',
     'birds',
+    'birds_top',
     'cbm',
     'ciconia',
+    'fishes',
+    'fishes_top',
     'herptiles',
-    'mammals',
-    'invertebrates',
-    'plants',
-    'birds_top',
     'herptiles_top',
-    'plants_top',
-    'mammals_top',
+    'invertebrates',
     'invertebrates_top',
+    'mammals',
+    'mammals_top',
+    'plants',
+    'plants_top',
+    'threats',
     'total_user_records',
-    'user_rank',
-    'threats'
+    'user_rank'
   ]
   forms.forEach(function (form) {
     api.stats[form + '_stats'] = function () {
@@ -165,7 +167,7 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     return $http({
       method: 'GET',
       url: ENDPOINT_URL + '/autocomplete',
-      params: params,
+      params,
       withCredentials: true
     }).then(function (response) {
       return response.data
@@ -192,7 +194,7 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         method: 'POST',
         url: ENDPOINT_URL + '/bgatlas/user/selected',
         data: {
-          cells: cells
+          cells
         }
       }).then(function (response) {
         return response.data
