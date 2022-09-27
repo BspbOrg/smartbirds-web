@@ -137,7 +137,10 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     'plants_top',
     'threats',
     'total_user_records',
-    'user_rank'
+    'user_rank',
+    'birds_migrations_peak_daily_species',
+    'birds_migrations_season_totals',
+    'birds_migrations_top_interesting_species_month'
   ]
   forms.forEach(function (form) {
     api.stats[form + '_stats'] = function () {

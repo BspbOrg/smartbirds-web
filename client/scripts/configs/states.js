@@ -565,10 +565,42 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
           },
           prefix: function () {
             return form.toUpperCase()
+          },
+          stats: function () {
+            return {
+              stats: form + '_top_stats',
+              userRanks: 'user_rank_stats'
+            }
           }
         }
       })
   })
+
+  $stateProvider
+    .state('auth.stats.migrations', {
+      url: '/migrations',
+      views: {
+        'content@auth': {
+          templateUrl: 'views/stats-migrations.html',
+          controller: 'StatsController as $ctrl'
+        }
+      },
+      resolve: {
+        form: function () {
+          return 'birdsMigrations'
+        },
+        prefix: function () {
+          return 'BIRDS_MIGRATIONS'
+        },
+        stats: function () {
+          return {
+            peak: 'birds_migrations_peak_daily_species_stats',
+            season: 'birds_migrations_season_totals_stats',
+            interesting: 'birds_migrations_top_interesting_species_month_stats'
+          }
+        }
+      }
+    })
 
   $stateProvider
     .state('auth.stats.daily_report', {

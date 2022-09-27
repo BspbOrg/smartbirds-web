@@ -1,22 +1,27 @@
-require('../app').controller('StatsController', /* @ngInject */function ($scope, $state, api, form, prefix, user) {
-  var controller = this
+require('../app').controller('StatsController', /* @ngInject */function ($scope, $state, api, form, prefix, user, stats) {
+  const controller = this
   controller.form = form
   controller.translationPrefix = prefix
+  controller.selectedDate = new Date()
 
   controller.tab = 'interesting'
 
-  api.stats[controller.form + '_top_stats']().then(function (stats) {
-    controller.stats = stats
+  Object.entries(stats).forEach(([key, fn]) => {
+    api.stats[fn]().then((stats) => {
+      controller[key] = stats
+    })
   })
 
-  api.stats.user_rank_stats().then(function (stats) {
-    controller.userRanks = stats
-  })
+  controller.filters = {
+    date: (targetDate) => (record) => {
+      return targetDate && record.date.split('T').shift() === new Date(targetDate).toISOString().split('T').shift()
+    }
+  }
 
   controller.generateInterestingSpeciesUrl = function (record) {
-    var formName = record.form || controller.form
+    const formName = record.form || controller.form
     return $state.href('auth.monitoring.public.' + formName, {
-      user: record.observer.id,
+      user: record.observer && record.observer.id,
       species: record.species.label.la,
       from_date: record.date,
       to_date: record.date,
@@ -25,7 +30,7 @@ require('../app').controller('StatsController', /* @ngInject */function ($scope,
   }
 
   controller.generateTopSpeciesUrl = function (record) {
-    var fromDate = new Date()
+    const fromDate = new Date()
     fromDate.setMonth(fromDate.getMonth() - 1)
     return $state.href('auth.monitoring.public.' + controller.form, {
       species: record.species.label.la,
@@ -35,7 +40,7 @@ require('../app').controller('StatsController', /* @ngInject */function ($scope,
   }
 
   controller.generateTopUserUrl = function (record) {
-    var fromDate = new Date()
+    const fromDate = new Date()
     fromDate.setMonth(0)
     fromDate.setDate(1)
     return $state.href('auth.monitoring.public.' + controller.form, {
@@ -46,23 +51,23 @@ require('../app').controller('StatsController', /* @ngInject */function ($scope,
   }
 
   controller.userRecordsPosition = function () {
-    var userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
+    const userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
     return userRank && userRank.records.position ? userRank.records.position : '--'
   }
 
   controller.userRecordsCount = function () {
-    var userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
+    const userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
     console.log(userRank)
     return userRank && userRank.records.count ? userRank.records.count : '0'
   }
 
   controller.userSpeciesPosition = function () {
-    var userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
+    const userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
     return userRank && userRank.species.position ? userRank.species.position : '--'
   }
 
   controller.userSpeciesCount = function () {
-    var userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
+    const userRank = controller.userRanks[user.getIdentity().id] && controller.userRanks[user.getIdentity().id][controller.form]
     return userRank && userRank.species.count ? userRank.species.count : '0'
   }
 })
