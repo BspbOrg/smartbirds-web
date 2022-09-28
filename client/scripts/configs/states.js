@@ -49,6 +49,30 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       resolve: resolveUser
     })
 
+    .state('migrations', {
+      url: '/migrations',
+      templateUrl: '/views/home-birds-migrations.html',
+      controller: 'StatsController',
+      controllerAs: '$ctrl',
+      title: 'FORM_BIRDS_MIGRATIONS_SHORT',
+      resolve: {
+        user: resolveUser.user,
+        form: function () {
+          return 'birdsMigrations'
+        },
+        prefix: function () {
+          return 'BIRDS_MIGRATIONS'
+        },
+        stats: function () {
+          return {
+            species: 'birds_migrations_top_species_month_stats',
+            season: 'birds_migrations_season_totals_stats',
+            interesting: 'birds_migrations_top_interesting_species_month_stats'
+          }
+        }
+      }
+    })
+
     .state('herp', {
       url: '/herp',
       templateUrl: '/views/home-herp.html',
