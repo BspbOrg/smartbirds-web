@@ -65,6 +65,7 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
         },
         stats: function () {
           return {
+            peak: 'birds_migrations_peak_daily_species_stats',
             species: 'birds_migrations_top_species_month_stats',
             season: 'birds_migrations_season_totals_stats',
             interesting: 'birds_migrations_top_interesting_species_month_stats'
