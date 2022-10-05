@@ -22,20 +22,28 @@ require('../app').controller('StatsController', /* @ngInject */function ($scope,
         if (record.migrationPoint.label[lang] === migrationPoint) return true
       }
       return false
+    },
+    species: (species) => (record) => {
+      if (!species) return true
+      for (const lang in record.species.label) {
+        if (record.species.label[lang] === species) return true
+      }
+      return false
     }
   }
 
   const cache = {}
-  controller.uniqueMigrationPoints = function (list) {
+  controller.uniqueLocalLabel = function (list, field) {
     cache[$translate.$language] = cache[$translate.$language] || {}
-    if (cache[$translate.$language][list]) return cache[$translate.$language][list]
+    cache[$translate.$language][field] = cache[$translate.$language][field] || {}
+    if (cache[$translate.$language][field][list]) return cache[$translate.$language][field][list]
 
     const result = Object.keys((list || []).reduce((acc, record) => {
-      acc[localization.getLocalLabel(record.migrationPoint.label)] = true
+      acc[localization.getLocalLabel(record[field].label)] = true
       return acc
-    }, {})).sort((a, b) => a.localeCompare(b))
+    }, {})).filter(Boolean).sort((a, b) => a.localeCompare(b))
 
-    cache[$translate.$language][list] = result
+    cache[$translate.$language][field][list] = result
     return result
   }
 

@@ -15,6 +15,25 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <form>
+            <div class="col-sm-7 col-md-5">
+              <field name="species" type="select" choices="$ctrl.uniqueLocalLabel($ctrl.peak, 'species')"
+                     label="{{'PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES' | translate}}"
+                     placeholder="{{'PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES_PLACEHOLDER' | translate}}"
+                     model="$ctrl.selectedSpecies"></field>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div ng-if="$ctrl.selectedSpecies" class="col-md-12">
+        <chart-migrations data="$ctrl.peak" specie="$ctrl.selectedSpecies"></chart-migrations>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -42,7 +61,6 @@
         </div>
 
         <div class="row">
-          <!-- season totals start -->
           <div class="col-md-12">
             <h3>{{'PUBLIC_BIRDS_MIGRATIONS_SEASON_TOTALS' | translate}}</h3>
           </div>
@@ -51,7 +69,7 @@
             <div class="row">
               <form>
                 <div class="col-sm-7 col-md-5">
-                  <field name="migrationPoint" type="select" choices="$ctrl.uniqueMigrationPoints($ctrl.season)"
+                  <field name="migrationPoint" type="select" choices="$ctrl.uniqueLocalLabel($ctrl.season, 'migrationPoint')"
                          label="{{'PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT' | translate}}"
                          placeholder="{{'PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER' | translate}}"
                          model="$ctrl.selectedMigrationPoint"></field>
@@ -81,7 +99,6 @@
               {{$ctrl.selectedMigrationPoint ? 'PUBLIC_BIRDS_MIGRATIONS_SEASON_NO_RECORDS' : 'PUBLIC_NO_RECORDS' | translate}}
             </div>
           </div>
-          <!-- season totals end -->
         </div>
 
         <div class="row">
