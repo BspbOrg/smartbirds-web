@@ -1,4 +1,4 @@
-require('../app').controller('StatsController', /* @ngInject */function ($scope, $state, api, form, prefix, user, stats) {
+require('../app').controller('StatsController', /* @ngInject */function ($scope, $state, $translate, api, form, localization, prefix, user, stats) {
   const controller = this
   controller.form = form
   controller.translationPrefix = prefix
@@ -15,7 +15,28 @@ require('../app').controller('StatsController', /* @ngInject */function ($scope,
   controller.filters = {
     date: (targetDate) => (record) => {
       return targetDate && record.date.split('T').shift() === new Date(targetDate).toISOString().split('T').shift()
+    },
+    migrationPoint: (migrationPoint) => (record) => {
+      if (!migrationPoint) return true
+      for (const lang in record.migrationPoint.label) {
+        if (record.migrationPoint.label[lang] === migrationPoint) return true
+      }
+      return false
     }
+  }
+
+  const cache = {}
+  controller.uniqueMigrationPoints = function (list) {
+    cache[$translate.$language] = cache[$translate.$language] || {}
+    if (cache[$translate.$language][list]) return cache[$translate.$language][list]
+
+    const result = Object.keys((list || []).reduce((acc, record) => {
+      acc[localization.getLocalLabel(record.migrationPoint.label)] = true
+      return acc
+    }, {})).sort((a, b) => a.localeCompare(b))
+
+    cache[$translate.$language][list] = result
+    return result
   }
 
   controller.generateInterestingSpeciesUrl = function (record) {
