@@ -1254,6 +1254,7 @@
     "PUBLIC_BIRDS_MIGRATIONS_PEAK_NO_RECORDS": "Липсват записи за избраната дата",
     "PUBLIC_BIRDS_MIGRATIONS_TITLE": "Форма Миграция птици",
     "PUBLIC_BIRDS_MIGRATIONS_SUBTITLE": "Наблюдения на мигриращи реещи се птици от точка",
+    "PUBLIC_BIRDS_MIGRATIONS_TEXT": "Тази част от www.SmartBirds.org е осъществена в партньорство с Националния природонаучен музей при БАН и с финансовата подкрепа на Програма LIFE на Европейския съюз.",
     "PUBLIC_BIRDS_MIGRATIONS_TOP_SPECIES_MONTH": "Най-често наблюдавани видове за последните 30 дни",
     "FISHES_PUBLIC_LIST_TITLE_MAIN": "Форма Риби",
     "FISHES_PUBLIC_LIST_TITLE_SECONDARY": "Наблюдения на риби",
@@ -1276,5 +1277,6 @@
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT": "Точка на наблюдение",
     "PUBLIC_BIRDS_MIGRATIONS_SEASON_NO_RECORDS": "Липсват записи за избраната миграционна точка",
     "PUBLIC_NO_RECORDS": "Липсват записи",
-    "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER": "Всички"
+    "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER": "Всички",
+    "PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES": "Вид"
 }

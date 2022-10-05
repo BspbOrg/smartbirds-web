@@ -1,4 +1,4 @@
-const COLOR_SCHEME = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#b15928']
+const COLOR_SCHEME = ['#e60049', '#0bb4ff', '#50e991', '#e6d800', '#9b19f5', '#ffa300', '#dc0ab4', '#b3d4ff', '#00bfa0']
 
 require('../app').directive('chartMigrations', /* @ngInject */function () {
   return {
@@ -17,6 +17,7 @@ require('../app').directive('chartMigrations', /* @ngInject */function () {
         if (!$ctrl.data) return
 
         $scope.$watch('$ctrl.species', function (species) {
+          $ctrl.chartLoaded = global.Chart != null
           if (!species) return
 
           const datasets = {}
@@ -38,6 +39,8 @@ require('../app').directive('chartMigrations', /* @ngInject */function () {
             label,
             data: $ctrl.labels.map((date) => datasets[date][label] || 0),
             backgroundColor: COLOR_SCHEME[idx % COLOR_SCHEME.length],
+            borderWidth: 1,
+            borderColor: 'rgba(0,0,0,0.6)',
             order: -order
           }))
           $ctrl.config = {
@@ -47,6 +50,9 @@ require('../app').directive('chartMigrations', /* @ngInject */function () {
               datasets: $ctrl.datasets
             },
             options: {
+              layout: {
+                autoPadding: true
+              },
               scales: {
                 x: {
                   stacked: true
