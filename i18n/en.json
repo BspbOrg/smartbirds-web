@@ -1272,5 +1272,9 @@
     "PUBLIC_FISHES_TOP_SPECIES_MONTH": "The most often observed species for the last 30 days",
     "PUBLIC_FISHES_TOP_OBSERVERS_RECORDS_YEAR": "Most observations recorded per calendar year",
     "PUBLIC_FISHES_TOP_OBSERVERS_SPECIES_YEAR": "The most species observed per calendar year",
-    "PUBLIC_STATISTIC_TABLE_COL_SUM_COUNT": "{{count}} individuals"
+    "PUBLIC_STATISTIC_TABLE_COL_SUM_COUNT": "{{count}} individuals",
+    "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT": "Migration point",
+    "PUBLIC_BIRDS_MIGRATIONS_SEASON_NO_RECORDS": "No records for the selected migration point",
+    "PUBLIC_NO_RECORDS": "No records",
+    "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER": "All"
 }

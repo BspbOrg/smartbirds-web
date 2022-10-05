@@ -1272,5 +1272,9 @@
     "PUBLIC_FISHES_TOP_SPECIES_MONTH": "Най-често наблюдавани видове за последните 30 дни",
     "PUBLIC_FISHES_TOP_OBSERVERS_RECORDS_YEAR": "Най-много въведени наблюдения за календарна година",
     "PUBLIC_FISHES_TOP_OBSERVERS_SPECIES_YEAR": "Най-много наблюдавани видове за календарна година",
-    "PUBLIC_STATISTIC_TABLE_COL_SUM_COUNT": "{{count}} индивида"
+    "PUBLIC_STATISTIC_TABLE_COL_SUM_COUNT": "{{count}} индивида",
+    "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT": "Точка на наблюдение",
+    "PUBLIC_BIRDS_MIGRATIONS_SEASON_NO_RECORDS": "Липсват записи за избраната миграционна точка",
+    "PUBLIC_NO_RECORDS": "Липсват записи",
+    "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER": "Всички"
 }
