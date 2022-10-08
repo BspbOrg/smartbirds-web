@@ -34,8 +34,37 @@
 @import "custom";
 @import "angular-loading-bar";
 @import "home";
-@import "fontello";
 @import "map";
+
+.icon-fw {
+  width: (18em / 14);
+  text-align: center;
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  //font-size: 122.5%;
+
+  transform: translateY(0.153em);
+}
+
+.huge .icon {
+  font-size: 1.22499999em;
+}
 
 input[type=file] {
   width: 1px;
