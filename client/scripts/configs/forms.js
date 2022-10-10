@@ -53,6 +53,57 @@ const forms = module.exports = {
       'moderatorReview'
     ]
   },
+  birdsMigrations: {
+    model: 'FormBirdsMigrations',
+    serverModel: 'formBirdsMigrations',
+    label: 'FORM_LABEL_BIRDS_MIGRATIONS',
+    translatePrefix: 'BIRDS_MIGRATIONS',
+    speciesType: 'birds',
+    hasCount: true,
+    longLabel: 'FORM_BIRDS_MIGRATIONS_LONG',
+    shortLabel: 'FORM_BIRDS_MIGRATIONS_SHORT',
+    hasStats: false,
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'species',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'threat',
+      'organization',
+      'moderatorReview',
+      'migration_point'
+    ]
+  },
+  fishes: {
+    model: 'FormFishes',
+    serverModel: 'formFishes',
+    label: 'FORM_LABEL_FISHES',
+    translatePrefix: 'FISHES',
+    speciesType: 'fishes',
+    hasCount: true,
+    longLabel: 'FORM_FISHES_LONG',
+    shortLabel: 'FORM_FISHES_SHORT',
+    hasStats: true,
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'species',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'threat',
+      'organization',
+      'moderatorReview'
+    ]
+  },
   herptiles: {
     model: 'FormHerptiles',
     serverModel: 'formHerptiles',
@@ -247,57 +298,6 @@ const forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'organization',
-      'moderatorReview'
-    ]
-  },
-  birdsMigrations: {
-    model: 'FormBirdsMigrations',
-    serverModel: 'formBirdsMigrations',
-    label: 'FORM_LABEL_BIRDS_MIGRATIONS',
-    translatePrefix: 'BIRDS_MIGRATIONS',
-    speciesType: 'birds',
-    hasCount: true,
-    longLabel: 'FORM_BIRDS_MIGRATIONS_LONG',
-    shortLabel: 'FORM_BIRDS_MIGRATIONS_SHORT',
-    hasStats: false,
-    filters: [
-      'auto_location',
-      '{user:int}',
-      'species',
-      'from_date',
-      'to_date',
-      'latitude',
-      'longitude',
-      'radius',
-      'tab',
-      'threat',
-      'organization',
-      'moderatorReview',
-      'migration_point'
-    ]
-  },
-  fishes: {
-    model: 'FormFishes',
-    serverModel: 'formFishes',
-    label: 'FORM_LABEL_FISHES',
-    translatePrefix: 'FISHES',
-    speciesType: 'fishes',
-    hasCount: true,
-    longLabel: 'FORM_FISHES_LONG',
-    shortLabel: 'FORM_FISHES_SHORT',
-    hasStats: true,
-    filters: [
-      'auto_location',
-      '{user:int}',
-      'species',
-      'from_date',
-      'to_date',
-      'latitude',
-      'longitude',
-      'radius',
-      'tab',
-      'threat',
       'organization',
       'moderatorReview'
     ]
