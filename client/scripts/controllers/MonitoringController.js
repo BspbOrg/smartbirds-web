@@ -2,10 +2,10 @@
  * Created by groupsky on 08.01.16.
  */
 
-var _ = require('lodash')
-var angular = require('angular')
+const _ = require('lodash')
+const angular = require('angular')
 require('../app').controller('MonitoringController', /* @ngInject */function ($scope, $state, $stateParams, $q, $translate, model, ngToast, db, Raven, ENDPOINT_URL, $httpParamSerializer, formName, user, User, formDef, context, localization) {
-  var controller = this
+  const controller = this
 
   controller.maxExportCount = 20000
   controller.formName = formName
@@ -87,7 +87,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
   }
 
   controller.updateFilter = function () {
-    var filter = _.mapValues(controller.filter, function (value, key) {
+    const filter = _.mapValues(controller.filter, function (value, key) {
       if (value && value.label) {
         return value.label.en
       }
@@ -105,7 +105,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
 
   controller.toggleSelected = function (row) {
     if (!row) {
-      var selected = !controller.allSelected
+      const selected = !controller.allSelected
       controller.rows.forEach(function (row) {
         row.$selected = selected
       })
@@ -123,7 +123,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
   controller.deleteRows = function (rows) {
     $q.all(rows.map(function (row) {
       return (row.$local ? row.$localDelete() : row.$delete()).then(function (res) {
-        var idx
+        let idx
         if (row.$local) {
           idx = controller.localRows.indexOf(row)
           if (idx !== -1) {
@@ -190,8 +190,8 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
     fetch(controller.failedQuery)
   }
 
-  controller.export = function (outputType) {
-    var selection = []
+  controller.export = function (outputType, exportType) {
+    const selection = []
     if (controller.selectedRows && controller.selectedRows.length > 0 && !controller.allSelected && controller.canExport) {
       angular.forEach(controller.selectedRows, function (row) {
         selection.push(row.id)
@@ -200,8 +200,9 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
     return model.export(angular.extend({}, controller.filter, {
       limit: -1,
       offset: 0,
-      outputType: outputType,
-      selection: selection
+      outputType,
+      selection,
+      exportType
     })).$promise
       .then(function (res) {
         ngToast.create({
