@@ -3,7 +3,7 @@
  */
 
 const angular = require('angular')
-require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclature, Poi, Species, User, Visit, Zone, user, Organization) {
+require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclature, Poi, Species, User, Visit, Zone, user, Organization, MapLayer) {
   const db = {
     locations: {},
     nomenclatures: {},
@@ -12,7 +12,8 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
     users: {},
     zones: {},
     visits: {},
-    organizations: {}
+    organizations: {},
+    mapLayers: {}
   }
 
   db.locations.$promise = user.authPromise
@@ -157,6 +158,25 @@ require('../app').service('db', /* @ngInject */function ($q, Location, Nomenclat
         return db.organizations
       }).finally(function () {
         delete db.organizations.$promise
+      })
+  })();
+
+  (db.$updateMapLayers = function () {
+    db.mapLayers = {}
+    db.mapLayers.$promise = user.authPromise
+      .then(function () {
+        return MapLayer.query({ limit: -1 }).$promise
+      })
+      .then(function (items) {
+        const res = db.mapLayers
+        items.forEach(function (item) {
+          res[item.type] = res[item.type] || {}
+          res[item.type][item.label.en] = item
+        })
+        return res
+      })
+      .finally(function () {
+        delete db.mapLayers.$promise
       })
   })()
 

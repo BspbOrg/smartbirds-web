@@ -556,6 +556,19 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
     })
 
     /// ////////
+    // Map Tiles //
+    /// ////////
+    .state('auth.mapLayers', {
+      url: '/layers?type',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/map-layers/list.html',
+          controller: 'MapLayersController as $ctrl'
+        }
+      }
+    })
+
+    /// ////////
     // Stats //
     /// ////////
     .state('auth.tasks', {

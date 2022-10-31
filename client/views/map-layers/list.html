@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header clearfix">
+      <div class="pull-right">
+        <div class="btn-group" uib-dropdown is-open="$ctrl.languageSelectorIsOpen">
+          <button type="button" class="btn btn-default" uib-dropdown-toggle>
+            {{$ctrl.currentLanguage ? ($ctrl.languages[$ctrl.currentLanguage].label|translate) : 'ALL'}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu list-group" uib-dropdown-menu>
+            <li class="list-group-item"
+                ng-class="{active: !$ctrl.currentLanguage}">
+              <a href="#" ng-click="$ctrl.setCurrentLanguage('', $event)">- ALL -</a>
+            </li>
+            <li class="list-group-item"
+                ng-repeat="(key, language) in $ctrl.languages track by key"
+                ng-class="{active: key === $ctrl.currentLanguage}">
+              <a href="#" ng-click="$ctrl.setCurrentLanguage(key, $event)">{{::language.label|translate}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {{::'MAP_LAYERS_TITLE'|translate}}
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <ul class="list-group">
+      <li class="list-group-item"
+          ng-repeat="(type, list) in $ctrl.mapLayers"
+          ng-class="{'list-group-item-info': $ctrl.selected.type === type}">
+        <a href ui-sref=".({type: type})">
+          <span class="badge pull-right">{{(list|toArray).length}}</span>
+          {{type|humanize}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    <form name="editform"
+          role="form"
+          class="table-responsive"
+          confirm-on-exit="editform.$dirty"
+          confirm-message-window="{{'MAP_LAYERS_UNSAVED_DATA_TITLE' | translate}}"
+          confirm-message-route="{{'MAP_LAYERS_UNSAVED_DATA_MESSAGE' | translate}}">
+      <table class="table table-hover table-striped table-responsive">
+        <thead>
+        <tr>
+          <th rowspan="2">#</th>
+          <th colspan="{{$ctrl.visibleLanguagesCount}}">{{::'MAP_LAYERS_COL_LABEL'|translate}}</th>
+          <th colspan="{{$ctrl.visibleLanguagesCount}}">{{::'MAP_LAYERS_COL_SUMMARY'|translate}}</th>
+          <th colspan="{{$ctrl.visibleLanguagesCount}}">{{::'MAP_LAYERS_COL_URL'|translate}}</th>
+          <th rowspan="2">{{::'MAP_LAYERS_COL_WIDTH'|translate}}</th>
+          <th rowspan="2">{{::'MAP_LAYERS_ROW_WIDTH'|translate}}</th>
+          <th rowspan="2" class="btn-group btn-group-xs">
+            <button
+              type="button"
+              class="btn btn-info btn-xs"
+              title="{{::'MAP_LAYERS_BUTTON_ADD' | translate}}"
+              ng-click="$ctrl.add()">
+              <i class="fa fa-plus fa-fw"></i>
+            </button>
+            <button ng-disabled="editform.$pristine"
+                    type="button"
+                    class="btn btn-success btn-xs"
+                    title="{{::'MAP_LAYERS_BUTTON_SAVE' | translate}}"
+                    ng-click="$ctrl.save()">
+              <i class="fa fa-check fa-fw"></i>
+            </button>
+          </th>
+        </tr>
+        <tr>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by 'label'+key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by 'summary'+key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by 'url'+key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="hover" ng-repeat="item in $ctrl.visible track by item.label.en">
+          <td>{{$index+1+($ctrl.page-1)*$ctrl.pageSize}}</td>
+          <td ng-repeat="(key, language) in $ctrl.visibleLanguages track by key">
+            <field type="text" model="item.label[key]"></field>
+          </td>
+          <td ng-repeat="(key, language) in $ctrl.visibleLanguages track by key">
+            <field type="text" model="item.summary[key]"></field>
+          </td>
+          <td ng-repeat="(key, language) in $ctrl.visibleLanguages track by key">
+            <field type="text" model="item.url[key]"></field>
+          </td>
+          <td>
+            <field type="int"
+                   model="item.tileWidth"></field>
+          </td>
+          <td>
+            <field type="int"
+                   model="item.tileHeight"></field>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-xs visible-hover"
+                    ng-click="$ctrl.remove($index)">
+              <i class="fa fa-remove fa-fw"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th rowspan="2">#</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by 'label'+key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by 'summary'+key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th ng-repeat="(key, language) in $ctrl.visibleLanguages track by 'url'+key" title="{{::language.label|translate}}">{{::key|uppercase}}</th>
+          <th rowspan="2">{{::'MAP_LAYERS_COL_WIDTH'|translate}}</th>
+          <th rowspan="2">{{::'MAP_LAYERS_ROW_WIDTH'|translate}}</th>
+          <th rowspan="2" class="btn-group btn-group-xs">
+            <button
+              type="button"
+              class="btn btn-info btn-xs"
+              title="{{::'MAP_LAYERS_BUTTON_ADD' | translate}}"
+              ng-click="$ctrl.add()">
+              <i class="fa fa-plus fa-fw"></i>
+            </button>
+            <button ng-disabled="editform.$pristine"
+                    type="button"
+                    class="btn btn-success btn-xs"
+                    title="{{::'MAP_LAYERS_BUTTON_SAVE' | translate}}"
+                    ng-click="$ctrl.save()">
+              <i class="fa fa-check fa-fw"></i>
+            </button>
+          </th>
+        </tr>
+        <tr>
+          <th colspan="{{$ctrl.visibleLanguagesCount}}">{{::'MAP_LAYERS_COL_LABEL'|translate}}</th>
+          <th colspan="{{$ctrl.visibleLanguagesCount}}">{{::'MAP_LAYERS_COL_SUMMARY'|translate}}</th>
+          <th colspan="{{$ctrl.visibleLanguagesCount}}">{{::'MAP_LAYERS_COL_URL'|translate}}</th>
+        </tr>
+        </tfoot>
+      </table>
+    </form>
+
+    <div class="actions actions-species">
+      <ul uib-pagination
+          total-items="$ctrl.selected.species.length"
+          items-per-page="$ctrl.pageSize"
+          max-size="5"
+          boundary-link-numbers="true"
+          ng-model="$ctrl.page"
+          ng-change="$ctrl.pageChanged()"></ul>
+    </div>
+  </div>
+</div>

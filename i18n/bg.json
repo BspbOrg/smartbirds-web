@@ -1280,5 +1280,13 @@
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER": "Всички",
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES": "Вид",
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES_PLACEHOLDER": "Избери вид",
-    "FORM_LIST_BUTTON_FULL_CSV_EXPORT_TOOLTIP": "Генериране на csv файл с всички намерени записи и всички полета"
+    "FORM_LIST_BUTTON_FULL_CSV_EXPORT_TOOLTIP": "Генериране на csv файл с всички намерени записи и всички полета",
+    "NAV_MAP_LAYERS": "Слоеве",
+    "MAP_LAYERS_TITLE": "Слоеве",
+    "MAP_LAYERS_UNSAVED_DATA_TITLE": "Имате незаписани промени!",
+    "MAP_LAYERS_UNSAVED_DATA_MESSAGE": "Имате незаписани промени. Сигурни ли сте, че искате да продължите?",
+    "MAP_LAYERS_COL_LABEL": "Име",
+    "MAP_LAYERS_COL_SUMMARY": "Описание",
+    "MAP_LAYERS_BUTTON_ADD": "Добавяне",
+    "MAP_LAYERS_BUTTON_SAVE": "Запис"
 }

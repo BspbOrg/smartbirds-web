@@ -1280,5 +1280,16 @@
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_MIGRATION_POINT_PLACEHOLDER": "All",
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES": "Species",
     "PUBLIC_BIRDS_MIGRATIONS_FILTER_SPECIES_PLACEHOLDER": "Choose a species",
-    "FORM_LIST_BUTTON_FULL_CSV_EXPORT_TOOLTIP": "Generating a csv file with all records found and all fields"
+    "FORM_LIST_BUTTON_FULL_CSV_EXPORT_TOOLTIP": "Generating a csv file with all records found and all fields",
+    "NAV_MAP_LAYERS": "Map layers",
+    "MAP_LAYERS_TITLE": "Map layers",
+    "MAP_LAYERS_UNSAVED_DATA_TITLE": "There are unsaved changes!",
+    "MAP_LAYERS_UNSAVED_DATA_MESSAGE": "There are unsaved changes! Are you sure you want to continue?",
+    "MAP_LAYERS_COL_LABEL": "Label",
+    "MAP_LAYERS_COL_SUMMARY": "Summary",
+    "MAP_LAYERS_COL_URL": "URL",
+    "MAP_LAYERS_COL_WIDTH": "Width (px)",
+    "MAP_LAYERS_COL_HEIGHT": "Height (px)",
+    "MAP_LAYERS_BUTTON_ADD": "Add",
+    "MAP_LAYERS_BUTTON_SAVE": "Save"
 }

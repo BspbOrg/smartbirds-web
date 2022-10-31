@@ -1006,5 +1006,9 @@
     "PUBLIC_FORM_LAST_INTERESTING_SPECIES_COL_SPECIES": "Видови",
     "PUBLIC_FORM_LAST_INTERESTING_SPECIES_COL_DATE": "Датум",
     "PUBLIC_FORM_LAST_INTERESTING_SPECIES_COL_COUNT": "Број",
-    "PUBLIC_FORM_LAST_INTERESTING_SPECIES_COL_OBSERVER": "Набљудувач"
+    "PUBLIC_FORM_LAST_INTERESTING_SPECIES_COL_OBSERVER": "Набљудувач",
+    "MAP_LAYERS_UNSAVED_DATA_TITLE": "Постојат незачувани промени!",
+    "MAP_LAYERS_UNSAVED_DATA_MESSAGE": "Постојат незачувани промени! Дали сте сигурни дека сакате да продолжите?",
+    "MAP_LAYERS_BUTTON_ADD": "Додади",
+    "MAP_LAYERS_BUTTON_SAVE": "Зачувај"
 }
