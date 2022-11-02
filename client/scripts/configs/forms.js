@@ -76,7 +76,8 @@ const forms = module.exports = {
       'threat',
       'organization',
       'moderatorReview',
-      'migration_point'
+      'migration_point',
+      'source'
     ]
   },
   fishes: {
@@ -101,7 +102,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'source'
     ]
   },
   herptiles: {
@@ -126,8 +128,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
-
+      'moderatorReview',
+      'source'
     ]
   },
   mammals: {
@@ -152,8 +154,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
-
+      'moderatorReview',
+      'source'
     ]
   },
   invertebrates: {
@@ -178,8 +180,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
-
+      'moderatorReview',
+      'source'
     ]
   },
   plants: {
@@ -204,8 +206,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
-
+      'moderatorReview',
+      'source'
     ]
   },
   ciconia: {
@@ -227,8 +229,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
-
+      'moderatorReview',
+      'source'
     ]
   },
   threats: {
@@ -254,7 +256,8 @@ const forms = module.exports = {
       'species',
       'category',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'source'
     ]
   },
   pylons: {
@@ -276,7 +279,8 @@ const forms = module.exports = {
       'radius',
       'tab',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'source'
     ]
   },
   pylonsCasualties: {
@@ -299,7 +303,8 @@ const forms = module.exports = {
       'radius',
       'tab',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'source'
     ]
   }
 }

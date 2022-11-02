@@ -50,6 +50,13 @@
             </div>
 
             <div class="col-md-4 col-lg-3">
+              <field name="source" type="single-choice" nomenclature="main_source"
+                     label="{{'COMMON_FORM_SOURCE' | translate}}"
+                     on-select="monitoringController.updateFilter()"
+                     model="monitoringController.filter.source"></field>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
               <field name="fromDate" type="date"
                      label="{{'MONITORING_LIST_FILTER_FROM_DATE' | translate}}"
                      on-select="monitoringController.updateFilter()"
