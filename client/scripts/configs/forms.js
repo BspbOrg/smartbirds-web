@@ -25,7 +25,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'source'
     ]
   },
   birds: {
@@ -50,7 +51,8 @@ const forms = module.exports = {
       'tab',
       'threat',
       'organization',
-      'moderatorReview'
+      'moderatorReview',
+      'source'
     ]
   },
   birdsMigrations: {
