@@ -4,6 +4,17 @@
 
 const _ = require('lodash')
 const angular = require('angular')
+
+const serializeFilters = function (filters) {
+  return _.mapValues(filters, function (value, key) {
+    if (value && value.label) {
+      return value.label.en
+    }
+
+    return value && angular.isFunction(value.toJSON) ? value.toJSON() : value
+  })
+}
+
 require('../app').controller('MonitoringController', /* @ngInject */function ($scope, $state, $stateParams, $q, $translate, model, ngToast, db, Raven, ENDPOINT_URL, $httpParamSerializer, formName, user, User, formDef, context, localization) {
   const controller = this
 
@@ -87,13 +98,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
   }
 
   controller.updateFilter = function () {
-    const filter = _.mapValues(controller.filter, function (value, key) {
-      if (value && value.label) {
-        return value.label.en
-      }
-
-      return value && angular.isFunction(value.toJSON) ? value.toJSON() : value
-    })
+    const filter = serializeFilters(controller.filter)
     if (angular.equals(filter, $stateParams)) { return }
     controller.canExport = !filter.user || filter.user === user.getIdentity().id || user.canAccess(formName)
     $state.go('.', filter, {
@@ -163,9 +168,10 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
   }
 
   function fetch (query) {
+    const _query = serializeFilters(query)
     controller.loading = true
     controller.offline = false
-    return model.query(angular.extend({}, query, { context: controller.context })).$promise
+    return model.query(angular.extend({}, _query, { context: controller.context })).$promise
       .then(function (rows) {
         controller.count = rows.$$response.data.$$response.count
         Array.prototype.push.apply(controller.rows, rows)
@@ -173,7 +179,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
         return controller.rows
       }, function (error) {
         controller.offline = true
-        controller.failedQuery = query
+        controller.failedQuery = _query
         return $q.reject(error)
       })
       .then(function (rows) {
