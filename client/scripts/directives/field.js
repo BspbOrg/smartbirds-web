@@ -167,8 +167,10 @@ require('../app').directive('field', /* @ngInject */function ($q, api, Raven, ge
                   })
                 } else if (angular.isObject(field.model)) {
                   if (!(field.model instanceof Species)) {
-                    field.model = db.species[field.nomenclature][field.model.label.en] || new Species(field.model)
+                    field.model = db.species[field.nomenclature][field.model.label.la] || new Species(field.model)
                   }
+                } else if (typeof field.model === 'string') {
+                  field.model = db.species[field.nomenclature][field.model] || new Species({ label: { la: field.model } })
                 }
               }
             })
@@ -191,7 +193,7 @@ require('../app').directive('field', /* @ngInject */function ($q, api, Raven, ge
           }
           case 'autocomplete': {
             field.load = function (q) {
-              return api.autocomplete({ q: q, type: field.subtypes })
+              return api.autocomplete({ q, type: field.subtypes })
             }
             break
           }
@@ -214,6 +216,8 @@ require('../app').directive('field', /* @ngInject */function ($q, api, Raven, ge
                   if (!(field.model instanceof Nomenclature)) {
                     field.model = db.nomenclatures[field.nomenclature][field.model.label.en] || new Nomenclature(field.model)
                   }
+                } else if (typeof field.model === 'string') {
+                  field.model = db.nomenclatures[field.nomenclature][field.model] || new Nomenclature({ label: { en: field.model } })
                 }
               }
             })
