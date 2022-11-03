@@ -167,10 +167,8 @@ require('../app').directive('field', /* @ngInject */function ($q, api, Raven, ge
                   })
                 } else if (angular.isObject(field.model)) {
                   if (!(field.model instanceof Species)) {
-                    field.model = db.species[field.nomenclature][field.model.label.la] || new Species(field.model)
+                    field.model = db.species[field.nomenclature][field.model.label.en] || new Species(field.model)
                   }
-                } else if (typeof field.model === 'string') {
-                  field.model = db.species[field.nomenclature][field.model] || new Species({ label: { la: field.model } })
                 }
               }
             })
