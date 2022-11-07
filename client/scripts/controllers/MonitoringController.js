@@ -203,7 +203,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
         selection.push(row.id)
       })
     }
-    return model.export(angular.extend({}, controller.filter, {
+    return model.export(angular.extend({}, serializeFilters(controller.filter), {
       limit: -1,
       offset: 0,
       outputType,
