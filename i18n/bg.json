@@ -1288,5 +1288,6 @@
     "MAP_LAYERS_COL_LABEL": "Име",
     "MAP_LAYERS_COL_SUMMARY": "Описание",
     "MAP_LAYERS_BUTTON_ADD": "Добавяне",
-    "MAP_LAYERS_BUTTON_SAVE": "Запис"
+    "MAP_LAYERS_BUTTON_SAVE": "Запис",
+    "FORM_LIST_BUTTON_FULL_ZIP_EXPORT_TOOLTIP": "Генериране на zip файл с всички намерени записи и всички полета, техните снимки и gpx файлове"
 }

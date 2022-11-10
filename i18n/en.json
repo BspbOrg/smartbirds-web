@@ -1291,5 +1291,6 @@
     "MAP_LAYERS_COL_WIDTH": "Width (px)",
     "MAP_LAYERS_COL_HEIGHT": "Height (px)",
     "MAP_LAYERS_BUTTON_ADD": "Add",
-    "MAP_LAYERS_BUTTON_SAVE": "Save"
+    "MAP_LAYERS_BUTTON_SAVE": "Save",
+    "FORM_LIST_BUTTON_FULL_ZIP_EXPORT_TOOLTIP": "Generating a zip file with all records found and all fields, along with their corresponding pictures and gpx files"
 }
