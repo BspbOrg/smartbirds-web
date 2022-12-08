@@ -49,7 +49,6 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       resolve: resolveUser
     })
 
-  /* temporary remove
     .state('migrations', {
       url: '/migrations',
       templateUrl: '/views/home-birds-migrations.html',
@@ -74,7 +73,6 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
         }
       }
     })
-    */
 
     .state('herp', {
       url: '/herp',
