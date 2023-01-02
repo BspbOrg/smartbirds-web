@@ -1,0 +1,166 @@
+<form name="smartform"
+      role="form"
+      confirm-on-exit="smartform.$dirty"
+      confirm-message-window="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
+      confirm-message-route="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
+  <div class="actions actions-detail">
+    <form-detail-buttons monitoring-detail-controller="monitoringDetailController"></form-detail-buttons>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <span ng-if="monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_EDIT</span>
+        <span ng-if="!monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_NEW</span>
+      </h1>
+    </div>
+  </div>
+
+  <div ng-include="'/views/monitorings/common2.html'"></div>
+
+  <div ng-include="'/views/monitorings/common.html'"></div>
+
+  <div class="row">
+    <div class="col-md-7 col-lg-6" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
+
+    <div class="col-md-5 col-lg-6">
+      <div class="row">
+        <div class="col-md-12">
+          <field name="species" type="species" nomenclature="bats" required="true"
+                 label="{{'FIELD_SPECIES' | translate}}"
+                 model="monitoringDetailController.data.species"></field>
+        </div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
+        <div class="col-md-6 col-lg-6">
+          <field name="count" type="int" min="1" required="true"
+                 label="{{'FIELD_COUNT' | translate}}"
+                 model="monitoringDetailController.data.count"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="metodology" type="single-choice" nomenclature="bats_methodology"
+                 label="{{'BATS_DETAIL_METODOLOGY' | translate}}"
+                 model="monitoringDetailController.data.metodology"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="tCave" type="float"
+                 label="{{'BATS_DETAIL_T_CAVE' | translate}}"
+                 model="monitoringDetailController.data.tCave"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="hCave" type="float"
+                 label="{{'BATS_DETAIL_H_CAVE' | translate}}"
+                 model="monitoringDetailController.data.hCave"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="typloc" type="single-choice" nomenclature="bats_type_location"
+                 label="{{'BATS_DETAIL_TYPE_LOCATION' | translate}}"
+                 model="monitoringDetailController.data.typloc"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sublocality" type="text"
+                 label="{{'BATS_DETAIL_SUBLOCALITY' | translate}}"
+                 model="monitoringDetailController.data.sublocality"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="swarming" type="bool"
+                 label="{{'BATS_DETAIL_SWARMING' | translate}}"
+                 help="{{'BATS_DETAIL_SWARMING_HELP' | translate}}"
+                 model="monitoringDetailController.data.swarming"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="age" type="single-choice" nomenclature="bats_age"
+                 label="{{'BATS_DETAIL_AGE' | translate}}"
+                 help="{{'BATS_DETAIL_AGE_HELP' | translate}}"
+                 model="monitoringDetailController.data.age"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sex" type="single-choice" nomenclature="bats_sex"
+                 label="{{'BATS_DETAIL_SEX' | translate}}"
+                 help="{{'BATS_DETAIL_SEX_HELP' | translate}}"
+                 model="monitoringDetailController.data.sex"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="habitats" type="single-choice" nomenclature="bats_habitat"
+                 label="{{'BATS_DETAIL_HABITAT' | translate}}"
+                 model="monitoringDetailController.data.habitats"></field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+      <field name="condition" type="single-choice" nomenclature="bats_condition"
+             label="{{'BATS_DETAIL_CONDITION' | translate}}"
+             help="{{'BATS_DETAIL_CONDITION_HELP' | translate}}"
+             model="monitoringDetailController.data.condition"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="typeCond" type="single-choice" nomenclature="bats_type_condition"
+             label="{{'BATS_DETAIL_TYPE_CONDITION' | translate}}"
+             model="monitoringDetailController.data.typeCond"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="reproductiveStatus" type="single-choice" nomenclature="bats_reproductive_status"
+             label="{{'BATS_DETAIL_REPRODUCTIVE_STATUS' | translate}}"
+             model="monitoringDetailController.data.reproductiveStatus"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="ring" type="single-choice" nomenclature="bats_ring"
+             label="{{'BATS_DETAIL_RING' | translate}}"
+             model="monitoringDetailController.data.ring"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="ringN" type="text"
+             label="{{'BATS_DETAIL_RING_N' | translate}}"
+             model="monitoringDetailController.data.ringN"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="bodyLength" type="float"
+             label="{{'BATS_DETAIL_BODY_LENGTH' | translate}}"
+             model="monitoringDetailController.data.bodyLength"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="tailLength" type="float"
+             label="{{'BATS_DETAIL_TAIL_LENGTH' | translate}}"
+             model="monitoringDetailController.data.tailLength"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="earLength" type="float"
+             label="{{'BATS_DETAIL_EAR_LENGTH' | translate}}"
+             model="monitoringDetailController.data.earLength"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="forearmLength" type="float"
+             label="{{'BATS_DETAIL_FOREARM_LENGTH' | translate}}"
+             model="monitoringDetailController.data.forearmLength"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="lengthThirdDigit" type="float"
+             label="{{'BATS_DETAIL_LENGTH_THIRD_DIGIT' | translate}}"
+             model="monitoringDetailController.data.lengthThirdDigit"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="lengthFifthDigit" type="float"
+             label="{{'BATS_DETAIL_LENGTH_FIFTH_DIGIT' | translate}}"
+             model="monitoringDetailController.data.lengthFifthDigit"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="lengthWS" type="float"
+             label="{{'BATS_DETAIL_LENGTH_WS' | translate}}"
+             model="monitoringDetailController.data.lengthWS"></field>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <field name="weight" type="float"
+             label="{{'BATS_DETAIL_WEIGHT' | translate}}"
+             model="monitoringDetailController.data.weight"></field>
+    </div>
+  </div>
+
+  <div ng-include="'/views/monitorings/footer.html'"></div>
+
+  <div class="row">
+    <form-pictures ng-model="monitoringDetailController.data.pictures"></form-pictures>
+  </div>
+
+</form>

@@ -23,6 +23,10 @@ module.exports = {
     fishes: {
       id: 'fishes',
       label: 'CLASS_FISHES'
+    },
+    bats: {
+      id: 'bats',
+      label: 'CLASS_BATS'
     }
   },
   threatsPrimaryTypes: {

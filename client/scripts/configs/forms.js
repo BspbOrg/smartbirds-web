@@ -212,6 +212,32 @@ const forms = module.exports = {
       'source'
     ]
   },
+  bats: {
+    model: 'FormBats',
+    serverModel: 'formBats',
+    label: 'FORM_LABEL_BATS',
+    translatePrefix: 'BATS',
+    speciesType: 'bats',
+    hasCount: true,
+    longLabel: 'FORM_BATS_LONG',
+    shortLabel: 'FORM_BATS_SHORT',
+    hasStats: true,
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'species',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'threat',
+      'organization',
+      'moderatorReview',
+      'source'
+    ]
+  },
   ciconia: {
     model: 'FormCiconia',
     serverModel: 'formCiconia',
