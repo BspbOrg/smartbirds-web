@@ -1289,5 +1289,17 @@
     "MAP_LAYERS_COL_SUMMARY": "Описание",
     "MAP_LAYERS_BUTTON_ADD": "Добавяне",
     "MAP_LAYERS_BUTTON_SAVE": "Запис",
-    "FORM_LIST_BUTTON_FULL_ZIP_EXPORT_TOOLTIP": "Генериране на zip файл с всички намерени записи и всички полета, техните снимки и gpx файлове"
+    "FORM_LIST_BUTTON_FULL_ZIP_EXPORT_TOOLTIP": "Генериране на zip файл с всички намерени записи и всички полета, техните снимки и gpx файлове",
+    "CLASS_BATS": "Прилепи",
+    "FORM_LABEL_BATS": "Форма Прилепи",
+    "FORM_BATS_LONG": "Форма Прилепи",
+    "FORM_BATS_SHORT": "Форма Прилепи",
+    "BATS_DETAIL_BODY_LENGTH": "дължина на тялото",
+    "BATS_DETAIL_TAIL_LENGTH": "дължина на опашката",
+    "BATS_DETAIL_EAR_LENGTH": "дължина на ухото",
+    "BATS_DETAIL_FOREARM_LENGTH": "Дължина на совалката",
+    "BATS_DETAIL_LENGTH_THIRD_DIGIT": "дължина на трети пръст +китката",
+    "BATS_DETAIL_LENGTH_FIFTH_DIGIT": "дължина на пети пръст +китката",
+    "BATS_DETAIL_LENGTH_WS": "дължина на горен зъбен ред",
+    "BATS_DETAIL_WEIGHT": "тегло в грама"
 }
