@@ -104,7 +104,14 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
     $state.go('.', filter, {
       notify: false
     })
-    angular.extend($stateParams, filter)
+    for (const key in filter) {
+      if (!Object.prototype.hasOwnProperty.call(filter, key) || key.startsWith('#')) { continue }
+      try {
+        $stateParams[key] = filter[key]
+      } catch (e) {
+        Raven.captureException(e)
+      }
+    }
     controller.requestRows()
   }
 
