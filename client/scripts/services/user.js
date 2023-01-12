@@ -151,6 +151,7 @@ require('../app')
             if (!parsedIdentity) break
             return parsedIdentity
           case 400:
+          case 401:
             service.setIdentity(null)
             return $q.reject(response.data)
         }

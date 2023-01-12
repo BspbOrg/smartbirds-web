@@ -1,10 +1,10 @@
-var angular = require('angular')
+const angular = require('angular')
 
 require('../app').service('modelResource', /* @ngInject */function ($q, Raven, Nomenclature, $translate) {
-  var service = this
+  const service = this
 
   service.genSingleObservationCode = function (data) {
-    var date = data.observationDateTime || data.startDateTime
+    let date = data.observationDateTime || data.startDateTime
     if (date && date.toJSON) { date = date.toJSON() }
     return '!SINGLE-' + date
   }
@@ -17,14 +17,14 @@ require('../app').service('modelResource', /* @ngInject */function ($q, Raven, N
   }
 
   service.save = function (Resource, data) {
-    var localId
+    let localId
     if (data.$local) {
       localId = data.id
       delete data.id
     }
     delete data.$local
 
-    var resource = new Resource(data)
+    const resource = new Resource(data)
     if (!resource.monitoringCode) {
       resource.monitoringCode = service.genSingleObservationCode(data)
     }
@@ -55,7 +55,17 @@ require('../app').service('modelResource', /* @ngInject */function ($q, Raven, N
         return res
       })
       .catch(function (error) {
-        Raven.captureMessage(JSON.stringify(error))
+        if (error) {
+          switch (error.status) {
+            case 401: // not authenticated
+              return $q.reject(error)
+          }
+        }
+        Raven.captureException(error, {
+          extra: {
+            error: JSON.stringify(error)
+          }
+        })
         return $q.reject(error)
       })
   }
