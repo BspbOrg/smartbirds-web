@@ -1300,8 +1300,8 @@
     "BATS_LIST_TITLE_MAIN": "Form Bats",
     "BATS_LIST_TITLE_SECONDARY": "Observations of bats",
     "BATS_DETAIL_METODOLOGY": "Methodology",
-    "BATS_DETAIL_T_CAVE": "T° Cave",
-    "BATS_DETAIL_H_CAVE": "H Cave (m)",
+    "BATS_DETAIL_T_CAVE": "T°C Roost",
+    "BATS_DETAIL_H_CAVE": "H - Roost humidity (%)",
     "BATS_DETAIL_TYPE_LOCATION": "Type of the locality",
     "BATS_DETAIL_SUBLOCALITY": "Sublocality",
     "BATS_DETAIL_SWARMING": "Swarming",
@@ -1321,6 +1321,7 @@
     "BATS_DETAIL_LENGTH_FIFTH_DIGIT": "D5 - Length fifth digit (mm)",
     "BATS_DETAIL_LENGTH_WS": "WS -  Length (mm)",
     "BATS_DETAIL_WEIGHT": "Weight (g)",
+    "BATS_DETAIL_SWARMING_HELP": "  ",
     "BATS_DETAIL_AGE_HELP": "Age of the individual",
     "BATS_DETAIL_SEX_HELP": "Sex of the individual",
     "BATS_DETAIL_CONDITION_HELP": "Condition of the ind. bat"
