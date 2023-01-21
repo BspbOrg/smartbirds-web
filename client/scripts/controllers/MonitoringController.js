@@ -109,7 +109,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
       try {
         $stateParams[key] = filter[key]
       } catch (e) {
-        if (e?.name === 'TypeError' && e?.message?.startsWith('Cannot assign to read only property \'#\'')) {
+        if (e && e.name === 'TypeError' && e.message && typeof e.message === 'string' && e.message.startsWith('Cannot assign to read only property \'#\'')) {
           // ignore
         } else {
           Raven.captureException(e)
