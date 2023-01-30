@@ -121,8 +121,6 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
 
   const forms = [
     'campaign',
-    'bats',
-    'bats_top',
     'birds',
     'birds_top',
     'cbm',

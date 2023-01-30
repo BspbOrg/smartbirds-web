@@ -586,7 +586,7 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       url: '/stats'
     })
 
-  const statForms = ['birds', 'fishes', 'invertebrates', 'herptiles', 'mammals', 'plants', 'bats']
+  const statForms = ['birds', 'fishes', 'invertebrates', 'herptiles', 'mammals', 'plants']
   angular.forEach(statForms, function (form) {
     $stateProvider
       .state('auth.stats.' + form, {
