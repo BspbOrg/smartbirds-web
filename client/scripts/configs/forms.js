@@ -169,7 +169,7 @@ const forms = module.exports = {
     hasCount: true,
     longLabel: 'FORM_BATS_LONG',
     shortLabel: 'FORM_BATS_SHORT',
-    hasStats: true,
+    hasStats: false,
     filters: [
       'auto_location',
       '{user:int}',
