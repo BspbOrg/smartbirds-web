@@ -1324,5 +1324,16 @@
     "BATS_DETAIL_SWARMING_HELP": "  ",
     "BATS_DETAIL_AGE_HELP": "Age of the individual",
     "BATS_DETAIL_SEX_HELP": "Sex of the individual",
-    "BATS_DETAIL_CONDITION_HELP": "Condition of the ind. bat"
+    "BATS_DETAIL_CONDITION_HELP": "Condition of the ind. bat",
+    "STATS_BATS_TITLE": "Bats",
+    "STATS_BATS_SUBTITLE": "Observations statistics",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES": "Interesting species observed for the last 30 days",
+    "PUBLIC_BATS_TOP_SPECIES_MONTH": "The most often observed species for the last 30 days",
+    "PUBLIC_BATS_TOP_OBSERVERS_RECORDS_YEAR": "Most observations recorded per calendar year",
+    "PUBLIC_BATS_TOP_OBSERVERS_SPECIES_YEAR": "The most species observed per calendar year",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_SPECIES": "Species",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_DATE": "Date",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_LOCATION": "Settlement",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_COUNT": "Count",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_OBSERVER": "Observer"
 }

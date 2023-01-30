@@ -1321,5 +1321,16 @@
     "BATS_DETAIL_SWARMING_HELP": "  ",
     "BATS_DETAIL_AGE_HELP": "Възраст на индивидите",
     "BATS_DETAIL_SEX_HELP": "Пол на индивидите",
-    "BATS_DETAIL_CONDITION_HELP": "Състояние"
+    "BATS_DETAIL_CONDITION_HELP": "Състояние",
+    "STATS_BATS_TITLE": "Прилепи",
+    "STATS_BATS_SUBTITLE": "Статистики за наблюденията",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES": "Наблюдавани интересни видове за последните 30 дни",
+    "PUBLIC_BATS_TOP_SPECIES_MONTH": "Най-често наблюдавани видове за последните 30 дни",
+    "PUBLIC_BATS_TOP_OBSERVERS_RECORDS_YEAR": "Най-много въведени наблюдения за календарна година",
+    "PUBLIC_BATS_TOP_OBSERVERS_SPECIES_YEAR": "Най-много наблюдавани видове за календарна година",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_SPECIES": "Вид",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_DATE": "Дата",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_LOCATION": "Селище",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_COUNT": "Брой",
+    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_OBSERVER": "Наблюдател"
 }
