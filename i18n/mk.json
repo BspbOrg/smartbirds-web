@@ -1017,15 +1017,5 @@
     "MAP_LAYERS_UNSAVED_DATA_TITLE": "Постојат незачувани промени!",
     "MAP_LAYERS_UNSAVED_DATA_MESSAGE": "Постојат незачувани промени! Дали сте сигурни дека сакате да продолжите?",
     "MAP_LAYERS_BUTTON_ADD": "Додади",
-    "MAP_LAYERS_BUTTON_SAVE": "Зачувај",
-    "STATS_BATS_SUBTITLE": "Статистика за набљудувањата",
-    "PUBLIC_BATS_LAST_INTERESTING_SPECIES": "Интересни видови набљудувани во последните 30 дена",
-    "PUBLIC_BATS_TOP_SPECIES_MONTH": "Најчесто набљудуван вид во последните 30 дена",
-    "PUBLIC_BATS_TOP_OBSERVERS_RECORDS_YEAR": "Најмногу внесени набљудувања во една календарска година",
-    "PUBLIC_BATS_TOP_OBSERVERS_SPECIES_YEAR": "Најмногу регистрирани видови во една календарска година",
-    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_SPECIES": "Видови",
-    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_DATE": "Датум",
-    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_LOCATION": "Локација",
-    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_COUNT": "Број",
-    "PUBLIC_BATS_LAST_INTERESTING_SPECIES_COL_OBSERVER": "Набљудувач"
+    "MAP_LAYERS_BUTTON_SAVE": "Зачувај"
 }
