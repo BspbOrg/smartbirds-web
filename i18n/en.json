@@ -1324,5 +1324,7 @@
     "BATS_DETAIL_SWARMING_HELP": "  ",
     "BATS_DETAIL_AGE_HELP": "Age of the individual",
     "BATS_DETAIL_SEX_HELP": "Sex of the individual",
-    "BATS_DETAIL_CONDITION_HELP": "Condition of the ind. bat"
+    "BATS_DETAIL_CONDITION_HELP": "Condition of the ind. bat",
+    "BATS_DETAIL_TRAGUS": "Tr - Tragus",
+    "BATS_DETAIL_UPPER_MOLAR": "Upper molar - CM3"
 }
