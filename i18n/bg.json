@@ -1321,5 +1321,7 @@
     "BATS_DETAIL_SWARMING_HELP": "  ",
     "BATS_DETAIL_AGE_HELP": "Възраст на индивидите",
     "BATS_DETAIL_SEX_HELP": "Пол на индивидите",
-    "BATS_DETAIL_CONDITION_HELP": "Състояние"
+    "BATS_DETAIL_CONDITION_HELP": "Състояние",
+    "BATS_DETAIL_TRAGUS": "Tr - Трагус",
+    "BATS_DETAIL_UPPER_MOLAR": "CM3 - Горен зъбен ред"
 }
