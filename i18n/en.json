@@ -1288,8 +1288,8 @@
     "MAP_LAYERS_COL_LABEL": "Label",
     "MAP_LAYERS_COL_SUMMARY": "Summary",
     "MAP_LAYERS_COL_URL": "URL",
-    "MAP_LAYERS_COL_WIDTH": "Width (px)",
-    "MAP_LAYERS_COL_HEIGHT": "Height (px)",
+    "MAP_LAYERS_ROW_WIDTH": "Width (px)",
+    "MAP_LAYERS_COL_WIDTH": "Height (px)",
     "MAP_LAYERS_BUTTON_ADD": "Add",
     "MAP_LAYERS_BUTTON_SAVE": "Save",
     "FORM_LIST_BUTTON_FULL_ZIP_EXPORT_TOOLTIP": "Generating a zip file with all records found and all fields, along with their corresponding pictures and gpx files",
@@ -1326,5 +1326,7 @@
     "BATS_DETAIL_SEX_HELP": "Sex of the individual",
     "BATS_DETAIL_CONDITION_HELP": "Condition of the ind. bat",
     "BATS_DETAIL_TRAGUS": "Tr - Tragus",
-    "BATS_DETAIL_UPPER_MOLAR": "Upper molar - CM3"
+    "BATS_DETAIL_UPPER_MOLAR": "Upper molar - CM3",
+    "BATS_PUBLIC_LIST_TITLE_MAIN": "Form Bats",
+    "BATS_PUBLIC_LIST_TITLE_SECONDARY": "Observations of bats"
 }

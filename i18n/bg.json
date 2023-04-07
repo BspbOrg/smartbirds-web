@@ -1287,6 +1287,9 @@
     "MAP_LAYERS_UNSAVED_DATA_MESSAGE": "Имате незаписани промени. Сигурни ли сте, че искате да продължите?",
     "MAP_LAYERS_COL_LABEL": "Име",
     "MAP_LAYERS_COL_SUMMARY": "Описание",
+    "MAP_LAYERS_COL_URL": "Линк",
+    "MAP_LAYERS_ROW_WIDTH": "Ширина (px)",
+    "MAP_LAYERS_COL_WIDTH": "Височина (px)",
     "MAP_LAYERS_BUTTON_ADD": "Добавяне",
     "MAP_LAYERS_BUTTON_SAVE": "Запис",
     "FORM_LIST_BUTTON_FULL_ZIP_EXPORT_TOOLTIP": "Генериране на zip файл с всички намерени записи и всички полета, техните снимки и gpx файлове",
@@ -1323,5 +1326,7 @@
     "BATS_DETAIL_SEX_HELP": "Пол на индивидите",
     "BATS_DETAIL_CONDITION_HELP": "Състояние",
     "BATS_DETAIL_TRAGUS": "Tr - Трагус",
-    "BATS_DETAIL_UPPER_MOLAR": "CM3 - Горен зъбен ред"
+    "BATS_DETAIL_UPPER_MOLAR": "CM3 - Горен зъбен ред",
+    "BATS_PUBLIC_LIST_TITLE_MAIN": "Форма Прилепи",
+    "BATS_PUBLIC_LIST_TITLE_SECONDARY": "Наблюдения на прилепи"
 }
