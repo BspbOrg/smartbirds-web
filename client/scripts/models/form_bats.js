@@ -57,7 +57,7 @@ require('../app').factory('FormBats', /* @ngInject */function ($resource, ENDPOI
       return db.users[this.user]
     },
     getSpecies: function () {
-      return db.species.fishes && db.species.fishes[this.species]
+      return db.species.bats && db.species.bats[this.species]
     },
     hasSource: true,
     preCopy: function () {
