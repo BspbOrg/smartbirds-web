@@ -70,6 +70,9 @@ if ('serviceWorker' in navigator) {
   const wb = new Workbox('/sw.js')
   wb.register()
   window.SW_STATUS = 'registered'
+  window.addEventListener('popstate', () => {
+    wb.update()
+  })
 }
 
 const app = module.exports = angular.module('sb', dependencies)
