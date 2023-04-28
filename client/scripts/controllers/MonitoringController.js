@@ -264,4 +264,20 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
       count: controller.rows && controller.rows.length
     }
   }
+
+  controller.import = function (inputType, items) {
+    return model.import({ items }).$promise
+      .then(function (res) {
+        ngToast.create({
+          className: 'success',
+          content: $translate.instant('Imported {{num}} records', { num: 1 })
+        })
+      })
+      .catch(function (error) {
+        ngToast.create({
+          className: 'danger',
+          content: '<p>' + $translate.instant('Error during import') + '</p><pre>' + (error && error.data ? error.data.error : JSON.stringify(error, null, 2)) + '</pre>'
+        })
+      })
+  }
 })
