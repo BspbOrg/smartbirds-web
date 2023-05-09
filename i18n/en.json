@@ -1328,5 +1328,14 @@
     "BATS_DETAIL_TRAGUS": "Tr - Tragus",
     "BATS_DETAIL_UPPER_MOLAR": "Upper molar - CM3",
     "BATS_PUBLIC_LIST_TITLE_MAIN": "Form Bats",
-    "BATS_PUBLIC_LIST_TITLE_SECONDARY": "Observations of bats"
+    "BATS_PUBLIC_LIST_TITLE_SECONDARY": "Observations of bats",
+    "IMPORT_SUMMARY_TITLE": "Import Summary",
+    "IMPORT_SUMMARY_IMPORTING": "Importing...",
+    "IMPORT_SUMMARY_TOTAL": "Total",
+    "IMPORT_SUMMARY_PROCESSED": "Processed",
+    "IMPORT_SUMMARY_ROWS_INSERTED": "Inserted",
+    "IMPORT_SUMMARY_ROWS_UPDATED": "Updated",
+    "IMPORT_SUMMARY_ERRORS": "Errors",
+    "IMPORT_SUMMARY_ROW": "Row",
+    "BTN_FORCE_IMPORT": "Force import"
 }

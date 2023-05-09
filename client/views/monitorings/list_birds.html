@@ -33,7 +33,7 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <import-buttons ng-if="::$user.isAdmin()" monitoring-controller="monitoringController"></import-buttons>
+        <import-buttons ng-if="::$user.isAdmin()" model="monitoringController.formDef.model" on-complete="monitoringController.onImportComplete(params)"></import-buttons>
         <export-buttons monitoring-controller="monitoringController"></export-buttons>
       </div>
       <div class="panel-body">

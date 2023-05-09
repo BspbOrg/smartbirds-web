@@ -15,7 +15,7 @@ const serializeFilters = function (filters) {
   })
 }
 
-require('../app').controller('MonitoringController', /* @ngInject */function ($scope, $state, $stateParams, $q, $translate, model, ngToast, db, Raven, ENDPOINT_URL, $httpParamSerializer, formName, user, User, formDef, context, localization, $uibModal) {
+require('../app').controller('MonitoringController', /* @ngInject */function ($scope, $state, $stateParams, $q, $translate, model, ngToast, db, Raven, ENDPOINT_URL, $httpParamSerializer, formName, user, User, formDef, context, localization) {
   const controller = this
 
   controller.maxExportCount = 20000
@@ -265,48 +265,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
     }
   }
 
-  controller.import = function (inputType, items) {
-    if (inputType !== 'csv') {
-      ngToast.create({
-        className: 'danger',
-        content: '<p>' + $translate.instant('Error during import') + '</p><pre>' + 'Unsupported input type ' + inputType + '</pre>'
-      })
-
-      return
-    }
-
-    const importState = {
-      importing: true,
-      summary: null
-    }
-
-    $uibModal.open({
-      templateUrl: 'views/import_summary.html',
-      controller: function ($uibModalInstance, state) {
-        this.state = state
-
-        this.close = function () {
-          $uibModalInstance.close()
-        }
-      },
-      controllerAs: 'ctrl',
-      backdrop: 'static',
-      resolve: {
-        state: function () {
-          return importState
-        }
-      }
-    })
-
-    return model.import({ items }).$promise
-      .then(function (res) {
-        importState.summary = res
-      })
-      .catch(function (error) {
-        importState.summary = error.data
-      })
-      .finally(function (res) {
-        importState.importing = false
-      })
+  controller.onImportComplete = function (params) {
+    controller.requestRows()
   }
 })

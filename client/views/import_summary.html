@@ -1,33 +1,44 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">
-        {{(ctrl.state.importing ? 'IMPORT_SUMMARY_IMPORTING' : 'IMPORT_SUMMARY_TITLE') | translate}}
-    </h3>
+  <h3 class="modal-title" id="modal-title">
+    {{(ctrl.state.importing ? 'IMPORT_SUMMARY_IMPORTING' : 'IMPORT_SUMMARY_TITLE') | translate}}
+  </h3>
 </div>
 <div ng-if="!ctrl.state.importing" class="modal-body" id="modal-body">
-    <div>
+  <div>
+    <ul>
+      <li><strong>{{'IMPORT_SUMMARY_TOTAL' | translate}}: </strong> {{ ctrl.state.summary.total }}</li>
+      <li><strong>{{'IMPORT_SUMMARY_PROCESSED' | translate}}: </strong> {{ ctrl.state.summary.processed }}</li>
+      <li><strong>{{'IMPORT_SUMMARY_ROWS_INSERTED' | translate}}: </strong> {{ ctrl.state.summary.created }}</li>
+      <li><strong>{{'IMPORT_SUMMARY_ROWS_UPDATED' | translate}}: </strong> {{ ctrl.state.summary.updated }}</li>
+      <li ng-if="ctrl.state.summary.errors && ctrl.state.summary.errors.length > 0">
+        <strong>{{'IMPORT_SUMMARY_ERRORS' | translate}}: </strong> {{ ctrl.state.summary.errors.length }}
         <ul>
-            <li><strong>{{'IMPORT_SUMMARY_TOTAL' | translate}}: </strong> {{ ctrl.state.summary.total }}</li>
-            <li><strong>{{'IMPORT_SUMMARY_PROCESSED' | translate}}: </strong> {{ ctrl.state.summary.processed }}</li>
-            <li><strong>{{'IMPORT_SUMMARY_ROWS_INSERTED' | translate}}: </strong> {{ ctrl.state.summary.created }}</li>
-            <li><strong>{{'IMPORT_SUMMARY_ROWS_UPDATED' | translate}}: </strong> {{ ctrl.state.summary.updated }}</li>
-            <li ng-if="ctrl.state.summary.errors && ctrl.state.summary.errors.length > 0">
-                <strong>{{'IMPORT_SUMMARY_ERRORS' | translate}}: </strong> {{ ctrl.state.summary.errors.length }}
-                <ul>
-                    <li ng-repeat="error in ctrl.state.summary.errors">
-                        <strong>{{'IMPORT_SUMMARY_ROW' | translate}} {{ error.row }}:</strong> {{ error.error }}
-                    </li>
-                </ul>
-            </li>
+          <li ng-repeat="error in ctrl.state.summary.errors">
+            <strong>{{'IMPORT_SUMMARY_ROW' | translate}} {{ error.row }}:</strong> {{ error.error }}
+          </li>
         </ul>
+      </li>
+    </ul>
+
+    <div ng-if="ctrl.state.summary.errors && ctrl.state.summary.errors.length > 0 && !ctrl.state.success">
+      <p class="text-warning">
+        There are errors in the provided file. Do you want to proceed and ignore the rows with errors?
+      </p>
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning" ng-click="ctrl.forceImport()">
+          {{'BTN_FORCE_IMPORT'|translate}}
+        </button>
+      </div>
     </div>
+  </div>
 
 </div>
 <div ng-if="!ctrl.state.importing" class="modal-footer">
-    <div class="pull-right text-right">
-        <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-click="ctrl.close()">
-                {{'BTN_ARIA_LABEL_CLOSE'|translate}}
-            </button>
-        </div>
+  <div class="pull-right text-right">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" ng-click="ctrl.close()">
+        {{'BTN_ARIA_LABEL_CLOSE'|translate}}
+      </button>
     </div>
+  </div>
 </div>
