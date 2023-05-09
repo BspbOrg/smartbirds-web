@@ -265,7 +265,7 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
     }
   }
 
-  controller.onImportComplete = function (params) {
+  controller.onImportComplete = function () {
     controller.requestRows()
   }
 })
