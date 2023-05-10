@@ -22,7 +22,7 @@
 
     <div ng-if="ctrl.state.summary.errors && ctrl.state.summary.errors.length > 0 && !ctrl.state.success">
       <p class="text-warning">
-        There are errors in the provided file. Do you want to proceed and ignore the rows with errors?
+        {{'FORCE_IMPORT_WARNING_MESSAGE'|translate}}
       </p>
       <div class="btn-group">
         <button type="button" class="btn btn-warning" ng-click="ctrl.forceImport()">
