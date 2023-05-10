@@ -1,14 +1,15 @@
-var angular = require('angular')
-var LocalCache = require('./mixins/local_cache')
-var countPendingReview = require('./mixins/countPendingReview')
+const angular = require('angular')
+const LocalCache = require('./mixins/local_cache')
+const countPendingReview = require('./mixins/countPendingReview')
 
 require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $resource, ENDPOINT_URL, db, localization) {
-  var FormBirds = $resource(ENDPOINT_URL + '/birds/:id', {
+  const FormBirds = $resource(ENDPOINT_URL + '/birds/:id', {
     id: '@id'
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/birds' },
-    countPendingReview: countPendingReview
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/birds' },
+    countPendingReview
   })
 
   // instance methods
@@ -23,7 +24,7 @@ require('../app').factory('FormBirds', /* @ngInject */function ($localStorage, $
       return db.species.birds && db.species.birds[this.species]
     },
     getCount: function (locale) {
-      var parts = []
+      const parts = []
       parts.push(localization.getLocalLabel(this.typeUnit.label, locale))
       if (!['Min.', 'Max.', 'Range', 'Unspecified number'].includes(this.typeUnit.label.en)) {
         parts.push(this.count)

@@ -8,6 +8,7 @@ require('../app').factory('FormHerptiles', /* @ngInject */function ($resource, E
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/herptiles' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/herptiles' },
     countPendingReview
   })
 

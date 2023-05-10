@@ -8,6 +8,7 @@ require('../app').factory('FormPylonsCasualties', /* @ngInject */function ($reso
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/pylons-casualties' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/pylons-casualties' },
     countPendingReview
   })
 

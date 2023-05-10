@@ -8,6 +8,7 @@ require('../app').factory('FormPlants', /* @ngInject */function ($resource, ENDP
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/plants' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/plants' },
     countPendingReview
   })
 

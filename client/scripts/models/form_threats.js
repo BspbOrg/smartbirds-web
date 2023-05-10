@@ -8,6 +8,7 @@ require('../app').factory('FormThreats', /* @ngInject */function ($localStorage,
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/threats' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/threats' },
     countPendingReview
   })
 

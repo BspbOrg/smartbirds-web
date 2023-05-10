@@ -8,6 +8,7 @@ require('../app').factory('FormMammals', /* @ngInject */function ($resource, END
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/mammals' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/mammals' },
     countPendingReview
   })
 
