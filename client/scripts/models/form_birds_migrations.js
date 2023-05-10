@@ -36,7 +36,8 @@ require('../app').factory('FormBirdsMigrations', /* @ngInject */function ($local
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/birds-migrations' },
-    countPendingReview: countPendingReview
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/birds-migrations' },
+    countPendingReview
   })
 
   // instance methods

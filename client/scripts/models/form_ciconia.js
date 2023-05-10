@@ -8,6 +8,7 @@ require('../app').factory('FormCiconia', /* @ngInject */function ($resource, END
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/ciconia' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/ciconia' },
     countPendingReview
   })
 

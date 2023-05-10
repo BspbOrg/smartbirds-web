@@ -73,6 +73,7 @@ require('../app').factory('FormFishes', /* @ngInject */function ($resource, ENDP
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/fishes' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/fishes' },
     countPendingReview
   })
 

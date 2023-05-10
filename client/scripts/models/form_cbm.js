@@ -8,6 +8,7 @@ require('../app').factory('FormCBM', /* @ngInject */function ($resource, ENDPOIN
   }, {
     // api methods
     export: { method: 'POST', url: ENDPOINT_URL + '/export/cbm' },
+    import: { method: 'POST', url: ENDPOINT_URL + '/import/cbm' },
     countPendingReview
   })
 
