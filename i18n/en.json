@@ -1338,5 +1338,11 @@
     "IMPORT_SUMMARY_ERRORS": "Errors",
     "IMPORT_SUMMARY_ROW": "Row",
     "BTN_FORCE_IMPORT": "Force import",
-    "FORCE_IMPORT_WARNING_MESSAGE": "There are errors in the provided file. Do you want to proceed and ignore the rows with errors?"
+    "FORCE_IMPORT_WARNING_MESSAGE": "There are errors in the provided file. Do you want to proceed and ignore the rows with errors?",
+    "IMPORT_RECORDS_MODAL_TITLE": "Import from file",
+    "IMPORT_RECORDS_CHOOSE_FILE": "Choose file",
+    "IMPORT_RECORDS_READING_FILE": "Loading file...",
+    "IMPORT_RECORDS_LANGUAGE": "Language",
+    "BTN_IMPORT": "Import",
+    "FORM_LIST_BUTTON_CSV_IMPORT_TOOLTIP": "Import from CSV file"
 }
