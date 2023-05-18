@@ -1,5 +1,3 @@
-const csvParse = require('csv-parse')
-
 require('../app').directive('importButtons', /* @ngInject */function ($translate, ngToast, $uibModal) {
   return {
     restrict: 'E',
@@ -8,56 +6,22 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
       modelId: '=model',
       onComplete: '&'
     },
-    link: function (scope, element, attrs, controller) {
-      const input = document.getElementById('import-file')
-      input.addEventListener('change', function () {
-        const file = input.files[0]
-
-        // eslint-disable-next-line no-undef
-        const reader = new FileReader()
-        const records = []
-
-        reader.onload = function () {
-          const csvData = reader.result
-          const parser = csvParse.parse(csvData, {
-            columns: true,
-            delimiter: ';',
-            skip_empty_lines: true
-          })
-          parser.on('readable', function () {
-            let record
-            while ((record = parser.read()) !== null) {
-              records.push(record)
-            }
-          })
-          parser.on('error', function (err) {
-            ngToast.create({
-              className: 'danger',
-              content: '<p>' + $translate.instant('Error while reading CSV file') + '</p><pre>' + (err ? err.message : JSON.stringify(err, null, 2)) + '</pre>'
-            })
-          })
-
-          controller.import('csv', records)
-        }
-
-        reader.readAsText(file)
-      })
-    },
     controller: /* @ngInject */function ($scope, $injector) {
       const controller = this
       const model = $injector.get($scope.modelId)
+
       controller.importState = {
         success: false,
         importing: true,
         summary: null
       }
 
-      controller.internalImport = function (items, force) {
+      controller.internalImport = function (items, language, force) {
         controller.importState.importing = true
         controller.importState.success = false
         controller.importState.summary = null
 
-        return model.import({ items, skipErrors: force }).$promise
+        return model.import({ items, skipErrors: force, language }).$promise
           .then(function (res) {
             controller.importState.success = true
             controller.importState.summary = res
@@ -72,7 +36,7 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
           })
       }
 
-      controller.import = function (inputType, items) {
+      controller.import = function (inputType, items, language) {
         if (inputType !== 'csv') {
           ngToast.create({
             className: 'danger',
@@ -92,7 +56,7 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
             }
 
             this.forceImport = function () {
-              controller.internalImport(items, true)
+              controller.internalImport(items, language, true)
             }
           },
           controllerAs: 'ctrl',
@@ -104,7 +68,29 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
           }
         })
 
-        return controller.internalImport(items, false)
+        return controller.internalImport(items, language, false)
+      }
+
+      controller.openImportModal = function () {
+        console.log('openImportModal')
+        $uibModal.open({
+          component: 'importRecordsModal',
+          backdrop: 'static',
+          resolve: {
+            modelId: function () {
+              return controller.modelId
+            }
+          }
+        })
+          .result.then(function (result) {
+            console.log('result', result)
+            if (result && result.records && result.records.length) {
+              controller.import('csv', result.records, result.language)
+            }
+          }, function (reason) {
+            // Modal dismissed
+            console.log('reason', reason)
+          })
       }
     },
     controllerAs: '$ctrl'
