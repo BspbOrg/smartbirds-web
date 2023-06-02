@@ -37,14 +37,14 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     forgotPassword: function (auth) {
       return $http({
         method: 'POST',
-        url: ENDPOINT_URL + '/session/' + auth.email + '/resetpw',
+        url: ENDPOINT_URL + '/session/' + $window.encodeURIComponent(auth.email) + '/resetpw',
         data: auth
       })
     },
     resetPassword: function (auth) {
       return $http({
         method: 'POST',
-        url: ENDPOINT_URL + '/session/' + auth.email + '/resetpw2',
+        url: ENDPOINT_URL + '/session/' + $window.encodeURIComponent(auth.email) + '/resetpw2',
         data: auth
       })
     },
