@@ -78,7 +78,7 @@
     "bootstrap": "^3.3.7",
     "browserify": "~17.0.0",
     "browserify-ngannotate": "^2.0.0",
-    "browserify-shim": "~3.8.15",
+    "browserify-shim": "~3.8.16",
     "bulk-require": "~1.0.1",
     "bulkify": "~1.4.2",
     "cross-env": "^7.0.3",
