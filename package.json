@@ -17,7 +17,7 @@
     "lint-staged": "^13.1.0",
     "local-cors-proxy": "^1.1.0",
     "standard": "^17.0.0",
-    "start-server-and-test": "^2.0.0",
+    "start-server-and-test": "^2.0.1",
     "watch": "^1.0.2",
     "watchify": "^4.0.0"
   },
