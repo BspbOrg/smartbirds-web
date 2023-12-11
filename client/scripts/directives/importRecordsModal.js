@@ -10,7 +10,8 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
     },
     link: function (scope, element, attrs, controller) {
       const input = document.getElementById('import-file')
-      input.addEventListener('change', function () {
+
+      const parseFile = function () {
         const file = input.files[0]
 
         scope.$apply(function () {
@@ -22,6 +23,21 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
         const reader = new FileReader()
         const records = []
 
+        const startTime = new Date().getTime()
+        let endTime = null
+
+        const constructObject = function (key, parentObj, value) {
+          if (key.split('.').length === 1) {
+            parentObj[key] = value
+            return parentObj
+          }
+
+          const curKey = key.split('.')[0]
+          if (!parentObj[curKey]) { parentObj[curKey] = {} }
+          parentObj[curKey] = constructObject(key.split('.').slice(1).join('.'), parentObj[curKey], value)
+          return parentObj
+        }
+
         reader.onload = function () {
           const csvData = reader.result
           const parser = csvParse.parse(csvData, {
@@ -32,7 +48,11 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
           parser.on('readable', function () {
             let record
             while ((record = parser.read()) !== null) {
-              records.push(record)
+              let resultRecord = {}
+              Object.keys(record).forEach(function (key) {
+                resultRecord = constructObject(key, resultRecord, record[key])
+              })
+              records.push(resultRecord)
             }
           })
           parser.on('error', function (err) {
@@ -42,12 +62,16 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
             })
           })
           parser.on('end', function () {
+            endTime = new Date().getTime()
+            console.log('end', records.length, endTime - startTime)
             controller.fileReady(records)
           })
         }
 
         reader.readAsText(file)
-      })
+      }
+
+      input.addEventListener('change', parseFile)
     },
     controller: /* @ngInject */function ($scope) {
       const controller = this
@@ -65,7 +89,6 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
       })
 
       $scope.$watch('$ctrl.records', function (newValue) {
-        console.log('watch', newValue)
         controller.canImport = newValue && newValue.length > 0
       })
 
