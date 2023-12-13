@@ -26,6 +26,13 @@
       </div>
     </div>
   </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="checkbox" id="ignore-errors" ng-model="$ctrl.ignoreErrors">
+                <label for="ignore-errors">{{ 'IMPORT_RECORDS_IGNORE_ERRORS' | translate }}</label>
+            </div>
+        </div>
 </div>
 
 <div ng-if="!ctrl.state.importing" class="modal-footer">

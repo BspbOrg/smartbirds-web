@@ -36,7 +36,7 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
           })
       }
 
-      controller.import = function (inputType, items, language) {
+      controller.import = function (inputType, items, language, ignoreErrors) {
         if (inputType !== 'csv') {
           ngToast.create({
             className: 'danger',
@@ -46,29 +46,7 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
           return
         }
 
-        $uibModal.open({
-          templateUrl: 'views/import_summary.html',
-          controller: function ($uibModalInstance, state) {
-            this.state = state
-
-            this.close = function () {
-              $uibModalInstance.close()
-            }
-
-            this.forceImport = function () {
-              controller.internalImport(items, language, true)
-            }
-          },
-          controllerAs: 'ctrl',
-          backdrop: 'static',
-          resolve: {
-            state: function () {
-              return controller.importState
-            }
-          }
-        })
-
-        return controller.internalImport(items, language, false)
+        return controller.internalImport(items, language, ignoreErrors)
       }
 
       controller.openImportModal = function () {
@@ -85,7 +63,7 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
           .result.then(function (result) {
             console.log('result', result)
             if (result && result.records && result.records.length) {
-              controller.import('csv', result.records, result.language)
+              controller.import('csv', result.records, result.language, result.ignoreErrors)
             }
           }, function (reason) {
             // Modal dismissed

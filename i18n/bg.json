@@ -1333,6 +1333,7 @@
     "IMPORT_RECORDS_CHOOSE_FILE": "Изберете файл",
     "IMPORT_RECORDS_READING_FILE": "Зареждане на файла...",
     "IMPORT_RECORDS_LANGUAGE": "Език",
+    "IMPORT_RECORDS_IGNORE_ERRORS": "Игнорирай грешките",
     "BTN_IMPORT": "Импортирай",
     "FORM_LIST_BUTTON_CSV_IMPORT_TOOLTIP": "Импорт от CSV файл"
 }

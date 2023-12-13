@@ -80,6 +80,7 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
       controller.records = []
       controller.language = 'bg'
       controller.canImport = false
+      controller.ignoreErrors = false
 
       controller.availableLanguages = Object.keys(languages).map(function (key) {
         return {
@@ -95,7 +96,6 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
       controller.fileReady = function (records) {
         $scope.$apply(function () {
           controller.loading = false
-          console.log('fileReady' + records.length, records)
           controller.records = records
         })
       }
@@ -103,7 +103,8 @@ require('../app').directive('importRecordsModal', /* @ngInject */function (ngToa
         $scope.close({
           $value: {
             records: controller.records,
-            language: controller.language
+            language: controller.language,
+            ignoreErrors: controller.ignoreErrors
           }
         })
       }
