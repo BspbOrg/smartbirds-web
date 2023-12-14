@@ -10,29 +10,19 @@ require('../app').directive('importButtons', /* @ngInject */function ($translate
       const controller = this
       const model = $injector.get($scope.modelId)
 
-      controller.importState = {
-        success: false,
-        importing: true,
-        summary: null
-      }
-
       controller.internalImport = function (items, language, force) {
-        controller.importState.importing = true
-        controller.importState.success = false
-        controller.importState.summary = null
-
         return model.import({ items, skipErrors: force, language }).$promise
           .then(function (res) {
-            controller.importState.success = true
-            controller.importState.summary = res
+            ngToast.create({
+              className: 'success',
+              content: $translate.instant('You will be notified by email when your import is ready')
+            })
           })
           .catch(function (error) {
-            controller.importState.success = false
-            controller.importState.summary = error.data
-          })
-          .finally(function (res) {
-            controller.importState.importing = false
-            $scope.onComplete({ params: 'lalalala' })
+            ngToast.create({
+              className: 'danger',
+              content: '<p>' + $translate.instant('Error during import') + '</p><pre>' + (error && error.data ? error.data.error : JSON.stringify(error, null, 2)) + '</pre>'
+            })
           })
       }
 
