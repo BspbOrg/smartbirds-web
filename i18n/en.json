@@ -1344,5 +1344,6 @@
     "IMPORT_RECORDS_READING_FILE": "Loading file...",
     "IMPORT_RECORDS_LANGUAGE": "Language",
     "BTN_IMPORT": "Import",
-    "FORM_LIST_BUTTON_CSV_IMPORT_TOOLTIP": "Import from CSV file"
+    "FORM_LIST_BUTTON_CSV_IMPORT_TOOLTIP": "Import from CSV file",
+    "FISHES_DETAIL_TOTAL_LENGTH": "Total length (TL) class, cm"
 }
