@@ -1345,5 +1345,7 @@
     "IMPORT_RECORDS_LANGUAGE": "Language",
     "BTN_IMPORT": "Import",
     "FORM_LIST_BUTTON_CSV_IMPORT_TOOLTIP": "Import from CSV file",
-    "FISHES_DETAIL_TOTAL_LENGTH": "Total length (TL) class, cm"
+    "FISHES_DETAIL_TOTAL_LENGTH": "Total length (TL) class, cm",
+    "IMPORT_RECORDS_IGNORE_ERRORS": "Ignore errors",
+    "You will be notified by email when your import is ready": "You will be notified by email when your import is ready"
 }
