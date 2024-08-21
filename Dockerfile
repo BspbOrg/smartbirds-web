@@ -29,6 +29,9 @@ FROM nginx:1.25.1-alpine AS RELEASE
 # copy generated static site
 COPY --from=build /app/public /usr/share/nginx/html
 
+# copy nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # make readonly to nginx
 RUN chown -R root:nginx /usr/share/nginx/html && \
     chmod -R go-w /usr/share/nginx/html
