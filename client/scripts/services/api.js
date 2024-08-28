@@ -114,6 +114,18 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
           force
         }
       })
+    },
+    autoTranslateNomenclatures: function (form, id, limit, force) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/auto-translate-nomenclatures',
+        data: {
+          form,
+          id,
+          limit,
+          force
+        }
+      })
     }
   }
 
