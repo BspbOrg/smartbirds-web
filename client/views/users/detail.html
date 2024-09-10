@@ -6,7 +6,7 @@
           <button type="button"
                   class="btn btn-danger"
                   ng-disabled="!user.data.getName()"
-                  ng-if="::$user.isAdmin() && user.data.id"
+                  ng-if="user.data.id"
                   confirm="{{::user.deleteConfirmMessage}}"
                   confirm-text="{{::user.data.getName()}}"
                   confirm-size="md"

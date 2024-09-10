@@ -2,15 +2,15 @@
  * Created by groupsky on 13.01.16.
  */
 
-var angular = require('angular')
-var forms = require('../configs/forms')
+const angular = require('angular')
+const forms = require('../configs/forms')
 
 require('../app').controller('UserController', /* @ngInject */function ($scope, $state, $stateParams, $q, $timeout, $translate, api, ngToast, user, User, Raven) {
-  var controller = this
+  const controller = this
 
-  var id = $stateParams.id || $stateParams.fromId
+  const id = $stateParams.id || $stateParams.fromId
 
-  controller.data = id ? User.get({ id: id }) : new User()
+  controller.data = id ? User.get({ id }) : new User()
   controller.data.id = id
 
   controller.moderatorForms = []
@@ -98,8 +98,11 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
 
   controller.delete = function () {
     $q.resolve(controller.data)
-      .then(function (user) {
-        return User.delete({ id: user.id }).$promise
+      .then(function (userToDelete) {
+        return $q.all([
+          userToDelete,
+          User.delete({ id: userToDelete.id }).$promise
+        ])
       })
       .then(function (res) {
         ngToast.create({
@@ -117,7 +120,10 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
       })
       .then(function (res) {
         controller.form.$setPristine()
-        $state.go('^')
+        if (res[0].id === user.getIdentity().id) {
+          user.logout()
+        }
+        $state.go('home')
       })
   }
 
@@ -126,7 +132,7 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
   }
 
   function hackAutocompletion () {
-    var timeout = false
+    let timeout = false
     var deregister = $scope.$watch(function () {
       if (timeout) $timeout.cancel(timeout)
       timeout = $timeout(function () {
