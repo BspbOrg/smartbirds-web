@@ -258,4 +258,54 @@
       </div>
     </div>
   </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">ETRS89 Grid</div>
+    <div class="panel-body">
+      <form name="etrs89" class="form-inline">
+        <div class="form-group">
+          <label for="etrs89-form">Form</label>
+          <select class="form-control" id="etrs89-form"
+                  ng-model="etrs89.form"
+                  ng-options="::v.serverModel as ::v.label|translate for v in ::$ctrl.forms">
+            <option value="">all forms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="etrs89-id">Record ID</label>
+          <input type="number" class="form-control" id="etrs89-id"
+                 placeholder="all with missing etrs89 grid code"
+                 ng-model="etrs89.id">
+        </div>
+        <div class="form-group">
+          <label for="etrs89-limit">Records</label>
+          <input type="number" class="form-control" id="etrs89-limit"
+                 placeholder="newest records"
+                 ng-model="etrs89.limit">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="etrs89.force">
+            Force
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.etrs89(etrs89.form, etrs89.id, etrs89.limit, etrs89.force)">
+          Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.etrs89.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.etrs89.response" class="alert alert-success" role="alert">
+        {{$ctrl.etrs89.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.etrs89.error" class="alert alert-danger" role="alert">
+        {{$ctrl.etrs89.error}}
+      </div>
+    </div>
+  </div>
 </div>

@@ -126,6 +126,18 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
           force
         }
       })
+    },
+    etrs89: function (form, id, limit, force) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/etrs89',
+        data: {
+          form,
+          id,
+          limit,
+          force
+        }
+      })
     }
   }
 
