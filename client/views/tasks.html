@@ -308,4 +308,45 @@
       </div>
     </div>
   </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Upload to EBP</div>
+    <div class="panel-body">
+      <form name="ebpUpload" class="form-inline">
+        <field name="ebpUpload-startDate" type="date"
+               label="Start date"
+               model="ebpUpload.start_date"></field>
+        <field name="ebpUpload-endDate" type="date"
+               label="End date"
+               model="ebpUpload.end_date"></field>
+        <div class="form-group">
+            <p class="input-group">
+                <label class="control-label" for="ebpUpload-mode">Mode</label>
+                <select class="form-control" id="ebpUpload-mode"
+                        ng-model="ebpUpload.mode" ng-init="ebpUpload.mode = 'insert'">
+                    <option value="insert">Inseret/Update</option>
+                    <option value="replace">Replace</option>
+                    <option value="delete">Delete</option>
+                </select>
+            </p>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.ebpUpload(ebpUpload.start_date, ebpUpload.end_date, ebpUpload.mode)">
+            Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.ebpUpload.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.ebpUpload.response" class="alert alert-success" role="alert">
+        {{$ctrl.ebpUpload.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.ebpUpload.error" class="alert alert-danger" role="alert">
+        {{$ctrl.ebpUpload.error}}
+      </div>
+    </div>
+  </div>
 </div>
