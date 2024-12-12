@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header" translate>
+      EBP_SETTINGS_TITLE
+    </h1>
+  </div>
+</div>
+
+<div ng-if="$user.isAdmin()" class="row">
+  <div class="col-md-3">
+    <ul class="list-group">
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'organizations'}">
+        <a href ui-sref=".({settings: 'organizations'})">
+          Allowed organizations
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'sources'}">
+        <a href ui-sref=".({settings: 'sources'})">
+          Allowed sources
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'protocol'}">
+        <a href ui-sref=".({settings: 'protocol'})">
+          Upload protocol
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'species'}">
+        <a href ui-sref=".({settings: 'species'})">
+          Species
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'species_status'}">
+        <a href ui-sref=".({settings: 'species_status'})">
+          Species status
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    content
+  </div>
+</div>
+
+<div ng-if="!$user.isAdmin()" class="row">
+  <div class="col-lg-12">
+    <div class="alert alert-danger" translate>
+      EBP_SETTINGS_NO_PERMISSION
+    </div>
+  </div>
+</div>

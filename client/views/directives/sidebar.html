@@ -161,6 +161,13 @@
           </li>
         </ul>
       </li>
+
+      <li ng-if="::$root.$user.isAdmin()">
+        <a ui-sref="auth.ebp" ui-sref-active="active">
+          <i class="fa fa-gears fa-fw"></i>
+          EBP
+        </a>
+      </li>
     </ul>
   </div>
   <!-- /.sidebar-collapse -->
