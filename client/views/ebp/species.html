@@ -1,0 +1,82 @@
+{{ $ctrl.species | json }}
+<form name="editform"
+      role="form"
+      class="table-responsive"
+      confirm-on-exit="editform.$dirty"
+      confirm-message-window="{{'SPECIES_UNSAVED_DATA_TITLE' | translate}}"
+      confirm-message-route="{{'SPECIES_UNSAVED_DATA_MESSAGE' | translate}}">
+  <table class="table table-hover table-striped table-responsive">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>EBP species code</th>
+      <th>SB name la</th>
+      <th>EBP name</th>
+      <th class="btn-group btn-group-xs">
+        <button
+          type="button"
+          class="btn btn-info btn-xs"
+          title="{{'SPECIES_BUTTON_ADD' | translate}}"
+          ng-click="$ctrl.addSpecies()">
+          <i class="fa fa-plus fa-fw"></i>
+        </button>
+        <button ng-disabled="editform.$pristine"
+                type="button"
+                class="btn btn-success btn-xs"
+                title="{{'SPECIES_BUTTON_SAVE' | translate}}"
+                ng-click="$ctrl.saveSpecies()">
+          <i class="fa fa-check fa-fw"></i>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="hover" ng-repeat="item in $ctrl.visibleSpecies track by item.ebpId">
+      <td>{{$index+1+($ctrl.page-1)*$ctrl.pageSize}}</td>
+      <td>
+        <field type="text"
+               model="item.ebpId"
+               required></field>
+      </td>
+      <td>
+        <field type="text"
+               model="item.sbNameLa" required></field>
+      </td>
+      <td>
+        <field type="text"
+               model="item.ebpNameLa"></field>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger btn-xs visible-hover"
+                ng-click="$ctrl.removeSpecies($index)">
+          <i class="fa fa-remove fa-fw"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <th>#</th>
+      <th>EBP species code</th>
+      <th>SB name la</th>
+      <th>EBP name</th>
+      <th class="btn-group btn-group-xs">
+        <button
+          type="button"
+          class="btn btn-info btn-xs"
+          title="{{'SPECIES_BUTTON_ADD' | translate}}"
+          ng-click="$ctrl.addSpecies()">
+          <i class="fa fa-plus fa-fw"></i>
+        </button>
+        <button ng-disabled="editform.$pristine"
+                type="button"
+                class="btn btn-success btn-xs"
+                title="{{'SPECIES_BUTTON_SAVE' | translate}}"
+                ng-click="$ctrl.saveSpecies()">
+          <i class="fa fa-check fa-fw"></i>
+        </button>
+      </th>
+    </tr>
+    </tfoot>
+  </table>
+</form>
