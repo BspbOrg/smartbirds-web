@@ -1,4 +1,4 @@
-require('../app').controller('EBPSpeciesController', /* @ngInject */function ($scope, $q, $stateParams, EBPSpecies) {
+require('../app').controller('EBPSpeciesController', /* @ngInject */function ($scope, $q, $stateParams, EBPSpecies, ngToast) {
   const $ctrl = this
 
   $ctrl.page = 1
@@ -28,7 +28,7 @@ require('../app').controller('EBPSpeciesController', /* @ngInject */function ($s
     $scope.editform.$setDirty()
   }
 
-  $ctrl.add = function (key) {
+  $ctrl.add = function () {
     const len = $ctrl.species.push({
       ebpId: null,
       sbNameLa: null,
@@ -40,7 +40,19 @@ require('../app').controller('EBPSpeciesController', /* @ngInject */function ($s
   }
 
   $ctrl.save = function () {
-    // TODO: save
+    if ($scope.editform.$invalid) return
+    if (!$ctrl.species.length) {
+      return
+    }
+    EBPSpecies.update({ items: $ctrl.species })
+      .$promise.then(function (items) {
+        $scope.editform.$setPristine()
+        ngToast.create(
+          {
+            className: 'success',
+            content: 'Species updated'
+          })
+      })
   }
 
   $ctrl.requestSpecies()
