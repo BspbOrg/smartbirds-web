@@ -1,4 +1,4 @@
-require('../app').controller('EBPSpeciesController', /* @ngInject */function ($scope, $q, $stateParams, EBPSpecies, ngToast) {
+require('../app').controller('EBPSpeciesController', /* @ngInject */function ($scope, $q, EBPSpecies, ngToast) {
   const $ctrl = this
 
   $ctrl.page = 1
