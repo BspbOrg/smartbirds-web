@@ -349,6 +349,30 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     }
   }
 
+  api.ebp = {
+    allowedOrganizations: function () {
+      return $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/ebp/organizations',
+        withCredentials: true
+      }).then(function (response) {
+        return response.data
+      })
+    },
+    updateAllowedOrganizations: function (allowed) {
+      return $http({
+        method: 'PUT',
+        url: ENDPOINT_URL + '/ebp/organizations',
+        data: {
+          items: allowed
+        },
+        withCredentials: true
+      }).then(function (response) {
+        return response.data
+      })
+    }
+  }
+
   api.reports = {
     daily: (date) => $http({
       method: 'GET',

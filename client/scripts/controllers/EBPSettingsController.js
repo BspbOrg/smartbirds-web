@@ -1,4 +1,4 @@
-require('../app').controller('EBPSettingsController', /* @ngInject */function ($scope, $q, $stateParams, EBPSpecies) {
+require('../app').controller('EBPSettingsController', /* @ngInject */function ($scope, $stateParams) {
   const $ctrl = this
 
   $ctrl.selected = 'sources'
