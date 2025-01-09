@@ -1,1 +1,16 @@
-<div>Protocol</div>
+<div ng-controller="EBPProtocolController as $ctrl">
+  <form name="editform"
+        role="form"
+        class="table-responsive"
+        confirm-on-exit="editform.$dirty"
+        confirm-message-window="{{'SPECIES_UNSAVED_DATA_TITLE' | translate}}"
+        confirm-message-route="{{'SPECIES_UNSAVED_DATA_MESSAGE' | translate}}">
+    <field type="text" model="$ctrl.protocol" label="Upload protocol"></field>
+    <button ng-disabled="editform.$pristine"
+            type="button"
+            class="btn btn-success btn-md"
+            title="{{'SPECIES_BUTTON_SAVE' | translate}}"
+            ng-click="$ctrl.save()">
+      Save
+  </form>
+</div>

@@ -367,8 +367,6 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
           items: allowed
         },
         withCredentials: true
-      }).then(function (response) {
-        return response.data
       })
     },
     sources: function () {
@@ -388,8 +386,23 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
           items: allowed
         },
         withCredentials: true
+      })
+    },
+    protocol: function () {
+      return $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/ebp/protocol',
+        withCredentials: true
       }).then(function (response) {
         return response.data
+      })
+    },
+    updateProtocol: function (protocol) {
+      return $http({
+        method: 'PUT',
+        url: ENDPOINT_URL + '/ebp/protocol',
+        data: { protocol },
+        withCredentials: true
       })
     }
   }
