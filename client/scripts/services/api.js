@@ -370,6 +370,27 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       }).then(function (response) {
         return response.data
       })
+    },
+    sources: function () {
+      return $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/ebp/sources',
+        withCredentials: true
+      }).then(function (response) {
+        return response.data
+      })
+    },
+    updateSources: function (allowed) {
+      return $http({
+        method: 'PUT',
+        url: ENDPOINT_URL + '/ebp/sources',
+        data: {
+          items: allowed
+        },
+        withCredentials: true
+      }).then(function (response) {
+        return response.data
+      })
     }
   }
 
