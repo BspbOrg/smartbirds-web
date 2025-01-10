@@ -1355,5 +1355,6 @@
     "EBP_SETTINGS_SPECIES_SB_NAME": "Име в smartbirds",
     "EBP_SETTINGS_SPECIES_EBP_NAME": "Име в EBP",
     "EBP_SETTINGS_SPECIES_STATUS_CODE": "EBP Код",
-    "EBP_SETTINGS_SPECIES_STATUS_SB_NAME": "Име в smartbirds"
+    "EBP_SETTINGS_SPECIES_STATUS_SB_NAME": "Име в smartbirds",
+    "NAV_EBP": "EBP"
 }
