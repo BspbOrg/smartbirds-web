@@ -3,14 +3,13 @@
         role="form"
         class="table-responsive"
         confirm-on-exit="editform.$dirty"
-        confirm-message-window="{{'SPECIES_UNSAVED_DATA_TITLE' | translate}}"
-        confirm-message-route="{{'SPECIES_UNSAVED_DATA_MESSAGE' | translate}}">
-    <field type="text" model="$ctrl.protocol" label="Upload protocol"></field>
+        confirm-message-window="true">
+    <field type="text" model="$ctrl.protocol" label="{{'EBP_SETTINGS_PROTOCOL' | translate}}"></field>
     <button ng-disabled="editform.$pristine"
             type="button"
             class="btn btn-success btn-md"
-            title="{{'SPECIES_BUTTON_SAVE' | translate}}"
+            title="{{'EBP_SETTINGS_BUTTON_SAVE' | translate}}"
             ng-click="$ctrl.save()">
-      Save
+      EBP_SETTINGS_BUTTON_SAVE
   </form>
 </div>
