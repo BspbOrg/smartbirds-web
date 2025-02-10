@@ -168,6 +168,12 @@
           {{ 'NAV_EBP' | translate }}
         </a>
       </li>
+      <li ng-if="::$root.$user.isAdmin()">
+        <a ui-sref="auth.server_config" ui-sref-active="active">
+          <i class="fa fa-gears fa-fw"></i>
+          {{ 'NAV_CONFIG' | translate }}
+        </a>
+      </li>
     </ul>
   </div>
   <!-- /.sidebar-collapse -->
