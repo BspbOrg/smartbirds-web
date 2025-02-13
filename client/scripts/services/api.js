@@ -377,6 +377,12 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       withCredentials: true
     }).then(function (response) {
       return response.data
+    }),
+    updateConfig: (updatedConfigs) => $http({
+      method: 'PUT',
+      url: ENDPOINT_URL + '/config',
+      data: { updatedConfigs },
+      withCredentials: true
     })
   }
 
