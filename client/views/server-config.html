@@ -6,6 +6,9 @@
   </div>
 </div>
 <div>
+  Pending configuration change: {{ $ctrl.pendingConfigurationChange }}
+</div>
+<div>
   <form name="editform"
         role="form"
         class="table-responsive"
@@ -30,13 +33,6 @@
       </thead>
       <tbody>
       <tr class="hover" ng-repeat="configVariable in $ctrl.configVariables track by configVariable.key">
-        <form name="editForm-{{ configVariable.key }}"
-              role="form"
-              class="table-responsive"
-              confirm-on-exit="editForm-{{ configVariable.key }}.$dirty"
-              confirm-message-window="true">
-
-        </form>
         <td>{{$index}}</td>
         <td>
           {{ configVariable.key }}
@@ -46,7 +42,6 @@
                  model="configVariable.value"></field>
         </td>
         <td>
-
         </td>
       </tr>
       </tbody>
