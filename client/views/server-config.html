@@ -5,9 +5,12 @@
     </h1>
   </div>
 </div>
-<div>
-  Pending configuration change: {{ $ctrl.pendingConfigurationChange }}
-</div>
+<h3 class="text-warning" ng-if="$ctrl.pendingConfigurationChange">
+  <i class="fa fa-exclamation-triangle"></i>
+  <span translate>
+    There are pending configuration changes which will be applied on next server restart.
+  </span>
+</h3>
 <div>
   <form name="editform"
         role="form"
@@ -25,6 +28,7 @@
                   type="button"
                   class="btn btn-success btn-xs"
                   title="{{'SERVER_CONFIG_BUTTON_SAVE' | translate}}"
+                  confirm="Are you sure you want to update the configuration?"
                   ng-click="$ctrl.save()">
             <i class="fa fa-check fa-fw"></i>
           </button>
@@ -55,6 +59,7 @@
                   type="button"
                   class="btn btn-success btn-xs"
                   title="{{'SERVER_CONFIG_BUTTON_SAVE' | translate}}"
+                  confirm="Are you sure you want to update the configuration?"
                   ng-click="$ctrl.save()">
             <i class="fa fa-check fa-fw"></i>
           </button>
