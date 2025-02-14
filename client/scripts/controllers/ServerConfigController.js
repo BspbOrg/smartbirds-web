@@ -26,6 +26,7 @@ require('../app').controller('ServerConfigController', /* @ngInject */function (
 
     api.server.updateConfig(changed).then(function () {
       $scope.editform.$setPristine()
+      $ctrl.requestConfig()
       ngToast.create(
         {
           className: 'success',
