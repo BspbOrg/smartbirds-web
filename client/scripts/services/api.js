@@ -349,59 +349,21 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
     }
   }
 
-  api.ebp = {
-    allowedOrganizations: function () {
+  api.settings = {
+    readSetting: function (key) {
       return $http({
         method: 'GET',
-        url: ENDPOINT_URL + '/ebp/organizations',
+        url: ENDPOINT_URL + '/settings/' + key,
         withCredentials: true
       }).then(function (response) {
         return response.data
       })
     },
-    updateAllowedOrganizations: function (allowed) {
+    updateSetting: function (key, value) {
       return $http({
         method: 'PUT',
-        url: ENDPOINT_URL + '/ebp/organizations',
-        data: {
-          items: allowed
-        },
-        withCredentials: true
-      })
-    },
-    sources: function () {
-      return $http({
-        method: 'GET',
-        url: ENDPOINT_URL + '/ebp/sources',
-        withCredentials: true
-      }).then(function (response) {
-        return response.data
-      })
-    },
-    updateSources: function (allowed) {
-      return $http({
-        method: 'PUT',
-        url: ENDPOINT_URL + '/ebp/sources',
-        data: {
-          items: allowed
-        },
-        withCredentials: true
-      })
-    },
-    protocol: function () {
-      return $http({
-        method: 'GET',
-        url: ENDPOINT_URL + '/ebp/protocol',
-        withCredentials: true
-      }).then(function (response) {
-        return response.data
-      })
-    },
-    updateProtocol: function (protocol) {
-      return $http({
-        method: 'PUT',
-        url: ENDPOINT_URL + '/ebp/protocol',
-        data: { protocol },
+        url: ENDPOINT_URL + '/settings/' + key,
+        data: { value },
         withCredentials: true
       })
     }

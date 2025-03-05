@@ -9,9 +9,10 @@ require('../app').controller('EBPOrganizationsController', /* @ngInject */functi
   })
 
   $ctrl.requestAllowedOrganizations = function () {
-    api.ebp.allowedOrganizations().then(function (res) {
+    api.settings.readSetting('ebp_organizations').then(function (res) {
+      const allowed = JSON.parse(res.value) || []
       $ctrl.organizations.forEach(function (organization) {
-        organization.allowed = res.includes(organization.slug)
+        organization.allowed = allowed.includes(organization.slug)
       })
     })
   }
@@ -20,7 +21,7 @@ require('../app').controller('EBPOrganizationsController', /* @ngInject */functi
     const allowed = $ctrl.organizations
       .filter((organization) => organization.allowed)
       .map((organization) => organization.slug)
-    api.ebp.updateAllowedOrganizations(allowed).then(function () {
+    api.settings.updateSetting('ebp_organizations', JSON.stringify(allowed)).then(function () {
       $scope.editform.$setPristine()
       ngToast.create(
         {

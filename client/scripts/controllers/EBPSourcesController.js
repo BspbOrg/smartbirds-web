@@ -9,9 +9,10 @@ require('../app').controller('EBPSourcesController', /* @ngInject */function ($s
   })
 
   $ctrl.requestAllowedSources = function () {
-    api.ebp.sources().then(function (res) {
+    api.settings.readSetting('ebp_sources').then(function (res) {
+      const allowed = JSON.parse(res.value) || []
       $ctrl.sources.forEach(function (source) {
-        source.allowed = res.includes(source.id)
+        source.allowed = allowed.includes(source.id)
       })
     })
   }
@@ -20,7 +21,7 @@ require('../app').controller('EBPSourcesController', /* @ngInject */function ($s
     const allowed = $ctrl.sources
       .filter((source) => source.allowed)
       .map((source) => source.id)
-    api.ebp.updateSources(allowed).then(function () {
+    api.settings.updateSetting('ebp_sources', JSON.stringify(allowed)).then(function () {
       $scope.editform.$setPristine()
       ngToast.create(
         {
