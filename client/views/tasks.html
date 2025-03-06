@@ -322,7 +322,7 @@
         <div class="form-group">
             <p class="input-group">
                 <label class="control-label" for="ebpUpload-mode">Mode</label>
-                <select class="form-control" id="ebpUpload-mode"
+                <select class="form-control" id="ebpUpload-mode" ng-disabled="ebpUpload.bulk"
                         ng-model="ebpUpload.mode" ng-init="ebpUpload.mode = 'insert'">
                     <option value="insert">Inseret/Update</option>
                     <option value="replace">Replace</option>
@@ -330,8 +330,14 @@
                 </select>
             </p>
         </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="ebpUpload.bulk">
+            Bulk
+          </label>
+        </div>
         <button type="button" class="btn btn-default"
-                ng-click="$ctrl.ebpUpload(ebpUpload.start_date, ebpUpload.end_date, ebpUpload.mode)">
+                ng-click="$ctrl.ebpUpload(ebpUpload.start_date, ebpUpload.end_date, ebpUpload.mode, ebpUpload.bulk)">
             Run
         </button>
       </form>
@@ -346,6 +352,9 @@
       </div>
       <div ng-if="$ctrl.ebpUpload.error" class="alert alert-danger" role="alert">
         {{$ctrl.ebpUpload.error}}
+      </div>
+      <div ng-if="ebpUpload.bulk" class="alert alert-danger" role="alert" translate>
+        EBP_UPLOAD_BULK_WARNING
       </div>
     </div>
   </div>

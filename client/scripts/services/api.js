@@ -139,14 +139,15 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         }
       })
     },
-    ebpUpload: function (startDate, endDate, mode) {
+    ebpUpload: function (startDate, endDate, mode, bulk) {
       return $http({
         method: 'POST',
         url: ENDPOINT_URL + '/tasks/ebp-upload',
         data: {
           startDate,
           endDate,
-          mode
+          mode,
+          bulk
         }
       })
     }

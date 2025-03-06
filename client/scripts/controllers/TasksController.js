@@ -21,7 +21,7 @@ require('../app').controller('TasksController', /* @ngInject */function (api) {
     }
   })
 
-  $ctrl.ebpUpload = function (startDate, endDate, mode) {
+  $ctrl.ebpUpload = function (startDate, endDate, mode, bulk) {
     delete $ctrl.ebpUpload.response
     delete $ctrl.ebpUpload.error
     if (!startDate) {
@@ -40,7 +40,7 @@ require('../app').controller('TasksController', /* @ngInject */function (api) {
     $ctrl.ebpUpload.loading = true
     const startDateNormalized = moment(startDate).startOf('day').toDate()
     const endDateNormalized = moment(endDate || startDate).endOf('day').toDate()
-    api.tasks.ebpUpload(startDateNormalized, endDateNormalized, mode).then(function (response) {
+    api.tasks.ebpUpload(startDateNormalized, endDateNormalized, mode, bulk).then(function (response) {
       $ctrl.ebpUpload.response = response.data.result
     }, function (error) {
       $ctrl.ebpUpload.error = error.data.error
