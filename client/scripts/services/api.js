@@ -126,6 +126,30 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
           force
         }
       })
+    },
+    etrs89: function (form, id, limit, force) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/etrs89',
+        data: {
+          form,
+          id,
+          limit,
+          force
+        }
+      })
+    },
+    ebpUpload: function (startDate, endDate, mode, bulk) {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/ebp-upload',
+        data: {
+          startDate,
+          endDate,
+          mode,
+          bulk
+        }
+      })
     }
   }
 
@@ -323,6 +347,26 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
       })
       promise.cancel = canceler.resolve
       return promise
+    }
+  }
+
+  api.settings = {
+    readSetting: function (key) {
+      return $http({
+        method: 'GET',
+        url: ENDPOINT_URL + '/settings/' + key,
+        withCredentials: true
+      }).then(function (response) {
+        return response.data
+      })
+    },
+    updateSetting: function (key, value) {
+      return $http({
+        method: 'PUT',
+        url: ENDPOINT_URL + '/settings/' + key,
+        data: { value },
+        withCredentials: true
+      })
     }
   }
 

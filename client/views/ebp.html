@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header" translate>
+      EBP_SETTINGS_TITLE
+    </h1>
+  </div>
+</div>
+
+<div ng-if="$user.isAdmin()" class="row">
+  <div class="col-md-3">
+    <ul class="list-group">
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'organizations'}">
+        <a href ui-sref=".({settings: 'organizations'})" translate>
+          EBP_SETTINGS_ORGANIZATIONS
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'sources'}">
+        <a href ui-sref=".({settings: 'sources'})" translate>
+          EBP_SETTINGS_SOURCES
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'protocol'}">
+        <a href ui-sref=".({settings: 'protocol'})" translate>
+          EBP_SETTINGS_PROTOCOL
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'cbm_protocol'}">
+        <a href ui-sref=".({settings: 'cbm_protocol'})" translate>
+          EBP_SETTINGS_CBM_PROTOCOL
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'species'}">
+        <a href ui-sref=".({settings: 'species'})" translate>
+          EBP_SETTINGS_SPECIES
+        </a>
+      </li>
+      <li class="list-group-item" ng-class="{'list-group-item-info': $ctrl.selected === 'species_status'}">
+        <a href ui-sref=".({settings: 'species_status'})" translate>
+          EBP_SETTINGS_SPECIES_STATUS
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div ng-if="$ctrl.selected === 'organizations'" ng-include="'/views/ebp/organizations.html'" class="col-md-9"></div>
+  <div ng-if="$ctrl.selected === 'sources'" ng-include="'/views/ebp/sources.html'" class="col-md-9"></div>
+  <div ng-if="$ctrl.selected === 'protocol'" ng-include="'/views/ebp/protocol.html'" class="col-md-9"></div>
+  <div ng-if="$ctrl.selected === 'cbm_protocol'" ng-include="'/views/ebp/cbm_protocol.html'" class="col-md-9"></div>
+  <div ng-if="$ctrl.selected === 'species'"  ng-include="'/views/ebp/species.html'" class="col-md-9"></div>
+  <div ng-if="$ctrl.selected === 'species_status'" ng-include="'/views/ebp/species_status.html'" class="col-md-9"></div>
+</div>
+
+<div ng-if="!$user.isAdmin()" class="row">
+  <div class="col-lg-12">
+    <div class="alert alert-danger" translate>
+      EBP_SETTINGS_NO_PERMISSION
+    </div>
+  </div>
+</div>

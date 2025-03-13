@@ -1,0 +1,53 @@
+<div ng-controller="EBPSourcesController as $ctrl">
+  <form name="editform"
+        role="form"
+        class="table-responsive"
+        confirm-on-exit="editform.$dirty"
+        confirm-message-window="true">
+    <table class="table table-hover table-striped table-responsive">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th translate>EBP_SETTINGS_SOURCE</th>
+        <th translate>EBP_SETTINGS_SOURCE_ENABLED</th>
+        <th class="btn-group btn-group-xs">
+          <button ng-disabled="editform.$pristine"
+                  type="button"
+                  class="btn btn-success btn-xs"
+                  title="{{'EBP_SETTINGS_BUTTON_SAVE' | translate}}"
+                  ng-click="$ctrl.save()">
+            <i class="fa fa-check fa-fw"></i>
+          </button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="hover" ng-repeat="item in $ctrl.sources track by item.id">
+        <td>{{$index}}</td>
+        <td>
+          {{item.label }}
+        </td>
+        <td colspan="2">
+          <input type="checkbox" ng-model="item.allowed" />
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>#</th>
+        <th translate>EBP_SETTINGS_SOURCE</th>
+        <th translate>EBP_SETTINGS_SOURCE_ENABLED</th>
+        <th class="btn-group btn-group-xs">
+          <button ng-disabled="editform.$pristine"
+                  type="button"
+                  class="btn btn-success btn-xs"
+                  title="{{'EBP_SETTINGS_BUTTON_SAVE' | translate}}"
+                  ng-click="$ctrl.save()">
+            <i class="fa fa-check fa-fw"></i>
+          </button>
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+  </form>
+</div>

@@ -258,4 +258,104 @@
       </div>
     </div>
   </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">ETRS89 Grid</div>
+    <div class="panel-body">
+      <form name="etrs89" class="form-inline">
+        <div class="form-group">
+          <label for="etrs89-form">Form</label>
+          <select class="form-control" id="etrs89-form"
+                  ng-model="etrs89.form"
+                  ng-options="::v.serverModel as ::v.label|translate for v in ::$ctrl.forms">
+            <option value="">all forms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="etrs89-id">Record ID</label>
+          <input type="number" class="form-control" id="etrs89-id"
+                 placeholder="all with missing etrs89 grid code"
+                 ng-model="etrs89.id">
+        </div>
+        <div class="form-group">
+          <label for="etrs89-limit">Records</label>
+          <input type="number" class="form-control" id="etrs89-limit"
+                 placeholder="newest records"
+                 ng-model="etrs89.limit">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="etrs89.force">
+            Force
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.etrs89(etrs89.form, etrs89.id, etrs89.limit, etrs89.force)">
+          Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.etrs89.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.etrs89.response" class="alert alert-success" role="alert">
+        {{$ctrl.etrs89.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.etrs89.error" class="alert alert-danger" role="alert">
+        {{$ctrl.etrs89.error}}
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Upload to EBP</div>
+    <div class="panel-body">
+      <form name="ebpUpload" class="form-inline">
+        <field name="ebpUpload-startDate" type="date"
+               label="Start date"
+               model="ebpUpload.start_date"></field>
+        <field name="ebpUpload-endDate" type="date"
+               label="End date"
+               model="ebpUpload.end_date"></field>
+        <div class="form-group">
+            <p class="input-group">
+                <label class="control-label" for="ebpUpload-mode">Mode</label>
+                <select class="form-control" id="ebpUpload-mode" ng-disabled="ebpUpload.bulk"
+                        ng-model="ebpUpload.mode" ng-init="ebpUpload.mode = 'insert'">
+                    <option value="insert">Inseret/Update</option>
+                    <option value="replace">Replace</option>
+                    <option value="delete">Delete</option>
+                </select>
+            </p>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="ebpUpload.bulk">
+            Bulk
+          </label>
+        </div>
+        <button type="button" class="btn btn-default"
+                ng-click="$ctrl.ebpUpload(ebpUpload.start_date, ebpUpload.end_date, ebpUpload.mode, ebpUpload.bulk)">
+            Run
+        </button>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.ebpUpload.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        running...
+      </div>
+      <div ng-if="$ctrl.ebpUpload.response" class="alert alert-success" role="alert">
+        {{$ctrl.ebpUpload.response ? 'success' : 'failure'}}
+      </div>
+      <div ng-if="$ctrl.ebpUpload.error" class="alert alert-danger" role="alert">
+        {{$ctrl.ebpUpload.error}}
+      </div>
+      <div ng-if="ebpUpload.bulk" class="alert alert-danger" role="alert" translate>
+        EBP_UPLOAD_BULK_WARNING
+      </div>
+    </div>
+  </div>
 </div>

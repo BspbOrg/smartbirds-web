@@ -1,0 +1,16 @@
+<div ng-controller="EBPProtocolController as $ctrl">
+  <form name="editform"
+        role="form"
+        class="table-responsive"
+        confirm-on-exit="editform.$dirty"
+        confirm-message-window="true">
+    <field type="text" model="$ctrl.protocol" label="{{'EBP_SETTINGS_PROTOCOL' | translate}}"></field>
+    <button ng-disabled="editform.$pristine"
+            type="button"
+            class="btn btn-success btn-md"
+            title="{{'EBP_SETTINGS_BUTTON_SAVE' | translate}}"
+            ng-click="$ctrl.save()"
+            translate>
+      EBP_SETTINGS_BUTTON_SAVE
+  </form>
+</div>

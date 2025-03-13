@@ -586,6 +586,19 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       url: '/stats'
     })
 
+    /// ////////
+    // EBP //
+    /// ////////
+    .state('auth.ebp', {
+      url: '/ebp?settings',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/ebp.html',
+          controller: 'EBPSettingsController as $ctrl'
+        }
+      }
+    })
+
   const statForms = ['birds', 'fishes', 'invertebrates', 'herptiles', 'mammals', 'plants']
   angular.forEach(statForms, function (form) {
     $stateProvider

@@ -1,0 +1,92 @@
+<div ng-controller="EBPSpeciesController as $ctrl">
+  <form name="editform"
+        role="form"
+        class="table-responsive"
+        confirm-on-exit="editform.$dirty"
+        confirm-message-window="true">
+    <table class="table table-hover table-striped table-responsive">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th translate>EBP_SETTINGS_SPECIES_CODE</th>
+        <th translate>EBP_SETTINGS_SPECIES_SB_NAME</th>
+        <th translate>EBP_SETTINGS_SPECIES_EBP_NAME</th>
+        <th class="btn-group btn-group-xs">
+          <button
+            type="button"
+            class="btn btn-info btn-xs"
+            title="{{'EBP_SETTINGS_BUTTON_ADD' | translate}}"
+            ng-click="$ctrl.add()">
+            <i class="fa fa-plus fa-fw"></i>
+          </button>
+          <button ng-disabled="editform.$pristine"
+                  type="button"
+                  class="btn btn-success btn-xs"
+                  title="{{'EBP_SETTINGS_BUTTON_SAVE' | translate}}"
+                  ng-click="$ctrl.save()">
+            <i class="fa fa-check fa-fw"></i>
+          </button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="hover" ng-repeat="item in $ctrl.visible track by item.id">
+        <td>{{$index+1+($ctrl.page-1)*$ctrl.pageSize}}</td>
+        <td>
+          <field type="text"
+                 model="item.ebpId"
+                 required></field>
+        </td>
+        <td>
+          <field type="text"
+                 model="item.sbNameLa" required></field>
+        </td>
+        <td>
+          <field type="text"
+                 model="item.ebpNameLa"></field>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-xs visible-hover"
+                  ng-click="$ctrl.remove($index)">
+            <i class="fa fa-remove fa-fw"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>#</th>
+        <th translate>EBP_SETTINGS_SPECIES_CODE</th>
+        <th translate>EBP_SETTINGS_SPECIES_SB_NAME</th>
+        <th translate>EBP_SETTINGS_SPECIES_EBP_NAME</th>
+        <th class="btn-group btn-group-xs">
+          <button
+            type="button"
+            class="btn btn-info btn-xs"
+            title="{{'EBP_SETTINGS_BUTTON_ADD' | translate}}"
+            ng-click="$ctrl.add()">
+            <i class="fa fa-plus fa-fw"></i>
+          </button>
+          <button ng-disabled="editform.$pristine"
+                  type="button"
+                  class="btn btn-success btn-xs"
+                  title="{{'EBP_SETTINGS_BUTTON_SAVE' | translate}}"
+                  ng-click="$ctrl.save()">
+            <i class="fa fa-check fa-fw"></i>
+          </button>
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+  </form>
+
+  <div class="actions actions-species">
+    <ul uib-pagination
+        total-items="$ctrl.count"
+        items-per-page="$ctrl.pageSize"
+        max-size="5"
+        boundary-link-numbers="true"
+        ng-model="$ctrl.page"
+        ng-change="$ctrl.pageChanged()"></ul>
+  </div>
+</div>
