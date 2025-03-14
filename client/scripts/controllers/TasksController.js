@@ -38,8 +38,8 @@ require('../app').controller('TasksController', /* @ngInject */function (api) {
     }
 
     $ctrl.ebpUpload.loading = true
-    const startDateNormalized = moment(startDate).startOf('day').toDate()
-    const endDateNormalized = moment(endDate || startDate).endOf('day').toDate()
+    const startDateNormalized = new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0, 0, 0))
+    const endDateNormalized = new Date(Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 23, 59, 59, 999))
     api.tasks.ebpUpload(startDateNormalized, endDateNormalized, mode, bulk).then(function (response) {
       $ctrl.ebpUpload.response = response.data.result
     }, function (error) {
