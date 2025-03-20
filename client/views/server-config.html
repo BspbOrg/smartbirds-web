@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header" translate>
-      SERVER CONFIG
+      SERVER_CONFIG_TITLE
     </h1>
   </div>
 </div>
 <h3 class="text-warning" ng-if="$ctrl.pendingConfigurationChange">
   <i class="fa fa-exclamation-triangle"></i>
   <span translate>
-    There are pending configuration changes which will be applied on next server restart.
+    SERVER_CONFIG_PENDING_CHANGES
   </span>
 </h3>
 <div>
@@ -21,14 +21,14 @@
       <thead>
       <tr>
         <th>#</th>
-        <th translate>Config key</th>
-        <th translate>Config value</th>
+        <th translate>SERVER_CONFIG_KEY</th>
+        <th translate>SERVER_CONFIG_VALUE</th>
         <th class="btn-group btn-group-xs">
           <button ng-disabled="editform.$pristine"
                   type="button"
                   class="btn btn-success btn-xs"
                   title="{{'SERVER_CONFIG_BUTTON_SAVE' | translate}}"
-                  confirm="Are you sure you want to update the configuration?"
+                  confirm="{{'SERVER_CONFIG_CONFIRMATION_MESSAGE' | translate}}"
                   ng-click="$ctrl.save()">
             <i class="fa fa-check fa-fw"></i>
           </button>
@@ -52,14 +52,14 @@
       <tfoot>
       <tr>
         <th>#</th>
-        <th translate>Config key</th>
-        <th translate>Config value</th>
+        <th translate>SERVER_CONFIG_KEY</th>
+        <th translate>SERVER_CONFIG_VALUE</th>
         <th class="btn-group btn-group-xs">
           <button ng-disabled="editform.$pristine"
                   type="button"
                   class="btn btn-success btn-xs"
                   title="{{'SERVER_CONFIG_BUTTON_SAVE' | translate}}"
-                  confirm="Are you sure you want to update the configuration?"
+                  confirm="{{'SERVER_CONFIG_CONFIRMATION_MESSAGE' | translate}}"
                   ng-click="$ctrl.save()">
             <i class="fa fa-check fa-fw"></i>
           </button>
