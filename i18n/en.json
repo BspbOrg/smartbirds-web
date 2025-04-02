@@ -1368,5 +1368,6 @@
     "EBP_SETTINGS_SPECIES_STATUS_SB_NAME": "SB status name",
     "NAV_EBP": "EBP",
     "EBP_SETTINGS_CBM_PROTOCOL": "CBM protocol",
-    "EBP_UPLOAD_BULK_WARNING": "This will overwrite all records in the EBP database for the given period! Proceed only if you are sure!"
+    "EBP_UPLOAD_BULK_WARNING": "This will overwrite all records in the EBP database for the given period! Proceed only if you are sure!",
+    "HERPTILES_DETAIL_TRAPS_COUNT": "Traps count"
 }
