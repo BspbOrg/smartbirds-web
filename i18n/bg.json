@@ -1358,5 +1358,6 @@
     "EBP_SETTINGS_SPECIES_STATUS_SB_NAME": "Име в smartbirds",
     "NAV_EBP": "EBP",
     "EBP_SETTINGS_CBM_PROTOCOL": "МОВП протокол",
-    "EBP_UPLOAD_BULK_WARNING": "Тази операция ще презапише всички данни в EBP портала за въведения период! Продължете само ако сте сигурни!"
+    "EBP_UPLOAD_BULK_WARNING": "Тази операция ще презапише всички данни в EBP портала за въведения период! Продължете само ако сте сигурни!",
+    "HERPTILES_DETAIL_TRAPS_COUNT": "Брой капани"
 }
