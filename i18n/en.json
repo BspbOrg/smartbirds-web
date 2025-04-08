@@ -1369,5 +1369,12 @@
     "NAV_EBP": "EBP",
     "EBP_SETTINGS_CBM_PROTOCOL": "CBM protocol",
     "EBP_UPLOAD_BULK_WARNING": "This will overwrite all records in the EBP database for the given period! Proceed only if you are sure!",
-    "HERPTILES_DETAIL_TRAPS_COUNT": "Traps count"
+    "HERPTILES_DETAIL_TRAPS_COUNT": "Traps count",
+    "NAV_CONFIG": "Settings",
+    "SERVER_CONFIG_TITLE": "Sever settings",
+    "SERVER_CONFIG_PENDING_CHANGES": "There are pending configuration changes which will be applied on next server restart.",
+    "SERVER_CONFIG_KEY": "Name",
+    "SERVER_CONFIG_VALUE": "Value",
+    "SERVER_CONFIG_BUTTON_SAVE": "Save",
+    "SERVER_CONFIG_CONFIRMATION_MESSAGE": "Are you sure you want to update the configuration?"
 }
