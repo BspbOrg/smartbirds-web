@@ -67,6 +67,13 @@
                  model="monitoringDetailController.data.findings"></field>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <field name="trapsCount" type="int" min="0"
+                 label="{{'HERPTILES_DETAIL_TRAPS_COUNT' | translate}}"
+                 model="monitoringDetailController.data.trapsCount"></field>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -148,11 +155,6 @@
       <field name="tempCloaca" type="float" min="-273.15"
              label="{{'HERPTILES_DETAIL_TEMP_CLOACA' | translate}}"
              model="monitoringDetailController.data.tempCloaca"></field>
-    </div>
-    <div class="col-md-3 col-lg-3">
-      <field name="trapsCount" type="int" min="0"
-             label="{{'HERPTILES_DETAIL_TRAPS_COUNT' | translate}}"
-             model="monitoringDetailController.data.trapsCount"></field>
     </div>
   </div>
 
