@@ -599,6 +599,19 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       }
     })
 
+    /// ////////
+    // SERVER CONFIGURATION //
+    /// ////////
+    .state('auth.server_config', {
+      url: '/config',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/server-config.html',
+          controller: 'ServerConfigController as $ctrl'
+        }
+      }
+    })
+
   const statForms = ['birds', 'fishes', 'invertebrates', 'herptiles', 'mammals', 'plants']
   angular.forEach(statForms, function (form) {
     $stateProvider
