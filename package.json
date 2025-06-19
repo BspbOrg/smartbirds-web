@@ -22,7 +22,7 @@
     "watchify": "^4.0.0"
   },
   "scripts": {
-    "deploy": "yarn version && git push && git push --tags && git push origin HEAD:production && echo 'ssh smartbirds.org \"smartbirds update-web\"'",
+    "deploy": "yarn version && git push && git push --tags && git push origin HEAD:production",
     "start": "npm run budo",
     "start:static": "http-server public",
     "less": "lessc",
