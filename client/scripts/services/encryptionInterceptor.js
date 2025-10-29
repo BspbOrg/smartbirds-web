@@ -17,21 +17,18 @@ require('../app').factory('encryptionInterceptor', /* @ngInject */function ($q, 
     response: function (response) {
       // Decrypt if response contains encrypted envelope
       if (response && response.data && encryption.isEncrypted(response.data)) {
-        const originalResponse = response.data.$$response
+        // Preserve the original response metadata added by unwrapApi
+        const originalMetadata = response.data.$$response
 
         return encryption.decryptIfNeeded(response.data, response.headers)
           .then(function (decryptedData) {
             // Replace with decrypted data
             response.data = decryptedData
 
-            // Restore all metadata from original response (preserving any future fields)
-            if (originalResponse) {
-              for (const key in originalResponse) {
-                if (key !== 'data' && Object.prototype.hasOwnProperty.call(originalResponse, key)) {
-                  response.data[key] = originalResponse[key]
-                }
-              }
-              response.data.$$response = originalResponse
+            // Restore the $$response reference to maintain compatibility with unwrapApi expectations
+            // This allows code that checks response.data.$$response to still work
+            if (originalMetadata) {
+              response.data.$$response = originalMetadata
             }
 
             return response
