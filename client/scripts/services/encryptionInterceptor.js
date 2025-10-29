@@ -15,8 +15,16 @@ require('../app').factory('encryptionInterceptor', /* @ngInject */function ($q, 
     },
 
     response: function (response) {
-      // Decrypt if response contains encrypted envelope
-      if (response && response.data && encryption.isEncrypted(response.data)) {
+      // Check if response is encrypted via header (more efficient than inspecting data)
+      const encryptedHeader = response.headers && response.headers('X-SB-Encrypted')
+
+      if (encryptedHeader && response && response.data) {
+        // Verify the data structure matches encryption envelope
+        if (!encryption.isEncrypted(response.data)) {
+          console.warn('[encryptionInterceptor] X-SB-Encrypted header present but data is not encrypted envelope')
+          return response
+        }
+
         // Preserve the original response metadata added by unwrapApi
         const originalMetadata = response.data.$$response
 

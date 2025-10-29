@@ -94,7 +94,7 @@ require('../app').factory('encryption', /* @ngInject */function ($window, $q) {
   /**
    * Decrypt envelope if encrypted
    */
-  function decryptIfNeeded (data, headers) {
+  function decryptIfNeeded (data) {
     // Not encrypted
     if (!isEncrypted(data)) {
       return $q.resolve(data)
