@@ -18,8 +18,9 @@ RUN npm ci --no-update-notifier --only=production
 # Copy sources
 COPY . .
 
-# Build static
-RUN npm run build && \
+# Build static with placeholder for encryption key
+# The placeholder will be replaced at runtime by the entrypoint script in deployment
+RUN API_ENCRYPTION_KEY=__ENCRYPTION_KEY_PLACEHOLDER__ npm run build && \
     npm run build:fonts && \
     npm run build:views
 
@@ -32,8 +33,7 @@ COPY --from=build /app/public /usr/share/nginx/html
 # copy nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# make readonly to nginx
-RUN chown -R root:nginx /usr/share/nginx/html && \
-    chmod -R go-w /usr/share/nginx/html
+# Set ownership (permissions will be adjusted by entrypoint in deployment)
+RUN chown -R root:nginx /usr/share/nginx/html
 
 EXPOSE 80
