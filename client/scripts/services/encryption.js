@@ -10,7 +10,7 @@ require('../app').factory('encryption', /* @ngInject */function ($window, $q) {
   const subtle = crypto && crypto.subtle
 
   // Encryption key from environment (set at build time by envify)
-  const API_ENCRYPTION_KEY_HEX = process.env.API_ENCRYPTION_KEY || ''
+  const API_ENCRYPTION_KEY = process.env.API_ENCRYPTION_KEY || ''
 
   /**
    * Convert hex string to Uint8Array
@@ -39,10 +39,30 @@ require('../app').factory('encryption', /* @ngInject */function ($window, $q) {
   }
 
   /**
-   * Import the encryption key from hex format
+   * Parse key string - try base64, then hex (same logic as server)
    */
-  function importKey (keyHex) {
-    const keyBytes = hexToBytes(keyHex)
+  function parseKey (input) {
+    if (!input) return null
+    // try base64, then hex
+    try {
+      const b64 = base64ToBytes(input)
+      if (b64.length === 32) return b64
+    } catch (e) {}
+    try {
+      const hex = hexToBytes(input)
+      if (hex.length === 32) return hex
+    } catch (e) {}
+    return null
+  }
+
+  /**
+   * Import the encryption key (supports both hex and base64 formats)
+   */
+  function importKey (keyString) {
+    const keyBytes = parseKey(keyString)
+    if (!keyBytes) {
+      throw new Error('Invalid encryption key format (need 32-byte key in hex or base64)')
+    }
     return subtle.importKey(
       'raw',
       keyBytes,
@@ -107,13 +127,13 @@ require('../app').factory('encryption', /* @ngInject */function ($window, $q) {
     }
 
     // Check if encryption key is configured
-    if (!API_ENCRYPTION_KEY_HEX) {
+    if (!API_ENCRYPTION_KEY) {
       console.error('[encryption] API_ENCRYPTION_KEY not configured')
       return $q.reject(new Error('API encryption key not configured'))
     }
 
     // Decrypt
-    return importKey(API_ENCRYPTION_KEY_HEX)
+    return importKey(API_ENCRYPTION_KEY)
       .then(function (key) {
         return decrypt(key, data.iv, data.tag, data.payload)
       })
