@@ -4,4 +4,5 @@
 
 require('../app').config(/* @ngInject */function ($httpProvider) {
   $httpProvider.interceptors.push('sbXmlHttpInterceptor')
+  $httpProvider.interceptors.push('encryptionInterceptor')
 })
