@@ -84,7 +84,7 @@
     "bulk-require": "~1.0.1",
     "bulkify": "~1.4.2",
     "cross-env": "^10.1.0",
-    "csv-parse": "^5.3.8",
+    "csv-parse": "^6.1.0",
     "envify": "~4.1.0",
     "font-awesome": "^4.5.0",
     "less": "^4.4.2",
