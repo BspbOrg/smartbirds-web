@@ -18,7 +18,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "local-cors-proxy": "^1.1.0",
-    "standard": "^17.0.0",
+    "standard": "^17.1.2",
     "start-server-and-test": "^2.0.1",
     "watch": "^1.0.2",
     "watchify": "^4.0.0"
