@@ -1,7 +1,7 @@
 import inject from '@rollup/plugin-inject'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import virtual from '@rollup/plugin-virtual'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 
 export default {
   input: 'client/scripts/sw.js',
