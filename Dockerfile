@@ -25,7 +25,7 @@ RUN API_ENCRYPTION_KEY=__ENCRYPTION_KEY_PLACEHOLDER__ npm run build && \
     npm run build:views
 
 #### Stage RELEASE #####################################################################################################
-FROM nginx:1.25.1-alpine AS RELEASE
+FROM nginx:1.29.3-alpine AS RELEASE
 
 # copy generated static site
 COPY --from=build /app/public /usr/share/nginx/html
