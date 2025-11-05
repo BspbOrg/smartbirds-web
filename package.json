@@ -15,7 +15,7 @@
     "dotenv-cli": "^11.0.0",
     "fantasticon": "^2.0.0",
     "http-server": "^14.1.1",
-    "husky": "^8.0.1",
+    "husky": "^9.1.7",
     "lint-staged": "^13.1.0",
     "local-cors-proxy": "^1.1.0",
     "standard": "^17.0.0",
