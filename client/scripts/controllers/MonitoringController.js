@@ -57,12 +57,6 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
         if (!controller.filter.user) {
           controller.filter.user = user.getIdentity().id
         }
-        $q.resolve(db.users.$promise || db.users).then(function (users) {
-          // if he has sharers
-          if (Object.keys(users).length > 1) {
-            controller.canFilterByUser = true
-          }
-        })
       }
       break
   }
