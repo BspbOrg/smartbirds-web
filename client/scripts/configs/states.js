@@ -26,9 +26,9 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
   // Use $stateProvider to configure your states.
   $stateProvider
 
-  /// ///////
-  // Home //
-  /// ///////
+    /// ///////
+    // Home //
+    /// ///////
     .state('home', {
       url: '/',
       templateUrl: '/views/home.html',
@@ -296,20 +296,6 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
     })
 
     /// ////////
-    // User Friends Management //
-    /// ////////
-    .state('auth.users.friends', {
-      url: '/friends',
-      views: {
-        'content@auth': {
-          templateUrl: '/views/users/friends.html',
-          controller: 'FriendsController',
-          controllerAs: '$ctrl'
-        }
-      }
-    })
-
-    /// ////////
     // Monitorings //
     /// ////////
     .state('auth.monitoring', {
@@ -340,9 +326,9 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
   angular.forEach(forms, function (formDef, formName) {
     $stateProvider
 
-    /// ////////
-    // Monitoring List public //
-    /// ////////
+      /// ////////
+      // Monitoring List public //
+      /// ////////
       .state('auth.monitoring.public.' + formName, {
         url: '/' + formName + '?' + (formDef || []).filters.join('&'),
         views: {
@@ -460,9 +446,9 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
   })
   $stateProvider
 
-  /// ////////
-  // Zones //
-  /// ////////
+    /// ////////
+    // Zones //
+    /// ////////
     .state('auth.zones', {
       url: '/zones?status&{location:int}&{owner:int}&zone',
       views: {
