@@ -88,7 +88,7 @@
     "csv-parse": "^6.1.0",
     "envify": "~4.1.0",
     "font-awesome": "^4.7.0",
-    "less": "^4.4.2",
+    "less": "^4.5.1",
     "less-plugin-clean-css": "^1.6.0",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
