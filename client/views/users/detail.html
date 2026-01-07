@@ -116,6 +116,12 @@
                choices="user.moderatorForms"
                label="{{::'USER_DETAIL_FORMS' | translate}}"
                model="user.data.forms"></field>
+
+        <field ng-if="::$user.isAdmin()" name="moderatorOrganizations" type="checkbox-group"
+               disabled="user.data.role !== 'moderator'"
+               choices="user.moderatorOrganizations"
+               label="{{::'USER_DETAIL_MODERATOR_ORGANIZATIONS' | translate}}"
+               model="user.data.moderatorOrganizations"></field>
       </div>
 
       <div ng-if="::$user.getIdentity().id === user.data.id">

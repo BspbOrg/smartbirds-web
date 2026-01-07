@@ -5,7 +5,7 @@
 const angular = require('angular')
 const forms = require('../configs/forms')
 
-require('../app').controller('UserController', /* @ngInject */function ($scope, $state, $stateParams, $q, $timeout, $translate, api, ngToast, user, User, Raven) {
+require('../app').controller('UserController', /* @ngInject */function ($scope, $state, $stateParams, $q, $timeout, $translate, api, ngToast, user, User, Raven, Organization) {
   const controller = this
 
   const id = $stateParams.id || $stateParams.fromId
@@ -14,6 +14,7 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
   controller.data.id = id
 
   controller.moderatorForms = []
+  controller.moderatorOrganizations = []
   controller.privacyChoices = [
     { id: 'public', label: 'PRIVACY_PUBLIC' },
     { id: 'private', label: 'PRIVACY_PRIVATE' }
@@ -27,6 +28,15 @@ require('../app').controller('UserController', /* @ngInject */function ($scope, 
   if (user.isAdmin()) {
     controller.roleChoices.push({ id: 'admin', label: 'admin' })
   }
+
+  Organization.query({ limit: -1 }).$promise.then(function (organizations) {
+    controller.moderatorOrganizations = organizations.map(function (org) {
+      return {
+        id: org.slug,
+        label: org.toString()
+      }
+    })
+  })
 
   angular.forEach(forms, function (formDef) {
     controller.moderatorForms.push({ id: formDef.serverModel, label: formDef.label })
