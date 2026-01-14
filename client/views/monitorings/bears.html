@@ -1,0 +1,116 @@
+<form name="smartform" role="form" confirm-on-exit="smartform.$dirty"
+  confirm-message-window="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_TITLE' | translate}}"
+  confirm-message-route="{{'MONITORING_DETAIL_UNSAVED_DATA_ALERT_MESSAGE' | translate}}">
+  <div class="actions actions-detail">
+    <form-detail-buttons monitoring-detail-controller="monitoringDetailController"></form-detail-buttons>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <span ng-if="monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_EDIT</span>
+        <span ng-if="!monitoringDetailController.data.id" translate>MONITORING_DETAIL_TITLE_NEW</span>
+      </h1>
+    </div>
+  </div>
+
+  <div ng-include="'/views/monitorings/common2.html'"></div>
+
+  <div ng-include="'/views/monitorings/common.html'"></div>
+
+  <div class="row">
+    <div class="col-md-8 col-lg-7" ng-include="'/views/monitorings/fields/geolocation.html'"></div>
+
+    <div class="col-md-4 col-lg-5">
+      <div class="row">
+        <div class="col-md-12">
+          <field name="species" type="species" nomenclature="mammals" required="true"
+            label="{{'FIELD_SPECIES' | translate}}" model="monitoringDetailController.data.species"></field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 col-lg-6">
+          <field name="count" type="int" min="1" required="true" ng-init="monitoringDetailController.data.count=1"
+            label="{{'BEARS_DETAIL_COUNT' | translate}}" model="monitoringDetailController.data.count"></field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/confidential.html'"></div>
+        <div class="col-md-6 col-lg-6" ng-include="'/views/monitorings/fields/moderatorReview.html'"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-6">
+          <field name="age" type="single-choice" nomenclature="bears_age" label="{{'BEARS_DETAIL_AGE' | translate}}"
+            model="monitoringDetailController.data.age"></field>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <field name="sex" type="single-choice" nomenclature="bears_gender" label="{{'BEARS_DETAIL_SEX' | translate}}"
+            model="monitoringDetailController.data.sex"></field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <field name="habitat" type="single-choice" nomenclature="bears_habitat"
+            label="{{'BEARS_DETAIL_HABITAT' | translate}}" model="monitoringDetailController.data.habitat"></field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <field name="findings" type="multiple-choice" nomenclature="bears_findings"
+            label="{{'BEARS_DETAIL_FINDINGS' | translate}}" model="monitoringDetailController.data.findings"></field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <field name="excrementContent" type="multiple-choice" nomenclature="bears_excrement_content"
+        label="{{'BEARS_DETAIL_EXCREMENT_CONTENT' | translate}}"
+        model="monitoringDetailController.data.excrementContent"></field>
+    </div>
+    <div class="col-md-6">
+      <field name="excrementConsistence" type="single-choice" nomenclature="bears_excrement_consistence"
+        label="{{'BEARS_DETAIL_EXCREMENT_CONSISTENCE' | translate}}"
+        model="monitoringDetailController.data.excrementConsistence"></field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <field name="markingHeight" type="float" min="0" label="{{'BEARS_DETAIL_MARKING_HEIGHT' | translate}}"
+        model="monitoringDetailController.data.markingHeight"></field>
+    </div>
+    <div class="col-md-6">
+      <field name="den" type="single-choice" nomenclature="bears_den" label="{{'BEARS_DETAIL_DEN' | translate}}"
+        model="monitoringDetailController.data.den"></field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <field name="footprintFrontPawWidth" type="float" min="0"
+        label="{{'BEARS_DETAIL_FOOTPRINT_FRONT_PAW_WIDTH' | translate}}"
+        model="monitoringDetailController.data.footprintFrontPawWidth"></field>
+    </div>
+    <div class="col-md-3">
+      <field name="footprintFrontPawLength" type="float" min="0"
+        label="{{'BEARS_DETAIL_FOOTPRINT_FRONT_PAW_LENGTH' | translate}}"
+        model="monitoringDetailController.data.footprintFrontPawLength"></field>
+    </div>
+    <div class="col-md-3">
+      <field name="footprintHindPawWidth" type="float" min="0"
+        label="{{'BEARS_DETAIL_FOOTPRINT_HIND_PAW_WIDTH' | translate}}"
+        model="monitoringDetailController.data.footprintHindPawWidth"></field>
+    </div>
+    <div class="col-md-3">
+      <field name="footprintHindPawLength" type="float" min="0"
+        label="{{'BEARS_DETAIL_FOOTPRINT_HIND_PAW_LENGTH' | translate}}"
+        model="monitoringDetailController.data.footprintHindPawLength"></field>
+    </div>
+
+    <div ng-include="'/views/monitorings/footer.html'"></div>
+
+    <div class="row">
+      <form-pictures ng-model="monitoringDetailController.data.pictures"></form-pictures>
+    </div>
+
+</form>
