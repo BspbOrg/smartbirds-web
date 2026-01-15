@@ -70,8 +70,9 @@ require('../app').factory('FormBears', /* @ngInject */function ($resource, ENDPO
       this.initDefaults()
     },
     initDefaults: function () {
-      this.confidential = false
+      this.confidential = true
       this.moderatorReview = false
+      this.species = 'Ursus arctos'
     },
     hasNotes: true
   })
