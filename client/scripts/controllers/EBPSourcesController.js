@@ -1,7 +1,7 @@
 require('../app').controller('EBPSourcesController', /* @ngInject */function ($scope, $q, db, api, ngToast) {
   const $ctrl = this
   $q.resolve(db.nomenclatures.$promise || db.nomenclatures).then(function (nomenclatures) {
-    $ctrl.sources = Object.values(nomenclatures.main_source || []).map((source) => ({
+    $ctrl.sources = Object.values(nomenclatures.ebp_source || []).map((source) => ({
       id: source.label.en,
       label: source.toString(),
       allowed: false
