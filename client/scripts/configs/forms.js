@@ -257,7 +257,7 @@ const forms = module.exports = {
       'longitude',
       'radius',
       'tab',
-      'threat',
+      'threatsBears',
       'organization',
       'moderatorReview',
       'source'

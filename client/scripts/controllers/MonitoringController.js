@@ -40,6 +40,11 @@ require('../app').controller('MonitoringController', /* @ngInject */function ($s
   }).then(function (categories) {
     controller.filter.category = categories[controller.filter.category]
   })
+  $q.resolve(db.nomenclatures.$promise || db.nomenclatures).then(function (nomenclatures) {
+    return nomenclatures.bears_threats.$promise || nomenclatures.bears_threats
+  }).then(function (threats) {
+    controller.filter.threatsBears = threats[controller.filter.threatsBears]
+  })
 
   switch (context) {
     case 'public':
