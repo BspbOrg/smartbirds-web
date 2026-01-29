@@ -565,6 +565,22 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       }
     })
 
+    /// //////////////
+    // Audit Log //
+    /// //////////////
+    .state('auth.audit', {
+      url: '/audit?actorUserId&ownerUserId&recordType&recordId&userAction&fromDate&toDate&operationId',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/audit/list.html',
+          controller: 'AuditController as auditController'
+        }
+      },
+      data: {
+        roles: ['admin']
+      }
+    })
+
     /// ////////
     // Stats //
     /// ////////

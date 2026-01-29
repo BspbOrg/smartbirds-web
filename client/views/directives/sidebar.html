@@ -125,6 +125,12 @@
           Tasks
         </a>
       </li>
+      <li ng-if="::$root.$user.isAdmin()">
+        <a ui-sref="auth.audit" ui-sref-active="active">
+          <i class="fa fa-eye fa-fw"></i>
+          Audit Log
+        </a>
+      </li>
 
       <li>
         <a id="atlas" href=""

@@ -1,0 +1,229 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      <i class="fa fa-eye fa-fw"></i>
+      {{'AUDIT_PAGE_TITLE' | translate}}
+    </h1>
+  </div>
+</div>
+
+<!-- Filter Panel -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-body" uib-collapse="auditController.filterCollapsed">
+        <form role="form" class="form form-filter">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_ACTOR_USER</label>
+                <field
+                  name="actorUser"
+                  type="user"
+                  model="auditController.filter.actorUser"
+                  placeholder="{{'AUDIT_PLACEHOLDER_SELECT_USER' | translate}}"
+                  on-select="auditController.updateFilter()">
+                </field>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_OWNER_USER</label>
+                <field
+                  name="ownerUser"
+                  type="user"
+                  model="auditController.filter.ownerUser"
+                  placeholder="{{'AUDIT_PLACEHOLDER_SELECT_USER' | translate}}"
+                  on-select="auditController.updateFilter()">
+                </field>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_RECORD_TYPE</label>
+                <select class="form-control" ng-model="auditController.filter.recordType" ng-change="auditController.updateFilter()">
+                  <option value="" translate>AUDIT_FILTER_ALL</option>
+                  <option ng-repeat="type in auditController.recordTypes" value="{{type}}">{{auditController.getRecordTypeLabel(type) | translate}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_RECORD_ID</label>
+                <input type="text" class="form-control" ng-model="auditController.filter.recordId" ng-change="auditController.updateFilter()" placeholder="{{'AUDIT_PLACEHOLDER_RECORD_ID' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_ACTION</label>
+                <select class="form-control" ng-model="auditController.filter.userAction" ng-change="auditController.updateFilter()">
+                  <option value="" translate>AUDIT_FILTER_ALL</option>
+                  <option ng-repeat="action in auditController.actions" value="{{action}}">{{action}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_OPERATION_ID</label>
+                <input type="text" class="form-control" ng-model="auditController.filter.operationId" ng-change="auditController.updateFilter()" placeholder="{{'AUDIT_PLACEHOLDER_OPERATION_ID' | translate}}">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_FROM_DATE</label>
+                <div class="input-group">
+                  <input type="text"
+                         class="form-control"
+                         uib-datepicker-popup="yyyy-MM-dd"
+                         ng-model="auditController.filter.fromDate"
+                         ng-change="auditController.updateFilter()"
+                         is-open="auditController.fromDateOpen"
+                         datepicker-options="{showWeeks: false}"
+                         placeholder="YYYY-MM-DD"
+                         alt-input-formats="['yyyy-MM-dd']" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="auditController.fromDateOpen = !auditController.fromDateOpen">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label translate>AUDIT_FILTER_TO_DATE</label>
+                <div class="input-group">
+                  <input type="text"
+                         class="form-control"
+                         uib-datepicker-popup="yyyy-MM-dd"
+                         ng-model="auditController.filter.toDate"
+                         ng-change="auditController.updateFilter()"
+                         is-open="auditController.toDateOpen"
+                         datepicker-options="{showWeeks: false}"
+                         placeholder="YYYY-MM-DD"
+                         alt-input-formats="['yyyy-MM-dd']" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="auditController.toDateOpen = !auditController.toDateOpen">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="button" class="btn btn-default" ng-click="auditController.clearFilters()">
+              <i class="fa fa-times"></i> <span translate>AUDIT_FILTER_CLEAR</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Results Summary -->
+<div class="row">
+  <div class="col-lg-12">
+    <p class="text-muted" translate translate-values="{count: auditController.rows.length, total: auditController.count}">
+      AUDIT_SUMMARY
+    </p>
+  </div>
+</div>
+
+<!-- Results Table -->
+<div class="row"
+     infinite-scroll="auditController.nextPage()"
+     infinite-scroll-distance="10"
+     infinite-scroll-disabled="auditController.loading || auditController.endOfPages">
+  <div class="col-lg-12">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th translate>AUDIT_COLUMN_OCCURRED_AT</th>
+            <th translate>AUDIT_COLUMN_ACTION</th>
+            <th translate>AUDIT_COLUMN_ACTOR</th>
+            <th translate>AUDIT_COLUMN_RECORD_TYPE</th>
+            <th translate>AUDIT_COLUMN_RECORD_ID</th>
+            <th translate>AUDIT_COLUMN_OWNER</th>
+            <th translate>AUDIT_COLUMN_OPERATION_ID</th>
+            <th translate>AUDIT_COLUMN_ACTOR_ROLE</th>
+            <th translate>AUDIT_COLUMN_ACTOR_ORG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-if="auditController.loading && auditController.rows.length === 0">
+            <td colspan="9" class="text-center">
+              <i class="fa fa-spinner fa-spin"></i> <span translate>AUDIT_LOADING</span>
+            </td>
+          </tr>
+          <tr ng-if="!auditController.loading && auditController.rows.length === 0">
+            <td colspan="9" class="text-center text-muted" translate>
+              AUDIT_NO_RECORDS
+            </td>
+          </tr>
+          <tr ng-repeat="row in auditController.rows"
+              ng-class="{'danger': row.action === 'DELETE', 'warning': row.action === 'EDIT'}">
+            <td>{{::row.occurredAt|date:'d.MM.yyyy HH:mm'}}</td>
+            <td>
+              <span class="label" ng-class="auditController.getActionClass(row.action)">
+                {{row.action}}
+              </span>
+            </td>
+            <td>
+              <a ng-if="row.getActor()" ui-sref="auth.users.detail({id: row.actorUserId})">
+                {{row.getActor().getName()}}
+              </a>
+              <span ng-if="!row.getActor()" class="text-muted" translate translate-values="{userId: row.actorUserId}">AUDIT_USER_UNKNOWN</span>
+            </td>
+            <td>
+              <small>{{auditController.getRecordTypeLabel(row.recordType) | translate}}</small>
+            </td>
+            <td>
+              <a href ng-click="auditController.viewRecord(row.recordType, row.recordId); $event.preventDefault()">
+                {{row.recordId}}
+              </a>
+            </td>
+            <td>
+              <a ng-if="row.getOwner()" ui-sref="auth.users.detail({id: row.ownerUserId})">
+                {{row.getOwner().getName()}}
+              </a>
+              <span ng-if="!row.getOwner() && row.ownerUserId" class="text-muted" translate translate-values="{userId: row.ownerUserId}">AUDIT_USER_UNKNOWN</span>
+              <span ng-if="!row.getOwner() && !row.ownerUserId" class="text-muted">-</span>
+            </td>
+            <td>
+              <a href="" ng-if="row.operationId" ng-click="auditController.filterByOperationId(row.operationId)">
+                <small>{{row.operationId}}</small>
+              </a>
+              <span ng-if="!row.operationId" class="text-muted">-</span>
+            </td>
+            <td>
+              <small>{{row.actorRole || '-'}}</small>
+            </td>
+            <td>
+              <small>{{row.actorOrganization || '-'}}</small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="text-center" ng-if="auditController.loading && auditController.rows.length > 0">
+      <i class="fa fa-spinner fa-2x fa-spin"></i>
+    </div>
+    <div class="text-center" ng-if="auditController.endOfPages && auditController.rows.length > 0">
+      <p class="text-muted">
+        <i class="fa fa-check"></i> <span translate>AUDIT_END_OF_RESULTS</span>
+      </p>
+    </div>
+  </div>
+</div>
