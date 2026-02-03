@@ -160,6 +160,31 @@ const forms = module.exports = {
       'source'
     ]
   },
+  bears: {
+    model: 'FormBears',
+    serverModel: 'formBears',
+    label: 'FORM_LABEL_BEARS',
+    translatePrefix: 'BEARS',
+    speciesType: 'mammals',
+    hasCount: true,
+    longLabel: 'FORM_BEARS_LONG',
+    shortLabel: 'FORM_BEARS_SHORT',
+    hasStats: false,
+    filters: [
+      'auto_location',
+      '{user:int}',
+      'from_date',
+      'to_date',
+      'latitude',
+      'longitude',
+      'radius',
+      'tab',
+      'threatsBears',
+      'organization',
+      'moderatorReview',
+      'source'
+    ]
+  },
   bats: {
     model: 'FormBats',
     serverModel: 'formBats',
@@ -233,31 +258,6 @@ const forms = module.exports = {
       'radius',
       'tab',
       'threat',
-      'organization',
-      'moderatorReview',
-      'source'
-    ]
-  },
-  bears: {
-    model: 'FormBears',
-    serverModel: 'formBears',
-    label: 'FORM_LABEL_BEARS',
-    translatePrefix: 'BEARS',
-    speciesType: 'mammals',
-    hasCount: true,
-    longLabel: 'FORM_BEARS_LONG',
-    shortLabel: 'FORM_BEARS_SHORT',
-    hasStats: false,
-    filters: [
-      'auto_location',
-      '{user:int}',
-      'from_date',
-      'to_date',
-      'latitude',
-      'longitude',
-      'radius',
-      'tab',
-      'threatsBears',
       'organization',
       'moderatorReview',
       'source'
