@@ -8,7 +8,7 @@
   <div ng-if="$user.isAdmin() || $user.isModerator('cbm')" class="col-lg-4 col-md-6">
     <div class="panel panel-primary">
       <div class="panel-heading"
-           ng-click="$state.go('auth.zones', {status:['requested','owned'], location: undefined, owner: undefined})">
+        ng-click="$state.go('auth.zones', {status:['requested','owned'], location: undefined, owner: undefined})">
         <div class="row">
           <p class="col-xs-3"><i class="fa fa-map-marker fa-5x"></i></p>
           <div class="col-xs-9 text-right">
@@ -31,6 +31,7 @@
   <dashboard-form-card form="::dashboard.forms.birds"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.herptiles"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.mammals"></dashboard-form-card>
+  <dashboard-form-card form="::dashboard.forms.bears"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.invertebrates"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.plants"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.fishes"></dashboard-form-card>
