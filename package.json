@@ -16,7 +16,7 @@
     "fantasticon": "^3.0.0",
     "http-server": "^14.1.1",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.6",
+    "lint-staged": "^16.2.7",
     "local-cors-proxy": "^1.1.0",
     "standard": "^17.1.2",
     "start-server-and-test": "^2.1.2",
