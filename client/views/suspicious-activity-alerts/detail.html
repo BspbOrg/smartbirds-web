@@ -1,0 +1,203 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      <i class="fa fa-shield fa-fw"></i>
+      {{'SUSPICIOUS_ACTIVITY_DETAIL_TITLE' | translate}}
+      <span ng-if="alertController.alert">: #{{alertController.alert.id}}</span>
+    </h1>
+  </div>
+</div>
+
+<div ng-if="alertController.loading">
+  <div class="text-center">
+    <i class="fa fa-spinner fa-spin fa-3x"></i>
+    <p translate>SUSPICIOUS_ACTIVITY_LOADING</p>
+  </div>
+</div>
+
+<div ng-if="!alertController.loading && alertController.alert">
+  <!-- Back Button -->
+  <div class="row">
+    <div class="col-lg-12">
+      <button class="btn btn-default" ng-click="alertController.goBack()">
+        <i class="fa fa-arrow-left"></i> <span translate>SUSPICIOUS_ACTIVITY_BACK_TO_LIST</span>
+      </button>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- Alert Header -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-info-circle"></i> <span translate>SUSPICIOUS_ACTIVITY_DETAIL_HEADER</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">
+              <strong translate>SUSPICIOUS_ACTIVITY_COLUMN_DETECTED_AT</strong>
+              <p>{{alertController.alert.detectedAt | date:'d.MM.yyyy HH:mm:ss'}}</p>
+            </div>
+            <div class="col-md-3">
+              <strong translate>SUSPICIOUS_ACTIVITY_COLUMN_PATTERN</strong>
+              <p>
+                <i class="fa" ng-class="alertController.alert.getPatternIcon()"></i>
+                {{alertController.alert.patternType}}
+              </p>
+            </div>
+            <div class="col-md-2">
+              <strong translate>SUSPICIOUS_ACTIVITY_COLUMN_STATUS</strong>
+              <p>
+                <span class="label" ng-class="alertController.alert.getStatusClass()">
+                  {{alertController.alert.status}}
+                </span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <strong translate>SUSPICIOUS_ACTIVITY_COLUMN_USER</strong>
+              <p>
+                <a ng-if="alertController.user" ui-sref="auth.users.detail({id: alertController.alert.userId})">
+                  {{alertController.user.getName()}}
+                </a>
+                <span ng-if="alertController.user && alertController.user.role" class="text-muted"> ({{alertController.user.role}})</span>
+                <span ng-if="!alertController.user" class="text-muted">ID: {{alertController.alert.userId}}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detection Details -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-bar-chart"></i> <span translate>SUSPICIOUS_ACTIVITY_DETAIL_DETECTION</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            <dt translate>SUSPICIOUS_ACTIVITY_COLUMN_REQUESTS</dt>
+            <dd>{{alertController.alert.requestCount || '-'}}</dd>
+
+            <!-- IP Count or IP Addresses -->
+            <dt translate>SUSPICIOUS_ACTIVITY_COLUMN_IPS</dt>
+            <dd ng-if="alertController.alert.distinctIps && alertController.alert.distinctIps.length">
+              <span ng-repeat="ip in alertController.alert.distinctIps" class="label label-default" style="margin-right: 5px; margin-bottom: 3px; display: inline-block;">{{ip}}</span>
+              <span class="text-muted" ng-if="alertController.alert.distinctIps.length > 1">({{alertController.alert.distinctIps.length}} total)</span>
+            </dd>
+            <dd ng-if="!alertController.alert.distinctIps || !alertController.alert.distinctIps.length">
+              <span ng-if="alertController.alert.detectionData.ipAddress" class="label label-default">{{alertController.alert.detectionData.ipAddress}}</span>
+              <span ng-if="!alertController.alert.detectionData.ipAddress">{{alertController.alert.ipCount || '-'}}</span>
+            </dd>
+
+            <!-- Endpoint or Endpoint Count -->
+            <dt ng-if="alertController.alert.endpoints && alertController.alert.endpoints.length || alertController.alert.detectionData.endpoint || alertController.alert.detectionData.endpointCount" translate>SUSPICIOUS_ACTIVITY_ENDPOINTS</dt>
+            <dd ng-if="alertController.alert.endpoints && alertController.alert.endpoints.length">
+              <code ng-repeat="endpoint in alertController.alert.endpoints" style="display: block; margin-bottom: 3px;">{{endpoint}}</code>
+            </dd>
+            <dd ng-if="!alertController.alert.endpoints || !alertController.alert.endpoints.length">
+              <code ng-if="alertController.alert.detectionData.endpoint" style="display: block;">
+                {{alertController.alert.detectionData.httpMethod || 'GET'}} {{alertController.alert.detectionData.endpoint}}
+              </code>
+              <span ng-if="!alertController.alert.detectionData.endpoint && alertController.alert.detectionData.endpointCount">
+                {{alertController.alert.detectionData.endpointCount}} <span translate>SUSPICIOUS_ACTIVITY_ENDPOINTS_DISTINCT</span>
+              </span>
+            </dd>
+
+            <!-- Session Count (for sessionAnomalies) -->
+            <dt ng-if="alertController.alert.detectionData.sessionCount" translate>SUSPICIOUS_ACTIVITY_SESSION_COUNT</dt>
+            <dd ng-if="alertController.alert.detectionData.sessionCount">{{alertController.alert.detectionData.sessionCount}}</dd>
+
+            <dt translate>SUSPICIOUS_ACTIVITY_TIME_WINDOW</dt>
+            <dd>{{alertController.alert.timeWindow || '-'}}</dd>
+
+            <!-- Time Range -->
+            <dt ng-if="alertController.alert.detectionData.firstRequest || alertController.alert.detectionData.firstSeen || alertController.alert.detectionData.burstStart" translate>SUSPICIOUS_ACTIVITY_TIME_RANGE</dt>
+            <dd ng-if="alertController.alert.detectionData.firstRequest || alertController.alert.detectionData.firstSeen || alertController.alert.detectionData.burstStart">
+              {{(alertController.alert.detectionData.firstRequest || alertController.alert.detectionData.firstSeen || alertController.alert.detectionData.burstStart) | date:'d.MM.yyyy HH:mm:ss'}}
+              -
+              {{(alertController.alert.detectionData.lastRequest || alertController.alert.detectionData.lastSeen || alertController.alert.detectionData.burstEnd) | date:'HH:mm:ss'}}
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detection Data (Collapsible) -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="cursor: pointer;" ng-click="alertController.showRawData = !alertController.showRawData">
+          <h3 class="panel-title">
+            <i class="fa" ng-class="alertController.showRawData ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+            <span translate>SUSPICIOUS_ACTIVITY_DETAIL_DATA</span>
+            <small class="text-muted"> (<span translate>SUSPICIOUS_ACTIVITY_CLICK_TO_TOGGLE</span>)</small>
+          </h3>
+        </div>
+        <div class="panel-body" uib-collapse="!alertController.showRawData">
+          <pre>{{alertController.alert.detectionData | json}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Actions -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-edit"></i> <span translate>SUSPICIOUS_ACTIVITY_DETAIL_ACTIONS</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" translate>SUSPICIOUS_ACTIVITY_COLUMN_STATUS</label>
+              <div class="col-sm-10">
+                <select class="form-control" ng-model="alertController.editForm.status">
+                  <option ng-repeat="status in alertController.statuses" value="{{status.value}}">{{status.label | translate}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label" translate>SUSPICIOUS_ACTIVITY_ADMIN_NOTES</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="4" ng-model="alertController.editForm.adminNotes" placeholder="{{'SUSPICIOUS_ACTIVITY_ADMIN_NOTES_PLACEHOLDER' | translate}}"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button"
+                        class="btn btn-primary"
+                        confirm="{{'SUSPICIOUS_ACTIVITY_CONFIRM_UPDATE' | translate}}"
+                        ng-click="alertController.updateAlert()"
+                        ng-disabled="!alertController.isDirty">
+                  <i class="fa fa-save"></i> <span translate>SUSPICIOUS_ACTIVITY_ACTION_SAVE</span>
+                </button>
+                <button type="button"
+                        class="btn btn-default"
+                        ng-click="alertController.loadAlert()"
+                        ng-disabled="!alertController.isDirty">
+                  <i class="fa fa-undo"></i> <span translate>SUSPICIOUS_ACTIVITY_ACTION_RESET</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

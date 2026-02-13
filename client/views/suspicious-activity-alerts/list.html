@@ -1,0 +1,277 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      <i class="fa fa-shield fa-fw"></i>
+      {{'SUSPICIOUS_ACTIVITY_PAGE_TITLE' | translate}}
+    </h1>
+  </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row" ng-if="alertsController.stats">
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge">{{alertsController.stats.newCount || 0}}</div>
+            <div translate>SUSPICIOUS_ACTIVITY_STAT_NEW</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-search fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge">{{alertsController.stats.investigatingCount || 0}}</div>
+            <div translate>SUSPICIOUS_ACTIVITY_STAT_INVESTIGATING</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-check fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge">{{alertsController.stats.resolvedThisWeek || 0}}</div>
+            <div translate>SUSPICIOUS_ACTIVITY_STAT_RESOLVED_WEEK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-times fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge">{{alertsController.stats.falsePositiveCount || 0}}</div>
+            <div translate>SUSPICIOUS_ACTIVITY_STAT_FALSE_POSITIVE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Panel -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-body" uib-collapse="alertsController.filterCollapsed">
+        <form role="form" class="form form-filter">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label translate>SUSPICIOUS_ACTIVITY_FILTER_STATUS</label>
+                <select class="form-control" ng-model="alertsController.filter.status" ng-change="alertsController.updateFilter()">
+                  <option value="" translate>SUSPICIOUS_ACTIVITY_FILTER_ALL</option>
+                  <option ng-repeat="status in alertsController.statuses" value="{{status.value}}">{{status.label | translate}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label translate>SUSPICIOUS_ACTIVITY_FILTER_PATTERN</label>
+                <select class="form-control" ng-model="alertsController.filter.patternType" ng-change="alertsController.updateFilter()">
+                  <option value="" translate>SUSPICIOUS_ACTIVITY_FILTER_ALL</option>
+                  <option ng-repeat="pattern in alertsController.patternTypes" value="{{pattern.value}}">{{pattern.label | translate}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label translate>SUSPICIOUS_ACTIVITY_FILTER_USER</label>
+                <field
+                  name="user"
+                  type="user"
+                  model="alertsController.filter.user"
+                  placeholder="{{'SUSPICIOUS_ACTIVITY_PLACEHOLDER_USER' | translate}}"
+                  on-select="alertsController.updateFilter()">
+                </field>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label translate>SUSPICIOUS_ACTIVITY_FILTER_FROM_DATE</label>
+                <div class="input-group">
+                  <input type="text"
+                         class="form-control"
+                         uib-datepicker-popup="yyyy-MM-dd"
+                         ng-model="alertsController.filter.fromDate"
+                         ng-change="alertsController.updateFilter()"
+                         is-open="alertsController.fromDateOpen"
+                         datepicker-options="{showWeeks: false}"
+                         placeholder="YYYY-MM-DD"
+                         alt-input-formats="['yyyy-MM-dd']" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="alertsController.fromDateOpen = !alertsController.fromDateOpen">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label translate>SUSPICIOUS_ACTIVITY_FILTER_TO_DATE</label>
+                <div class="input-group">
+                  <input type="text"
+                         class="form-control"
+                         uib-datepicker-popup="yyyy-MM-dd"
+                         ng-model="alertsController.filter.toDate"
+                         ng-change="alertsController.updateFilter()"
+                         is-open="alertsController.toDateOpen"
+                         datepicker-options="{showWeeks: false}"
+                         placeholder="YYYY-MM-DD"
+                         alt-input-formats="['yyyy-MM-dd']" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="alertsController.toDateOpen = !alertsController.toDateOpen">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="button" class="btn btn-default" ng-click="alertsController.clearFilters()">
+              <i class="fa fa-times"></i> <span translate>SUSPICIOUS_ACTIVITY_FILTER_CLEAR</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Display -->
+<div class="row" ng-if="alertsController.hasError">
+  <div class="col-lg-12">
+    <div class="alert alert-danger">
+      <h4><i class="fa fa-exclamation-triangle"></i> Error Loading Alerts</h4>
+      <p>{{alertsController.errorMessage}}</p>
+      <p>
+        <button class="btn btn-danger" ng-click="alertsController.retryLoad()">
+          <i class="fa fa-refresh"></i> Retry
+        </button>
+      </p>
+      <p class="text-muted"><small>Note: Make sure the backend server is running and the API endpoint exists.</small></p>
+    </div>
+  </div>
+</div>
+
+<!-- Results Summary -->
+<div class="row" ng-if="!alertsController.hasError">
+  <div class="col-lg-12">
+    <p class="text-muted" translate translate-values="{count: alertsController.alerts.length, total: alertsController.count}">
+      SUSPICIOUS_ACTIVITY_SUMMARY
+    </p>
+  </div>
+</div>
+
+<!-- Results Table -->
+<div class="row" ng-if="!alertsController.hasError"
+     infinite-scroll="alertsController.nextPage()"
+     infinite-scroll-distance="10"
+     infinite-scroll-disabled="alertsController.loading || alertsController.endOfPages">
+  <div class="col-lg-12">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-condensed suspicious-activity-table">
+        <thead>
+          <tr>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_DETECTED_AT</th>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_PATTERN</th>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_USER</th>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_STATUS</th>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_REQUESTS</th>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_IPS</th>
+            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-if="alertsController.loading && alertsController.alerts.length === 0">
+            <td colspan="7" class="text-center">
+              <i class="fa fa-spinner fa-spin"></i> <span translate>SUSPICIOUS_ACTIVITY_LOADING</span>
+            </td>
+          </tr>
+          <tr ng-if="!alertsController.loading && alertsController.alerts.length === 0">
+            <td colspan="7" class="text-center text-muted" translate>
+              SUSPICIOUS_ACTIVITY_NO_RESULTS
+            </td>
+          </tr>
+          <tr ng-repeat="alert in alertsController.alerts"
+              ng-click="alertsController.viewDetail(alert.id)">
+            <td>{{::alert.detectedAt | date:'d.MM.yyyy HH:mm'}}</td>
+            <td>
+              <i class="fa" ng-class="alert.getPatternIcon()"></i>
+              {{::alert.patternType}}
+            </td>
+            <td>
+              <a ng-if="alert.getUser()" ui-sref="auth.users.detail({id: alert.userId})" ng-click="$event.stopPropagation()">
+                {{alert.getUser().getName()}}
+              </a>
+              <span ng-if="!alert.getUser()" class="text-muted" translate translate-values="{userId: alert.userId}">SUSPICIOUS_ACTIVITY_USER_UNKNOWN</span>
+            </td>
+            <td>
+              <span class="label" ng-class="alert.getStatusClass()">
+                {{::alert.status}}
+              </span>
+            </td>
+            <td>{{::alert.requestCount}}</td>
+            <td>{{::alert.ipCount}}</td>
+            <td ng-click="$event.stopPropagation()">
+              <div class="btn-group btn-group-xs">
+                <button class="btn btn-warning btn-xs"
+                        ng-if="alert.status === 'new'"
+                        confirm="{{'SUSPICIOUS_ACTIVITY_CONFIRM_INVESTIGATE' | translate}}"
+                        ng-click="alertsController.markAsInvestigating(alert)"
+                        title="{{'SUSPICIOUS_ACTIVITY_ACTION_INVESTIGATE' | translate}}">
+                  <i class="fa fa-search"></i>
+                </button>
+                <button class="btn btn-success btn-xs"
+                        ng-if="alert.status !== 'resolved'"
+                        confirm="{{'SUSPICIOUS_ACTIVITY_CONFIRM_RESOLVE' | translate}}"
+                        ng-click="alertsController.markAsResolved(alert)"
+                        title="{{'SUSPICIOUS_ACTIVITY_ACTION_RESOLVE' | translate}}">
+                  <i class="fa fa-check"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="text-center" ng-if="alertsController.loading && alertsController.alerts.length > 0">
+      <i class="fa fa-spinner fa-2x fa-spin"></i>
+    </div>
+    <div class="text-center" ng-if="alertsController.endOfPages && alertsController.alerts.length > 0">
+      <p class="text-muted">
+        <i class="fa fa-check"></i> <span translate>SUSPICIOUS_ACTIVITY_END_OF_RESULTS</span>
+      </p>
+    </div>
+  </div>
+</div>
