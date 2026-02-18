@@ -5,7 +5,7 @@
 const angular = require('angular')
 const forms = require('../configs/forms')
 
-require('../app').controller('AuditController', /* @ngInject */function ($scope, $state, $stateParams, AccessAudit, User) {
+require('../app').controller('AuditController', /* @ngInject */function ($scope, $state, $stateParams, AccessAudit, $q, ngToast, $translate) {
   const controller = this
 
   // Available filter options
@@ -51,21 +51,11 @@ require('../app').controller('AuditController', /* @ngInject */function ($scope,
   controller.endOfPages = false
   controller.offset = 0
   controller.limit = 50
+  controller.error = null
 
-  // Fetch rows from API
-  controller.fetchRows = function (append) {
-    if (controller.loading) return
-
-    controller.loading = true
-
-    const params = {
-      limit: controller.limit,
-      offset: append ? controller.offset : 0,
-      sortBy: 'occurredAt',
-      sortOrder: 'DESC'
-    }
-
-    // Apply filters - extract IDs from user objects if needed
+  // Build filter params object from current filter state
+  function buildFilterParams () {
+    const params = {}
     if (controller.filter.actorUser) {
       params.actorUserId = angular.isObject(controller.filter.actorUser)
         ? controller.filter.actorUser.id
@@ -76,24 +66,27 @@ require('../app').controller('AuditController', /* @ngInject */function ($scope,
         ? controller.filter.ownerUser.id
         : controller.filter.ownerUser
     }
-    if (controller.filter.recordType) {
-      params.recordType = controller.filter.recordType
-    }
-    if (controller.filter.recordId) {
-      params.recordId = controller.filter.recordId
-    }
-    if (controller.filter.userAction) {
-      params.userAction = controller.filter.userAction
-    }
-    if (controller.filter.fromDate) {
-      params.fromDate = controller.filter.fromDate.toISOString()
-    }
-    if (controller.filter.toDate) {
-      params.toDate = controller.filter.toDate.toISOString()
-    }
-    if (controller.filter.operationId) {
-      params.operationId = controller.filter.operationId
-    }
+    if (controller.filter.recordType) params.recordType = controller.filter.recordType
+    if (controller.filter.recordId) params.recordId = controller.filter.recordId
+    if (controller.filter.userAction) params.userAction = controller.filter.userAction
+    if (controller.filter.fromDate) params.fromDate = controller.filter.fromDate.toISOString()
+    if (controller.filter.toDate) params.toDate = controller.filter.toDate.toISOString()
+    if (controller.filter.operationId) params.operationId = controller.filter.operationId
+    return params
+  }
+
+  // Fetch rows from API
+  controller.fetchRows = function (append) {
+    if (controller.loading) return
+
+    controller.loading = true
+
+    const params = angular.extend({
+      limit: controller.limit,
+      offset: append ? controller.offset : 0,
+      sortBy: 'occurredAt',
+      sortOrder: 'DESC'
+    }, buildFilterParams())
 
     AccessAudit.query(params).$promise.then(function (rows) {
       if (append) {
@@ -102,18 +95,37 @@ require('../app').controller('AuditController', /* @ngInject */function ($scope,
         controller.rows = rows
         controller.offset = 0
       }
+      controller.error = null
       controller.count = rows.$$response.data.$$response.count || 0
       controller.offset += rows.length
       controller.endOfPages = !rows.length || controller.offset >= controller.count
+    }, function (error) {
+      controller.error = params
+      ngToast.create({
+        className: 'danger',
+        content: '<p>' + $translate.instant('AUDIT_ERROR_LOADING') + '</p>' +
+                 '<pre>' + (error && error.data ? error.data.error : JSON.stringify(error, null, 2)) + '</pre>'
+      })
+      return $q.reject(error)
     }).finally(function () {
       controller.loading = false
     })
   }
 
+  // Retry after a failed fetch
+  controller.retry = function () {
+    if (controller.error) {
+      controller.rows = []
+      controller.offset = 0
+      controller.endOfPages = false
+      controller.fetchRows(false)
+    }
+  }
+
   // Update filter and refresh data
   controller.updateFilter = function () {
     // Update state params - explicitly set to null to clear from URL
-    const params = {
+    const urlParams = {
       actorUserId: null,
       ownerUserId: null,
       recordType: null,
@@ -123,41 +135,9 @@ require('../app').controller('AuditController', /* @ngInject */function ($scope,
       toDate: null,
       operationId: null
     }
+    angular.extend(urlParams, buildFilterParams())
 
-    // Handle actorUser - can be either a user object or user ID
-    if (controller.filter.actorUser) {
-      params.actorUserId = angular.isObject(controller.filter.actorUser)
-        ? controller.filter.actorUser.id
-        : controller.filter.actorUser
-    }
-
-    // Handle ownerUser - can be either a user object or user ID
-    if (controller.filter.ownerUser) {
-      params.ownerUserId = angular.isObject(controller.filter.ownerUser)
-        ? controller.filter.ownerUser.id
-        : controller.filter.ownerUser
-    }
-
-    if (controller.filter.recordType) {
-      params.recordType = controller.filter.recordType
-    }
-    if (controller.filter.recordId) {
-      params.recordId = controller.filter.recordId
-    }
-    if (controller.filter.userAction) {
-      params.userAction = controller.filter.userAction
-    }
-    if (controller.filter.fromDate) {
-      params.fromDate = controller.filter.fromDate.toISOString()
-    }
-    if (controller.filter.toDate) {
-      params.toDate = controller.filter.toDate.toISOString()
-    }
-    if (controller.filter.operationId) {
-      params.operationId = controller.filter.operationId
-    }
-
-    $state.go('.', params, { notify: false })
+    $state.go('.', urlParams, { notify: false })
 
     // Reset and fetch new data
     controller.rows = []

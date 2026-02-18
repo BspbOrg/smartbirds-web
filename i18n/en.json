@@ -1404,8 +1404,6 @@
     "BEARS_DETAIL_FOOTPRINT_FRONT_PAW_LENGTH": "Tracks: Front paw - longest claw length (cm)",
     "BEARS_DETAIL_FOOTPRINT_HIND_PAW_WIDTH": "Tracks: Hind paw - width (cm)",
     "BEARS_DETAIL_FOOTPRINT_HIND_PAW_LENGTH": "Tracks: Hind paw - length without claws (cm)",
-    "BEARS_PUBLIC_LIST_TITLE_MAIN": "Form Bears",
-    "BEARS_PUBLIC_LIST_TITLE_SECONDARY": "Bear observations",
     "AUDIT_PAGE_TITLE": "Access Audit Log",
     "AUDIT_FILTER_ACTOR_USER": "Actor (Who Accessed)",
     "AUDIT_FILTER_OWNER_USER": "Owner (Record Owner)",
@@ -1433,5 +1431,12 @@
     "AUDIT_LOADING": "Loading...",
     "AUDIT_NO_RECORDS": "No audit records found",
     "AUDIT_END_OF_RESULTS": "End of results",
-    "AUDIT_USER_UNKNOWN": "User {{userId}}"
+    "AUDIT_USER_UNKNOWN": "User {{userId}}",
+    "NAV_AUDIT_LOG": "Audit Log",
+    "AUDIT_ERROR_LOADING": "Failed to load audit records.",
+    "AUDIT_ERROR_CONNECTION": "Could not connect to the server. Check your connection and retry.",
+    "AUDIT_ARIA_OPEN_FROM_DATE": "Open from date picker",
+    "AUDIT_ARIA_OPEN_TO_DATE": "Open to date picker",
+    "BEARS_PUBLIC_LIST_TITLE_MAIN": "Form Bears",
+    "BEARS_PUBLIC_LIST_TITLE_SECONDARY": "Bear observations"
 }
