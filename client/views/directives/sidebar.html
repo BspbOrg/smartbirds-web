@@ -125,6 +125,12 @@
           Tasks
         </a>
       </li>
+      <li ng-if="::$root.$user.isAdmin()">
+        <a ui-sref="auth.audit" ui-sref-active="active">
+          <i class="fa fa-eye fa-fw"></i>
+          {{'NAV_AUDIT_LOG' | translate}}
+        </a>
+      </li>
 
       <li>
         <a id="atlas" href=""
