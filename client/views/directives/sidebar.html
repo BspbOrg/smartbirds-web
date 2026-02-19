@@ -131,6 +131,12 @@
           {{'NAV_AUDIT_LOG' | translate}}
         </a>
       </li>
+      <li ng-if="::$root.$user.isAdmin()">
+        <a ui-sref="auth.suspiciousActivityAlerts" ui-sref-active="active">
+          <i class="fa fa-shield fa-fw"></i>
+          <span translate="SUSPICIOUS_ACTIVITY_PAGE_TITLE">Suspicious Activity</span>
+        </a>
+      </li>
 
       <li>
         <a id="atlas" href=""

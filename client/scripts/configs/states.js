@@ -581,6 +581,35 @@ app.config(/* @ngInject */function ($locationProvider, $stateProvider, $urlRoute
       }
     })
 
+    /// ////////////////////////////
+    // Suspicious Activity Alerts //
+    /// ////////////////////////////
+    .state('auth.suspiciousActivityAlerts', {
+      url: '/suspicious-activity-alerts?status&patternType&userId&fromDate&toDate&severity',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/suspicious-activity-alerts/list.html',
+          controller: 'SuspiciousActivityAlertsController as alertsController'
+        }
+      },
+      data: {
+        roles: ['admin']
+      }
+    })
+
+    .state('auth.suspiciousActivityAlerts.detail', {
+      url: '/{id:int}',
+      views: {
+        'content@auth': {
+          templateUrl: '/views/suspicious-activity-alerts/detail.html',
+          controller: 'SuspiciousActivityAlertDetailController as alertController'
+        }
+      },
+      data: {
+        roles: ['admin']
+      }
+    })
+
     /// ////////
     // Stats //
     /// ////////

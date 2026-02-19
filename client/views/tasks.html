@@ -358,4 +358,36 @@
       </div>
     </div>
   </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading" translate>SUSPICIOUS_ACTIVITY_TASK_TITLE</div>
+    <div class="panel-body">
+      <p translate>SUSPICIOUS_ACTIVITY_TASK_DESCRIPTION</p>
+      <button type="button" class="btn btn-default"
+              ng-click="$ctrl.detectSuspiciousActivity()">
+        <span translate>SUSPICIOUS_ACTIVITY_TASK_RUN</span>
+      </button>
+    </div>
+    <div class="panel-footer">
+      <div ng-if="$ctrl.detectSuspiciousActivity.loading" class="alert alert-info" role="alert">
+        <i class="fa fa-spinner fa-spin"></i>
+        <span translate>SUSPICIOUS_ACTIVITY_TASK_RUNNING</span>
+      </div>
+      <div ng-if="$ctrl.detectSuspiciousActivity.response" class="alert alert-success" role="alert">
+        <span translate>SUSPICIOUS_ACTIVITY_TASK_SUCCESS</span>
+        <div ng-if="$ctrl.detectSuspiciousActivity.response.alertsCreated">
+          <strong>{{$ctrl.detectSuspiciousActivity.response.alertsCreated}}</strong> <span translate>SUSPICIOUS_ACTIVITY_TASK_ALERTS_CREATED</span>
+        </div>
+        <div ng-if="$ctrl.detectSuspiciousActivity.response.message">
+          {{$ctrl.detectSuspiciousActivity.response.message}}
+        </div>
+        <a ui-sref="auth.suspiciousActivityAlerts" class="btn btn-sm btn-default" style="margin-top: 10px;">
+          <span translate>SUSPICIOUS_ACTIVITY_TASK_VIEW_ALERTS</span>
+        </a>
+      </div>
+      <div ng-if="$ctrl.detectSuspiciousActivity.error" class="alert alert-danger" role="alert">
+        {{$ctrl.detectSuspiciousActivity.error}}
+      </div>
+    </div>
+  </div>
 </div>

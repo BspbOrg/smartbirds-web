@@ -1,7 +1,7 @@
-var forms = require('../configs/forms')
+const forms = require('../configs/forms')
 
-require('../app').controller('DashboardController', /* @ngInject */function (Zone, user) {
-  var vc = this
+require('../app').controller('DashboardController', /* @ngInject */function (Zone, user, SuspiciousActivityAlert) {
+  const vc = this
 
   vc.pendingZones = Zone.query({
     status: 'requested',
@@ -15,4 +15,13 @@ require('../app').controller('DashboardController', /* @ngInject */function (Zon
   })
 
   vc.forms = forms
+
+  if (user.isAdmin()) {
+    vc.suspiciousStats = { newCount: 0, investigatingCount: 0 }
+    SuspiciousActivityAlert.stats().$promise.then(function (stats) {
+      vc.suspiciousStats = stats
+    }).catch(function (err) {
+      console.error('Error loading suspicious activity stats:', err)
+    })
+  }
 })

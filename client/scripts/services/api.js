@@ -139,6 +139,12 @@ require('../app').service('api', /* @ngInject */function ($log, $http, $resource
         }
       })
     },
+    detectSuspiciousActivity: function () {
+      return $http({
+        method: 'POST',
+        url: ENDPOINT_URL + '/tasks/detect-suspicious-activity'
+      })
+    },
     ebpUpload: function (startDate, endDate, mode, bulk) {
       return $http({
         method: 'POST',

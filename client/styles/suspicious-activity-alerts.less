@@ -1,0 +1,56 @@
+// Suspicious Activity Alerts Styles
+
+// Statistics cards
+.panel-danger .huge,
+.panel-warning .huge,
+.panel-success .huge,
+.panel-default .huge {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+// Pattern icons
+.suspicious-activity-table {
+  .fa-database {
+    color: #5bc0de; // Blue for bulk operations
+  }
+
+  .fa-bolt {
+    color: #f0ad4e; // Orange for rapid fire
+  }
+
+  .fa-exchange {
+    color: #d9534f; // Red for IP switching
+  }
+
+  .fa-warning {
+    color: #f0ad4e; // Orange for session anomalies
+  }
+}
+
+// Detail page
+.suspicious-activity-detail {
+  .panel-body pre {
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}
+
+// Action buttons
+.btn-group.btn-group-xs {
+  .btn {
+    padding: 1px 5px;
+    font-size: 12px;
+  }
+}
+
+// Loading states
+.text-center {
+  .fa-spinner {
+    color: #337ab7;
+  }
+}
