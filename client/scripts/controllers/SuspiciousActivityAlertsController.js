@@ -4,7 +4,7 @@
 
 const angular = require('angular')
 
-require('../app').controller('SuspiciousActivityAlertsController', /* @ngInject */function ($scope, $state, $stateParams, SuspiciousActivityAlert, db, ngToast, $translate) {
+require('../app').controller('SuspiciousActivityAlertsController', /* @ngInject */function ($scope, $state, $stateParams, SuspiciousActivityAlert, db, ngToast) {
   const controller = this
 
   // Filter options
@@ -179,44 +179,6 @@ require('../app').controller('SuspiciousActivityAlertsController', /* @ngInject 
   // Navigate to detail view
   controller.viewDetail = function (alertId) {
     $state.go('auth.suspiciousActivityAlerts.detail', { id: alertId })
-  }
-
-  // Quick action: Mark as investigating
-  controller.markAsInvestigating = function (alert) {
-    SuspiciousActivityAlert.update({
-      id: alert.id,
-      status: 'investigating'
-    }).$promise.then(function () {
-      ngToast.create({
-        className: 'success',
-        content: $translate.instant('SUSPICIOUS_ACTIVITY_STATUS_INVESTIGATING')
-      })
-      controller.updateFilter()
-    }).catch(function (err) {
-      ngToast.create({
-        className: 'danger',
-        content: $translate.instant('SUSPICIOUS_ACTIVITY_UPDATE_ERROR') + ': ' + ((err.data && err.data.error) || err.statusText)
-      })
-    })
-  }
-
-  // Quick action: Mark as resolved
-  controller.markAsResolved = function (alert) {
-    SuspiciousActivityAlert.update({
-      id: alert.id,
-      status: 'resolved'
-    }).$promise.then(function () {
-      ngToast.create({
-        className: 'success',
-        content: $translate.instant('SUSPICIOUS_ACTIVITY_STATUS_RESOLVED')
-      })
-      controller.updateFilter()
-    }).catch(function (err) {
-      ngToast.create({
-        className: 'danger',
-        content: $translate.instant('SUSPICIOUS_ACTIVITY_UPDATE_ERROR') + ': ' + ((err.data && err.data.error) || err.statusText)
-      })
-    })
   }
 
   // Initial load

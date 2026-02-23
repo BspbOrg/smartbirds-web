@@ -207,17 +207,16 @@
             <th translate>SUSPICIOUS_ACTIVITY_COLUMN_STATUS</th>
             <th translate>SUSPICIOUS_ACTIVITY_COLUMN_REQUESTS</th>
             <th translate>SUSPICIOUS_ACTIVITY_COLUMN_IPS</th>
-            <th translate>SUSPICIOUS_ACTIVITY_COLUMN_ACTIONS</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-if="alertsController.loading && alertsController.alerts.length === 0">
-            <td colspan="7" class="text-center">
+            <td colspan="6" class="text-center">
               <i class="fa fa-spinner fa-spin"></i> <span translate>SUSPICIOUS_ACTIVITY_LOADING</span>
             </td>
           </tr>
           <tr ng-if="!alertsController.loading && alertsController.alerts.length === 0">
-            <td colspan="7" class="text-center text-muted" translate>
+            <td colspan="6" class="text-center text-muted" translate>
               SUSPICIOUS_ACTIVITY_NO_RESULTS
             </td>
           </tr>
@@ -241,24 +240,6 @@
             </td>
             <td>{{::alert.requestCount}}</td>
             <td>{{::alert.ipCount}}</td>
-            <td ng-click="$event.stopPropagation()">
-              <div class="btn-group btn-group-xs">
-                <button class="btn btn-warning btn-xs"
-                        ng-if="alert.status === 'new'"
-                        confirm="{{'SUSPICIOUS_ACTIVITY_CONFIRM_INVESTIGATE' | translate}}"
-                        ng-click="alertsController.markAsInvestigating(alert)"
-                        title="{{'SUSPICIOUS_ACTIVITY_ACTION_INVESTIGATE' | translate}}">
-                  <i class="fa fa-search"></i>
-                </button>
-                <button class="btn btn-success btn-xs"
-                        ng-if="alert.status !== 'resolved'"
-                        confirm="{{'SUSPICIOUS_ACTIVITY_CONFIRM_RESOLVE' | translate}}"
-                        ng-click="alertsController.markAsResolved(alert)"
-                        title="{{'SUSPICIOUS_ACTIVITY_ACTION_RESOLVE' | translate}}">
-                  <i class="fa fa-check"></i>
-                </button>
-              </div>
-            </td>
           </tr>
         </tbody>
       </table>
