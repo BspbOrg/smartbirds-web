@@ -21,6 +21,19 @@ require('../app').controller('TasksController', /* @ngInject */function (api) {
     }
   })
 
+  $ctrl.detectSuspiciousActivity = function () {
+    delete $ctrl.detectSuspiciousActivity.response
+    delete $ctrl.detectSuspiciousActivity.error
+    $ctrl.detectSuspiciousActivity.loading = true
+    api.tasks.detectSuspiciousActivity().then(function (response) {
+      $ctrl.detectSuspiciousActivity.response = response.data.result
+    }, function (error) {
+      $ctrl.detectSuspiciousActivity.error = error.data.error
+    }).finally(function () {
+      delete $ctrl.detectSuspiciousActivity.loading
+    })
+  }
+
   $ctrl.ebpUpload = function (startDate, endDate, mode, bulk) {
     delete $ctrl.ebpUpload.response
     delete $ctrl.ebpUpload.error

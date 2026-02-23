@@ -4,29 +4,34 @@
   </div>
 </div>
 
-<div class="row">
-  <div ng-if="$user.isAdmin() || $user.isModerator('cbm')" class="col-lg-4 col-md-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading"
-        ng-click="$state.go('auth.zones', {status:['requested','owned'], location: undefined, owner: undefined})">
-        <div class="row">
-          <p class="col-xs-3"><i class="fa fa-map-marker fa-5x"></i></p>
-          <div class="col-xs-9 text-right">
-            <div class="huge">{{dashboard.pendingZones.length|plusify:9}}</div>
-            <div translate>DASHBOARD_CARD_REQUESTS</div>
-          </div>
-        </div>
-      </div>
-      <a href ui-sref="auth.zones({status: 'requested'})">
-        <div class="panel-footer"><span class="pull-left" translate>DASHBOARD_CARD_REQUESTS_REVIEW</span>
-          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+<div class="row row-cards" ng-if="$user.isAdmin() || $user.isModerator('cbm')">
+  <dashboard-card
+    ng-if="$user.isAdmin()"
+    count="dashboard.suspiciousStats.newCount"
+    label="DASHBOARD_CARD_SUSPICIOUS_ALERTS"
+    icon="fa-warning"
+    status="dashboard.suspiciousStats.newCount > 0 ? 'danger' : 'default'"
+    heading-state="auth.suspiciousActivityAlerts"
+    footer-label="DASHBOARD_CARD_SUSPICIOUS_REVIEW"
+    footer-state="auth.suspiciousActivityAlerts"
+    footer-state-params="{status: 'new'}">
+  </dashboard-card>
 
-          <div class="clearfix"></div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <dashboard-card
+    ng-if="$user.isAdmin() || $user.isModerator('cbm')"
+    count="dashboard.pendingZones.length | plusify:9"
+    label="DASHBOARD_CARD_REQUESTS"
+    icon="fa-map-marker"
+    status="'primary'"
+    heading-state="auth.zones"
+    heading-state-params="{status: ['requested', 'owned'], location: undefined, owner: undefined}"
+    footer-label="DASHBOARD_CARD_REQUESTS_REVIEW"
+    footer-state="auth.zones"
+    footer-state-params="{status: 'requested'}">
+  </dashboard-card>
+</div>
 
+<div class="row row-cards">
   <dashboard-form-card form="::dashboard.forms.cbm"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.birds"></dashboard-form-card>
   <dashboard-form-card form="::dashboard.forms.herptiles"></dashboard-form-card>

@@ -1,0 +1,20 @@
+<div class="col-lg-4 col-md-6">
+  <div class="panel" ng-class="'panel-' + ($ctrl.status || 'default')">
+    <div class="panel-heading" ng-click="$root.$state.go($ctrl.headingState, $ctrl.headingStateParams)">
+      <div class="row">
+        <p class="col-xs-3"><i class="fa {{$ctrl.icon}} fa-5x"></i></p>
+        <div class="col-xs-9 text-right">
+          <div class="huge">{{$ctrl.count || 0}}</div>
+          <div>{{$ctrl.label | translate}}</div>
+        </div>
+      </div>
+    </div>
+    <a href ng-click="$root.$state.go($ctrl.footerState, $ctrl.footerStateParams)">
+      <div class="panel-footer">
+        <span class="pull-left">{{$ctrl.footerLabel | translate}}</span>
+        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+        <div class="clearfix"></div>
+      </div>
+    </a>
+  </div>
+</div>
