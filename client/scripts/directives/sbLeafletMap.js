@@ -60,6 +60,9 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           })
         })
 
+        updateTrack(ctrl.track)
+        updateZone(ctrl.zone)
+
         // poi is mutated in place by updateFromModel so $onChanges won't fire for it
         $scope.$watch(function () { return ctrl.poi }, function (poi) {
           if (!poi) return
@@ -100,14 +103,7 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         if (marker) {
           marker.setLatLng(latLng)
         } else {
-          marker = leaflet.marker(latLng, { draggable: true, icon: markerIcon }).addTo(map)
-          marker.on('dragend', function (e) {
-            $scope.$apply(function () {
-              const pos = e.target.getLatLng()
-              if (!ctrl.onClick) return
-              ctrl.onClick(null, null, null, [makeLatLng(pos.lat, pos.lng)])
-            })
-          })
+          marker = leaflet.marker(latLng, { icon: markerIcon }).addTo(map)
         }
       }
 
@@ -121,7 +117,8 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           color: '#f00',
           fillColor: '#f00',
           fillOpacity: 0.3,
-          weight: 1
+          weight: 1,
+          interactive: false
         }).addTo(map)
       }
 
@@ -141,7 +138,8 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         zonePolygon = leaflet.polygon(points, {
           color: '#00f',
           fillOpacity: 0.7,
-          weight: 3
+          weight: 3,
+          interactive: false
         }).addTo(map)
       }
     }
