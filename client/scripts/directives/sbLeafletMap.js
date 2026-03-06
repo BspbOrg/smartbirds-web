@@ -36,15 +36,22 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
 
       ctrl.$postLink = function () {
         const mapEl = $element[0].querySelector('.sb-leaflet-map-container')
-        map = leaflet.map(mapEl).setView(
-          ctrl.center ? [ctrl.center.latitude, ctrl.center.longitude] : [42.765833, 25.238611],
-          ctrl.zoom || 8
-        )
-
-        leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        const initialCenter = ctrl.center ? [ctrl.center.latitude, ctrl.center.longitude] : [42.765833, 25.238611]
+        const tileLayerOptions = {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           maxZoom: 19
-        }).addTo(map)
+        }
+
+        const mapOptions = { scrollWheelZoom: false }
+
+        map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || 8)
+        leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tileLayerOptions).addTo(map)
+
+        mapEl.addEventListener('wheel', function (e) {
+          if (!e.ctrlKey) return
+          e.preventDefault()
+          if (e.deltaY < 0) { map.zoomIn() } else { map.zoomOut() }
+        }, { passive: false })
 
         map.on('click', function (e) {
           if (!ctrl.onClick) return
