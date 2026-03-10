@@ -42,10 +42,14 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           maxZoom: 19
         }
 
-        const mapOptions = { scrollWheelZoom: false }
+        const mapOptions = {
+          scrollWheelZoom: false,
+          attributionControl: true
+        }
 
         map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || 8)
-        leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tileLayerOptions).addTo(map)
+        map.attributionControl.setPrefix(false)
+        leaflet.tileLayer('https://tiles.smartbirds.org/{z}/{x}/{y}.png', tileLayerOptions).addTo(map)
 
         mapEl.addEventListener('wheel', function (e) {
           if (!e.ctrlKey) return
