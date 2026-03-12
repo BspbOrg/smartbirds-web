@@ -51,10 +51,17 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         map.attributionControl.setPrefix(false)
         leaflet.tileLayer('https://tiles.smartbirds.org/{z}/{x}/{y}.png', tileLayerOptions).addTo(map)
 
+        // Custom Ctrl+scroll zoom that zooms to mouse cursor
+        // Uses Leaflet's setZoomAround for zoom-to-cursor behavior
         mapEl.addEventListener('wheel', function (e) {
           if (!e.ctrlKey) return
           e.preventDefault()
-          if (e.deltaY < 0) { map.zoomIn() } else { map.zoomOut() }
+          e.stopPropagation()
+          const containerPoint = map.mouseEventToContainerPoint(e)
+          const latLng = map.containerPointToLatLng(containerPoint)
+          const delta = e.deltaY < 0 ? 1 : -1
+          const newZoom = map.getZoom() + delta
+          map.setZoomAround(latLng, newZoom, { animate: true })
         }, { passive: false })
 
         map.on('click', function (e) {
