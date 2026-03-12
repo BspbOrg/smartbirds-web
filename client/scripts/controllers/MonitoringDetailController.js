@@ -6,6 +6,9 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
 ) {
   const controller = this
 
+  // Map provider state management - always default to OSM
+  controller.mapProvider = 'osm'
+
   let id = $stateParams.id
   let isCopy = false
   if (!$stateParams.id && $stateParams.fromId) {
