@@ -29,11 +29,19 @@
         </div>
       </div>
       <div class="text-right col-xs-4">
-        <track-edit ng-model="monitoringDetailController.data.track"></track-edit>
+        <div style="margin-bottom: 10px;">
+          <track-edit ng-model="monitoringDetailController.data.track"></track-edit>
+        </div>
+        <field name="mapProvider" type="bool"
+               label-true="OpenStreetMap"
+               label-false="Google Maps"
+               value-true="osm"
+               value-false="google"
+               model="monitoringDetailController.mapProvider"></field>
       </div>
     </div>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12" ng-if="monitoringDetailController.mapProvider === 'osm'">
     <sb-leaflet-map
       center="monitoringDetailController.map.center"
       zoom="monitoringDetailController.map.zoom"
@@ -44,7 +52,7 @@
       zone="monitoringDetailController.data.getZone && monitoringDetailController.data.getZone() && monitoringDetailController.data.getZone().coordinates"
     ></sb-leaflet-map>
   </div>
-  <div class="col-md-12" ng-if="false">
+  <div class="col-md-12" ng-if="monitoringDetailController.mapProvider === 'google'">
     <ui-gmap-google-map
       center="monitoringDetailController.map.center"
       pan="true"
