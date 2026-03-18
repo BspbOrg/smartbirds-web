@@ -1,4 +1,5 @@
 const leaflet = require('leaflet')
+require('leaflet-fullscreen')
 
 const markerIcon = leaflet.divIcon({
   html: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 24 36">' +
@@ -50,6 +51,7 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || 8)
         map.attributionControl.setPrefix(false)
         leaflet.tileLayer('https://tiles.smartbirds.org/{z}/{x}/{y}.png', tileLayerOptions).addTo(map)
+        map.addControl(new leaflet.Control.Fullscreen({ position: 'topright' }))
 
         // Custom Ctrl+scroll zoom that zooms to mouse cursor
         // Uses Leaflet's setZoomAround for zoom-to-cursor behavior
