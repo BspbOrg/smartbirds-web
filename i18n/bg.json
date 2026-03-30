@@ -1500,5 +1500,6 @@
     "SUSPICIOUS_ACTIVITY_RAPID_LOOKBACK_MINUTES": "Подозрителна активност: период на преглед за бързи заявки (минути)",
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_DISTINCT_IPS": "Подозрителна активност: праг за различни IP адреси",
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_TIME_WINDOW_MINUTES": "Подозрителна активност: времеви прозорец за смяна на IP (минути)",
-    "SUSPICIOUS_ACTIVITY_SESSION_TIME_WINDOW_MINUTES": "Подозрителна активност: времеви прозорец за аномалии в сесиите (минути)"
+    "SUSPICIOUS_ACTIVITY_SESSION_TIME_WINDOW_MINUTES": "Подозрителна активност: времеви прозорец за аномалии в сесиите (минути)",
+    "AUDIT_COLUMN_SPECIES": "Вид"
 }

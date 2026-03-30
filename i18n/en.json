@@ -1507,5 +1507,6 @@
     "SUSPICIOUS_ACTIVITY_RAPID_LOOKBACK_MINUTES": "Suspicious activity: rapid fire lookback period (minutes)",
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_DISTINCT_IPS": "Suspicious activity: IP switching distinct IPs threshold",
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_TIME_WINDOW_MINUTES": "Suspicious activity: IP switching time window (minutes)",
-    "SUSPICIOUS_ACTIVITY_SESSION_TIME_WINDOW_MINUTES": "Suspicious activity: session anomalies time window (minutes)"
+    "SUSPICIOUS_ACTIVITY_SESSION_TIME_WINDOW_MINUTES": "Suspicious activity: session anomalies time window (minutes)",
+    "AUDIT_COLUMN_SPECIES": "Species"
 }

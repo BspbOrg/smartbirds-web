@@ -168,6 +168,7 @@
             <th translate>AUDIT_COLUMN_ACTION</th>
             <th translate>AUDIT_COLUMN_ACTOR</th>
             <th translate>AUDIT_COLUMN_RECORD_TYPE</th>
+            <th translate>AUDIT_COLUMN_SPECIES</th>
             <th translate>AUDIT_COLUMN_RECORD_ID</th>
             <th translate>AUDIT_COLUMN_OWNER</th>
             <th translate>AUDIT_COLUMN_OPERATION_ID</th>
@@ -177,12 +178,12 @@
         </thead>
         <tbody>
           <tr ng-if="auditController.loading && auditController.rows.length === 0">
-            <td colspan="9" class="text-center">
+            <td colspan="10" class="text-center">
               <i class="fa fa-spinner fa-spin"></i> <span translate>AUDIT_LOADING</span>
             </td>
           </tr>
           <tr ng-if="!auditController.loading && !auditController.error && auditController.rows.length === 0">
-            <td colspan="9" class="text-center text-muted" translate>
+            <td colspan="10" class="text-center text-muted" translate>
               AUDIT_NO_RECORDS
             </td>
           </tr>
@@ -202,6 +203,9 @@
             </td>
             <td>
               <small>{{::auditController.getRecordTypeLabel(row.recordType) | translate}}</small>
+            </td>
+            <td>
+              <small>{{::row.species || '-'}}</small>
             </td>
             <td>
               <a href ng-click="auditController.viewRecord(row.recordType, row.recordId); $event.preventDefault()">
