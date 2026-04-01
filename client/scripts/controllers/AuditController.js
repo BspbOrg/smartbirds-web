@@ -202,6 +202,8 @@ require('../app').controller('AuditController', /* @ngInject */function ($scope,
     return classMap[action] || 'label-default'
   }
 
+  controller.tab = 'detail'
+
   // Initial load
   controller.fetchRows(false)
 })

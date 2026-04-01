@@ -1501,5 +1501,20 @@
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_DISTINCT_IPS": "Подозрителна активност: праг за различни IP адреси",
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_TIME_WINDOW_MINUTES": "Подозрителна активност: времеви прозорец за смяна на IP (минути)",
     "SUSPICIOUS_ACTIVITY_SESSION_TIME_WINDOW_MINUTES": "Подозрителна активност: времеви прозорец за аномалии в сесиите (минути)",
-    "AUDIT_COLUMN_SPECIES": "Вид"
+    "AUDIT_COLUMN_SPECIES": "Вид",
+    "AUDIT_TAB_DETAIL": "Детайлен дневник",
+    "AUDIT_TAB_SUMMARY": "Дневно резюме",
+    "AUDIT_SUMMARY_PAGE_TITLE": "Резюме на одита",
+    "AUDIT_SUMMARY_DATE_LABEL": "Дата",
+    "AUDIT_SUMMARY_COL_ACTOR": "Инициатор",
+    "AUDIT_SUMMARY_COL_ROLE": "Роля",
+    "AUDIT_SUMMARY_COL_ORG": "Организация",
+    "AUDIT_SUMMARY_COL_VIEW": "Прегледи",
+    "AUDIT_SUMMARY_COL_EDIT": "Редакции",
+    "AUDIT_SUMMARY_COL_DELETE": "Изтривания",
+    "AUDIT_SUMMARY_COL_LIST": "Списъци",
+    "AUDIT_SUMMARY_COL_EXPORT": "Експорти",
+    "AUDIT_SUMMARY_COL_TOTAL": "Общо",
+    "AUDIT_SUMMARY_NO_RECORDS": "Няма активност за тази дата",
+    "AUDIT_SUMMARY_LOADING": "Зареждане..."
 }

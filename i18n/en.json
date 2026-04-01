@@ -1508,5 +1508,20 @@
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_DISTINCT_IPS": "Suspicious activity: IP switching distinct IPs threshold",
     "SUSPICIOUS_ACTIVITY_IP_SWITCHING_TIME_WINDOW_MINUTES": "Suspicious activity: IP switching time window (minutes)",
     "SUSPICIOUS_ACTIVITY_SESSION_TIME_WINDOW_MINUTES": "Suspicious activity: session anomalies time window (minutes)",
-    "AUDIT_COLUMN_SPECIES": "Species"
+    "AUDIT_COLUMN_SPECIES": "Species",
+    "AUDIT_TAB_DETAIL": "Detail Log",
+    "AUDIT_TAB_SUMMARY": "Daily Summary",
+    "AUDIT_SUMMARY_PAGE_TITLE": "Audit Summary",
+    "AUDIT_SUMMARY_DATE_LABEL": "Date",
+    "AUDIT_SUMMARY_COL_ACTOR": "Actor",
+    "AUDIT_SUMMARY_COL_ROLE": "Role",
+    "AUDIT_SUMMARY_COL_ORG": "Organisation",
+    "AUDIT_SUMMARY_COL_VIEW": "Views",
+    "AUDIT_SUMMARY_COL_EDIT": "Edits",
+    "AUDIT_SUMMARY_COL_DELETE": "Deletes",
+    "AUDIT_SUMMARY_COL_LIST": "Lists",
+    "AUDIT_SUMMARY_COL_EXPORT": "Exports",
+    "AUDIT_SUMMARY_COL_TOTAL": "Total",
+    "AUDIT_SUMMARY_NO_RECORDS": "No activity found for this date",
+    "AUDIT_SUMMARY_LOADING": "Loading..."
 }
