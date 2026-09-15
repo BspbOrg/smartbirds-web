@@ -166,7 +166,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     if (data.getZone) {
       controller.map.center = data.getZone() && angular.copy(data.getZone().getCenter() || controller.map.poi)
       controller.map.zoom = 14
-    } else if (controller.map.poi.latitude && controller.map.poi.longitude) {
+    } else if (controller.map.poi.latitude != null && controller.map.poi.longitude != null) {
       controller.map.center = angular.copy(controller.map.poi)
       controller.map.zoom = 14
     }
