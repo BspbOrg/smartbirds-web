@@ -77,11 +77,15 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         updateZone(ctrl.zone)
 
         // poi is mutated in place by updateFromModel so $onChanges won't fire for it
-        $scope.$watch(function () { return ctrl.poi }, function (poi) {
-          if (!poi) return
-          updateMarker(poi.latitude, poi.longitude)
+        $scope.$watch(function () {
+          const poi = ctrl.poi
+          if (!poi) return null
+          return poi.latitude + ',' + poi.longitude
+        }, function (key) {
+          if (key === null) return
+          updateMarker(ctrl.poi.latitude, ctrl.poi.longitude)
           updateAccuracy(ctrl.accuracy)
-        }, true)
+        })
       }
 
       ctrl.$onChanges = function (changes) {
@@ -89,9 +93,8 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         if (changes.center || changes.zoom) {
           const lat = ctrl.center && ctrl.center.latitude
           const lng = ctrl.center && ctrl.center.longitude
-          const z = ctrl.zoom
-          if (!z) return
-          if (lat && lng) {
+          const z = ctrl.zoom || map.getZoom()
+          if (lat != null && lng != null) {
             map.setView([lat, lng], z)
           } else {
             map.setZoom(z)
