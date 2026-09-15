@@ -1,5 +1,6 @@
 const leaflet = require('leaflet')
 require('leaflet-fullscreen')
+const leafletMap = require('../services/leafletMap')
 
 const markerIcon = leaflet.divIcon({
   html: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 24 36">' +
@@ -34,37 +35,40 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
     controller: /* @ngInject */function ($scope, $element) {
       const ctrl = this
       let map, marker, accuracyCircle, trackLine, zonePolygon
+      let mapEl, resizeObserver
+
+      // Named so $onDestroy can remove the listener again
+      function onWheel (e) {
+        if (!e.ctrlKey) return
+        e.preventDefault()
+        e.stopPropagation()
+        const containerPoint = map.mouseEventToContainerPoint(e)
+        const latLng = map.containerPointToLatLng(containerPoint)
+        const delta = e.deltaY < 0 ? 1 : -1
+        map.setZoomAround(latLng, map.getZoom() + delta, { animate: true })
+      }
 
       ctrl.$postLink = function () {
-        const mapEl = $element[0].querySelector('.sb-leaflet-map-container')
-        const initialCenter = ctrl.center ? [ctrl.center.latitude, ctrl.center.longitude] : [42.765833, 25.238611]
-        const tileLayerOptions = {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 19
-        }
+        mapEl = $element[0].querySelector('.sb-leaflet-map-container')
+        const center = ctrl.center || leafletMap.DEFAULT_CENTER
+        const initialCenter = [center.latitude, center.longitude]
 
         const mapOptions = {
           scrollWheelZoom: false,
           attributionControl: true
         }
 
-        map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || 8)
+        map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || leafletMap.DEFAULT_ZOOM)
         map.attributionControl.setPrefix(false)
-        leaflet.tileLayer('https://tiles.smartbirds.org/{z}/{x}/{y}.png', tileLayerOptions).addTo(map)
+        leafletMap.createTileLayer().addTo(map)
         map.addControl(new leaflet.Control.Fullscreen({ position: 'topright' }))
+
+        // Leaflet paints grey tiles if the container resizes while hidden
+        resizeObserver = leafletMap.observeSize(mapEl, map)
 
         // Custom Ctrl+scroll zoom that zooms to mouse cursor
         // Uses Leaflet's setZoomAround for zoom-to-cursor behavior
-        mapEl.addEventListener('wheel', function (e) {
-          if (!e.ctrlKey) return
-          e.preventDefault()
-          e.stopPropagation()
-          const containerPoint = map.mouseEventToContainerPoint(e)
-          const latLng = map.containerPointToLatLng(containerPoint)
-          const delta = e.deltaY < 0 ? 1 : -1
-          const newZoom = map.getZoom() + delta
-          map.setZoomAround(latLng, newZoom, { animate: true })
-        }, { passive: false })
+        mapEl.addEventListener('wheel', onWheel, { passive: false })
 
         map.on('click', function (e) {
           if (!ctrl.onClick) return
@@ -106,12 +110,14 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
       }
 
       ctrl.$onDestroy = function () {
-        if (map) map.remove()
+        if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null }
+        if (mapEl) { mapEl.removeEventListener('wheel', onWheel); mapEl = null }
+        if (map) { map.remove(); map = null }
       }
 
       function updateMarker (lat, lng) {
         if (!map) return
-        if (!lat || !lng) {
+        if (lat == null || lng == null) {
           if (marker) { map.removeLayer(marker); marker = null }
           return
         }
@@ -127,7 +133,7 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         if (!map) return
         if (accuracyCircle) { map.removeLayer(accuracyCircle); accuracyCircle = null }
         const poi = ctrl.poi
-        if (!accuracy || !poi || !poi.latitude || !poi.longitude) return
+        if (!accuracy || !poi || poi.latitude == null || poi.longitude == null) return
         accuracyCircle = leaflet.circle([poi.latitude, poi.longitude], {
           radius: accuracy,
           color: '#f00',
