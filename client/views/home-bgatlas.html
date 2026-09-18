@@ -14,22 +14,13 @@
           <h2 translate>PUBLIC_ATLAS_SUBTITLE</h2>
           <hr class="small">
           <div>
-            <ui-gmap-google-map
+            <sb-leaflet-collection-map
               center="$ctrl.map.state.center"
-              options="$ctrl.map.options"
               zoom="$ctrl.map.state.zoom"
-            >
-
-              <ui-gmap-polygons ng-if="$ctrl.cells.length"
-                                fit="true"
-                                fill="'fill'"
-                                models="::$ctrl.cells"
-                                path="'coordinates'"
-                                static="true"
-                                stroke="'stroke'"
-              ></ui-gmap-polygons>
-
-            </ui-gmap-google-map>
+              max-zoom="$ctrl.map.options.maxZoom"
+              polygons="$ctrl.cells"
+              fit="true"
+            ></sb-leaflet-collection-map>
 
             <atlas-legend></atlas-legend>
           </div>

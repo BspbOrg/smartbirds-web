@@ -22,4 +22,25 @@ function observeSize (element, map) {
   return observer
 }
 
-module.exports = { DEFAULT_CENTER, DEFAULT_ZOOM, createTileLayer, observeSize }
+function numberOr (value, fallback) {
+  return typeof value === 'number' && isFinite(value) ? value : fallback
+}
+
+// The {fill, stroke} model shape ui-gmap read, spelled the way Leaflet wants it.
+//
+// The defaults are not padding: the atlas interest map passes its opacity helpers
+// as function references instead of calling them, and those models carry no
+// stroke.weight. Google ignored both; Leaflet would render them.
+function translateStyle (model) {
+  const fill = (model && model.fill) || {}
+  const stroke = (model && model.stroke) || {}
+  return {
+    color: stroke.color,
+    weight: numberOr(stroke.weight, 1),
+    opacity: numberOr(stroke.opacity, 1),
+    fillColor: fill.color,
+    fillOpacity: numberOr(fill.opacity, 0.2)
+  }
+}
+
+module.exports = { DEFAULT_CENTER, DEFAULT_ZOOM, createTileLayer, observeSize, translateStyle }
