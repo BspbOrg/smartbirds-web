@@ -13,7 +13,8 @@ const markerIcon = leaflet.divIcon({
   popupAnchor: [0, -36]
 })
 
-// Wrap plain {lat, lng} values into the Google Maps-style latLng object the controller's click handler expects
+// Click handlers read coordinates as latLng.lat() / .lng(), so wrap plain numbers
+// in that accessor shape rather than making every caller change.
 function makeLatLng (lat, lng) {
   return { latLng: { lat: function () { return lat }, lng: function () { return lng } } }
 }

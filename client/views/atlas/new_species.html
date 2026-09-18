@@ -5,23 +5,14 @@
 
   <div class="row">
     <div class="col-md-8 col-lg-7">
-      <ui-gmap-google-map
+      <sb-leaflet-collection-map
         center="$ctrl.map.state.center"
-        options="$ctrl.map.options"
         zoom="$ctrl.map.state.zoom"
-      >
-
-        <ui-gmap-polygons ng-if="$ctrl.cells.length"
-                          fit="true"
-                          fill="'fill'"
-                          models="::$ctrl.cells"
-                          path="'coordinates'"
-                          static="true"
-                          stroke="'stroke'"
-                          events="$ctrl.events"
-        ></ui-gmap-polygons>
-
-      </ui-gmap-google-map>
+        max-zoom="$ctrl.map.options.maxZoom"
+        polygons="$ctrl.cells"
+        fit="true"
+        on-polygon-click="$ctrl.events.click"
+      ></sb-leaflet-collection-map>
 
       <atlas-legend></atlas-legend>
     </div>

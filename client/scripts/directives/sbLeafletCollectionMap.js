@@ -14,8 +14,8 @@ const markerIcon = leaflet.divIcon({
   popupAnchor: [0, -36]
 })
 
-// ui-gmap tolerated a non-array models value — the list map passes {} when it
-// clears — and iterating an object yielded nothing. Match that.
+// Callers clear their collection by assigning {} rather than [], so a non-array
+// value has to mean "empty" rather than throw.
 function toArray (models) {
   return Array.isArray(models) ? models : []
 }
@@ -68,8 +68,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           scrollWheelZoom: false,
           attributionControl: true
         }
-        // On the map rather than the tile layer: this caps interaction, which is
-        // what callers previously got from Google's options.maxZoom.
+        // On the map, not the tile layer: this caps how far the user can zoom,
+        // rather than how far tiles are fetched.
         if (ctrl.maxZoom != null) mapOptions.maxZoom = ctrl.maxZoom
 
         map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || leafletMap.DEFAULT_ZOOM)
@@ -111,9 +111,9 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         // the consumer's first refresh finds newModels already a function.
         if (ctrl.control && typeof ctrl.control === 'object') {
           ctrl.control.newModels = function (models) {
-            // ui-gmap's newModels was a full rebuild, not an incremental update,
-            // so replace the set wholesale. Called with no args it re-reads the
-            // binding, keeping one path into setMarkers.
+            // A full rebuild, not an incremental update. Called with no args it
+            // re-reads the binding, so the control and $onChanges paths share
+            // one route into setMarkers.
             if (arguments.length) ctrl.markers = models
             setMarkers(ctrl.markers)
           }
@@ -124,9 +124,9 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       }
 
       // Callers restyle by mutating model.fill / model.stroke in place, so no
-      // binding reference changes and $onChanges never fires. ui-gmap used four
-      // $watches per polygon; one watch over a joined signature does the same at
-      // a fraction of the digest cost.
+      // binding reference changes and $onChanges never fires. Watching a joined
+      // signature of every model's style catches that with one watcher, where
+      // watching each property of each model would cost thousands.
       $scope.$watch(function () {
         if (!polygonEntries.size) return ''
         const parts = []
@@ -180,8 +180,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         const built = []
         toArray(models).forEach(function (model) {
           if (!model) return
-          // == null, not falsy: a real coordinate of 0 must render. ui-gmap skipped
-          // such models silently too.
+          // == null, not falsy: a real coordinate of 0 must render. Models with
+          // genuinely absent coordinates are skipped rather than throwing.
           if (model.latitude == null || model.longitude == null) return
           const marker = leaflet.marker([model.latitude, model.longitude], { icon: markerIcon })
           marker.on('click', function () {
@@ -211,7 +211,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         for (let i = 0; i < points.length; i++) {
           const point = points[i]
           // == null, not falsy: a real coordinate of 0 must render. Same rule as
-          // setMarkers, and as ui-gmap's own coordinate validation.
+          // setMarkers. One bad corner drops the whole polygon — a partial ring
+          // would draw a misleading shape.
           if (!point || point.latitude == null || point.longitude == null) return null
           latLngs.push([point.latitude, point.longitude])
         }
@@ -250,8 +251,9 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         fitToContent()
       }
 
-      // ui-gmap re-fits on every change and no-ops on an empty set, so a clear()
-      // leaves the viewport alone. Kept deliberately, to match current behaviour.
+      // Re-fits on every content change, and does nothing when there is no
+      // content — so clearing the collection leaves the viewport where it was
+      // rather than jumping somewhere arbitrary.
       function fitToContent () {
         if (!ctrl.fit || !map) return
 
@@ -272,8 +274,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
 
         const bounds = leaflet.latLngBounds(latLngs)
         // Deferred past the digest so layout exists: fitBounds against a container
-        // whose height has not resolved computes a wrong zoom. ui-gmap's FitHelper
-        // defers for the same reason.
+        // whose height has not resolved computes a wrong zoom.
         if (fitTimer) $timeout.cancel(fitTimer)
         fitTimer = $timeout(function () {
           fitTimer = null

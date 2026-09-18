@@ -26,11 +26,13 @@ function numberOr (value, fallback) {
   return typeof value === 'number' && isFinite(value) ? value : fallback
 }
 
-// The {fill, stroke} model shape ui-gmap read, spelled the way Leaflet wants it.
+// Maps a model's {fill, stroke} objects onto Leaflet path options.
 //
-// The defaults are not padding: the atlas interest map passes its opacity helpers
-// as function references instead of calling them, and those models carry no
-// stroke.weight. Google ignored both; Leaflet would render them.
+// Every value is coerced, because a non-numeric opacity would otherwise land in
+// an SVG attribute and render unpredictably. Missing values fall back to fully
+// opaque rather than to Leaflet's own softer defaults, so an incomplete model is
+// conspicuous instead of quietly looking plausible. No screen relies on this —
+// they all supply real numbers.
 function translateStyle (model) {
   const fill = (model && model.fill) || {}
   const stroke = (model && model.stroke) || {}
@@ -39,7 +41,7 @@ function translateStyle (model) {
     weight: numberOr(stroke.weight, 1),
     opacity: numberOr(stroke.opacity, 1),
     fillColor: fill.color,
-    fillOpacity: numberOr(fill.opacity, 0.2)
+    fillOpacity: numberOr(fill.opacity, 1)
   }
 }
 
