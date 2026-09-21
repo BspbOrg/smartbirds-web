@@ -2,18 +2,18 @@
  * Created by groupsky on 01.04.16.
  */
 
-var angular = require('angular')
-var extend = require('angular').extend
-var moment = require('moment')
-var languages = require('../../../config/languages')
-var capitalizeFirstLetter = require('../utils/capitalizeFirstLetter')
+const angular = require('angular')
+const extend = require('angular').extend
+const moment = require('moment')
+const languages = require('../../../config/languages')
+const capitalizeFirstLetter = require('../utils/capitalizeFirstLetter')
 
 function strCompare (a, b) {
   return a < b ? -1 : 1
 }
 
 require('../app').directive('homeMap', /* @ngInject */function () {
-  var lastModel
+  let lastModel
   return {
     restrict: 'AE',
     templateUrl: function (elem, attr) {
@@ -23,24 +23,52 @@ require('../app').directive('homeMap', /* @ngInject */function () {
       form: '@'
     },
     controller: /* @ngInject */function ($scope, $q, $translate, api) {
-      var vc = extend(this, {
-        center: { latitude: 42.744820608, longitude: 25.2151370694 },
+      const vc = extend(this, {
+        center: {
+          latitude: 42.744820608,
+          longitude: 25.2151370694
+        },
         zoom: 8,
         records: [],
         filteredRecords: [],
         options: {
-          maxZoom: 15,
-          streetViewControl: false
+          maxZoom: 15
         },
         marker: {
           click: function (marker, eventName, model) {
             if (lastModel && lastModel !== model) lastModel.show = !lastModel.show
             model.show = !model.show
             vc.activeModel = lastModel = model
+          },
+          popupContent: function (model) {
+            switch ($scope.form) {
+              case 'threats':
+                return '<div><h4 class="text-uppercase text-justify">' +
+                  (model['threats' + capitalizeFirstLetter($translate.$language)] || model.threatsEn) +
+                  '</h4></div>'
+              case 'cbm':
+                return '<div>' +
+                  '<h6 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_ZONE') + '</small> ' + model.id + '</h6>' +
+                  '<h6 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_USER') + '</small> ' + model.first_name + ' ' + model.last_name + '</h6>' +
+                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_SPECIES') + '</small> ' + model.species_count + '</h5>' +
+                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_INDIVIDUALS') + '</small> ' + model.units_count + '</h5>' +
+                  '</div>'
+              case 'birds':
+                return '<div><h5 class="text-uppercase text-justify"><small>' +
+                  $translate.instant('PUBLIC_BIRDS_MAP_SPECIES') + '</small> ' + model.species_count + '</h5></div>'
+              default:
+                return '<div>' +
+                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_SPECIES') + '</small> ' + model.species_count + '</h5>' +
+                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_INDIVIDUALS') + '</small> ' + model.units_count + '</h5>' +
+                  '</div>'
+            }
           }
         },
         windowOptions: {
-          pixelOffset: { width: 0, height: -25 }
+          pixelOffset: {
+            width: 0,
+            height: -25
+          }
         },
         filters: {
           current: {},
@@ -86,7 +114,7 @@ require('../app').directive('homeMap', /* @ngInject */function () {
           switch ($scope.form) {
             case 'threats':
               Object.keys(languages).forEach(function (language) {
-                var k = 'threats' + capitalizeFirstLetter(language)
+                const k = 'threats' + capitalizeFirstLetter(language)
                 vc.filters.options[k][record[k] || record.threatsEn] = true
               })
               break
@@ -96,7 +124,7 @@ require('../app').directive('homeMap', /* @ngInject */function () {
         switch ($scope.form) {
           case 'threats':
             Object.keys(languages).forEach(function (language) {
-              var k = 'threats' + capitalizeFirstLetter(language)
+              const k = 'threats' + capitalizeFirstLetter(language)
               vc.filters.options[k] = Object.keys(vc.filters.options[k]).sort(strCompare)
             })
             break

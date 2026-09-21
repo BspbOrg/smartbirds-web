@@ -33,7 +33,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       onClick: '<',
       polygons: '<',
       maxZoom: '<',
-      onPolygonClick: '<'
+      onPolygonClick: '<',
+      popupContent: '<'
     },
     bindToController: true,
     controllerAs: '$ctrl',
@@ -100,7 +101,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         // Custom Ctrl+scroll zoom that zooms to mouse cursor
         mapEl.addEventListener('wheel', onWheel, { passive: false })
 
-        markerLayer = ctrl.cluster ? leaflet.markerClusterGroup() : leaflet.layerGroup()
+        markerLayer = ctrl.cluster ? leaflet.markerClusterGroup({ showCoverageOnHover: false }) : leaflet.layerGroup()
         markerLayer.addTo(map)
 
         polygonLayer = leaflet.layerGroup()
@@ -184,7 +185,11 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           // genuinely absent coordinates are skipped rather than throwing.
           if (model.latitude == null || model.longitude == null) return
           const marker = leaflet.marker([model.latitude, model.longitude], { icon: markerIcon })
+          if (ctrl.popupContent) {
+            marker.bindPopup(ctrl.popupContent(model), { offset: [0, -25] })
+          }
           marker.on('click', function () {
+            if (ctrl.popupContent) marker.setPopupContent(ctrl.popupContent(model))
             if (!ctrl.onClick) return
             $scope.$apply(function () {
               ctrl.onClick(marker, 'click', model)
