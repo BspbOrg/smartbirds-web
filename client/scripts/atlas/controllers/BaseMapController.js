@@ -1,13 +1,12 @@
-var utils = require('../utils')
+const leafletMap = require('../../services/leafletMap')
+const utils = require('../utils')
 
 module.exports = function BaseMapController () {
-  var $ctrl = this
+  const $ctrl = this
 
   $ctrl.map = {
     state: {
-      bounds: utils.defaultBounds,
-      center: utils.defaultCenter,
-      dragging: false,
+      center: leafletMap.DEFAULT_CENTER,
       zoom: utils.defaultZoom
     },
     options: {

@@ -1,18 +1,3 @@
-const defaultBounds = {
-  northeast: {
-    latitude: 44.44350031073804,
-    longitude: 29.21416050689999
-  },
-  southwest: {
-    latitude: 40.91718468273068,
-    longitude: 21.21611363189999
-  }
-}
-
-const defaultCenter = {
-  latitude: 42.70537387439325, longitude: 25.2151370694
-}
-
 const defaultZoom = 7
 
 const selectedColor = '#33c'
@@ -51,9 +36,9 @@ function mapCellToMapModel (cell, selected) {
   const percent = cell.spec_old > 0 ? 100.0 * cell.spec_known / cell.spec_old : 0
   const model = {
     id: cell.utm_code,
-    percent: percent,
+    percent,
     coordinates: cell.coordinates,
-    cell: cell,
+    cell,
     completed: !!cell.completed
   }
   updateModelStyle(model, selected)
@@ -85,16 +70,14 @@ function updateModelStyle (model, selected) {
 }
 
 module.exports = {
-  defaultBounds: defaultBounds,
-  defaultCenter: defaultCenter,
-  defaultZoom: defaultZoom,
-  selectedColor: selectedColor,
-  selectedOpacityFill: selectedOpacityFill,
-  selectedOpacityStroke: selectedOpacityStroke,
-  unselectedColor: unselectedColor,
-  unselectedOpacityFill: unselectedOpacityFill,
-  unselectedOpacityStroke: unselectedOpacityStroke,
-  mapCellToMapModel: mapCellToMapModel,
-  updateModelStyle: updateModelStyle,
+  defaultZoom,
+  selectedColor,
+  selectedOpacityFill,
+  selectedOpacityStroke,
+  unselectedColor,
+  unselectedOpacityFill,
+  unselectedOpacityStroke,
+  mapCellToMapModel,
+  updateModelStyle,
   colors: { low: lowColor, med: medColor, high: highColor, completed: completedColor }
 }
