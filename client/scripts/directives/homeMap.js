@@ -7,13 +7,13 @@ const extend = require('angular').extend
 const moment = require('moment')
 const languages = require('../../../config/languages')
 const capitalizeFirstLetter = require('../utils/capitalizeFirstLetter')
+const leafletMap = require('../services/leafletMap')
 
 function strCompare (a, b) {
   return a < b ? -1 : 1
 }
 
 require('../app').directive('homeMap', /* @ngInject */function () {
-  let lastModel
   return {
     restrict: 'AE',
     templateUrl: function (elem, attr) {
@@ -24,29 +24,12 @@ require('../app').directive('homeMap', /* @ngInject */function () {
     },
     controller: /* @ngInject */function ($scope, $q, $translate, api) {
       const vc = extend(this, {
-        center: {
-          latitude: 42.744820608,
-          longitude: 25.2151370694
-        },
-        zoom: 8,
+        center: leafletMap.DEFAULT_CENTER,
+        zoom: leafletMap.DEFAULT_ZOOM,
         records: [],
         filteredRecords: [],
         options: {
-          maxZoom: 15,
-          streetViewControl: false
-        },
-        marker: {
-          click: function (marker, eventName, model) {
-            if (lastModel && lastModel !== model) lastModel.show = !lastModel.show
-            model.show = !model.show
-            vc.activeModel = lastModel = model
-          }
-        },
-        windowOptions: {
-          pixelOffset: {
-            width: 0,
-            height: -25
-          }
+          maxZoom: 15
         },
         filters: {
           current: {},
