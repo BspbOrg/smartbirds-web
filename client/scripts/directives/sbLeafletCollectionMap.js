@@ -1,3 +1,4 @@
+const angular = require('angular')
 const leaflet = require('leaflet')
 require('leaflet-fullscreen')
 require('leaflet.markercluster')
@@ -23,6 +24,11 @@ function toArray (models) {
 require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function () {
   return {
     templateUrl: '/views/directives/sbLeafletCollectionMap.html',
+    // Optional <marker-popup> markup, linked per opened popup with the marker's
+    // model as $model. Without it markers get no popup.
+    transclude: {
+      markerPopup: '?markerPopup'
+    },
     scope: {
       center: '<',
       zoom: '<',
@@ -33,12 +39,11 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       onClick: '<',
       polygons: '<',
       maxZoom: '<',
-      onPolygonClick: '<',
-      popupContent: '<'
+      onPolygonClick: '<'
     },
     bindToController: true,
     controllerAs: '$ctrl',
-    controller: /* @ngInject */function ($scope, $element, $timeout) {
+    controller: /* @ngInject */function ($scope, $element, $timeout, $transclude) {
       const ctrl = this
       let map, markerLayer, polygonLayer
       let mapEl, resizeObserver, refitObserver, fitTimer
@@ -185,11 +190,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           // genuinely absent coordinates are skipped rather than throwing.
           if (model.latitude == null || model.longitude == null) return
           const marker = leaflet.marker([model.latitude, model.longitude], { icon: markerIcon })
-          if (ctrl.popupContent) {
-            marker.bindPopup(ctrl.popupContent(model), { offset: [0, -25] })
-          }
+          if ($transclude.isSlotFilled('markerPopup')) bindPopup(marker, model)
           marker.on('click', function () {
-            if (ctrl.popupContent) marker.setPopupContent(ctrl.popupContent(model))
             if (!ctrl.onClick) return
             $scope.$apply(function () {
               ctrl.onClick(marker, 'click', model)
@@ -207,6 +209,33 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         }
 
         fitToContent()
+      }
+
+      // Content is built when the popup opens, not per marker, so a thousand
+      // markers cost one scope while one popup is open. Angular does the
+      // rendering, so model fields are escaped and `translate` works.
+      function bindPopup (marker, model) {
+        let popupScope, popupEl
+        marker.bindPopup(function () {
+          // Leaflet calls this again on every popup.update(); reuse what is open.
+          if (popupEl) return popupEl
+          popupEl = document.createElement('div')
+          $transclude(function (clone, scope) {
+            popupScope = scope
+            popupScope.$model = model
+            angular.element(popupEl).append(clone)
+          }, null, 'markerPopup')
+          // Render now: Leaflet measures the content right after this returns.
+          popupScope.$digest()
+          return popupEl
+        })
+        // Also fires when the marker is removed with its popup open, so
+        // setMarkers and $onDestroy need no extra cleanup.
+        marker.on('popupclose', function () {
+          if (popupScope) popupScope.$destroy()
+          if (popupEl) angular.element(popupEl).remove()
+          popupScope = popupEl = null
+        })
       }
 
       function pathOf (model) {

@@ -32,36 +32,14 @@ require('../app').directive('homeMap', /* @ngInject */function () {
         records: [],
         filteredRecords: [],
         options: {
-          maxZoom: 15
+          maxZoom: 15,
+          streetViewControl: false
         },
         marker: {
           click: function (marker, eventName, model) {
             if (lastModel && lastModel !== model) lastModel.show = !lastModel.show
             model.show = !model.show
             vc.activeModel = lastModel = model
-          },
-          popupContent: function (model) {
-            switch ($scope.form) {
-              case 'threats':
-                return '<div><h4 class="text-uppercase text-justify">' +
-                  (model['threats' + capitalizeFirstLetter($translate.$language)] || model.threatsEn) +
-                  '</h4></div>'
-              case 'cbm':
-                return '<div>' +
-                  '<h6 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_ZONE') + '</small> ' + model.id + '</h6>' +
-                  '<h6 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_USER') + '</small> ' + model.first_name + ' ' + model.last_name + '</h6>' +
-                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_SPECIES') + '</small> ' + model.species_count + '</h5>' +
-                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_INDIVIDUALS') + '</small> ' + model.units_count + '</h5>' +
-                  '</div>'
-              case 'birds':
-                return '<div><h5 class="text-uppercase text-justify"><small>' +
-                  $translate.instant('PUBLIC_BIRDS_MAP_SPECIES') + '</small> ' + model.species_count + '</h5></div>'
-              default:
-                return '<div>' +
-                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_SPECIES') + '</small> ' + model.species_count + '</h5>' +
-                  '<h5 class="text-uppercase text-justify"><small>' + $translate.instant('PUBLIC_CBM_MAP_INDIVIDUALS') + '</small> ' + model.units_count + '</h5>' +
-                  '</div>'
-            }
           }
         },
         windowOptions: {

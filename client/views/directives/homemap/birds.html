@@ -5,9 +5,13 @@
   max-zoom="map.options.maxZoom"
   markers="map.records"
   cluster="true"
-  popup-content="map.marker.popupContent"
 >
-
+  <marker-popup>
+    <h5 class="text-uppercase text-justify">
+      <small translate>PUBLIC_BIRDS_MAP_SPECIES</small>
+      {{$model.species_count}}
+    </h5>
+  </marker-popup>
 </sb-leaflet-collection-map>
 
 <ng-include src="'/views/directives/homemap/helptext.html'"></ng-include>
