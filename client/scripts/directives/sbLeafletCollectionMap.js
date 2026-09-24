@@ -24,10 +24,11 @@ function toArray (models) {
 require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function () {
   return {
     templateUrl: '/views/directives/sbLeafletCollectionMap.html',
-    // Optional <marker-popup> markup, linked per opened popup with the marker's
-    // model as $model. Without it markers get no popup.
+    // Optional <marker-popup> and <polygon-popup> markup, linked per opened
+    // popup with the layer's model as $model. Without it the layer gets no popup.
     transclude: {
-      markerPopup: '?markerPopup'
+      markerPopup: '?markerPopup',
+      polygonPopup: '?polygonPopup'
     },
     scope: {
       center: '<',
@@ -39,13 +40,23 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       onClick: '<',
       polygons: '<',
       maxZoom: '<',
-      onPolygonClick: '<'
+      onPolygonClick: '<',
+      // Leaflet path options for every polygon. Without it each model's own
+      // fill/stroke is used.
+      polygonStyle: '<',
+      // Models whose `path` is an array of {latitude, longitude}. Drawn with
+      // polylineStyle, not clickable, and not part of the fit.
+      polylines: '<',
+      polylineStyle: '<',
+      // (marker, 'popupclose', model) whenever a marker popup closes, however
+      // it was closed.
+      onPopupClose: '<'
     },
     bindToController: true,
     controllerAs: '$ctrl',
     controller: /* @ngInject */function ($scope, $element, $timeout, $transclude) {
       const ctrl = this
-      let map, markerLayer, polygonLayer
+      let map, markerLayer, polygonLayer, polylineLayer
       let mapEl, resizeObserver, refitObserver, fitTimer
       // model -> {layer, signature}. Keyed by model identity because callers
       // mutate models in place rather than replacing them.
@@ -109,8 +120,11 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         markerLayer = ctrl.cluster ? leaflet.markerClusterGroup({ showCoverageOnHover: false }) : leaflet.layerGroup()
         markerLayer.addTo(map)
 
+        // Paths share one pane, so polylines added after polygons draw on top.
         polygonLayer = leaflet.layerGroup()
         polygonLayer.addTo(map)
+        polylineLayer = leaflet.layerGroup()
+        polylineLayer.addTo(map)
 
         // The control object arrives as a bare {} and the consumer keeps its
         // reference, so assign onto it rather than replacing it. Populated here so
@@ -127,6 +141,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
 
         setMarkers(ctrl.markers)
         setPolygons(ctrl.polygons)
+        setPolylines(ctrl.polylines)
       }
 
       // Callers restyle by mutating model.fill / model.stroke in place, so no
@@ -146,7 +161,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           const signature = signatureOf(model)
           if (signature === entry.signature) return
           entry.signature = signature
-          entry.layer.setStyle(leafletMap.translateStyle(model))
+          entry.layer.setStyle(polygonStyleOf(model))
         })
       })
 
@@ -164,6 +179,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         }
         if (changes.markers) setMarkers(ctrl.markers)
         if (changes.polygons) setPolygons(ctrl.polygons)
+        if (changes.polylines) setPolylines(ctrl.polylines)
       }
 
       ctrl.$onDestroy = function () {
@@ -175,6 +191,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         if (mapEl) { mapEl.removeEventListener('wheel', onWheel); mapEl = null }
         if (markerLayer) { markerLayer.clearLayers(); markerLayer = null }
         if (polygonLayer) { polygonLayer.clearLayers(); polygonLayer = null }
+        if (polylineLayer) { polylineLayer.clearLayers(); polylineLayer = null }
         polygonEntries = new Map()
         if (map) { map.remove(); map = null }
       }
@@ -190,7 +207,15 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           // genuinely absent coordinates are skipped rather than throwing.
           if (model.latitude == null || model.longitude == null) return
           const marker = leaflet.marker([model.latitude, model.longitude], { icon: markerIcon })
-          if ($transclude.isSlotFilled('markerPopup')) bindPopup(marker, model)
+          if ($transclude.isSlotFilled('markerPopup')) {
+            bindPopup(marker, model, 'markerPopup', function () {
+              // $evalAsync, not $apply: this also fires from clearLayers inside
+              // a digest. The map check skips closes caused by $onDestroy.
+              $scope.$evalAsync(function () {
+                if (map && ctrl.onPopupClose) ctrl.onPopupClose(marker, 'popupclose', model)
+              })
+            })
+          }
           marker.on('click', function () {
             if (!ctrl.onClick) return
             $scope.$apply(function () {
@@ -214,9 +239,9 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       // Content is built when the popup opens, not per marker, so a thousand
       // markers cost one scope while one popup is open. Angular does the
       // rendering, so model fields are escaped and `translate` works.
-      function bindPopup (marker, model) {
-        let popupScope, popupEl
-        marker.bindPopup(function () {
+      function bindPopup (layer, model, slot, onClose) {
+        let popupScope, popupEl, sizeObserver
+        layer.bindPopup(function () {
           // Leaflet calls this again on every popup.update(); reuse what is open.
           if (popupEl) return popupEl
           popupEl = document.createElement('div')
@@ -224,33 +249,46 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
             popupScope = scope
             popupScope.$model = model
             angular.element(popupEl).append(clone)
-          }, null, 'markerPopup')
+          }, null, slot)
           // Render now: Leaflet measures the content right after this returns.
           popupScope.$digest()
+          // Content that arrives later (an ng-include still loading) changes
+          // the size after that measurement; re-layout the popup when it does.
+          if (window.ResizeObserver) {
+            sizeObserver = new window.ResizeObserver(function () {
+              if (layer.isPopupOpen()) layer.getPopup().update()
+            })
+            sizeObserver.observe(popupEl)
+          }
           return popupEl
         })
-        // Also fires when the marker is removed with its popup open, so
-        // setMarkers and $onDestroy need no extra cleanup.
-        marker.on('popupclose', function () {
+        // Also fires when the layer is removed with its popup open, so
+        // setMarkers, setPolygons and $onDestroy need no extra cleanup.
+        layer.on('popupclose', function () {
+          if (sizeObserver) sizeObserver.disconnect()
           if (popupScope) popupScope.$destroy()
           if (popupEl) angular.element(popupEl).remove()
-          popupScope = popupEl = null
+          popupScope = popupEl = sizeObserver = null
+          if (onClose) onClose()
         })
       }
 
-      function pathOf (model) {
-        const points = model && model.coordinates
+      function pathOf (points) {
         if (!Array.isArray(points)) return null
         const latLngs = []
         for (let i = 0; i < points.length; i++) {
           const point = points[i]
           // == null, not falsy: a real coordinate of 0 must render. Same rule as
-          // setMarkers. One bad corner drops the whole polygon — a partial ring
-          // would draw a misleading shape.
+          // setMarkers. One bad point drops the whole shape — a partial ring or
+          // track would draw a misleading shape.
           if (!point || point.latitude == null || point.longitude == null) return null
           latLngs.push([point.latitude, point.longitude])
         }
         return latLngs.length ? latLngs : null
+      }
+
+      function polygonStyleOf (model) {
+        return ctrl.polygonStyle || leafletMap.translateStyle(model)
       }
 
       // Everything translateStyle reads, as one string, so the watch above can
@@ -269,9 +307,10 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
 
         toArray(models).forEach(function (model) {
           if (!model) return
-          const latLngs = pathOf(model)
+          const latLngs = pathOf(model.coordinates)
           if (!latLngs) return
-          const polygon = leaflet.polygon(latLngs, leafletMap.translateStyle(model))
+          const polygon = leaflet.polygon(latLngs, polygonStyleOf(model))
+          if ($transclude.isSlotFilled('polygonPopup')) bindPopup(polygon, model, 'polygonPopup')
           polygon.on('click', function () {
             if (!ctrl.onPolygonClick) return
             $scope.$apply(function () {
@@ -283,6 +322,16 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         })
 
         fitToContent()
+      }
+
+      function setPolylines (models) {
+        if (!map || !polylineLayer) return
+        polylineLayer.clearLayers()
+        const style = Object.assign({}, ctrl.polylineStyle, { interactive: false })
+        toArray(models).forEach(function (model) {
+          const latLngs = pathOf(model && model.path)
+          if (latLngs) polylineLayer.addLayer(leaflet.polyline(latLngs, style))
+        })
       }
 
       // Re-fits on every content change, and does nothing when there is no

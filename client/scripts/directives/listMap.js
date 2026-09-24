@@ -1,5 +1,9 @@
 const angular = require('angular')
 
+// Leaflet path options, the same colours the Google version used.
+const ZONE_STYLE = { color: '#c33', opacity: 0.7, weight: 0.5, fillColor: '#c33', fillOpacity: 0.4 }
+const TRACK_STYLE = { color: '#36c', weight: 3 }
+
 require('../app').directive('listMap', /* @ngInject */function ($filter, $http, db, Track) {
   return {
     templateUrl: '/views/directives/listmap.html',
@@ -20,24 +24,16 @@ require('../app').directive('listMap', /* @ngInject */function ($filter, $http, 
             haveTracks: true,
             haveDetail: true
           }, $ctrl.opts || {}),
-          center: { latitude: 42.744820608, longitude: 25.2151370694 },
-          zoom: 8,
+          zoneStyle: ZONE_STYLE,
+          trackStyle: TRACK_STYLE,
           zones: [],
           zonesIndex: {},
           tracksWaiting: 0,
           tracks: [],
           tracksIndex: {},
-          options: {},
+          // selected.pin is the marker whose popup is open. A second click on it
+          // opens the record.
           selected: {},
-          polygon: {
-            click: function (polygon, eventName, model) {
-              if ($ctrl.selected && $ctrl.selected.zone === model) {
-                $ctrl.selected = {}
-              } else {
-                $ctrl.selected = { zone: model }
-              }
-            }
-          },
           marker: {
             control: {},
             click: function (marker, eventName, model) {
@@ -50,34 +46,49 @@ require('../app').directive('listMap', /* @ngInject */function ($filter, $http, 
               } else {
                 $ctrl.selected = { pin: model }
               }
+            },
+            // Popups also close from their × button, a map click or another
+            // marker opening. Without this the next click on the marker would
+            // skip the popup and open the record.
+            popupClose: function (marker, eventName, model) {
+              if ($ctrl && $ctrl.selected && $ctrl.selected.pin === model) {
+                $ctrl.selected = {}
+              }
             }
           },
           addRows: function (rows) {
             $ctrl.rows = [].concat($ctrl.rows || [], rows || [])
             $ctrl.refresh()
           },
+          // zones and tracks get a new array rather than a push, so the map's
+          // one-way bindings see the change.
           extractZones: function (rows) {
-            (rows || $ctrl.rows).forEach(function (row) {
+            const added = []
+            const source = rows || $ctrl.rows
+            source.forEach(function (row) {
               if (!row.zone || !db.zones[row.zone]) return
-              if ($ctrl.zonesIndex[row.zone]) return
-              $ctrl.zonesIndex[row.zone] = $ctrl.zones.length
-              $ctrl.zones.push(db.zones[row.zone])
+              // != null, not falsy: the first zone's index is 0
+              if ($ctrl.zonesIndex[row.zone] != null) return
+              $ctrl.zonesIndex[row.zone] = $ctrl.zones.length + added.length
+              added.push(db.zones[row.zone])
             })
+            if (added.length) $ctrl.zones = $ctrl.zones.concat(added)
           },
           extractTracks: function (rows) {
             (rows || $ctrl.rows).forEach(function (row) {
               if ($ctrl.tracksWaiting >= 3) return
               if (!row.track) return
-              if ($ctrl.tracksIndex[row.track]) return
+              // != null, not falsy: the first track's index is 0
+              if ($ctrl.tracksIndex[row.track] != null) return
               $ctrl.tracksIndex[row.track] = true
               $ctrl.tracksWaiting++
               Track.get(row.track).then(function (points) {
                 if (!points.length) return
                 $ctrl.tracksIndex[row.track] = $ctrl.tracks.length
-                $ctrl.tracks.push({
+                $ctrl.tracks = $ctrl.tracks.concat([{
                   id: $ctrl.tracks.length,
                   path: points
-                })
+                }])
               })
                 .finally(function () {
                   $ctrl.tracksWaiting--
