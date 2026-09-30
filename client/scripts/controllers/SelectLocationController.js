@@ -1,10 +1,11 @@
-var defaults = require('lodash/defaults')
+const defaults = require('lodash/defaults')
+const leaflet = require('leaflet')
+const leafletMap = require('../services/leafletMap')
 
 require('../app').controller('SelectLocationController', /* @ngInject */function ($scope, $timeout, $uibModalInstance, location) {
-  var $ctrl = this
-  var latKilometersPerDegree = 111.195
-  var lonKilometersPerDegree = 82.445
+  const $ctrl = this
 
+  $ctrl.mapProvider = 'osm'
   $ctrl.location = defaults({}, location, { radius: '5' })
   $ctrl.radiusChoices = [
     { id: '0.5', label: 'DISTANCE_500_M' },
@@ -14,13 +15,29 @@ require('../app').controller('SelectLocationController', /* @ngInject */function
     { id: '10', label: 'DISTANCE_10_KM' }
   ]
 
-  $ctrl.radiusCoordinates = []
+  // The fields can hold strings, and an empty one would read as 0 on the map,
+  // so the maps get parsed numbers, or nothing when a value is missing.
+  //
+  // The server filters by the box around the radius, not the circle, so both maps draw that box.
+  $ctrl.updateRadius = function () {
+    const latitude = parseFloat($ctrl.location.latitude)
+    const longitude = parseFloat($ctrl.location.longitude)
+    const radius = parseFloat($ctrl.location.radius)
+    $ctrl.point = isFinite(latitude) && isFinite(longitude) ? { latitude, longitude } : null
+    $ctrl.radiusCoordinates = []
+    if (!$ctrl.point || !isFinite(radius)) return
+    // toBounds takes the box's full side in metres: radius in km × 1000 × 2
+    const bounds = leaflet.latLng(latitude, longitude).toBounds(radius * 2000)
+    $ctrl.radiusCoordinates = [bounds.getSouthWest(), bounds.getSouthEast(), bounds.getNorthEast(), bounds.getNorthWest()].map(function (corner) {
+      return { latitude: corner.lat, longitude: corner.lng }
+    })
+  }
+
+  $ctrl.updateRadius()
+
   $ctrl.map = {
-    center: defaults({}, $ctrl.location, {
-      latitude: 42.765833,
-      longitude: 25.238611
-    }),
-    zoom: 8,
+    center: Object.assign({}, $ctrl.point || leafletMap.DEFAULT_CENTER),
+    zoom: leafletMap.DEFAULT_ZOOM,
     click: function (maps, event, scope, args) {
       if (typeof args === 'undefined') {
         args = scope
@@ -34,30 +51,7 @@ require('../app').controller('SelectLocationController', /* @ngInject */function
     }
   }
 
-  $ctrl.updateRadius = function () {
-    $ctrl.radiusCoordinates = [
-      {
-        latitude: parseFloat($ctrl.location.latitude) - parseFloat($ctrl.location.radius) / latKilometersPerDegree,
-        longitude: parseFloat($ctrl.location.longitude) - parseFloat($ctrl.location.radius) / lonKilometersPerDegree
-      },
-      {
-        latitude: parseFloat($ctrl.location.latitude) - parseFloat($ctrl.location.radius) / latKilometersPerDegree,
-        longitude: parseFloat($ctrl.location.longitude) + parseFloat($ctrl.location.radius) / lonKilometersPerDegree
-      },
-      {
-        latitude: parseFloat($ctrl.location.latitude) + parseFloat($ctrl.location.radius) / latKilometersPerDegree,
-        longitude: parseFloat($ctrl.location.longitude) + parseFloat($ctrl.location.radius) / lonKilometersPerDegree
-      },
-      {
-        latitude: parseFloat($ctrl.location.latitude) + parseFloat($ctrl.location.radius) / latKilometersPerDegree,
-        longitude: parseFloat($ctrl.location.longitude) - parseFloat($ctrl.location.radius) / lonKilometersPerDegree
-      }
-    ]
-  }
-
   $ctrl.locationSelected = function () {
     $uibModalInstance.close($ctrl.location)
   }
-
-  $ctrl.updateRadius()
 })

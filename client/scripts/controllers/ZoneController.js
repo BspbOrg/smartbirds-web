@@ -3,7 +3,9 @@
  */
 
 require('../app').controller('ZoneController', /* @ngInject */function ($scope, $stateParams, $window, $http, Zone) {
-  var controller = this
+  const controller = this
+
+  controller.mapProvider = 'osm'
 
   $scope.zone = Zone.get({ id: $stateParams.id })
 
@@ -13,17 +15,17 @@ require('../app').controller('ZoneController', /* @ngInject */function ($scope, 
 
   controller.download = function (type) {
     $http.get($scope.zone.linkUrl() + '.' + type, { responseType: 'text' }).then(function (res) {
-      var contentType = res.headers('Content-Type')
-      var content = res.data
+      const contentType = res.headers('Content-Type')
+      const content = res.data
       console.log(contentType)
       console.log(content)
 
-      var pom = document.createElement('a')
+      const pom = document.createElement('a')
       pom.setAttribute('href', 'data:' + contentType + ';charset=utf-8,' + encodeURIComponent(content))
       pom.setAttribute('download', $scope.zone.id + '.' + type)
 
       if (document.createEvent) {
-        var event = document.createEvent('MouseEvents')
+        const event = document.createEvent('MouseEvents')
         event.initEvent('click', true, true)
         pom.dispatchEvent(event)
       } else {

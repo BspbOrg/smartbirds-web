@@ -13,10 +13,12 @@ function createTileLayer (options) {
   }, options))
 }
 
-function observeSize (element, map) {
+// onResize, when given, runs after each invalidateSize
+function observeSize (element, map, onResize) {
   if (typeof ResizeObserver === 'undefined') return null
   const observer = new ResizeObserver(function () {
     map.invalidateSize()
+    if (onResize) onResize()
   })
   observer.observe(element)
   return observer

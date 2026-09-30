@@ -33,6 +33,28 @@ sb-leaflet-collection-map {
   }
 }
 
+// Print the map at its screen size (set by sbLeafletMap), scaled to the page.
+// tan(atan2(a, b)) is a / b; escaped so LESS leaves it alone.
+@media print {
+  .sb-leaflet-map-wrapper {
+    container-type: inline-size;
+    overflow: hidden;
+  }
+
+  .sb-leaflet-map-container.is-print-scaled {
+    right: auto;
+    bottom: auto;
+    width: var(--map-w);
+    height: var(--map-h);
+    transform-origin: 0 0;
+    transform: ~"scale(tan(atan2(100cqw, var(--map-w))))";
+
+    .leaflet-top {
+      display: none;
+    }
+  }
+}
+
 .angular-google-map-container{
   height: auto;
   width:100%;

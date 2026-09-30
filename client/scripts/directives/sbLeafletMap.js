@@ -29,13 +29,15 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
       onClick: '<',
       accuracy: '<',
       track: '<',
-      zone: '<'
+      zone: '<',
+      zoneStyle: '<',
+      box: '<'
     },
     bindToController: true,
     controllerAs: '$ctrl',
     controller: /* @ngInject */function ($scope, $element) {
       const ctrl = this
-      let map, marker, accuracyCircle, trackLine, zonePolygon
+      let map, marker, accuracyCircle, boxPolygon, trackLine, zonePolygon
       let mapEl, resizeObserver
 
       // Named so $onDestroy can remove the listener again
@@ -47,6 +49,18 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         const latLng = map.containerPointToLatLng(containerPoint)
         const delta = e.deltaY < 0 ? 1 : -1
         map.setZoomAround(latLng, map.getZoom() + delta, { animate: true })
+      }
+
+      // The browser lays out the printed page without running any script, and
+      // Leaflet keeps its content anchored top-left, so a narrower page cuts off
+      // the right and bottom of the map. The print rule in map.less keeps the map at its screen
+      // size and scales it down to the page instead; it reads that size here.
+      // Without the size the map would print blank, hence the class.
+      function recordScreenSize () {
+        if (!mapEl.clientWidth || !mapEl.clientHeight) return
+        mapEl.style.setProperty('--map-w', mapEl.clientWidth + 'px')
+        mapEl.style.setProperty('--map-h', mapEl.clientHeight + 'px')
+        mapEl.classList.add('is-print-scaled')
       }
 
       ctrl.$postLink = function () {
@@ -65,7 +79,7 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         map.addControl(new leaflet.Control.Fullscreen({ position: 'topright' }))
 
         // Leaflet paints grey tiles if the container resizes while hidden
-        resizeObserver = leafletMap.observeSize(mapEl, map)
+        resizeObserver = leafletMap.observeSize(mapEl, map, recordScreenSize)
 
         // Custom Ctrl+scroll zoom that zooms to mouse cursor
         // Uses Leaflet's setZoomAround for zoom-to-cursor behavior
@@ -78,6 +92,7 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           })
         })
 
+        updateBox(ctrl.box)
         updateTrack(ctrl.track)
         updateZone(ctrl.zone)
 
@@ -86,9 +101,10 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           const poi = ctrl.poi
           if (!poi) return null
           return poi.latitude + ',' + poi.longitude
-        }, function (key) {
-          if (key === null) return
-          updateMarker(ctrl.poi.latitude, ctrl.poi.longitude)
+        }, function () {
+          // A missing poi clears the marker and circles rather than leaving them behind
+          const poi = ctrl.poi || {}
+          updateMarker(poi.latitude, poi.longitude)
           updateAccuracy(ctrl.accuracy)
         })
       }
@@ -106,8 +122,9 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           }
         }
         if (changes.accuracy) updateAccuracy(ctrl.accuracy)
+        if (changes.box) updateBox(ctrl.box)
         if (changes.track) updateTrack(ctrl.track)
-        if (changes.zone) updateZone(ctrl.zone)
+        if (changes.zone || changes.zoneStyle) updateZone(ctrl.zone)
       }
 
       ctrl.$onDestroy = function () {
@@ -145,6 +162,21 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         }).addTo(map)
       }
 
+      function updateBox (box) {
+        if (!map) return
+        if (boxPolygon) { map.removeLayer(boxPolygon); boxPolygon = null }
+        if (!box || !box.length) return
+        const points = box.map(function (p) { return [p.latitude, p.longitude] })
+        boxPolygon = leaflet.polygon(points, {
+          color: '#3c3',
+          opacity: 0.8,
+          weight: 1,
+          fillColor: '#3c3',
+          fillOpacity: 0.3,
+          interactive: false
+        }).addTo(map)
+      }
+
       function updateTrack (track) {
         if (!map) return
         if (trackLine) { map.removeLayer(trackLine); trackLine = null }
@@ -158,12 +190,11 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
         if (zonePolygon) { map.removeLayer(zonePolygon); zonePolygon = null }
         if (!zone || !zone.length) return
         const points = zone.map(function (p) { return [p.latitude, p.longitude] })
-        zonePolygon = leaflet.polygon(points, {
+        zonePolygon = leaflet.polygon(points, Object.assign({
           color: '#00f',
           fillOpacity: 0.7,
-          weight: 3,
-          interactive: false
-        }).addTo(map)
+          weight: 3
+        }, ctrl.zoneStyle, { interactive: false })).addTo(map)
       }
     }
   }
