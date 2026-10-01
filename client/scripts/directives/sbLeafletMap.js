@@ -31,7 +31,10 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
       track: '<',
       zone: '<',
       zoneStyle: '<',
-      box: '<'
+      box: '<',
+      // A picture of the map: no panning, zooming or controls, and clicks pass
+      // through to whatever the map sits in, such as a link.
+      static: '<'
     },
     bindToController: true,
     controllerAs: '$ctrl',
@@ -72,18 +75,28 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           scrollWheelZoom: false,
           attributionControl: true
         }
+        if (ctrl.static) {
+          Object.assign(mapOptions, {
+            dragging: false,
+            touchZoom: false,
+            doubleClickZoom: false,
+            boxZoom: false,
+            keyboard: false,
+            zoomControl: false
+          })
+        }
 
         map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || leafletMap.DEFAULT_ZOOM)
         map.attributionControl.setPrefix(false)
         leafletMap.createTileLayer().addTo(map)
-        map.addControl(new leaflet.Control.Fullscreen({ position: 'topright' }))
+        if (!ctrl.static) map.addControl(new leaflet.Control.Fullscreen({ position: 'topright' }))
 
         // Leaflet paints grey tiles if the container resizes while hidden
         resizeObserver = leafletMap.observeSize(mapEl, map, recordScreenSize)
 
         // Custom Ctrl+scroll zoom that zooms to mouse cursor
         // Uses Leaflet's setZoomAround for zoom-to-cursor behavior
-        mapEl.addEventListener('wheel', onWheel, { passive: false })
+        if (!ctrl.static) mapEl.addEventListener('wheel', onWheel, { passive: false })
 
         map.on('click', function (e) {
           if (!ctrl.onClick) return

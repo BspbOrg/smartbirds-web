@@ -1,10 +1,9 @@
-var module = require('../app')
+const app = require('../app')
 
-module
+app
   .constant('GMAP_KEY', 'AIzaSyA9uIfcc1I4bNvfIS3vpGXxMxqZkjEukhY')
   .config(/* @ngInject */function (uiGmapGoogleMapApiProvider, GMAP_KEY) {
     uiGmapGoogleMapApiProvider.configure({
-      key: GMAP_KEY,
-      libraries: 'geometry,visualization'
+      key: GMAP_KEY
     })
   })

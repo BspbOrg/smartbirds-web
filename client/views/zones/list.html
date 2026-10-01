@@ -86,7 +86,10 @@
       <!-- /.panel-heading -->
       <div>
         <a href ui-sref="auth.zones.view({id: zone.id})" class="thumbnail">
-          <img ng-src="{{::zonesController.getStaticMap(zone)}}" width="100%" class="userMap">
+          <sb-leaflet-map static="true" center="::zone.getCenter()" zoom="14"
+                          zone="::zone.coordinates"
+                          zone-style="{color: zone.getStatus()=='free'?'#000':zone.getStatus()=='owned'?'#f00':'#f90', fillOpacity: 0.4, stroke: false}"
+          ></sb-leaflet-map>
         </a>
       </div>
 

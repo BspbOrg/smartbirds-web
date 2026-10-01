@@ -44,6 +44,9 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       // Leaflet path options for every polygon. Without it each model's own
       // fill/stroke is used.
       polygonStyle: '<',
+      // From this zoom on, polygons replace markers: below it only the markers
+      // show, at or above it only the polygons. Without it both always show.
+      polygonMinZoom: '<',
       // Models whose `path` is an array of {latitude, longitude}. Drawn with
       // polylineStyle, not clickable, and not part of the fit.
       polylines: '<',
@@ -126,6 +129,9 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         polylineLayer = leaflet.layerGroup()
         polylineLayer.addTo(map)
 
+        showLayersForZoom()
+        map.on('zoomend', showLayersForZoom)
+
         // The control object arrives as a bare {} and the consumer keeps its
         // reference, so assign onto it rather than replacing it. Populated here so
         // the consumer's first refresh finds newModels already a function.
@@ -180,6 +186,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         if (changes.markers) setMarkers(ctrl.markers)
         if (changes.polygons) setPolygons(ctrl.polygons)
         if (changes.polylines) setPolylines(ctrl.polylines)
+        if (changes.polygonMinZoom) showLayersForZoom()
       }
 
       ctrl.$onDestroy = function () {
@@ -271,6 +278,21 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           popupScope = popupEl = sizeObserver = null
           if (onClose) onClose()
         })
+      }
+
+      // Only toggles the layers on the map. Their content stays, so the fit
+      // still covers hidden markers and polygons.
+      function showLayersForZoom () {
+        if (!map) return
+        const min = ctrl.polygonMinZoom
+        const zoom = map.getZoom()
+        showLayer(markerLayer, min == null || zoom < min)
+        showLayer(polygonLayer, min == null || zoom >= min)
+      }
+
+      function showLayer (layer, show) {
+        if (show && !map.hasLayer(layer)) map.addLayer(layer)
+        if (!show && map.hasLayer(layer)) map.removeLayer(layer)
       }
 
       function pathOf (points) {
