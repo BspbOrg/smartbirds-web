@@ -1,8 +1,5 @@
 const angular = require('angular')
-
-// Leaflet path options, the same colours the Google version used.
-const ZONE_STYLE = { color: '#c33', opacity: 0.7, weight: 0.5, fillColor: '#c33', fillOpacity: 0.4 }
-const TRACK_STYLE = { color: '#36c', weight: 3 }
+const mapStyles = require('../services/mapStyles')
 
 require('../app').directive('listMap', /* @ngInject */function ($filter, $http, db, Track) {
   return {
@@ -24,8 +21,8 @@ require('../app').directive('listMap', /* @ngInject */function ($filter, $http, 
             haveTracks: true,
             haveDetail: true
           }, $ctrl.opts || {}),
-          zoneStyle: ZONE_STYLE,
-          trackStyle: TRACK_STYLE,
+          zoneStyle: mapStyles.LIST_ZONE,
+          trackStyle: mapStyles.TRACK,
           zones: [],
           zonesIndex: {},
           tracksWaiting: 0,

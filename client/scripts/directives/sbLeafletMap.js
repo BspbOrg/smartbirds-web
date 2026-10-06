@@ -1,20 +1,20 @@
 const leaflet = require('leaflet')
-require('leaflet-fullscreen')
 const leafletMap = require('../services/leafletMap')
+const mapStyles = require('../services/mapStyles')
 
-const markerIcon = leaflet.divIcon({
-  html: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 24 36">' +
-    '<path d="M12 0C5.373 0 0 5.373 0 12c0 8.3 12 24 12 24s12-15.7 12-24C24 5.373 18.627 0 12 0z" fill="#EA4335"/>' +
-    '<circle cx="12" cy="12" r="5" fill="white"/>' +
-    '</svg>',
-  className: '',
-  iconSize: [24, 36],
-  iconAnchor: [12, 36],
-  popupAnchor: [0, -36]
-})
+// For `static`: nothing can move the map.
+const STATIC_OPTIONS = {
+  dragging: false,
+  touchZoom: false,
+  doubleClickZoom: false,
+  boxZoom: false,
+  keyboard: false,
+  zoomControl: false,
+  ctrlWheelZoom: false,
+  fullscreenControl: false
+}
 
-// Click handlers read coordinates as latLng.lat() / .lng(), so wrap plain numbers
-// in that accessor shape rather than making every caller change.
+// Click handlers are shared with Google maps and expect latLng.lat() / .lng().
 function makeLatLng (lat, lng) {
   return { latLng: { lat: function () { return lat }, lng: function () { return lng } } }
 }
@@ -32,8 +32,7 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
       zone: '<',
       zoneStyle: '<',
       box: '<',
-      // A picture of the map: no panning, zooming or controls, and clicks pass
-      // through to whatever the map sits in, such as a link.
+      // A picture of the map: no controls, clicks go to the parent (e.g. a link).
       static: '<'
     },
     bindToController: true,
@@ -43,22 +42,8 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
       let map, marker, accuracyCircle, boxPolygon, trackLine, zonePolygon
       let mapEl, resizeObserver
 
-      // Named so $onDestroy can remove the listener again
-      function onWheel (e) {
-        if (!e.ctrlKey) return
-        e.preventDefault()
-        e.stopPropagation()
-        const containerPoint = map.mouseEventToContainerPoint(e)
-        const latLng = map.containerPointToLatLng(containerPoint)
-        const delta = e.deltaY < 0 ? 1 : -1
-        map.setZoomAround(latLng, map.getZoom() + delta, { animate: true })
-      }
-
-      // The browser lays out the printed page without running any script, and
-      // Leaflet keeps its content anchored top-left, so a narrower page cuts off
-      // the right and bottom of the map. The print rule in map.less keeps the map at its screen
-      // size and scales it down to the page instead; it reads that size here.
-      // Without the size the map would print blank, hence the class.
+      // For print: map.less scales the map down from its screen size, which
+      // only script can measure. No size, no class, so it never prints blank.
       function recordScreenSize () {
         if (!mapEl.clientWidth || !mapEl.clientHeight) return
         mapEl.style.setProperty('--map-w', mapEl.clientWidth + 'px')
@@ -68,35 +53,9 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
 
       ctrl.$postLink = function () {
         mapEl = $element[0].querySelector('.sb-leaflet-map-container')
-        const center = ctrl.center || leafletMap.DEFAULT_CENTER
-        const initialCenter = [center.latitude, center.longitude]
+        map = leafletMap.createMap(mapEl, ctrl.center, ctrl.zoom, ctrl.static ? STATIC_OPTIONS : null)
 
-        const mapOptions = {
-          scrollWheelZoom: false,
-          attributionControl: true
-        }
-        if (ctrl.static) {
-          Object.assign(mapOptions, {
-            dragging: false,
-            touchZoom: false,
-            doubleClickZoom: false,
-            boxZoom: false,
-            keyboard: false,
-            zoomControl: false
-          })
-        }
-
-        map = leaflet.map(mapEl, mapOptions).setView(initialCenter, ctrl.zoom || leafletMap.DEFAULT_ZOOM)
-        map.attributionControl.setPrefix(false)
-        leafletMap.createTileLayer().addTo(map)
-        if (!ctrl.static) map.addControl(new leaflet.Control.Fullscreen({ position: 'topright' }))
-
-        // Leaflet paints grey tiles if the container resizes while hidden
         resizeObserver = leafletMap.observeSize(mapEl, map, recordScreenSize)
-
-        // Custom Ctrl+scroll zoom that zooms to mouse cursor
-        // Uses Leaflet's setZoomAround for zoom-to-cursor behavior
-        if (!ctrl.static) mapEl.addEventListener('wheel', onWheel, { passive: false })
 
         map.on('click', function (e) {
           if (!ctrl.onClick) return
@@ -105,109 +64,84 @@ require('../app').directive('sbLeafletMap', /* @ngInject */function () {
           })
         })
 
-        updateBox(ctrl.box)
-        updateTrack(ctrl.track)
-        updateZone(ctrl.zone)
+        updateBox()
+        updateTrack()
+        updateZone()
 
-        // poi is mutated in place by updateFromModel so $onChanges won't fire for it
+        // poi changes in place, which $onChanges misses
         $scope.$watch(function () {
           const poi = ctrl.poi
           if (!poi) return null
           return poi.latitude + ',' + poi.longitude
         }, function () {
-          // A missing poi clears the marker and circles rather than leaving them behind
-          const poi = ctrl.poi || {}
-          updateMarker(poi.latitude, poi.longitude)
-          updateAccuracy(ctrl.accuracy)
+          updateMarker()
+          updateAccuracy()
         })
       }
 
       ctrl.$onChanges = function (changes) {
         if (!map) return
-        if (changes.center || changes.zoom) {
-          const lat = ctrl.center && ctrl.center.latitude
-          const lng = ctrl.center && ctrl.center.longitude
-          const z = ctrl.zoom || map.getZoom()
-          if (lat != null && lng != null) {
-            map.setView([lat, lng], z)
-          } else {
-            map.setZoom(z)
-          }
-        }
-        if (changes.accuracy) updateAccuracy(ctrl.accuracy)
-        if (changes.box) updateBox(ctrl.box)
-        if (changes.track) updateTrack(ctrl.track)
-        if (changes.zone || changes.zoneStyle) updateZone(ctrl.zone)
+        if (changes.center || changes.zoom) leafletMap.applyView(map, ctrl.center, ctrl.zoom)
+        if (changes.accuracy) updateAccuracy()
+        if (changes.box) updateBox()
+        if (changes.track) updateTrack()
+        if (changes.zone || changes.zoneStyle) updateZone()
       }
 
       ctrl.$onDestroy = function () {
         if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null }
-        if (mapEl) { mapEl.removeEventListener('wheel', onWheel); mapEl = null }
         if (map) { map.remove(); map = null }
+        mapEl = null
       }
 
-      function updateMarker (lat, lng) {
-        if (!map) return
-        if (lat == null || lng == null) {
+      // [lat, lng] of the poi, or null
+      function poiLatLng () {
+        const poi = ctrl.poi
+        if (!poi || poi.latitude == null || poi.longitude == null) return null
+        return [poi.latitude, poi.longitude]
+      }
+
+      function updateMarker () {
+        const latLng = poiLatLng()
+        if (!latLng) {
           if (marker) { map.removeLayer(marker); marker = null }
-          return
-        }
-        const latLng = [lat, lng]
-        if (marker) {
+        } else if (marker) {
           marker.setLatLng(latLng)
         } else {
-          marker = leaflet.marker(latLng, { icon: markerIcon }).addTo(map)
+          marker = leaflet.marker(latLng, { icon: leafletMap.markerIcon }).addTo(map)
         }
       }
 
-      function updateAccuracy (accuracy) {
-        if (!map) return
+      function updateAccuracy () {
         if (accuracyCircle) { map.removeLayer(accuracyCircle); accuracyCircle = null }
-        const poi = ctrl.poi
-        if (!accuracy || !poi || poi.latitude == null || poi.longitude == null) return
-        accuracyCircle = leaflet.circle([poi.latitude, poi.longitude], {
-          radius: accuracy,
-          color: '#f00',
-          fillColor: '#f00',
-          fillOpacity: 0.3,
-          weight: 1,
-          interactive: false
-        }).addTo(map)
+        const latLng = poiLatLng()
+        if (!ctrl.accuracy || !latLng) return
+        accuracyCircle = leaflet.circle(latLng, Object.assign({ radius: ctrl.accuracy }, mapStyles.ACCURACY)).addTo(map)
       }
 
-      function updateBox (box) {
-        if (!map) return
-        if (boxPolygon) { map.removeLayer(boxPolygon); boxPolygon = null }
-        if (!box || !box.length) return
-        const points = box.map(function (p) { return [p.latitude, p.longitude] })
-        boxPolygon = leaflet.polygon(points, {
-          color: '#3c3',
-          opacity: 0.8,
-          weight: 1,
-          fillColor: '#3c3',
-          fillOpacity: 0.3,
-          interactive: false
-        }).addTo(map)
+      // Removes the old layer and returns the new one, or null if no points.
+      function replaceOverlay (oldLayer, points, build) {
+        if (oldLayer) map.removeLayer(oldLayer)
+        const latLngs = leafletMap.toLatLngs(points)
+        return latLngs ? build(latLngs).addTo(map) : null
       }
 
-      function updateTrack (track) {
-        if (!map) return
-        if (trackLine) { map.removeLayer(trackLine); trackLine = null }
-        if (!track || !track.length) return
-        const points = track.map(function (p) { return [p.latitude, p.longitude] })
-        trackLine = leaflet.polyline(points, { color: '#36c', weight: 3 }).addTo(map)
+      function updateBox () {
+        boxPolygon = replaceOverlay(boxPolygon, ctrl.box, function (latLngs) {
+          return leaflet.polygon(latLngs, mapStyles.BOX)
+        })
       }
 
-      function updateZone (zone) {
-        if (!map) return
-        if (zonePolygon) { map.removeLayer(zonePolygon); zonePolygon = null }
-        if (!zone || !zone.length) return
-        const points = zone.map(function (p) { return [p.latitude, p.longitude] })
-        zonePolygon = leaflet.polygon(points, Object.assign({
-          color: '#00f',
-          fillOpacity: 0.7,
-          weight: 3
-        }, ctrl.zoneStyle, { interactive: false })).addTo(map)
+      function updateTrack () {
+        trackLine = replaceOverlay(trackLine, ctrl.track, function (latLngs) {
+          return leaflet.polyline(latLngs, mapStyles.TRACK)
+        })
+      }
+
+      function updateZone () {
+        zonePolygon = replaceOverlay(zonePolygon, ctrl.zone, function (latLngs) {
+          return leaflet.polygon(latLngs, Object.assign({}, mapStyles.ZONE, ctrl.zoneStyle, { interactive: false }))
+        })
       }
     }
   }
