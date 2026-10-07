@@ -58,6 +58,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       let polygonLayers = new Map()
       // Bounds to fit once the container has a size (e.g. in a hidden tab).
       let pendingBounds
+      // Bounds to fit once the running zoom animation ends.
+      let afterZoomBounds
 
       ctrl.$postLink = function () {
         mapEl = $element[0].querySelector('.sb-leaflet-map-container')
@@ -69,7 +71,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           if (!pendingBounds || !hasSize()) return
           const bounds = pendingBounds
           pendingBounds = null
-          map.fitBounds(bounds)
+          fitBounds(bounds)
         })
 
         markerLayer = ctrl.cluster === false
@@ -126,6 +128,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       ctrl.$onDestroy = function () {
         if (fitTimer) { $timeout.cancel(fitTimer); fitTimer = null }
         pendingBounds = null
+        afterZoomBounds = null
         if (ctrl.control && typeof ctrl.control === 'object') delete ctrl.control.newModels
         if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null }
         if (markerLayer) { markerLayer.clearLayers(); markerLayer = null }
@@ -302,8 +305,27 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
             return
           }
           pendingBounds = null
-          map.fitBounds(bounds)
+          fitBounds(bounds)
         })
+      }
+
+      // Leaflet drops a zoom asked for while a zoom animation runs, and
+      // animate: false does not help. Rows that arrive during the previous
+      // fit's animation would be left out, so fit the newest bounds once it ends.
+      function fitBounds (bounds) {
+        if (!map._animatingZoom) {
+          afterZoomBounds = null
+          map.fitBounds(bounds)
+          return
+        }
+        if (!afterZoomBounds) {
+          map.once('zoomend', function () {
+            const latest = afterZoomBounds
+            afterZoomBounds = null
+            if (map && latest) fitBounds(latest)
+          })
+        }
+        afterZoomBounds = bounds
       }
 
       function hasSize () {
