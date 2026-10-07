@@ -13,33 +13,35 @@ module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $
   $ctrl.selected = []
 
   api.bgatlas2008.userGrid().then(function (cells) {
+    const initial = []
     $ctrl.cells = cells.map(function (cell) {
       const selected = user.getIdentity().bgatlasCells && user.getIdentity().bgatlasCells.some(function (c) {
         return c.utm_code === cell.utm_code
       })
 
-      const model = utils.mapCellToMapModel(cell, selected)
+      const model = utils.mapCellToMapModel(cell)
 
       if (selected) {
-        $ctrl.selected.push(model)
+        initial.push(model)
       }
       return model
     })
+    $ctrl.selected = initial
   })
 
+  // $ctrl.selected gets a new array on every change, so the map sees it.
   $ctrl.unselect = function (selectedIdx) {
     if (!(selectedIdx in $ctrl.selected)) {
       return
     }
-    const model = $ctrl.selected[selectedIdx]
-    $ctrl.selected.splice(selectedIdx, 1)
-    utils.updateModelStyle(model, false)
+    $ctrl.selected = $ctrl.selected.filter(function (model, idx) {
+      return idx !== selectedIdx
+    })
   }
 
   $ctrl.select = function (model) {
     if (model.completed) return
-    $ctrl.selected.push(model)
-    utils.updateModelStyle(model, true)
+    $ctrl.selected = $ctrl.selected.concat([model])
   }
 
   $ctrl.events = {

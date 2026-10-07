@@ -17,6 +17,8 @@
         max-zoom="$ctrl.map.options.maxZoom"
         polygons="$ctrl.cells"
         on-polygon-click="$ctrl.events.click"
+        polygon-style-fn="$ctrl.cellStyle"
+        selected-polygons="$ctrl.selected"
       ></sb-leaflet-collection-map>
 
       <atlas-legend></atlas-legend>

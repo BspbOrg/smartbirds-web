@@ -13,4 +13,7 @@ module.exports = function BaseMapController () {
       maxZoom: 15
     }
   }
+
+  // polygon-style-fn for the maps that select cells
+  $ctrl.cellStyle = utils.cellStyle
 }

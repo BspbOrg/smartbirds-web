@@ -8,6 +8,12 @@ function toArray (models) {
   return Array.isArray(models) ? models : []
 }
 
+// selectedPolygons is one model, an array of models, or nothing.
+function toSelection (value) {
+  if (Array.isArray(value)) return value
+  return value && typeof value === 'object' ? [value] : []
+}
+
 require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function () {
   return {
     templateUrl: '/views/directives/sbLeafletMap.html',
@@ -27,8 +33,13 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       polygons: '<',
       maxZoom: '<',
       onPolygonClick: '<',
-      // Leaflet path options for all polygons. Default: each model's fill/stroke.
+      // Leaflet path options for all polygons. Overrides polygonStyleFn.
       polygonStyle: '<',
+      // (model, selected) -> {fill, stroke}. Default: the model's own fill/stroke.
+      polygonStyleFn: '<',
+      // One model or an array of models, drawn with polygonStyleFn(model, true).
+      // Assign a new value to change it; changes in place are not seen.
+      selectedPolygons: '<',
       // From this zoom on, polygons replace markers.
       polygonMinZoom: '<',
       // Models with a `path` of {latitude, longitude}. Not clickable, not in the fit.
@@ -43,8 +54,8 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       const ctrl = this
       let map, markerLayer, polygonLayer, polylineLayer
       let mapEl, resizeObserver, fitTimer
-      // model -> {layer, signature}. Callers change models in place.
-      let polygonEntries = new Map()
+      // model -> its polygon layer, to restyle one polygon without a rebuild
+      let polygonLayers = new Map()
       // Bounds to fit once the container has a size (e.g. in a hidden tab).
       let pendingBounds
 
@@ -89,30 +100,19 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         setPolylines(ctrl.polylines)
       }
 
-      // Callers restyle by changing model.fill / model.stroke in place, which
-      // $onChanges misses. One watcher on a joined string catches it cheaply.
-      $scope.$watch(function () {
-        if (!polygonEntries.size) return ''
-        const parts = []
-        polygonEntries.forEach(function (entry, model) {
-          parts.push(signatureOf(model))
-        })
-        return parts.join('~')
-      }, function (newValue, oldValue) {
-        if (newValue === oldValue) return
-        polygonEntries.forEach(function (entry, model) {
-          const signature = signatureOf(model)
-          if (signature === entry.signature) return
-          entry.signature = signature
-          entry.layer.setStyle(polygonStyleOf(model))
-        })
-      })
-
       ctrl.$onChanges = function (changes) {
         if (!map) return
         if (changes.center || changes.zoom) leafletMap.applyView(map, ctrl.center, ctrl.zoom)
         if (changes.markers) setMarkers(ctrl.markers)
-        if (changes.polygons) setPolygons(ctrl.polygons)
+        if (changes.polygons) {
+          // The rebuild already uses the current styles and selection.
+          setPolygons(ctrl.polygons)
+        } else if (changes.polygonStyle || changes.polygonStyleFn) {
+          restylePolygons(polygonLayers.keys())
+        } else if (changes.selectedPolygons) {
+          // Only the polygons that left or joined the selection change.
+          restylePolygons(toSelection(changes.selectedPolygons.previousValue).concat(toSelection(ctrl.selectedPolygons)))
+        }
         if (changes.polylines) setPolylines(ctrl.polylines)
         if (changes.polygonMinZoom) showLayersForZoom()
       }
@@ -125,7 +125,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         if (markerLayer) { markerLayer.clearLayers(); markerLayer = null }
         if (polygonLayer) { polygonLayer.clearLayers(); polygonLayer = null }
         if (polylineLayer) { polylineLayer.clearLayers(); polylineLayer = null }
-        polygonEntries = new Map()
+        polygonLayers = new Map()
         if (map) { map.remove(); map = null }
         mapEl = null
       }
@@ -216,21 +216,24 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       }
 
       function polygonStyleOf (model) {
-        return ctrl.polygonStyle || leafletMap.translateStyle(model)
+        if (ctrl.polygonStyle) return ctrl.polygonStyle
+        if (!ctrl.polygonStyleFn) return leafletMap.translateStyle(model)
+        const selected = toSelection(ctrl.selectedPolygons).indexOf(model) !== -1
+        return leafletMap.translateStyle(ctrl.polygonStyleFn(model, selected))
       }
 
-      // Everything translateStyle reads, as one string for the watcher.
-      function signatureOf (model) {
-        const fill = model.fill || {}
-        const stroke = model.stroke || {}
-        return fill.color + '|' + fill.opacity + '|' +
-          stroke.color + '|' + stroke.opacity + '|' + stroke.weight
+      // Models that are not on the map are skipped.
+      function restylePolygons (models) {
+        Array.from(models).forEach(function (model) {
+          const layer = polygonLayers.get(model)
+          if (layer) layer.setStyle(polygonStyleOf(model))
+        })
       }
 
       function setPolygons (models) {
         if (!map || !polygonLayer) return
         polygonLayer.clearLayers()
-        polygonEntries = new Map()
+        polygonLayers = new Map()
 
         toArray(models).forEach(function (model) {
           if (!model) return
@@ -245,7 +248,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
             })
           })
           polygonLayer.addLayer(polygon)
-          polygonEntries.set(model, { layer: polygon, signature: signatureOf(model) })
+          polygonLayers.set(model, polygon)
         })
 
         fitToContent()

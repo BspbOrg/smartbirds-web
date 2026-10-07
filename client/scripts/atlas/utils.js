@@ -32,7 +32,7 @@ const unselectedOpacityStroke = function (percent) {
   return 0.4
 }
 
-function mapCellToMapModel (cell, selected) {
+function mapCellToMapModel (cell) {
   const percent = cell.spec_old > 0 ? 100.0 * cell.spec_known / cell.spec_old : 0
   const model = {
     id: cell.utm_code,
@@ -41,32 +41,23 @@ function mapCellToMapModel (cell, selected) {
     cell,
     completed: !!cell.completed
   }
-  updateModelStyle(model, selected)
-  return model
+  // The unselected look, for maps that do not pass a polygon-style-fn
+  return Object.assign(model, cellStyle(model, false))
 }
 
-function updateModelStyle (model, selected) {
-  model.fill = model.fill || {}
-  model.stroke = model.stroke || {}
-  model.stroke.weight = 1
+// The {fill, stroke} to draw a cell with. Returns a new object every time.
+function cellStyle (model, selected) {
   if (selected) {
-    model.fill.color = selectedColor
-    model.fill.opacity = selectedOpacityFill
-    model.stroke.color = selectedColor
-    model.stroke.opacity = selectedOpacityStroke
-  } else {
-    model.fill.opacity = unselectedOpacityFill()
-    model.stroke.opacity = unselectedOpacityStroke(model.percent)
-
-    if (model.completed) {
-      model.fill.color = completedColor
-      model.stroke.color = completedColor
-    } else {
-      model.fill.color = unselectedColor(model.percent)
-      model.stroke.color = unselectedColor(model.percent)
+    return {
+      fill: { color: selectedColor, opacity: selectedOpacityFill },
+      stroke: { color: selectedColor, opacity: selectedOpacityStroke, weight: 1 }
     }
   }
-  return model
+  const color = model.completed ? completedColor : unselectedColor(model.percent)
+  return {
+    fill: { color, opacity: unselectedOpacityFill() },
+    stroke: { color, opacity: unselectedOpacityStroke(model.percent), weight: 1 }
+  }
 }
 
 module.exports = {
@@ -78,6 +69,6 @@ module.exports = {
   unselectedOpacityFill,
   unselectedOpacityStroke,
   mapCellToMapModel,
-  updateModelStyle,
+  cellStyle,
   colors: { low: lowColor, med: medColor, high: highColor, completed: completedColor }
 }

@@ -42,19 +42,12 @@ require('../app').directive('zonesMap', /* @ngInject */function () {
       vc.zoom = leafletMap.DEFAULT_ZOOM
       vc.polygonMinZoom = POLYGON_MIN_ZOOM
       vc.markers = []
-      // {zone, coordinates, fill, stroke}. Restyled in place on selection, so
-      // the map does not rebuild and re-fit.
+      // The zones themselves, so selectedZone works as the map's selection
       vc.polygons = []
 
-      function styleOf (zone) {
-        if (zone === $scope.selectedZone) return STYLES.selected
+      vc.zoneStyle = function (zone, selected) {
+        if (selected) return STYLES.selected
         return zone.getStatus() === 'free' ? STYLES.free : STYLES.taken
-      }
-
-      function restyle () {
-        vc.polygons.forEach(function (polygon) {
-          angular.extend(polygon, styleOf(polygon.zone))
-        })
       }
 
       // A marker stands for one zone too small to see; zoom in to it.
@@ -63,11 +56,11 @@ require('../app').directive('zonesMap', /* @ngInject */function () {
         vc.zoom = POLYGON_MIN_ZOOM
       }
 
-      vc.onPolygonClick = function (polygon, eventName, model) {
-        if (model.zone === $scope.selectedZone) {
+      vc.onPolygonClick = function (polygon, eventName, zone) {
+        if (zone === $scope.selectedZone) {
           $scope.selectedZone = null
-        } else if (model.zone.getStatus() === 'free') {
-          $scope.selectedZone = model.zone
+        } else if (zone.getStatus() === 'free') {
+          $scope.selectedZone = zone
         }
       }
 
@@ -79,12 +72,11 @@ require('../app').directive('zonesMap', /* @ngInject */function () {
           const center = zone.getCenter()
           if (!center) return
           vc.markers.push(center)
-          vc.polygons.push(angular.extend({ zone, coordinates: zone.coordinates }, styleOf(zone)))
+          vc.polygons.push(zone)
         })
       }
 
       $scope.$watchCollection('zones', updateZones)
-      $scope.$watch('selectedZone', restyle)
     }
   }
 })
