@@ -38,7 +38,7 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
       // (model, selected) -> {fill, stroke}. Default: the model's own fill/stroke.
       polygonStyleFn: '<',
       // One model or an array of models, drawn with polygonStyleFn(model, true).
-      // Assign a new value to change it; changes in place are not seen.
+      // Watched as a collection, so push/splice on the array is seen too.
       selectedPolygons: '<',
       // From this zoom on, polygons replace markers.
       polygonMinZoom: '<',
@@ -100,6 +100,15 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
         setPolylines(ctrl.polylines)
       }
 
+      // Only the polygons that left or joined the selection change.
+      // The two-arg listener makes Angular keep a copy of the old items.
+      $scope.$watchCollection(function () {
+        return toSelection(ctrl.selectedPolygons)
+      }, function (selection, previous) {
+        if (selection === previous) return
+        restylePolygons(previous.concat(selection))
+      })
+
       ctrl.$onChanges = function (changes) {
         if (!map) return
         if (changes.center || changes.zoom) leafletMap.applyView(map, ctrl.center, ctrl.zoom)
@@ -109,9 +118,6 @@ require('../app').directive('sbLeafletCollectionMap', /* @ngInject */function ()
           setPolygons(ctrl.polygons)
         } else if (changes.polygonStyle || changes.polygonStyleFn) {
           restylePolygons(polygonLayers.keys())
-        } else if (changes.selectedPolygons) {
-          // Only the polygons that left or joined the selection change.
-          restylePolygons(toSelection(changes.selectedPolygons.previousValue).concat(toSelection(ctrl.selectedPolygons)))
         }
         if (changes.polylines) setPolylines(ctrl.polylines)
         if (changes.polygonMinZoom) showLayersForZoom()
