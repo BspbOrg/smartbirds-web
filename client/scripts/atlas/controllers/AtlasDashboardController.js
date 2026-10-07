@@ -25,16 +25,12 @@ module.exports = /* @ngInject */function AtlasDashboardController (api, $filter,
         lastCellInfoRequest.cancel()
         lastCellInfoRequest = null
       }
-      if ($ctrl.selected) {
-        utils.updateModelStyle($ctrl.selected, false)
-      }
       if ($ctrl.selected === model) {
         $ctrl.loading = false
         $ctrl.selected = null
         $ctrl.rows = []
       } else {
         $ctrl.selected = model
-        utils.updateModelStyle(model, true)
         $ctrl.rows = []
         $ctrl.loading = true
         var call = lastCellInfoRequest = api.bgatlas2008.getCellInfo(model.cell.utm_code)

@@ -11,37 +11,31 @@ module.exports = /* @ngInject */function AtlasModeratorProgressController (api, 
   $ctrl.colors = utils.colors
   $ctrl.colors.vhigh = '#31c1f1'
 
-  $ctrl.updateModelStyle = function (model, selected) {
-    if (selected) {
-      return utils.updateModelStyle(model, selected)
-    }
+  // This page has its own colour scale for unselected cells
+  $ctrl.cellStyle = function (model, selected) {
+    if (selected) return utils.cellStyle(model, true)
 
-    model.fill.opacity = utils.unselectedOpacityFill()
-    model.stroke.opacity = 0.4
+    let color
     if (model.completed) {
-      model.fill.color = utils.colors.completed
-      model.stroke.color = utils.colors.completed
+      color = utils.colors.completed
     } else if (model.percent <= 40) {
-      model.fill.color = utils.colors.low
-      model.stroke.color = utils.colors.low
+      color = utils.colors.low
     } else if (model.percent <= 70) {
-      model.fill.color = utils.colors.med
-      model.stroke.color = utils.colors.med
+      color = utils.colors.med
     } else if (model.percent <= 90) {
-      model.fill.color = utils.colors.high
-      model.stroke.color = utils.colors.high
+      color = utils.colors.high
     } else {
-      model.fill.color = $ctrl.colors.vhigh
-      model.stroke.color = $ctrl.colors.vhigh
+      color = $ctrl.colors.vhigh
     }
-
-    return model
+    return {
+      fill: { color, opacity: utils.unselectedOpacityFill() },
+      stroke: { color, opacity: 0.4, weight: 1 }
+    }
   }
 
   api.bgatlas2008.globalCellStats().then(function (cells) {
     $ctrl.cells = cells.map(function (cell) {
-      const model = utils.mapCellToMapModel(cell)
-      return $ctrl.updateModelStyle(model, false)
+      return utils.mapCellToMapModel(cell)
     })
   })
 

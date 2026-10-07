@@ -45,7 +45,22 @@
       </div>
     </div>
 
-    <div class="zone" ng-if="zone.$resolved">
+    <form class="text-right hidden-print" ng-if="zone.$resolved">
+      <field name="mapProvider" type="bool"
+             label-true="OpenStreetMap"
+             label-false="Google Maps"
+             value-true="osm"
+             value-false="google"
+             required="true"
+             model="zoneController.mapProvider"></field>
+    </form>
+    <div class="zone" ng-if="zone.$resolved && zoneController.mapProvider === 'osm'">
+      <sb-leaflet-map center="zone.getCenter()" zoom="14"
+                      zone="zone.coordinates"
+                      zone-style="{color: zone.getStatus()=='free'?'#fff':zone.getStatus()=='owned'?'#f00':'#f90', opacity: 0.7, weight: 3, fillOpacity: 0}"
+      ></sb-leaflet-map>
+    </div>
+    <div class="zone" ng-if="zone.$resolved && zoneController.mapProvider === 'google'">
       <ui-gmap-google-map center='zone.getCenter()' zoom='14' options="{
               mapTypeId: 'hybrid',
               mapTypeIds: ['hybrid', 'roadmap', 'terrain']

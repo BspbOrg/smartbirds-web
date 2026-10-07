@@ -2,9 +2,9 @@
  * Created by groupsky on 20.11.15.
  */
 
-var angular = require('angular')
-require('../app').controller('ZonesController', /* @ngInject */function ($scope, $state, $stateParams, Zone, GMAP_KEY, user, User, localization) {
-  var controller = this
+const angular = require('angular')
+require('../app').controller('ZonesController', /* @ngInject */function ($scope, $state, $stateParams, Zone, user, User, localization) {
+  const controller = this
 
   $scope.getLocalLabel = localization.getLocalLabel
 
@@ -34,7 +34,7 @@ require('../app').controller('ZonesController', /* @ngInject */function ($scope,
 
   controller.getUsers = function (filter) {
     if (controller.loadingUsers && controller.loadingUsers.cancel) { controller.loadingUsers.cancel() }
-    var users = User.query({ q: filter })
+    const users = User.query({ q: filter })
     controller.loadingUsers = users.$promise
     users.$promise.finally(function () {
       controller.loadingUsers = null
@@ -43,38 +43,12 @@ require('../app').controller('ZonesController', /* @ngInject */function ($scope,
   }
 
   controller.filterRows = function () {
-    var filter = controller.filterZones(controller.filter)
+    const filter = controller.filterZones(controller.filter)
     $scope.visibleRows = []
     $scope.rows.every(function (row) {
       if (filter(row)) $scope.visibleRows.push(row)
       return $scope.visibleRows.length < 25
     })
-  }
-
-  controller.getStaticMap = function (zone) {
-    var url = '//maps.googleapis.com/maps/api/staticmap?'
-    url += '&center=' + zone.getCenter().latitude + ',' + zone.getCenter().longitude
-    url += '&zoom=14&size=500x400&maptype=terrain'
-    url += '&key=' + GMAP_KEY
-    // {color: zone.getStatus()=='free'?'#fff':zone.getStatus()=='owned'?'#f00':'#f90', opacity: 0.7, weight: 0.5}
-    url += '&path=color:'
-    var color
-    switch (zone.getStatus()) {
-      case 'free':
-        color = '0x000000'
-        break
-      case 'owned':
-        color = '0xFF0000'
-        break
-      default:
-        color = '0xFF9900'
-        break
-    }
-    url += color + '00|weight:0.5|fillcolor:' + color + '66'
-    url += zone.coordinates.reduce(function (res, point) {
-      return res + '|' + point.latitude + ',' + point.longitude
-    }, '')
-    return url
   }
 
   controller.rejectRequest = function (zone) {

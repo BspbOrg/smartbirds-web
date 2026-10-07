@@ -18,7 +18,7 @@ module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $
         return c.utm_code === cell.utm_code
       })
 
-      const model = utils.mapCellToMapModel(cell, selected)
+      const model = utils.mapCellToMapModel(cell)
 
       if (selected) {
         $ctrl.selected.push(model)
@@ -31,15 +31,12 @@ module.exports = /* @ngInject */function AtlasRequestController (api, ngToast, $
     if (!(selectedIdx in $ctrl.selected)) {
       return
     }
-    const model = $ctrl.selected[selectedIdx]
     $ctrl.selected.splice(selectedIdx, 1)
-    utils.updateModelStyle(model, false)
   }
 
   $ctrl.select = function (model) {
     if (model.completed) return
     $ctrl.selected.push(model)
-    utils.updateModelStyle(model, true)
   }
 
   $ctrl.events = {

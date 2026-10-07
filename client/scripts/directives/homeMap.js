@@ -2,18 +2,18 @@
  * Created by groupsky on 01.04.16.
  */
 
-var angular = require('angular')
-var extend = require('angular').extend
-var moment = require('moment')
-var languages = require('../../../config/languages')
-var capitalizeFirstLetter = require('../utils/capitalizeFirstLetter')
+const angular = require('angular')
+const extend = require('angular').extend
+const moment = require('moment')
+const languages = require('../../../config/languages')
+const capitalizeFirstLetter = require('../utils/capitalizeFirstLetter')
+const leafletMap = require('../services/leafletMap')
 
 function strCompare (a, b) {
   return a < b ? -1 : 1
 }
 
 require('../app').directive('homeMap', /* @ngInject */function () {
-  var lastModel
   return {
     restrict: 'AE',
     templateUrl: function (elem, attr) {
@@ -23,24 +23,13 @@ require('../app').directive('homeMap', /* @ngInject */function () {
       form: '@'
     },
     controller: /* @ngInject */function ($scope, $q, $translate, api) {
-      var vc = extend(this, {
-        center: { latitude: 42.744820608, longitude: 25.2151370694 },
-        zoom: 8,
+      const vc = extend(this, {
+        center: leafletMap.DEFAULT_CENTER,
+        zoom: leafletMap.DEFAULT_ZOOM,
         records: [],
         filteredRecords: [],
         options: {
-          maxZoom: 15,
-          streetViewControl: false
-        },
-        marker: {
-          click: function (marker, eventName, model) {
-            if (lastModel && lastModel !== model) lastModel.show = !lastModel.show
-            model.show = !model.show
-            vc.activeModel = lastModel = model
-          }
-        },
-        windowOptions: {
-          pixelOffset: { width: 0, height: -25 }
+          maxZoom: 15
         },
         filters: {
           current: {},
@@ -86,7 +75,7 @@ require('../app').directive('homeMap', /* @ngInject */function () {
           switch ($scope.form) {
             case 'threats':
               Object.keys(languages).forEach(function (language) {
-                var k = 'threats' + capitalizeFirstLetter(language)
+                const k = 'threats' + capitalizeFirstLetter(language)
                 vc.filters.options[k][record[k] || record.threatsEn] = true
               })
               break
@@ -96,7 +85,7 @@ require('../app').directive('homeMap', /* @ngInject */function () {
         switch ($scope.form) {
           case 'threats':
             Object.keys(languages).forEach(function (language) {
-              var k = 'threats' + capitalizeFirstLetter(language)
+              const k = 'threats' + capitalizeFirstLetter(language)
               vc.filters.options[k] = Object.keys(vc.filters.options[k]).sort(strCompare)
             })
             break

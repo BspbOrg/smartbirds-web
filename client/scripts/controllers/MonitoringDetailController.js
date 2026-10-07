@@ -1,4 +1,5 @@
 const angular = require('angular')
+const leafletMap = require('../services/leafletMap')
 
 require('../app').controller('MonitoringDetailController', /* @ngInject */function (
   $filter, $http, $scope, $state, $stateParams, $q, $timeout, $translate, model, ngToast, db,
@@ -123,11 +124,8 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
       latitude: undefined,
       longitude: undefined
     },
-    center: {
-      latitude: 42.765833,
-      longitude: 25.238611
-    },
-    zoom: 8,
+    center: Object.assign({}, leafletMap.DEFAULT_CENTER),
+    zoom: leafletMap.DEFAULT_ZOOM,
     click: function (maps, event, scope, args) {
       if (typeof args === 'undefined') {
         args = scope
@@ -166,7 +164,7 @@ require('../app').controller('MonitoringDetailController', /* @ngInject */functi
     if (data.getZone) {
       controller.map.center = data.getZone() && angular.copy(data.getZone().getCenter() || controller.map.poi)
       controller.map.zoom = 14
-    } else if (controller.map.poi.latitude && controller.map.poi.longitude) {
+    } else if (controller.map.poi.latitude != null && controller.map.poi.longitude != null) {
       controller.map.center = angular.copy(controller.map.poi)
       controller.map.zoom = 14
     }

@@ -30,14 +30,26 @@
                         model="$ctrl.location.radius"></field>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-lg-12">
+                    <div class="col-md-12 col-lg-12 text-right">
+                        <field name="mapProvider" type="bool"
+                            label-true="OpenStreetMap"
+                            label-false="Google Maps"
+                            value-true="osm"
+                            value-false="google"
+                            required="true"
+                            model="$ctrl.mapProvider"></field>
+                    </div>
+                    <div class="col-md-12 col-lg-12" ng-if="$ctrl.mapProvider === 'osm'">
+                        <sb-leaflet-map center="$ctrl.map.center" zoom="$ctrl.map.zoom" on-click="$ctrl.map.click"
+                            poi="$ctrl.point" box="$ctrl.radiusCoordinates"></sb-leaflet-map>
+                    </div>
+                    <div class="col-md-12 col-lg-12" ng-if="$ctrl.mapProvider === 'google'">
                         <ui-gmap-google-map center="$ctrl.map.center" pan="true" zoom="$ctrl.map.zoom" events="{click: $ctrl.map.click}"
                             options="{mapTypeId: 'hybrid', clickableIcons: false}">
-                            <ui-gmap-polygon static="false" path="$ctrl.radiusCoordinates" fill="{color: '#3c3', opacitiy: 0.7}"
-                                stroke="{color: '#3c3', opacity: 0.8, weight: 1}" geodesic="true"></ui-gmap-polygon>
-                                <ui-gmap-marker ng-if="$ctrl.location.latitude && $ctrl.location.longitude" coords="$ctrl.location"
-                                idKey="'coords'">
-                                </ui-gmap-marker>
+                            <ui-gmap-polygon static="false" path="$ctrl.radiusCoordinates"
+                                fill="{color: '#3c3', opacity: 0.3}" stroke="{color: '#3c3', opacity: 0.8, weight: 1}"
+                                clickable="false"></ui-gmap-polygon>
+                            <ui-gmap-marker ng-if="$ctrl.point" coords="$ctrl.point" idKey="'coords'"></ui-gmap-marker>
                         </ui-gmap-google-map>
                     </div>
                 </div>

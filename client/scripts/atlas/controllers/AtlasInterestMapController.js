@@ -17,11 +17,11 @@ module.exports = /* @ngInject */function AtlasInterestMapController (api, ngToas
         const model = {
           id: cell.utm_code,
           coordinates: cell.coordinates,
-          cell: cell
+          cell
         }
         if (cell.completed) {
-          model.fill = { color: $ctrl.colors.completed, opacity: utils.unselectedOpacityFill }
-          model.stroke = { color: $ctrl.colors.completed, opacity: utils.unselectedOpacityStroke }
+          model.fill = { color: $ctrl.colors.completed, opacity: utils.unselectedOpacityFill() }
+          model.stroke = { color: $ctrl.colors.completed, opacity: utils.unselectedOpacityStroke(0) }
         } else {
           switch (cell.selected) {
             case 0:

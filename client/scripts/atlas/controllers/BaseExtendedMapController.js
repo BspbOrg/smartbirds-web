@@ -1,4 +1,3 @@
-const utils = require('../utils')
 const BaseMapController = require('./BaseMapController')
 
 module.exports = function BaseExtendedMapController (ngToast, $translate) {
@@ -13,18 +12,11 @@ module.exports = function BaseExtendedMapController (ngToast, $translate) {
 
   let lastCellInfoRequest = null
 
-  $ctrl.updateModelStyle = utils.updateModelStyle
-
   function setSelectedCell (model) {
     // cancel last cell request if any
     if (lastCellInfoRequest) {
       lastCellInfoRequest.cancel()
       lastCellInfoRequest = null
-    }
-
-    // unselect previous
-    if ($ctrl.selected) {
-      $ctrl.updateModelStyle($ctrl.selected, false)
     }
 
     // unselect on second select
@@ -35,7 +27,6 @@ module.exports = function BaseExtendedMapController (ngToast, $translate) {
       return
     }
 
-    $ctrl.updateModelStyle(model, true)
     $ctrl.selected = model
     $ctrl.loading = true
 
