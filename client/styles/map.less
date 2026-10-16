@@ -18,6 +18,20 @@ sb-leaflet-collection-map {
   right: 0;
 }
 
+// Larger popup text. Leaflet's default is 13px. Bootstrap headings have fixed
+// px sizes, so size them from the popup text to keep them in step.
+.leaflet-popup-content {
+  font-size: 15px;
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    font-size: 0.9em;
+  }
+}
+
 .aspect-map {
   width: 100%;
   padding-bottom: 80%;
